@@ -21,7 +21,8 @@ CC		=	gcc
 
 DLIB		=	../libs
 DSRC		=	./src
-DINCLUDE	=	./include
+DINCLUDE	=	./include	\
+				../libs
 DTESTS		=	./tests
 
 LIB		=	
