@@ -27,17 +27,19 @@ $(SERVER_NAME):
 $(CLIENT_NAME):
 	make -C $(CLIENT_D)
 
-clean_all:
+clean:
 	make clean -C $(SERVER_D)
 	make clean -C $(CLIENT_D)
 
-fclean_all:
+fclean:
 	make fclean -C $(SERVER_D)
 	make fclean -C $(CLIENT_D)
 	rm -rf $(SERVER_NAME)
 	rm -rf $(CLIENT_NAME)
 
-re_all: 
+re: 
+	rm -rf $(SERVER_NAME)
+	rm -rf $(CLIENT_NAME)
 	make re -C $(SERVER_D)
 	make re -C $(CLIENT_D)
 
@@ -63,4 +65,4 @@ re_client:
 	rm -rf $(CLIENT_NAME)
 	make re -C $(CLIENT_D)
 
-.PHONY: all $(SERVER_NAME)  $(CLIENT_NAME) clean_all fclean_all re_all clean_server clean_client fclean_server fclean_cliennt re_server re_client
+.PHONY: all $(SERVER_NAME)  $(CLIENT_NAME) clean fclean re clean_server clean_client fclean_server fclean_cliennt re_server re_client
