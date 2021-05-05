@@ -1,0 +1,24 @@
+name: build
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: make
+      run: make
+    - name: make re
+      run : make re
+    - name: make clean
+      run : make clean
+    - name: make fclean
+      run : make fclean
