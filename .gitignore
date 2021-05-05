@@ -1,0 +1,15 @@
+*.a
+*.o
+*~
+*vgcor*
+*.gcno
+*.gcda
+
+.temp/
+log*.txt
+
+*myteeams_cli
+*mytemas_server
+
+# Visual studio code files
+.vscode/
