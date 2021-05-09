@@ -9,7 +9,7 @@
 log*.txt
 
 *myteeams_cli
-*mytemas_server
+*myteams_server
 
 # Visual studio code files
 .vscode/
