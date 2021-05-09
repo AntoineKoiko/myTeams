@@ -21,11 +21,10 @@ CC		=	gcc
 
 DLIB		=	../libs
 DSRC		=	./src
-DINCLUDE	=	./include	\
-				../libs
+DINCLUDE	=	./include
 DTESTS		=	./tests
 
-LIB		=	
+LIB		=	myteams
 
 TEST_SRC	=
 
@@ -34,8 +33,8 @@ SRC		=
 SRCS	=	$(SRC) $(DSRC)/main.c
 OBJ		=	$(SRCS:.c=.o)
 
-CFLAGS	=	-W -Wall -Wextra -Werror -pedantic -I $(DINCLUDE)
-LDFLAGS	=	
+CFLAGS	=	-W -Wall -Wextra -Werror -pedantic -I $(DINCLUDE) -I $(DLIB) 
+LDFLAGS	=	 -L $(DLIB) -lmyteams -Wl,-rpath=$(PWD)/$(DLIB)
 
 all: $(NAME)
 
