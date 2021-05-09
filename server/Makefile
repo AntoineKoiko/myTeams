@@ -28,7 +28,10 @@ LIB		=	myteams
 
 TEST_SRC	=
 
-SRC		=	
+DSETUP	=	$(DSRC)/setup
+SETUP_SRC	=	$(DSETUP)/get_args.c	\
+
+SRC		=	$(SETUP_SRC)
 
 SRCS	=	$(SRC) $(DSRC)/main.c
 OBJ		=	$(SRCS:.c=.o)
