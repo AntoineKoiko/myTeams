@@ -9,6 +9,9 @@
 #include <string.h>
 #include "client.h"
 
+#include <uuid/uuid.h>
+
+
 const char *help_panel = "USAGE: ./myteams_cli ip port\n"
 "\tip\tis the server ip address on which the server socket listens\n"
 "\tport\tis the port number on which the server socket listens\n";
