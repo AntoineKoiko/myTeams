@@ -24,16 +24,17 @@ DSRC		=	./src
 DINCLUDE	=	./include
 DTESTS		=	./tests
 
-LIB		=	
+LIB		=
 
 TEST_SRC	=
 
-SRC		=	
+SRC		=	$(DSRC)/usage.c
 
 SRCS	=	$(SRC) $(DSRC)/main.c
+
 OBJ		=	$(SRCS:.c=.o)
 
-CFLAGS	=	-W -Wall -Wextra -Werror -pedantic -I $(DINCLUDE) -I $(DLIB) 
+CFLAGS	=	-W -Wall -Wextra -Werror -pedantic -I $(DINCLUDE) -I $(DLIB)
 LDFLAGS	=	 -L $(DLIB) -lmyteams -Wl,-rpath=$(PWD)/$(DLIB)
 
 all: $(NAME)

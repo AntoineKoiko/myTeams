@@ -8,7 +8,13 @@
 #ifndef SERVER_H_
 #define SERVER_H_
 
-#define EXIT_SUC 0
-#define EXIT_FAIL 84
+#include <stdio.h>
+#include <string.h>
+#include "logging_server.h"
+
+#define EXIT_SUCCES 0
+#define EXIT_ERROR 84
+
+int usage(int status);
 
 #endif /* !SERVER_H_ */

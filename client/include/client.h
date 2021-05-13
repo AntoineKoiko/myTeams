@@ -8,7 +8,12 @@
 #ifndef CLIENT_H_
 #define CLIENT_H_
 
-#define EXIT_SUC 0
-#define EXIT_FAIL 84
+#define EXIT_SUCCES 0
+#define EXIT_ERROR 84
+
+#include <stdio.h>
+#include <string.h>
+
+int usage(int status);
 
 #endif /* !CLIENT_H_ */
