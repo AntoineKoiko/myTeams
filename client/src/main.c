@@ -9,9 +9,18 @@
 
 int main(int ac, char **av)
 {
-    if (ac > 1 && !strcmp(av[1], "-help")) {
+    int ret = EXIT_SUCCES;
+    teams_client_t teams_client = {0};
+
+    if (ac > 1 && !strcmp(av[1], "-help"))
         return usage(EXIT_SUCCES);
-    }
-    printf("hello world\n");
-    return EXIT_SUCCES;
+    if (check_args(ac, av, &teams_client.client))
+        return usage(EXIT_ERROR);
+    if (create_client(&teams_client) != EXIT_SUCCES)
+        return EXIT_ERROR;
+    get_or_set_client(&teams_client);
+    handle_signal();
+    ret = client_my_teams(&teams_client);
+    destroy_client(&teams_client);
+    return ret;
 }

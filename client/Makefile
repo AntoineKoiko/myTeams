@@ -21,6 +21,7 @@ CC		=	gcc
 
 DLIB		=	../libs/myteams
 DSRC		=	./src
+DSETUP		=	$(DSRC)/setup
 DINCLUDE	=	./include
 DTESTS		=	./tests
 
@@ -28,7 +29,14 @@ LIB		=
 
 TEST_SRC	=
 
-SRC		=	$(DSRC)/usage.c
+SRC		=	$(DSETUP)/check_args.c		\
+			$(DSETUP)/signal_handler.c	\
+			$(DSRC)/usage.c				\
+			$(DSRC)/constant.c			\
+			$(DSRC)/create_client.c		\
+			$(DSRC)/destroy_client.c	\
+			$(DSRC)/get_or_set_client.c	\
+			$(DSRC)/client_my_teams.c	\
 
 SRCS	=	$(SRC) $(DSRC)/main.c
 
