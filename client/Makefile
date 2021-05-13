@@ -6,7 +6,7 @@
 ##
 
 #constante
-ECHO		=	echo
+ECHO		=	echo -e
 DEFAULT		=	"\e[0m"
 OK_C		=	"\e[32m"
 ERROR_C		=	"\e[31m"
@@ -20,9 +20,19 @@ TEST_NAME	=	unit_tests
 CC		=	gcc
 
 DLIB		=	../libs/myteams
+LIBSO		= 	../libs/myteams
 DSRC		=	./src
+DSETUP 		=	$(DSRC)/setup
 DINCLUDE	=	./include
 DTESTS		=	./tests
+
+var := $(shell realpath $(PWD)/$(LIBSO)/libmyteams.so)
+
+ifeq ($(.SHELLSTATUS), 0)
+LIBSO=../libs/myteams
+else
+LIBSO=./libs/myteams
+endif
 
 LIB		=
 
@@ -35,7 +45,7 @@ SRCS	=	$(SRC) $(DSRC)/main.c
 OBJ		=	$(SRCS:.c=.o)
 
 CFLAGS	=	-W -Wall -Wextra -Werror -pedantic -I $(DINCLUDE) -I $(DLIB)
-LDFLAGS	=	-luuid -L $(DLIB) -lmyteams -Wl,-rpath=$(PWD)/$(DLIB)
+LDFLAGS	=	-luuid -L $(DLIB) -lmyteams -Wl,-rpath=$(PWD)/$(LIBSO)
 
 all: $(NAME)
 
