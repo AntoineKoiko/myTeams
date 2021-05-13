@@ -22,7 +22,7 @@ CC		=	gcc
 DLIB		=	../libs/myteams
 LIBSO		= 	../libs/myteams
 DSRC		=	./src
-DSETUP	=	$(DSRC)/setup
+DSETUP		=	$(DSRC)/setup
 DINCLUDE	=	./include
 DTESTS		=	./tests
 
@@ -39,7 +39,14 @@ LIB		=	myteams
 TEST_SRC	=
 
 SRC		=	$(DSETUP)/get_args.c	\
-			$(DSRC)/usage.c	\
+			$(DSETUP)/signal_handler.c	\
+			$(DSRC)/constant.c		\
+			$(DSRC)/usage.c			\
+			$(DSRC)/create_server.c	\
+			$(DSRC)/get_or_set_server.c \
+			$(DSRC)/close_server.c		\
+			$(DSRC)/destroy_server.c	\
+			$(DSRC)/server_my_teams.c	\
 
 SRCS	=	$(SRC) $(DSRC)/main.c
 

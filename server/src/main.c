@@ -9,14 +9,19 @@
 
 int main(int ac, char **av)
 {
-    unsigned short port = 0;
+    int ret = EXIT_SUCCES;
+    teams_server_t teams_server = {0};
 
-    if (ac > 1 && !strcmp(av[1], "-help")) {
+    if (ac > 1 && !strcmp(av[1], "-help"))
         return usage(EXIT_SUCCES);
-    }
-    else if (ac != 2 || !get_args(av, &port))
+    if (get_args(ac, av, &teams_server.server))
+        return usage(EXIT_ERROR);
+    if (create_server(&teams_server.server) == EXIT_ERROR)
         return EXIT_ERROR;
-    printf("hello world\n");
-    server_event_team_created("team_uuid", "team_name", "user_uuid");
-    return EXIT_SUCCES;
+    get_or_set_server(&teams_server);
+    //load_database(teams_server.database);
+    handle_signal();
+    ret = server_my_teams(&teams_server);
+    close_server(&teams_server);
+    return ret;
 }

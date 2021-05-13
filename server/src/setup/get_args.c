@@ -7,28 +7,12 @@
 
 #include "server.h"
 
-#include <limits.h>
-#include <string.h>
-#include <stdlib.h>
-
-static bool is_string_number(const char *str)
+int get_args(int ac, char **av, connection_t *server)
 {
-    for (int i = 0; str[i]; i++) {
-        if (!IS_DIGIT(str[i]))
-            return false;
-    }
-    return true;
-}
-
-bool get_args(char **av, unsigned short *port)
-{
-    long long buf_nb = 0;
-
-    if (!is_string_number(av[1]))
-        return false;
-    buf_nb = atoll(av[1]);
-    if (buf_nb < 0 || buf_nb > USHRT_MAX)
-        return false;
-    (*port) = (unsigned short)buf_nb;
-    return true;
+    if (ac != 2)
+        return EXIT_ERROR;
+    if (strspn(av[1], digits) != strlen(av[1]))
+        return EXIT_ERROR;
+    server->port = atoi(av[1]);
+    return EXIT_SUCCES;
 }
