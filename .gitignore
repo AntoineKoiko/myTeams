@@ -12,5 +12,6 @@ log*.txt
 *myteams_cli
 *myteams_server
 
-# Visual studio code files
+# Text editor files
 .vscode/
+.idea
