@@ -1,6 +1,7 @@
 *.a
 *.o
 *~
+*#
 *vgcor*
 *.gcno
 *.gcda
@@ -10,6 +11,7 @@ log*.txt
 
 *myteeams_cli
 *mytemas_server
+a.out
 
 # Visual studio code files
 .vscode/
