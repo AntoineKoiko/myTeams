@@ -15,3 +15,6 @@ log*.txt
 # Text editor files
 .vscode/
 .idea
+
+#my personnal folder for testing something inside the repo
+.sandbox
