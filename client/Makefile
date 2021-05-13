@@ -22,7 +22,7 @@ CC		=	gcc
 DLIB		=	../libs/myteams
 LIBSO		= 	../libs/myteams
 DSRC		=	./src
-DSETUP 		=	$(DSRC)/setup
+DSETUP		=	$(DSRC)/setup
 DINCLUDE	=	./include
 DTESTS		=	./tests
 
@@ -38,7 +38,20 @@ LIB		=
 
 TEST_SRC	=
 
-SRC		=	$(DSRC)/usage.c
+SRC		=	$(DSETUP)/check_args.c		\
+			$(DSETUP)/signal_handler.c	\
+			$(DSETUP)/manage_fd_sets.c	\
+			$(DSRC)/usage.c				\
+			$(DSRC)/constant.c			\
+			$(DSRC)/create_client.c		\
+			$(DSRC)/destroy_client.c	\
+			$(DSRC)/get_or_set_client.c	\
+			$(DSRC)/client_my_teams.c	\
+			$(DSRC)/check_select_error.c\
+			$(DSRC)/check_fds.c			\
+			$(DSRC)/interprate_server_response.c	\
+			$(DSRC)/interprate_user_input.c			\
+			$(DSRC)/packet_is_empty.c				\
 
 SRCS	=	$(SRC) $(DSRC)/main.c
 
