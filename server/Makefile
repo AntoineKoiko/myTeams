@@ -19,8 +19,9 @@ TEST_NAME	=	unit_tests
 
 CC		=	gcc
 
-DLIB		=	../libs
+DLIB		=	../libs/myteams
 DSRC		=	./src
+DSETUP	=	$(DSRC)/setup
 DINCLUDE	=	./include
 DTESTS		=	./tests
 
@@ -28,7 +29,8 @@ LIB		=	myteams
 
 TEST_SRC	=
 
-SRC		=	$(DSRC)/usage.c
+SRC		=	$(DSETUP)/get_args.c	\
+			$(DSRC)/usage.c	\
 
 SRCS	=	$(SRC) $(DSRC)/main.c
 

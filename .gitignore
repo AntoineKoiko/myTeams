@@ -9,9 +9,8 @@
 .temp/
 log*.txt
 
-*myteeams_cli
-*mytemas_server
-a.out
+*myteams_cli
+*myteams_server
 
 # Visual studio code files
 .vscode/

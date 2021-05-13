@@ -19,7 +19,7 @@ TEST_NAME	=	unit_tests
 
 CC		=	gcc
 
-DLIB		=	../libs
+DLIB		=	../libs/myteams
 DSRC		=	./src
 DINCLUDE	=	./include
 DTESTS		=	./tests
@@ -36,7 +36,6 @@ OBJ		=	$(SRCS:.c=.o)
 
 CFLAGS	=	-W -Wall -Wextra -Werror -pedantic -I $(DINCLUDE) -I $(DLIB)
 LDFLAGS	=	-luuid -L $(DLIB) -lmyteams -Wl,-rpath=$(PWD)/$(DLIB)
-
 
 all: $(NAME)
 
