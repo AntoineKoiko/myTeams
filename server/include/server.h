@@ -8,13 +8,13 @@
 #ifndef SERVER_H_
 #define SERVER_H_
 
-//DEFINE
+// DEFINE
 
-#define MAX_NAME_LENGTH 32
+#define MAX_NAME_LENGTH        32
 #define MAX_DESCRIPTION_LENGTH 255
-#define MAX_BODY_LENGTH 512
+#define MAX_BODY_LENGTH        512
 
-//INCLUDE
+// INCLUDE
 
 #include <unistd.h>
 #include <stdlib.h>
@@ -28,6 +28,7 @@
 #include <sys/select.h>
 #include <sys/queue.h>
 #include <uuid/uuid.h>
+
 #include "connection_t.h"
 #include "logging_server.h"
 #include "session_list_t.h"
@@ -42,17 +43,17 @@
 #include "msg_t.h"
 
 //--------------------------------
-//DEFINE
+// DEFINE
 
 #define EXIT_SUCCES 0
-#define EXIT_ERROR 84
+#define EXIT_ERROR  84
 
 //-------------------------------
-//FUNCTIONS
+// FUNCTIONS
 
 int usage(int status);
 
-//setup
+// setup
 int get_args(int ac, char **av, connection_t *server);
 
 int handle_signal(void);
@@ -64,7 +65,7 @@ void manage_fd_sets(teams_server_t *server);
 int create_server(connection_t *server);
 void close_server(teams_server_t *server);
 
-//void save_db_into_files(database_t *database);
+// void save_db_into_files(database_t *database);
 
 void destroy_server(teams_server_t *server);
 
