@@ -40,6 +40,7 @@ TEST_SRC	=
 
 SRC		=	$(DSETUP)/get_args.c	\
 			$(DSETUP)/signal_handler.c	\
+			$(DSETUP)/manage_fd_sets.c	\
 			$(DSRC)/constant.c		\
 			$(DSRC)/usage.c			\
 			$(DSRC)/create_server.c	\
@@ -47,6 +48,15 @@ SRC		=	$(DSETUP)/get_args.c	\
 			$(DSRC)/close_server.c		\
 			$(DSRC)/destroy_server.c	\
 			$(DSRC)/server_my_teams.c	\
+			$(DSRC)/check_select_error.c	\
+			$(DSRC)/packet_is_empty.c		\
+			$(DSRC)/check_fds.c				\
+			$(DSRC)/connect_client.c		\
+			$(DSRC)/get_high_socket.c		\
+			$(DSRC)/close_session.c			\
+			$(DSRC)/interprate_clients_req.c\
+			$(DSRC)/new/new_session.c	\
+
 
 SRCS	=	$(SRC) $(DSRC)/main.c
 

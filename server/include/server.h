@@ -20,7 +20,11 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <sys/select.h>
+#include <sys/queue.h>
+#include <uuid/uuid.h>
+#include "connection_t.h"
 #include "logging_server.h"
+#include "session_list_t.h"
 #include "teams_server_t.h"
 #include "constant.h"
 
@@ -57,7 +61,18 @@ int server_my_teams(teams_server_t *server);
 
 int check_select_error(int nready);
 
-void check_fds(teams_server_t *client);
+int check_fds(teams_server_t *server);
 
+session_list_t *new_session(void);
+
+int close_session(teams_server_t *server, session_list_t *session);
+
+int connect_client(teams_server_t *server);
+
+bool packet_is_empty(unsigned char buffer[1024]);
+
+int get_high_socket(teams_server_t *server);
+
+int interprate_clients_request(teams_server_t *server);
 
 #endif /* !SERVER_H_ */

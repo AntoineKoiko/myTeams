@@ -8,10 +8,10 @@
 #ifndef TEAMS_SERVER_T_H_
 #define TEAMS_SERVER_T_H_
 
-#include "connection_t.h"
-
 typedef struct {
     connection_t server;
+    STAILQ_HEAD(, session_list_s)
+    session_head;
     //session_list_t clients;
     //database_t data;
     fd_set readfds;
