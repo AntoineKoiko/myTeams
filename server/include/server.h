@@ -8,6 +8,12 @@
 #ifndef SERVER_H_
 #define SERVER_H_
 
+//DEFINE
+
+#define MAX_NAME_LENGTH 32
+#define MAX_DESCRIPTION_LENGTH 255
+#define MAX_BODY_LENGTH 512
+
 //INCLUDE
 
 #include <unistd.h>
@@ -27,6 +33,13 @@
 #include "session_list_t.h"
 #include "teams_server_t.h"
 #include "constant.h"
+#include "status_t.h"
+#include "team_t.h"
+#include "channel_t.h"
+#include "thread_t.h"
+#include "user_t.h"
+#include "reply_t.h"
+#include "msg_t.h"
 
 //--------------------------------
 //DEFINE

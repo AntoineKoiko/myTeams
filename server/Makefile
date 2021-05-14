@@ -56,7 +56,12 @@ SRC		=	$(DSETUP)/get_args.c	\
 			$(DSRC)/close_session.c			\
 			$(DSRC)/interprate_clients_req.c\
 			$(DSRC)/new/new_session.c	\
-
+			$(DSRC)/new/new_user.c 		\
+			$(DSRC)/new/new_team.c 		\
+			$(DSRC)/new/new_channel.c 	\
+			$(DSRC)/new/new_thread.c 	\
+			$(DSRC)/new/new_reply.c 	\
+			$(DSRC)/new/new_msg.c 		\
 
 SRCS	=	$(SRC) $(DSRC)/main.c
 
