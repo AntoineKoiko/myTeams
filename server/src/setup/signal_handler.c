@@ -5,14 +5,14 @@
 ** signal_handler
 */
 
-#include "client.h"
+#include "server.h"
 
 static void handle_sigint(__attribute((unused))int sig)
 {
-    teams_client_t *teams = get_or_set_client(NULL);
+    teams_server_t *server = get_or_set_server(NULL);
 
-    printf("\nCATCH SIGINT: The client will shutdown.\n");
-    destroy_client(teams);
+    printf("\nCATCH SIGINT: The server will shutdown\n");
+    close_server(server);
     exit(0);
 }
 
