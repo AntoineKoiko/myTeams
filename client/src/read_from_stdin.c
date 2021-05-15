@@ -9,12 +9,11 @@
 
 static void clear_buffer(command_stack_t *cmd, char *buffer)
 {
-    if (strlen(buffer+strlen(cmd->cmd))) {
-        memmove(buffer, buffer+strlen(cmd->cmd), strlen(buffer+strlen(cmd->cmd)));
-        memset(buffer+strlen(cmd->cmd), 0, INPUT_BUFF_SIZE - strlen(buffer+strlen(cmd->cmd)));
-    } else {
-        memset(buffer, 0, INPUT_BUFF_SIZE);
-    }
+    char tmp[INPUT_BUFF_SIZE] = {0};
+
+    strcpy(tmp, buffer+strlen(cmd->cmd));
+    memset(buffer, 0, INPUT_BUFF_SIZE);
+    strcpy(buffer, tmp);
 }
 
 static int split_string(teams_client_t *client, char *buffer)
