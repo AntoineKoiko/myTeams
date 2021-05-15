@@ -12,6 +12,8 @@
 #include "database/team_list.h"
 #include "database/user_list.h"
 
+#include "database/database_constants.h"
+
 #define STATIC_ARRAY_SIZE(x) (sizeof(x) / sizeof (x[0]))
 
 #define N_U __attribute__((unused))

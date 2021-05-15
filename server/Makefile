@@ -64,20 +64,22 @@ SRC		=	$(DSETUP)/get_args.c	\
 			$(DSRC)/new/new_reply.c 	\
 			$(DSRC)/new/new_msg.c 		\
 			\
-			$(DDATABASE)/save_db.c			\
-			$(DDATABASE)/database_constants.c			\
-			$(DDATABASE)/save_teams.c		\
-			$(DDATABASE)/save_users.c		\
-			$(DDATABASE)/save_channels.c	\
-			$(DDATABASE)/save_threads.c		\
-			$(DDATABASE)/save_replies.c		\
-			$(DDATABASE)/save_messages.c	\
+			$(DDATABASE)/save_db.c				\
+			$(DDATABASE)/database_constants.c	\
+			$(DDATABASE)/save_teams.c			\
+			$(DDATABASE)/save_users.c			\
+			$(DDATABASE)/save_channels.c		\
+			$(DDATABASE)/save_threads.c			\
+			$(DDATABASE)/save_replies.c			\
+			$(DDATABASE)/save_messages.c		\
 
 SRCS	=	$(SRC) $(DSRC)/main.c
 
 OBJ		=	$(SRCS:.c=.o)
 
-CFLAGS	=	-W -Wall -Wextra -Werror -pedantic -I $(DINCLUDE) -I $(DLIB)
+INCLUDE	=	-I $(DINCLUDE) -I $(DLIB)
+
+CFLAGS	=	-W -Wall -Wextra -Werror -pedantic $(INCLUDE)
 LDFLAGS	=	-luuid -L $(DLIB) -lmyteams -Wl,-rpath=$(PWD)/$(LIBSO)
 
 all: $(NAME)
