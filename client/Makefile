@@ -52,6 +52,7 @@ SRC		=	$(DSETUP)/check_args.c		\
 			$(DSRC)/interprate_server_response.c	\
 			$(DSRC)/interprate_user_input.c			\
 			$(DSRC)/packet_is_empty.c				\
+			$(DSRC)/read_from_stdin.c				\
 
 SRCS	=	$(SRC) $(DSRC)/main.c
 

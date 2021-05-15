@@ -8,6 +8,8 @@
 #ifndef CLIENT_H_
 #define CLIENT_H_
 
+#define INPUT_BUFF_SIZE 1024
+
 //INCLUDE
 
 #include <unistd.h>
@@ -22,7 +24,9 @@
 #include <sys/select.h>
 #include <sys/types.h>
 #include <sys/socket.h>
+#include <sys/queue.h>
 #include "connection_t.h"
+#include "command_stack_t.h"
 #include "teams_client_t.h"
 #include "constant.h"
 
@@ -55,7 +59,9 @@ int client_my_teams(teams_client_t *client);
 
 int check_select_error(int nready);
 
-void check_fds(teams_client_t *client);
+int read_from_stdin(teams_client_t *client, char *buffer);
+
+int check_fds(teams_client_t *client);
 
 bool packet_is_empty(unsigned char buffer[1024]);
 

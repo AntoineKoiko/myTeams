@@ -15,6 +15,8 @@ typedef struct {
     fd_set readfds;
     fd_set writefds;
     char input_buff[1024];
+    STAILQ_HEAD(, command_stack_s)
+    command_head;
 } teams_client_t;
 
 #endif /* !TEAMS_CLIENT_T_H_ */

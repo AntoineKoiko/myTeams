@@ -9,6 +9,13 @@
 
 void interprate_user_input(teams_client_t *client)
 {
-    printf("User say: %s\n", client->input_buff);
-    memset(client->input_buff, 0, 1024);
+    command_stack_t *cmd = NULL;
+
+    while (!STAILQ_EMPTY(&client->command_head)) {
+        cmd = STAILQ_FIRST(&client->command_head);
+        STAILQ_REMOVE_HEAD(&client->command_head, next);
+        printf("User say: %s", cmd->cmd);
+        free(cmd->cmd);
+        free(cmd);
+    }
 }

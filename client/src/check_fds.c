@@ -7,15 +7,11 @@
 
 #include "client.h"
 
-static int read_from_stdin(char *buffer)
-{
-    read(1, buffer, 1);
-    return EXIT_SUCCES;
-}
-
 static int read_from_server(connection_t *client)
 {
-    read(client->socket, &client->input_buff, 1);
+    if (read(client->socket, &client->input_buff, 1) <= 0) {
+        printf("SERVER SEND NULL BYTE\n");
+    }
     return EXIT_SUCCES;
 }
 
@@ -26,11 +22,15 @@ static int write_to_server(connection_t *client)
     return EXIT_SUCCES;
 }
 
-void check_fds(teams_client_t *client)
+int check_fds(teams_client_t *client)
 {
+    int ret = 0;
+
     if (FD_ISSET(STDIN_FILENO, &client->readfds)) {
-        printf("READ FROM STDIN\n");
-        read_from_stdin(client->input_buff);
+        ret = read_from_stdin(client, client->input_buff);
+        if (ret) {
+            return ret;
+        }
     }
     if (FD_ISSET(client->client.socket, &client->readfds)) {
         printf("READ FROM SERVER");
@@ -39,4 +39,5 @@ void check_fds(teams_client_t *client)
     if (FD_ISSET(client->client.socket, &client->writefds)) {
         write_to_server(&client->client);
     }
+    return EXIT_SUCCES;
 }
