@@ -22,5 +22,5 @@ int connect_client(teams_server_t *server)
         return EXIT_ERROR;
     }
     STAILQ_INSERT_TAIL(&server->session_head, session, next);
-    return EXIT_SUCCES;
+    return EXIT_SUCCESS;
 }

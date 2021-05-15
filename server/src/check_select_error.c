@@ -17,5 +17,5 @@ int check_select_error(int nready)
         printf("select return 0: server should exit\n");
         return EXIT_ERROR;
     }
-    return EXIT_SUCCES;
+    return EXIT_SUCCESS;
 }

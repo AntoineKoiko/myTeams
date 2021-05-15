@@ -65,5 +65,5 @@ int check_fds(teams_server_t *server)
 
     }
     handle_closed_fd(server);
-    return EXIT_SUCCES;
+    return EXIT_SUCCESS;
 }

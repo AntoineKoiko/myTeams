@@ -7,12 +7,14 @@
 #ifndef MYTEAMS_REPLY_LIST_H
 #define MYTEAMS_REPLY_LIST_H
 
+#include <sys/queue.h>
+
 #include "reply_t.h"
 
-typedef struct reply_list_s
+typedef struct reply_node_s
 {
     reply_t *reply_data;
-    STAILQ_ENTRY(reply_list_s) next;
-} reply_list_t;
+    SLIST_ENTRY(reply_node_s) next;
+} reply_node_t;
 
 #endif // MYTEAMS_REPLY_LIST_H

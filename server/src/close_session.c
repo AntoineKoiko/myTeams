@@ -16,5 +16,5 @@ int close_session(teams_server_t *server, session_list_t *session)
     STAILQ_REMOVE(&server->session_head, session, session_list_s, next);
     //PASSER à NOT_CONNECTED la variable du user;
     free(session);
-    return EXIT_SUCCES;
+    return EXIT_SUCCESS;
 }

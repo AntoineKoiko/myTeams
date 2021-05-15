@@ -16,7 +16,7 @@ typedef struct
     STAILQ_HEAD(, session_list_s)
     session_head;
     // session_list_t clients;
-    database_t data;
+//    database_t data;
     fd_set readfds;
     fd_set writefds;
 

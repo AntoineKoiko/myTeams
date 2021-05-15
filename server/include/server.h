@@ -42,10 +42,11 @@
 #include "reply_t.h"
 #include "msg_t.h"
 
+#include "database/database.h"
+
 //--------------------------------
 // DEFINE
 
-#define EXIT_SUCCES 0
 #define EXIT_ERROR  84
 
 //-------------------------------

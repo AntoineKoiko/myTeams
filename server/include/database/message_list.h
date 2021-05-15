@@ -7,12 +7,14 @@
 #ifndef MYTEAMS_MSG_LIST_H
 #define MYTEAMS_MSG_LIST_H
 
+#include <sys/queue.h>
+
 #include "msg_t.h"
 
-typedef struct msg_list_s
+typedef struct msg_node_s
 {
     msg_t *msg_data;
-    STAILQ_ENTRY(msg_list_s) next;
-} msg_list_t;
+    SLIST_ENTRY(msg_node_s) next;
+} msg_node_t;
 
 #endif // MYTEAMS_MSG_LIST_H

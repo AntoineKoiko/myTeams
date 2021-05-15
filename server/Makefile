@@ -22,9 +22,10 @@ CC		=	gcc
 DLIB		=	../libs/myteams
 LIBSO		= 	../libs/myteams
 DSRC		=	./src
-DSETUP		=	$(DSRC)/setup
 DINCLUDE	=	./include
 DTESTS		=	./tests
+DSETUP		=	$(DSRC)/setup
+DDATABASE	=	$(DSRC)/database
 
 var := $(shell realpath $(PWD)/$(LIBSO)/libmyteams.so)
 
@@ -62,6 +63,15 @@ SRC		=	$(DSETUP)/get_args.c	\
 			$(DSRC)/new/new_thread.c 	\
 			$(DSRC)/new/new_reply.c 	\
 			$(DSRC)/new/new_msg.c 		\
+			\
+			$(DDATABASE)/save_db.c			\
+			$(DDATABASE)/database_constants.c			\
+			$(DDATABASE)/save_teams.c		\
+			$(DDATABASE)/save_users.c		\
+			$(DDATABASE)/save_channels.c	\
+			$(DDATABASE)/save_threads.c		\
+			$(DDATABASE)/save_replies.c		\
+			$(DDATABASE)/save_messages.c	\
 
 SRCS	=	$(SRC) $(DSRC)/main.c
 

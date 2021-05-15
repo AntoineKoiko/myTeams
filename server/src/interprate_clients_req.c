@@ -13,7 +13,7 @@ static int interprate_client_req(teams_server_t *server,
     (void)server;
     printf("USER SAYS: %s\n", session->cnt.input_buff);
     memset(session->cnt.input_buff, 0, 1024);
-    return EXIT_SUCCES;
+    return EXIT_SUCCESS;
 }
 
 int interprate_clients_request(teams_server_t *server)
@@ -26,5 +26,5 @@ int interprate_clients_request(teams_server_t *server)
             interprate_client_req(server, session);
         }
     }
-    return EXIT_SUCCES;
+    return EXIT_SUCCESS;
 }

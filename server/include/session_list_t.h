@@ -11,7 +11,7 @@
 #include "server.h"
 
 typedef struct session_list_s {
-    //user_list_t *user;
+    //user_node_t *user;
     connection_t cnt;
     bool logged_in;
     uuid_t team_ctx;
