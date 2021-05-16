@@ -12,14 +12,14 @@ static int read_from_server(connection_t *client)
     if (read(client->socket, &client->input_buff, 1) <= 0) {
         return EXIT_FAILURE;
     }
-    return EXIT_SUCCES;
+    return EXIT_SUCCESS;
 }
 
 static int write_to_server(connection_t *client)
 {
-    write(client->socket, client->output_buff, 1);
-    memset(client->output_buff, 0, 1024);
-    return EXIT_SUCCES;
+    write(client->socket, client->output_buff, INPUT_BUFF_SIZE);
+    memset(client->output_buff, 0, INPUT_BUFF_SIZE);
+    return EXIT_SUCCESS;
 }
 
 int check_fds(teams_client_t *client)
@@ -40,5 +40,5 @@ int check_fds(teams_client_t *client)
     if (FD_ISSET(client->client.socket, &client->writefds)) {
         write_to_server(&client->client);
     }
-    return EXIT_SUCCES;
+    return EXIT_SUCCESS;
 }

@@ -26,14 +26,14 @@
 #include <sys/socket.h>
 #include <sys/queue.h>
 #include "connection_t.h"
-#include "command_stack_t.h"
+#include "string_list_t.h"
 #include "teams_client_t.h"
+#include "command_t.h"
 #include "constant.h"
 
 //--------------------------------
 //DEFINE
 
-#define EXIT_SUCCES 0
 #define EXIT_ERROR 84
 
 //-------------------------------
@@ -63,9 +63,16 @@ int read_from_stdin(teams_client_t *client, char *buffer);
 
 int check_fds(teams_client_t *client);
 
+char *rm_escape_char(char *str);
+
 bool packet_is_empty(unsigned char buffer[1024]);
 
+void serialize_cmd(teams_client_t *client, size_t cmd, char **argv);
+
+char **get_args(teams_client_t *teams_client, char *arg_str);
+
 void interprate_user_input(teams_client_t *client);
+
 void interprate_server_response(teams_client_t *client);
 
 #endif /* !CLIENT_H_ */

@@ -10,4 +10,6 @@
 
 extern const char *digits;
 
+extern const command_t command_list[];
+
 #endif /* !CONSTANT_H_ */

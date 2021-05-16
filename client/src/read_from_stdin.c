@@ -7,37 +7,37 @@
 
 #include "client.h"
 
-static void clear_buffer(command_stack_t *cmd, char *buffer)
+static void clear_buffer(string_list_t *cmd, char *buffer)
 {
     char tmp[INPUT_BUFF_SIZE] = {0};
 
-    strcpy(tmp, buffer+strlen(cmd->cmd));
+    strcpy(tmp, buffer+strlen(cmd->str));
     memset(buffer, 0, INPUT_BUFF_SIZE);
     strcpy(buffer, tmp);
 }
 
 static int split_string(teams_client_t *client, char *buffer)
 {
-    command_stack_t *cmd = NULL;
+    string_list_t *cmd = NULL;
 
     while (strchr(buffer, '\n') != NULL) {
-        cmd = malloc(sizeof(command_stack_t));
+        cmd = malloc(sizeof(string_list_t));
         if (cmd == NULL)
             return EXIT_ERROR;
-        cmd->cmd = strndup(buffer, strcspn(buffer, "\n") + 1);
-        if (cmd->cmd == NULL) {
+        cmd->str = strndup(buffer, strcspn(buffer, "\n") + 1);
+        if (cmd->str == NULL) {
             free(cmd);
             return EXIT_ERROR;
         }
         clear_buffer(cmd, buffer);
         STAILQ_INSERT_TAIL(&client->command_head, cmd, next);
     }
-    return EXIT_SUCCES;
+    return EXIT_SUCCESS;
 }
 
 int read_from_stdin(teams_client_t *client, char *buffer)
 {
-    int ret = EXIT_SUCCES;
+    int ret = EXIT_SUCCESS;
     ssize_t nread = 0;
 
     while (strchr(buffer, '\n') == NULL) {

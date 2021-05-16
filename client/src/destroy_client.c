@@ -9,7 +9,7 @@
 
 void destroy_client(teams_client_t *teams)
 {
-    command_stack_t *cmd = NULL;
+    string_list_t *cmd = NULL;
 
     shutdown(teams->client.socket, SHUT_RDWR);
     if (teams->client.socket != -1)
@@ -17,7 +17,7 @@ void destroy_client(teams_client_t *teams)
     while (!STAILQ_EMPTY(&teams->command_head)) {
         cmd = STAILQ_FIRST(&teams->command_head);
         STAILQ_REMOVE_HEAD(&teams->command_head, next);
-        free(cmd->cmd);
+        free(cmd->str);
         free(cmd);
     }
 }
