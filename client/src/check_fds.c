@@ -10,7 +10,7 @@
 static int read_from_server(connection_t *client)
 {
     if (read(client->socket, &client->input_buff, 1) <= 0) {
-        printf("SERVER SEND NULL BYTE\n");
+        return EXIT_FAILURE;
     }
     return EXIT_SUCCES;
 }
@@ -28,13 +28,14 @@ int check_fds(teams_client_t *client)
 
     if (FD_ISSET(STDIN_FILENO, &client->readfds)) {
         ret = read_from_stdin(client, client->input_buff);
-        if (ret) {
+        if (ret)
             return ret;
-        }
     }
     if (FD_ISSET(client->client.socket, &client->readfds)) {
         printf("READ FROM SERVER");
-        read_from_server(&client->client);
+        ret = read_from_server(&client->client);
+        if (ret)
+            return ret;
     }
     if (FD_ISSET(client->client.socket, &client->writefds)) {
         write_to_server(&client->client);
