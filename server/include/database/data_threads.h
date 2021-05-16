@@ -1,14 +1,16 @@
 /*
 ** EPITECH PROJECT, 2021
-** thread_list.h
+** data_threads.h
 ** File description:
-** Linked list containing every thread of a channel
+** Threads data handling
 */
-#ifndef MYTEAMS_THREAD_LIST_H
-#define MYTEAMS_THREAD_LIST_H
+#ifndef SERVER_DATA_THREADS_H
+#define SERVER_DATA_THREADS_H
 
 #include <sys/queue.h>
 #include "thread_t.h"
+
+typedef struct database_s database_t;
 
 typedef struct thread_node_s
 {
@@ -17,4 +19,6 @@ typedef struct thread_node_s
     SLIST_ENTRY(thread_node_s) next;
 } thread_node_t;
 
-#endif // MYTEAMS_THREAD_LIST_H
+int save_threads(const database_t *db);
+
+#endif // SERVER_DATA_THREADS_H

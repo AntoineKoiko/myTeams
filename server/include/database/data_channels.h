@@ -1,16 +1,17 @@
 /*
 ** EPITECH PROJECT, 2021
-** channel_list.h
+** data_channels.h
 ** File description:
-** Linked list containing all the channels of a team
+** Channels data handling
 */
-#ifndef MYTEAMS_CHANNEL_LIST_H
-#define MYTEAMS_CHANNEL_LIST_H
+#ifndef SERVER_DATA_CHANNELS_H
+#define SERVER_DATA_CHANNELS_H
 
 #include <sys/queue.h>
 
 #include "channel_t.h"
-#include "database/thread_list.h"
+
+typedef struct database_s database_t;
 
 typedef struct channel_node_s
 {
@@ -19,4 +20,6 @@ typedef struct channel_node_s
     SLIST_ENTRY(channel_node_s) next;
 } channel_node_t;
 
-#endif // MYTEAMS_CHANNEL_LIST_H
+int save_channels(const database_t *db);
+
+#endif // SERVER_DATA_CHANNELS_H

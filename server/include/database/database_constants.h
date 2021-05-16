@@ -19,11 +19,14 @@ typedef enum file_types_e
     MESSAGES
 } file_types_t;
 
-typedef struct file_type_ext_s
+typedef struct save_file_s
 {
-    enum file_types_e type;
+    file_types_t type;
     const char *const ext;
-} file_type_ext_t;
+    int (*save_function)(const database_t *);
+} save_file_t;
+
+const int magic_file_nb;
 
 extern const char *const ext_teams;
 extern const char *const ext_users;
@@ -34,6 +37,6 @@ extern const char *const ext_messages;
 
 extern const char *const save_file;
 
-extern const file_type_ext_t save_files[NB_FILE_TYPES];
+extern const save_file_t save_files[NB_FILE_TYPES];
 
 #endif // SERVER_DATABASE_CONSTANTS_H

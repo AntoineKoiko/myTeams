@@ -8,7 +8,8 @@
 #include "database/database.h"
 #include "database/database_constants.h"
 
-const int magic_nb = 180517110; // le numero de telephone d'epitech Rennes lol
+const int magic_file_nb =
+    180517110; // le numero de telephone d'epitech Rennes lol
 
 const char *const ext_teams = ".teams";
 const char *const ext_users = ".users";
@@ -19,9 +20,9 @@ const char *const ext_messages = ".messages";
 
 const char *const save_file = "database";
 
-const file_type_ext_t save_files[NB_FILE_TYPES] = {{TEAMS, ext_teams},
-    {USERS, ext_users},
-    {CHANNELS, ext_channels},
-    {THREADS, ext_threads},
-    {REPLIES, ext_replies},
-    {MESSAGES, ext_messages}};
+const save_file_t save_files[NB_FILE_TYPES] = {{TEAMS, ext_teams, save_teams},
+    {USERS, ext_users, save_users},
+    {CHANNELS, ext_channels, save_channels},
+    {THREADS, ext_threads, save_threads},
+    {REPLIES, ext_replies, save_replies},
+    {MESSAGES, ext_messages, save_messages}};

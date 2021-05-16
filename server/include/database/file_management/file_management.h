@@ -7,10 +7,12 @@
 #ifndef SERVER_FILE_MANAGEMENT_H
 #define SERVER_FILE_MANAGEMENT_H
 
+#include "database/database_constants.h"
+
 typedef struct file_header_s
 {
-    int magic_number;
-    int file_type;
+    const int magic_number;
+    file_types_t file_type;
     int elements_nb;
 } file_header_t;
 
