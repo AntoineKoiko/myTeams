@@ -43,8 +43,10 @@ int read_from_stdin(teams_client_t *client, char *buffer)
     while (strchr(buffer, '\n') == NULL) {
         nread = read(STDIN_FILENO, buffer+strlen(buffer),
                     INPUT_BUFF_SIZE - strlen(buffer));
-        if (nread == 0)
-            return EXIT_FAILURE;
+        if (nread == 0) {
+            client->should_read = false;
+            return EXIT_SUCCESS;
+        }
         if (nread < 0)
             return EXIT_ERROR;
     }

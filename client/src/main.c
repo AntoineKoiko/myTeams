@@ -22,6 +22,7 @@ int main(int ac, char **av)
     handle_signal();
     STAILQ_INIT(&teams_client.command_head);
     STAILQ_INIT(&teams_client.arg_stack);
+    teams_client.should_read = true;
     ret = client_my_teams(&teams_client);
     destroy_client(&teams_client);
     return (ret == EXIT_ERROR ? EXIT_ERROR : EXIT_SUCCESS);

@@ -12,7 +12,7 @@ int client_my_teams(teams_client_t *client)
     int nready = 0;
     int ret = 0;
 
-    while (true) {
+    while (client->should_read) {
         manage_fd_sets(client);
         nready = select(client->client.socket + 1, &client->readfds,
                         &client->writefds, NULL, NULL);

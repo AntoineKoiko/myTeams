@@ -15,6 +15,7 @@ typedef struct {
     fd_set readfds;
     fd_set writefds;
     char input_buff[1024];
+    bool should_read;
     STAILQ_HEAD(, string_list_s)
     command_head;
     STAILQ_HEAD(, string_list_s)

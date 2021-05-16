@@ -10,7 +10,9 @@
 void manage_fd_sets(teams_client_t *client)
 {
     FD_ZERO(&client->readfds);
-    FD_SET(STDIN_FILENO, &client->readfds);
+    if (client->should_read) {
+        FD_SET(STDIN_FILENO, &client->readfds);
+    }
     FD_SET(client->client.socket, &client->readfds);
     FD_ZERO(&client->writefds);
     if (!packet_is_empty(client->client.output_buff)) {

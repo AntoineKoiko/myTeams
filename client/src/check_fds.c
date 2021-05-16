@@ -9,7 +9,7 @@
 
 static int read_from_server(connection_t *client)
 {
-    if (read(client->socket, &client->input_buff, 1) <= 0) {
+    if (read(client->socket, &client->input_buff, INPUT_BUFF_SIZE) <= 0) {
         return EXIT_FAILURE;
     }
     return EXIT_SUCCESS;
