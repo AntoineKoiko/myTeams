@@ -15,5 +15,5 @@ int check_args(int ac, char **av, connection_t *client)
         return EXIT_ERROR;
     client->hostname = av[1];
     client->port = atoi(av[2]);
-    return EXIT_SUCCES;
+    return EXIT_SUCCESS;
 }

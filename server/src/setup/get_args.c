@@ -14,5 +14,5 @@ int get_args(int ac, char **av, connection_t *server)
     if (strspn(av[1], digits) != strlen(av[1]))
         return EXIT_ERROR;
     server->port = atoi(av[1]);
-    return EXIT_SUCCES;
+    return EXIT_SUCCESS;
 }

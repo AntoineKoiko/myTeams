@@ -47,5 +47,5 @@ int create_server(connection_t *cnt)
         printf("listen: %s\n", strerror(errno));
         return EXIT_ERROR;
     }
-    return EXIT_SUCCES;;
+    return EXIT_SUCCESS;
 }

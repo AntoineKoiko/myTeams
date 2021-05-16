@@ -23,5 +23,5 @@ int handle_signal(void)
     act.sa_handler = &handle_sigint;
     act.sa_flags = SA_SIGINFO;
     sigaction(SIGINT, &act, NULL);
-    return EXIT_SUCCES;
+    return EXIT_SUCCESS;
 }

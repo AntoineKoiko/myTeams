@@ -23,5 +23,5 @@ int server_my_teams(teams_server_t *server)
             return EXIT_ERROR;
         interprate_clients_request(server);
     }
-    return EXIT_SUCCES;
+    return EXIT_SUCCESS;
 }

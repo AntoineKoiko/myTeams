@@ -25,5 +25,5 @@ int client_my_teams(teams_client_t *client)
         if (!packet_is_empty(client->client.input_buff))
             interprate_server_response(client);
     }
-    return EXIT_SUCCES;
+    return EXIT_SUCCESS;
 }
