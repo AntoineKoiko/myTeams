@@ -47,7 +47,9 @@
 //--------------------------------
 // DEFINE
 
-#define EXIT_ERROR  84
+#ifndef EXIT_ERROR
+    #define EXIT_ERROR 84
+#endif
 
 //-------------------------------
 // FUNCTIONS

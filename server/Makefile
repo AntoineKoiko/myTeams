@@ -66,6 +66,7 @@ SRC		=	$(DSETUP)/get_args.c	\
 			\
 			$(DDATABASE)/save_db.c				\
 			$(DDATABASE)/database_constants.c	\
+			$(DDATABASE)/file_management/header.c	\
 			$(DDATABASE)/save_teams.c			\
 			$(DDATABASE)/save_users.c			\
 			$(DDATABASE)/save_channels.c		\

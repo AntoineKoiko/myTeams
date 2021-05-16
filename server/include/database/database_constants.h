@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2021
 ** database_constants.h
 ** File description:
-** TODO: add description
+** Constants for database management
 */
 #ifndef SERVER_DATABASE_CONSTANTS_H
 #define SERVER_DATABASE_CONSTANTS_H
@@ -22,7 +22,7 @@ typedef enum file_types_e
 typedef struct save_file_s
 {
     file_types_t type;
-    const char *const ext;
+    const char *const extension;
     int (*save_function)(const database_t *);
 } save_file_t;
 
@@ -35,7 +35,7 @@ extern const char *const ext_threads;
 extern const char *const ext_replies;
 extern const char *const ext_messages;
 
-extern const char *const save_file;
+extern const char *const save_filename;
 
 extern const save_file_t save_files[NB_FILE_TYPES];
 

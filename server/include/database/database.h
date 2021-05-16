@@ -7,7 +7,11 @@
 #ifndef MYTEAMS_DATABASE_H
 #define MYTEAMS_DATABASE_H
 
+#define _GNU_SOURCE
+#include <stdio.h>
+
 #include <sys/queue.h>
+#include <fcntl.h>
 
 #include "database/data_channels.h"
 #include "database/data_users.h"
@@ -16,6 +20,7 @@
 #include "database/data_replies.h"
 #include "database/data_messages.h"
 
+#include "database/file_management/file_management.h"
 #include "database/database_constants.h"
 
 #define STATIC_ARRAY_SIZE(x) (sizeof(x) / sizeof(x[0]))

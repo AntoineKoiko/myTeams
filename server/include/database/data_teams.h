@@ -13,7 +13,6 @@
 #include <uuid/uuid.h>
 
 #include "team_t.h"
-#include "database/channel_list.h"
 
 typedef struct database_s database_t;
 
