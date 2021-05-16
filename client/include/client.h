@@ -25,6 +25,8 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <sys/queue.h>
+#include <uuid/uuid.h>
+#include "logging_client.h"
 #include "connection_t.h"
 #include "string_list_t.h"
 #include "teams_client_t.h"

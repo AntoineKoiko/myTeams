@@ -55,6 +55,7 @@ SRC		=	$(DSETUP)/check_args.c		\
 			$(DSRC)/get_args.c						\
 			$(DSRC)/rm_escape_char.c				\
 			$(DSRC)/read_from_stdin.c				\
+			$(DSRC)/serialize_cmd.c					\
 
 SRCS	=	$(SRC) $(DSRC)/main.c
 

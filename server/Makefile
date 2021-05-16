@@ -62,6 +62,7 @@ SRC		=	$(DSETUP)/get_args.c	\
 			$(DSRC)/new/new_thread.c 	\
 			$(DSRC)/new/new_reply.c 	\
 			$(DSRC)/new/new_msg.c 		\
+			$(DSRC)/requests/login.c	\
 
 SRCS	=	$(SRC) $(DSRC)/main.c
 

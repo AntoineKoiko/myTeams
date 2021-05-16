@@ -21,7 +21,7 @@ void manage_fd_sets(teams_server_t *server)
     STAILQ_FOREACH(session, &server->session_head, next)
     {
         if (!packet_is_empty(session->cnt.output_buff)) {
-            FD_SET(session->cnt.socket, &server->readfds);
+            FD_SET(session->cnt.socket, &server->writefds);
         }
     }
 }

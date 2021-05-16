@@ -17,8 +17,9 @@ static int read_from_server(connection_t *client)
 
 static int write_to_server(connection_t *client)
 {
-    write(client->socket, client->output_buff, INPUT_BUFF_SIZE);
+    write(client->socket, client->output_buff, client->output_size);
     memset(client->output_buff, 0, INPUT_BUFF_SIZE);
+    client->output_size = 0;
     return EXIT_SUCCESS;
 }
 
@@ -32,7 +33,6 @@ int check_fds(teams_client_t *client)
             return ret;
     }
     if (FD_ISSET(client->client.socket, &client->readfds)) {
-        printf("READ FROM SERVER");
         ret = read_from_server(&client->client);
         if (ret)
             return ret;

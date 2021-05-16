@@ -28,6 +28,7 @@
 #include <sys/select.h>
 #include <sys/queue.h>
 #include <uuid/uuid.h>
+#include "user_t.h"
 #include "connection_t.h"
 #include "logging_server.h"
 #include "session_list_t.h"
@@ -37,14 +38,12 @@
 #include "team_t.h"
 #include "channel_t.h"
 #include "thread_t.h"
-#include "user_t.h"
 #include "reply_t.h"
 #include "msg_t.h"
 
 //--------------------------------
 //DEFINE
 
-#define EXIT_SUCCES 0
 #define EXIT_ERROR 84
 
 //-------------------------------
@@ -87,5 +86,23 @@ bool packet_is_empty(unsigned char buffer[1024]);
 int get_high_socket(teams_server_t *server);
 
 int interprate_clients_request(teams_server_t *server);
+
+//object constructor
+
+channel_t *new_channel(uuid_t team_uuid, char *name, char *desc);
+
+msg_t *new_msg(uuid_t sender_uuid, uuid_t receiver_uuid, char *body);
+
+reply_t *new_reply(char *body, uuid_t team_uuid, uuid_t thread_uuid,
+                    uuid_t user_uuid);
+
+team_t *new_team(const char *name, const char *desc, uuid_t created_by);
+
+thread_t *new_thread(uuid_t chan, uuid_t user, char *title, char *body);
+
+user_t *new_user(const char *user_name);
+
+int login_request(teams_server_t *server, session_list_t *session,
+                    char **argv);
 
 #endif /* !SERVER_H_ */

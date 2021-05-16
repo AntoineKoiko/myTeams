@@ -39,7 +39,7 @@ static int command_interpretor(teams_client_t *client, char *cmd)
     int nb_args = 0;
 
     if (idx == -1) {
-        printf("%s: command not found\n", cmd);
+        printf("Unknown command.\n");
         return EXIT_ERROR;
     }
     arg_array = get_args(client, cmd+strlen(command_list[idx].cmd));
@@ -47,7 +47,7 @@ static int command_interpretor(teams_client_t *client, char *cmd)
     if (nb_args < command_list[idx].min_arg || nb_args > command_list[idx].max_arg) {
         printf("%s: wrong number of argument(s)\n", command_list[idx].cmd);
     } else {
-        //serialize_cmd(client, idx, arg_array);
+        serialize_cmd(client, idx, arg_array);
     }
     for (size_t i = 0; arg_array[i]; i++) {
         free(arg_array[i]);

@@ -12,9 +12,11 @@ static void check_fds_read(teams_server_t *server, session_list_t *session)
     ssize_t nread = 0;
 
     if (FD_ISSET(session->cnt.socket, &server->readfds)) {
-        nread = read(session->cnt.socket, &session->cnt.input_buff, 1);
+        nread = read(session->cnt.socket, &session->cnt.input_buff, 1024);
         if (nread <= 0) {
             session->should_exit = true;
+        } else {
+            session->cnt.input_size = nread;
         }
     }
 }
@@ -22,7 +24,7 @@ static void check_fds_read(teams_server_t *server, session_list_t *session)
 static void check_fds_write(teams_server_t *server, session_list_t *session)
 {
     if (FD_ISSET(session->cnt.socket, &server->writefds)) {
-        dprintf(session->cnt.socket, "%s", session->cnt.output_buff);
+        write(session->cnt.socket, session->cnt.output_buff, 1024);
         memset(session->cnt.output_buff, 0, 1024);
     }
 }
@@ -65,5 +67,5 @@ int check_fds(teams_server_t *server)
 
     }
     handle_closed_fd(server);
-    return EXIT_SUCCES;
+    return EXIT_SUCCESS;
 }

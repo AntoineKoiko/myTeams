@@ -17,6 +17,8 @@ typedef struct {
     char *hostname;
     unsigned char input_buff[1024];
     unsigned char output_buff[1024];
+    size_t output_size;
+    size_t input_size;
 } connection_t;
 
 #endif /* !CONNECTION_T_H_ */
