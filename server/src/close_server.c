@@ -9,6 +9,7 @@
 
 void close_server(teams_server_t *server)
 {
-    //save_db_into_files(server.database);
+    save_db(server->database);
+
     destroy_server(server);
 }

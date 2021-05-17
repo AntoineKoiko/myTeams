@@ -12,9 +12,11 @@ log*.txt
 *myteams_cli
 *myteams_server
 
+.database
+
 # Text editor files
 .vscode/
 .idea
 
-#my personnal folder for testing something inside the repo
+# my personnal folder to test something inside the repo
 .sandbox

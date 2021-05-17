@@ -29,7 +29,7 @@ enum error_codes
 
 static inline int server_error(const char *const name, const int return_value)
 {
-    printf("%s: %s", name, strerror(errno));
+    printf("%s: %s\n", name, strerror(errno));
     return return_value;
 }
 

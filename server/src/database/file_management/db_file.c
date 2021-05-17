@@ -42,7 +42,7 @@ int open_db_file(const file_types_t file_type)
         return ERR_SYS;
     if (get_db_filepath(my_db_dirpath, file_type, &my_db_filepath) == ERR_SYS)
         return ERR_SYS;
-    my_fd = open(my_db_filepath, O_CREAT, O_RDWR);
+    my_fd = open(my_db_filepath, O_CREAT | O_TRUNC | O_RDWR, 0600);
     free(my_db_filepath);
     return my_fd;
 }
