@@ -8,7 +8,8 @@
 #ifndef CHANNEL_T_H_
 #define CHANNEL_T_H_
 
-#include "server.h"
+#include <uuid/uuid.h>
+#include "max_size.h"
 
 typedef struct {
     uuid_t channel_uuid;
