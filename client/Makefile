@@ -24,6 +24,7 @@ LIBSO		= 	../libs/myteams
 DSRC		=	./src
 DSETUP		=	$(DSRC)/setup
 DINCLUDE	=	./include
+DCOMMON		=	../common
 DTESTS		=	./tests
 
 var := $(shell realpath $(PWD)/$(LIBSO)/libmyteams.so)
@@ -56,12 +57,20 @@ SRC		=	$(DSETUP)/check_args.c		\
 			$(DSRC)/rm_escape_char.c				\
 			$(DSRC)/read_from_stdin.c				\
 			$(DSRC)/serialize_cmd.c					\
+			$(DSRC)/server_response/unserializer/get_uuid.c				\
+			$(DSRC)/server_response/process_error.c	\
+			$(DSRC)/server_response/process_success.c	\
+			$(DSRC)/server_response/success/process_create_event.c	\
+			$(DSRC)/server_response/success/process_elem.c	\
+			$(DSRC)/server_response/success/process_list.c	\
+			$(DSRC)/server_response/success/process_simple_event.c	\
+			$(DSRC)/server_response/success/process_other_event.c	\
 
 SRCS	=	$(SRC) $(DSRC)/main.c
 
 OBJ		=	$(SRCS:.c=.o)
 
-CFLAGS	=	-W -Wall -Wextra -Werror -pedantic -I $(DINCLUDE) -I $(DLIB)
+CFLAGS	=	-W -Wall -Wextra -Werror -pedantic -I $(DINCLUDE) -I $(DLIB) -I $(DCOMMON)/include
 LDFLAGS	=	-luuid -L $(DLIB) -lmyteams -Wl,-rpath=$(PWD)/$(LIBSO)
 
 all: $(NAME)

@@ -8,7 +8,8 @@
 #ifndef TEAM_T_H_
 #define TEAM_T_H_
 
-#include "server.h"
+#include <uuid/uuid.h>
+#include "max_size.h"
 
 typedef struct {
     uuid_t team_uuid;

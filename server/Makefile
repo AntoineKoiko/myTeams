@@ -24,6 +24,7 @@ LIBSO		= 	../libs/myteams
 DSRC		=	./src
 DSETUP		=	$(DSRC)/setup
 DINCLUDE	=	./include
+DCOMMON		= 	../common
 DTESTS		=	./tests
 
 var := $(shell realpath $(PWD)/$(LIBSO)/libmyteams.so)
@@ -68,7 +69,7 @@ SRCS	=	$(SRC) $(DSRC)/main.c
 
 OBJ		=	$(SRCS:.c=.o)
 
-CFLAGS	=	-W -Wall -Wextra -Werror -pedantic -I $(DINCLUDE) -I $(DLIB)
+CFLAGS	=	-W -Wall -Wextra -Werror -pedantic -I $(DINCLUDE) -I $(DLIB) -I $(DCOMMON)/include
 LDFLAGS	=	-luuid -L $(DLIB) -lmyteams -Wl,-rpath=$(PWD)/$(LIBSO)
 
 all: $(NAME)
