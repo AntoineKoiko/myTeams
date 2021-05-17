@@ -12,6 +12,7 @@
 #undef _GNU_SOURCE
 
 #include "database/database_constants.h"
+#include "server_error.h"
 
 typedef struct file_header_s
 {
@@ -24,8 +25,11 @@ int add_generic_header(int fd, file_types_t file_type);
 
 static inline int get_save_file_name(file_types_t type, char **filename)
 {
-    return asprintf(
-        filename, "%s%s", save_filename, save_files[type].extension);
+    if (asprintf(filename, "%s%s", save_filename, save_files[type].extension)
+            == ERR_LIB
+        || !filename)
+        return server_error("asprintf", ERR_LIB);
+    return EXIT_SUCCESS;
 }
 
 #endif // SERVER_FILE_MANAGEMENT_H

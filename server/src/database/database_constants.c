@@ -6,7 +6,13 @@
 */
 
 #include "database/database.h"
-#include "database/database_constants.h"
+
+#include "database/data_teams.h"
+#include "database/data_users.h"
+#include "database/data_channels.h"
+#include "database/data_threads.h"
+#include "database/data_replies.h"
+#include "database/data_messages.h"
 
 const int magic_file_nb =
     180517110; // le numero de telephone d'epitech Rennes lol
