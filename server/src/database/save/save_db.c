@@ -8,8 +8,9 @@
 #include "database/database.h"
 #include "server_error.h"
 
-int create_db_dir()
+int create_db_dir(void)
 {
+    return EXIT_SUCCESS;
 }
 
 int init_save_file(const file_types_t file_type)

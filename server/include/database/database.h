@@ -7,7 +7,7 @@
 #ifndef MYTEAMS_DATABASE_H
 #define MYTEAMS_DATABASE_H
 
-// #include "database/file_management/file_management.h"
+#include "database/file_management/file_management.h"
 #include "database/database_constants.h"
 
 #define _GNU_SOURCE
