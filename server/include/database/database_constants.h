@@ -29,7 +29,7 @@ typedef struct save_file_s
     int (*save_function)(const int, const database_t *);
 } save_file_t;
 
-const int magic_file_nb;
+extern const int magic_file_nb;
 
 extern const char *const ext_teams;
 extern const char *const ext_users;
