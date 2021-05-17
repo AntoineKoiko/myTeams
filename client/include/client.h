@@ -27,6 +27,13 @@
 #include <sys/queue.h>
 #include <uuid/uuid.h>
 #include "logging_client.h"
+#include "packet.h"
+#include "channel_t.h"
+#include "msg_t.h"
+#include "reply_t.h"
+#include "team_t.h"
+#include "thread_t.h"
+#include "user_t.h"
 #include "connection_t.h"
 #include "string_list_t.h"
 #include "teams_client_t.h"
@@ -75,6 +82,18 @@ char **get_args(teams_client_t *teams_client, char *arg_str);
 
 void interprate_user_input(teams_client_t *client);
 
+//SERVER RESPONSE
+
 void interprate_server_response(teams_client_t *client);
+
+int process_error(int code, size_t packet_size, unsigned char *buff);
+int process_success(int code, size_t packet_size, unsigned char *buff);
+int process_elem(int code, size_t packet_size, unsigned char *buff);
+int process_list(int code, size_t packet_size, unsigned char *buff);
+int process_create_event(int code, size_t packet_size, unsigned char *buff);
+int process_simple_event(int code, size_t packet_size, unsigned char *buff);
+int process_other_event(int code, size_t packet_size, unsigned char *buff);
+
+char *get_uuid(unsigned char *buff, char uuid_unparse[UUID_STR_LEN]);
 
 #endif /* !CLIENT_H_ */

@@ -8,6 +8,10 @@
 #ifndef REPLY_T_H_
 #define REPLY_T_H_
 
+#include <uuid/uuid.h>
+#include <time.h>
+#include "max_size.h"
+
 typedef struct {
     uuid_t team_uuid;
     uuid_t thread_uuid;

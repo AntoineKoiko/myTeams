@@ -11,6 +11,8 @@
 #include <stdio.h>
 #undef _GNU_SOURCE
 
+#include <stdlib.h>
+
 #include "database/database_constants.h"
 #include "server_error.h"
 

@@ -23,6 +23,7 @@ DLIB		=	../libs/myteams
 LIBSO		= 	../libs/myteams
 DSRC		=	./src
 DINCLUDE	=	./include
+DCOMMON		= 	../common
 DTESTS		=	./tests
 DSETUP		=	$(DSRC)/setup
 DDATABASE	=	$(DSRC)/database
@@ -85,9 +86,10 @@ SRCS	=	$(SRC) $(DSRC)/main.c
 
 OBJ		=	$(SRCS:.c=.o)
 
-INCLUDE	=	-I $(DINCLUDE) -I $(DLIB)
+INCLUDE	=	-I $(DINCLUDE) -I $(DLIB) -I $(DCOMMON)/include
 
 CFLAGS	=	-W -Wall -Wextra -Werror -pedantic $(INCLUDE)
+
 LDFLAGS	=	-luuid -L $(DLIB) -lmyteams -Wl,-rpath=$(PWD)/$(LIBSO)
 
 all: $(NAME)
