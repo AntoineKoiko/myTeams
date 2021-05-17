@@ -22,10 +22,11 @@ CC		=	gcc
 DLIB		=	../libs/myteams
 LIBSO		= 	../libs/myteams
 DSRC		=	./src
-DSETUP		=	$(DSRC)/setup
 DINCLUDE	=	./include
 DCOMMON		= 	../common
 DTESTS		=	./tests
+DSETUP		=	$(DSRC)/setup
+DDATABASE	=	$(DSRC)/database
 
 var := $(shell realpath $(PWD)/$(LIBSO)/libmyteams.so)
 
@@ -64,12 +65,31 @@ SRC		=	$(DSETUP)/get_args.c	\
 			$(DSRC)/new/new_reply.c 	\
 			$(DSRC)/new/new_msg.c 		\
 			$(DSRC)/requests/login.c	\
+			\
+			$(DDATABASE)/database_constants.c	\
+			\
+			$(DDATABASE)/init/init_db.c				\
+			\
+			$(DDATABASE)/file_management/header.c	\
+			\
+			$(DDATABASE)/load/load_db.c				\
+			\
+			$(DDATABASE)/save/save_db.c				\
+			$(DDATABASE)/save/save_teams.c			\
+			$(DDATABASE)/save/save_users.c			\
+			$(DDATABASE)/save/save_channels.c		\
+			$(DDATABASE)/save/save_threads.c			\
+			$(DDATABASE)/save/save_replies.c			\
+			$(DDATABASE)/save/save_messages.c		\
 
 SRCS	=	$(SRC) $(DSRC)/main.c
 
 OBJ		=	$(SRCS:.c=.o)
 
-CFLAGS	=	-W -Wall -Wextra -Werror -pedantic -I $(DINCLUDE) -I $(DLIB) -I $(DCOMMON)/include
+INCLUDE	=	-I $(DINCLUDE) -I $(DLIB) -I $(DCOMMON)/include
+
+CFLAGS	=	-W -Wall -Wextra -Werror -pedantic $(INCLUDE)
+
 LDFLAGS	=	-luuid -L $(DLIB) -lmyteams -Wl,-rpath=$(PWD)/$(LIBSO)
 
 all: $(NAME)

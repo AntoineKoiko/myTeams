@@ -10,9 +10,12 @@
 
 //INCLUDE
 
+#define _GNU_SOURCE
+#include <stdio.h>
+#undef _GNU_SOURCE
+
 #include <unistd.h>
 #include <stdlib.h>
-#include <stdio.h>
 #include <string.h>
 #include <errno.h>
 #include <signal.h>
@@ -36,16 +39,18 @@
 #include "msg_t.h"
 
 //--------------------------------
-//DEFINE
+// DEFINE
 
-#define EXIT_ERROR 84
+#ifndef EXIT_ERROR
+    #define EXIT_ERROR 84
+#endif
 
 //-------------------------------
-//FUNCTIONS
+// FUNCTIONS
 
 int usage(int status);
 
-//setup
+// SETUP
 int get_args(int ac, char **av, connection_t *server);
 
 int handle_signal(void);
@@ -57,7 +62,7 @@ void manage_fd_sets(teams_server_t *server);
 int create_server(connection_t *server);
 void close_server(teams_server_t *server);
 
-//void save_db_into_files(database_t *database);
+// void save_db_into_files(database_t *database);
 
 void destroy_server(teams_server_t *server);
 
