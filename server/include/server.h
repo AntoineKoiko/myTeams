@@ -107,6 +107,10 @@ thread_t *new_thread(uuid_t chan, uuid_t user, char *title, char *body);
 
 user_t *new_user(const char *user_name);
 
+//object destructor
+void clean_user(user_t **user);
+
+
 int login_request(teams_server_t *server, session_list_t *session,
                     char **argv);
 

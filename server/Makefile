@@ -63,6 +63,7 @@ SRC		=	$(DSETUP)/get_args.c	\
 			$(DSRC)/new/new_thread.c 	\
 			$(DSRC)/new/new_reply.c 	\
 			$(DSRC)/new/new_msg.c 		\
+			$(DSRC)/clean_user.c		\
 			$(DSRC)/requests/login.c	\
 			\
 			$(DDATABASE)/database_constants.c	\
