@@ -28,6 +28,7 @@ int save_db(const database_t *db)
         if (my_fd < 0)
             continue;
         save_files[i].save_function(my_fd, db);
+        close(my_fd);
     }
     return EXIT_SUCCESS;
 }

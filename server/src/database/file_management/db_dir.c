@@ -18,12 +18,12 @@ static int create_db_dir(const char *dirpath)
 
 int get_db_dirpath(const char **dirname)
 {
-    DIR *dir = NULL;
+    DIR *my_dir = NULL;
 
     *dirname = data_dirname;
-    dir = opendir(*dirname);
-    if (!dir)
+    my_dir = opendir(*dirname);
+    if (!my_dir)
         return create_db_dir(*dirname);
-    free(dir);
+    closedir(my_dir);
     return EXIT_SUCCESS;
 }

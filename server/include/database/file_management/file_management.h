@@ -15,6 +15,7 @@
 #include <sys/stat.h>
 #include <dirent.h>
 #include <fcntl.h>
+#include "unistd.h"
 
 #include "database/database_constants.h"
 #include "server_error.h"
