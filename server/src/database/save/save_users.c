@@ -1,13 +1,13 @@
 /*
 ** EPITECH PROJECT, 2021
-** sage_threads.c
+** sage_users.c
 ** File description:
-** Save threads into file
+** Save users into file
 */
 
 #include "database/database.h"
 
-int save_threads(const database_t *db)
+int save_users(N_U const int fd, N_U const database_t *db)
 {
     return EXIT_SUCCESS;
 }

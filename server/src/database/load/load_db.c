@@ -1,13 +1,14 @@
 /*
 ** EPITECH PROJECT, 2021
-** sage_replies.c
+** load_db.c
 ** File description:
-** Save replies into file
+** Load database from files
 */
 
+#include "server_error.h"
 #include "database/database.h"
 
-int save_replies(const database_t *db)
+int load_db(N_U database_t *db)
 {
     return EXIT_SUCCESS;
 }

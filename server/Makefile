@@ -64,15 +64,21 @@ SRC		=	$(DSETUP)/get_args.c	\
 			$(DSRC)/new/new_reply.c 	\
 			$(DSRC)/new/new_msg.c 		\
 			\
-			$(DDATABASE)/save_db.c				\
 			$(DDATABASE)/database_constants.c	\
+			\
+			$(DDATABASE)/init/init_db.c				\
+			\
 			$(DDATABASE)/file_management/header.c	\
-			$(DDATABASE)/save_teams.c			\
-			$(DDATABASE)/save_users.c			\
-			$(DDATABASE)/save_channels.c		\
-			$(DDATABASE)/save_threads.c			\
-			$(DDATABASE)/save_replies.c			\
-			$(DDATABASE)/save_messages.c		\
+			\
+			$(DDATABASE)/load/load_db.c				\
+			\
+			$(DDATABASE)/save/save_db.c				\
+			$(DDATABASE)/save/save_teams.c			\
+			$(DDATABASE)/save/save_users.c			\
+			$(DDATABASE)/save/save_channels.c		\
+			$(DDATABASE)/save/save_threads.c			\
+			$(DDATABASE)/save/save_replies.c			\
+			$(DDATABASE)/save/save_messages.c		\
 
 SRCS	=	$(SRC) $(DSRC)/main.c
 

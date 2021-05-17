@@ -19,6 +19,6 @@ typedef struct msg_node_s
     SLIST_ENTRY(msg_node_s) next;
 } msg_node_t;
 
-int save_messages(const database_t *db);
+int save_messages(int fd, const database_t *db);
 
 #endif // SERVER_DATA_MESSAGES_H

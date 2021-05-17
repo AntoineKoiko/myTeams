@@ -1,13 +1,13 @@
 /*
 ** EPITECH PROJECT, 2021
-** sage_messages.c
+** sage_channels.c
 ** File description:
-** Save messages into file
+** Save channels into file
 */
 
 #include "database/database.h"
 
-int save_messages(const database_t *db)
+int save_channels(N_U const int fd, N_U const database_t *db)
 {
     return EXIT_SUCCESS;
 }

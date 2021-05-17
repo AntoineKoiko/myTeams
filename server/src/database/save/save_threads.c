@@ -1,13 +1,13 @@
 /*
 ** EPITECH PROJECT, 2021
-** sage_channels.c
+** sage_threads.c
 ** File description:
-** Save channels into file
+** Save threads into file
 */
 
 #include "database/database.h"
 
-int save_channels(const database_t *db)
+int save_threads(N_U const int fd, N_U const database_t *db)
 {
     return EXIT_SUCCESS;
 }

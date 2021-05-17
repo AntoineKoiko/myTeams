@@ -20,7 +20,8 @@ const char *const ext_messages = ".messages";
 
 const char *const save_filename = "database";
 
-const save_file_t save_files[NB_FILE_TYPES] = {{TEAMS, ext_teams, save_teams},
+const save_file_t save_files[NB_DATA_FILE_TYPE] = {
+    {TEAMS, ext_teams, save_teams},
     {USERS, ext_users, save_users},
     {CHANNELS, ext_channels, save_channels},
     {THREADS, ext_threads, save_threads},

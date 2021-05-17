@@ -27,9 +27,9 @@ int save_db(const database_t *db)
 {
     int my_fd = ERR_SYS;
 
-    for (uint i = 0; i < NB_FILE_TYPES; ++i) {
+    for (uint i = 0; i < NB_DATA_FILE_TYPE; ++i) {
         my_fd = init_save_file(save_files[i].type);
-        save_files[i].save_function(db);
+        save_files[i].save_function(my_fd, db);
     }
     return EXIT_SUCCESS;
 }

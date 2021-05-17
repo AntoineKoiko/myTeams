@@ -7,9 +7,12 @@
 #ifndef SERVER_SERVER_ERROR_H
 #define SERVER_SERVER_ERROR_H
 
+#define _GNU_SOURCE
+#include <stdio.h> // perror()
+#undef _GNU_SOURCE
 #include <errno.h>
-#include <stdio.h>  // perror()
 #include <stdlib.h> // EXIT_SUCCESS
+#include <string.h>
 
 #ifndef EXIT_ERROR
     #define EXIT_ERROR 84
@@ -26,7 +29,7 @@ enum error_codes
 
 static inline int server_error(const char *const name, const int return_value)
 {
-    perror(name);
+    printf("%s: %s", name, strerror(errno));
     return return_value;
 }
 

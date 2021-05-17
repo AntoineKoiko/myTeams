@@ -31,15 +31,16 @@ typedef struct user_node_s
 {
     user_t *user_data;
     uuid_t *subscribed_team;
-    SLIST_HEAD(, msg_node_t) conversation;
+    SLIST_HEAD(, msg_node_s) conversation;
     SLIST_ENTRY(user_node_s) next;
 } user_node_t;
 
 /**
  * @brief Save users in file
+ * @param fd The file to save the data in
  * @param db The data to save
  * @return Error code
  */
-int save_users(const database_t *db);
+int save_users(int fd, const database_t *db);
 
 #endif // SERVER_DATA_USERS_H

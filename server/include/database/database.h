@@ -7,28 +7,37 @@
 #ifndef MYTEAMS_DATABASE_H
 #define MYTEAMS_DATABASE_H
 
+#include "database/file_management/file_management.h"
+#include "database/database_constants.h"
+
 #define _GNU_SOURCE
 #include <stdio.h>
+#undef _GNU_SOURCE
+
+#define N_U __attribute__((unused))
 
 #include <sys/queue.h>
 #include <fcntl.h>
 
-#include "database/data_channels.h"
+#include "database/data_teams.h"
 #include "database/data_users.h"
 #include "database/data_channels.h"
 #include "database/data_threads.h"
 #include "database/data_replies.h"
 #include "database/data_messages.h"
 
-#include "database/file_management/file_management.h"
-#include "database/database_constants.h"
-
 #define STATIC_ARRAY_SIZE(x) (sizeof(x) / sizeof(x[0]))
 
 typedef struct database_s
 {
-    SLIST_HEAD(, team_node_t) teams;
-    SLIST_HEAD(, user_node_t) users;
+    SLIST_HEAD(, team_node_s) teams;
+    SLIST_HEAD(, user_node_s) users;
 } database_t;
+
+int init_db(database_t **db);
+
+int load_db(database_t *db);
+
+int save_db(const database_t *db);
 
 #endif // MYTEAMS_DATABASE_H

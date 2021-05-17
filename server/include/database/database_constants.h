@@ -7,7 +7,9 @@
 #ifndef SERVER_DATABASE_CONSTANTS_H
 #define SERVER_DATABASE_CONSTANTS_H
 
-#define NB_FILE_TYPES
+#define NB_DATA_FILE_TYPE 6
+
+typedef struct database_s database_t;
 
 typedef enum file_types_e
 {
@@ -23,7 +25,8 @@ typedef struct save_file_s
 {
     file_types_t type;
     const char *const extension;
-    int (*save_function)(const database_t *);
+    //    int (*load_function)(const database_t *);
+    int (*save_function)(const int, const database_t *);
 } save_file_t;
 
 const int magic_file_nb;
@@ -37,6 +40,6 @@ extern const char *const ext_messages;
 
 extern const char *const save_filename;
 
-extern const save_file_t save_files[NB_FILE_TYPES];
+extern const save_file_t save_files[NB_DATA_FILE_TYPE];
 
 #endif // SERVER_DATABASE_CONSTANTS_H

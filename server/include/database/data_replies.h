@@ -19,6 +19,6 @@ typedef struct reply_node_s
     SLIST_ENTRY(reply_node_s) next;
 } reply_node_t;
 
-int save_replies(const database_t *db);
+int save_replies(int fd, const database_t *db);
 
 #endif // SERVER_DATA_REPLIES_H

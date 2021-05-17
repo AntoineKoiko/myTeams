@@ -8,15 +8,16 @@
 #ifndef TEAMS_SERVER_T_H_
 #define TEAMS_SERVER_T_H_
 
+#include "database/database.h"
 #include "server.h"
 
-typedef struct
+typedef struct teams_server_s
 {
     connection_t server;
     STAILQ_HEAD(, session_list_s)
     session_head;
     // session_list_t clients;
-//    database_t data;
+    database_t *database;
     fd_set readfds;
     fd_set writefds;
 

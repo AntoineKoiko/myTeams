@@ -16,9 +16,12 @@
 
 // INCLUDE
 
+#define _GNU_SOURCE
+#include <stdio.h>
+#undef _GNU_SOURCE
+
 #include <unistd.h>
 #include <stdlib.h>
-#include <stdio.h>
 #include <string.h>
 #include <errno.h>
 #include <signal.h>
@@ -41,8 +44,6 @@
 #include "user_t.h"
 #include "reply_t.h"
 #include "msg_t.h"
-
-#include "database/database.h"
 
 //--------------------------------
 // DEFINE
