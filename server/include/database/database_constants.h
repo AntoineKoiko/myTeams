@@ -38,7 +38,8 @@ extern const char *const ext_threads;
 extern const char *const ext_replies;
 extern const char *const ext_messages;
 
-extern const char *const save_filename;
+extern const char *const data_dirname;
+extern const char *const data_filename;
 
 extern const save_file_t save_files[NB_DATA_FILE_TYPE];
 

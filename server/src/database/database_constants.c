@@ -24,7 +24,8 @@ const char *const ext_threads = ".threads";
 const char *const ext_replies = ".replies";
 const char *const ext_messages = ".messages";
 
-const char *const save_filename = "database";
+const char *const data_dirname = ".database";
+const char *const data_filename = "database";
 
 const save_file_t save_files[NB_DATA_FILE_TYPE] = {
     {TEAMS, ext_teams, save_teams},
