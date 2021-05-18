@@ -113,6 +113,8 @@ int use_request(teams_server_t *server, session_list_t *session,
                     char **argv);
 int create_team_request(teams_server_t *server, session_list_t *session,
                     char **argv);
+int create_channel_request(teams_server_t *server, session_list_t *session,
+                    char **argv);
 
 
 
