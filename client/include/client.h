@@ -102,6 +102,14 @@ int print_channel_created(int code, size_t packet_size, unsigned char *buff);
 int print_thread_created(int code, size_t packet_size, unsigned char *buff);
 int print_reply_created(int code, size_t packet_size, unsigned char *buff);
 
+//EVENT 24X
+
+int event_team_created(int code, size_t packet_size, unsigned char *buff);
+int event_channel_created(int code, size_t packet_size, unsigned char *buff);
+int event_thread_created(int code, size_t packet_size, unsigned char *buff);
+int event_reply_received(int code, size_t packet_size, unsigned char *buff);
+int event_msg_received(int code, size_t packet_size, unsigned char *buff);
+
 //OTHER EVENT 25X
 
 int event_logged_in_out(int code, size_t packet_size, unsigned char *buff);
