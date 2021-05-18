@@ -22,7 +22,8 @@ void serialize_cmd(teams_client_t *client, size_t cmd, char **argv)
     memcpy(client->client.output_buff+old_size+it, &code, sizeof(char));
     it += sizeof(char);
     for (size_t i = 0; argv[i]; i++) {
-        memcpy(client->client.output_buff+old_size+it, argv[i], strlen(argv[i]));
+        memcpy(client->client.output_buff+old_size+it, argv[i],
+                strlen(argv[i]));
         it += strlen(argv[i]) + 1;
     }
     client->client.output_size += packet_size + sizeof(size_t);

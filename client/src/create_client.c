@@ -19,7 +19,8 @@ int create_client(teams_client_t *teams_client)
     cnt->addr.sin_family = AF_INET;
     cnt->addr.sin_port = htons(teams_client->client.port);
     cnt->addr.sin_addr.s_addr = inet_addr(teams_client->client.hostname);
-    if (connect(cnt->socket, (struct sockaddr *)&cnt->addr, sizeof(cnt->addr)) == -1) {
+    if (connect(cnt->socket, (struct sockaddr *)&cnt->addr,
+        sizeof(cnt->addr)) == -1) {
         printf("create_client: connect: %s\n", strerror(errno));
         return EXIT_ERROR;
     }

@@ -44,7 +44,8 @@ static int command_interpretor(teams_client_t *client, char *cmd)
     }
     arg_array = get_args(client, cmd+strlen(command_list[idx].cmd));
     nb_args = str_array_len(arg_array);
-    if (nb_args < command_list[idx].min_arg || nb_args > command_list[idx].max_arg) {
+    if (nb_args < command_list[idx].min_arg ||
+        nb_args > command_list[idx].max_arg) {
         printf("%s: wrong number of argument(s)\n", command_list[idx].cmd);
     } else {
         serialize_cmd(client, idx, arg_array);
