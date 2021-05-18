@@ -107,5 +107,15 @@ void clean_user(user_t **user);
 
 int login_request(teams_server_t *server, session_list_t *session,
                     char **argv);
+int logout_request(teams_server_t *server, session_list_t *session,
+                    char **argv);
+
+
+
+team_node_t *find_team_in_db(database_t *db, uuid_t team_uuid);
+channel_node_t *find_channel_in_db(database_t *db, uuid_t tm_uuid,
+                                    uuid_t chan_uuid);
+thread_node_t *find_thread_in_db(database_t *db, uuid_t tm_uuid,
+                                    uuid_t chan_uuid, uuid_t thread_uuid);
 
 #endif /* !SERVER_H_ */

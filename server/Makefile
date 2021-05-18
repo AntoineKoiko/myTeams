@@ -68,6 +68,8 @@ SRC		=	$(DSETUP)/get_args.c	\
 			$(DSRC)/requests/login.c	\
 			$(DSRC)/requests/logout.c	\
 			$(DSRC)/requests/db_find_team.c	\
+			$(DSRC)/requests/db_find_channel.c	\
+			$(DSRC)/requests/db_find_thread.c	\
 			\
 			$(DDATABASE)/database_constants.c	\
 			\

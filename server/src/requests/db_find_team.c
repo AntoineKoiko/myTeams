@@ -7,7 +7,7 @@
 
 #include "server.h"
 
-team_t *find_team_in_db(database_t *db, uuid_t team_uuid)
+team_node_t *find_team_in_db(database_t *db, uuid_t team_uuid)
 {
     team_node_t *node = NULL;
     team_t *buf = NULL;
@@ -15,7 +15,7 @@ team_t *find_team_in_db(database_t *db, uuid_t team_uuid)
     for (node = db->teams.slh_first; node; node = node->next.sle_next) {
         buf = node->team_data;
         if (memcmp(&buf->team_uuid, &team_uuid, 16) == 0)
-            return buf;
+            return node;
     }
     return NULL;
 }
