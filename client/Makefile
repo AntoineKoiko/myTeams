@@ -68,6 +68,7 @@ SRC		=	$(DSETUP)/check_args.c		\
 			$(DSRC)/server_response/success/process_elem.c			\
 			$(DSRC)/server_response/success/process_create_event.c	\
 			$(DSRC)/server_response/success/process_other_event.c	\
+			$(DSRC)/server_response/process_error.c					\
 
 SRCS	=	$(SRC) $(DSRC)/main.c
 

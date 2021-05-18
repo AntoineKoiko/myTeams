@@ -107,6 +107,14 @@ int print_reply_created(int code, size_t packet_size, unsigned char *buff);
 int event_logged_in_out(int code, size_t packet_size, unsigned char *buff);
 int event_subscription(int code, size_t packet_size, unsigned char *buff);
 
+//ERROR 40X
+
+int process_error(int code, size_t packet_size, unsigned char *buff);
+
+//ERROR UNKNOW UUID 41X
+
+int process_uk_error(int code, size_t packet_size, unsigned char *buff);
+
 //PRIMARY TYPE GETTER
 
 void get_str(char *str, unsigned char *buff, size_t *it);
