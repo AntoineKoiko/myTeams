@@ -6,20 +6,16 @@
 */
 
 #include "database/database.h"
+#include "database/file_management/file_management.h"
 #include "server_error.h"
 
-int init_save_file(const file_types_t file_type)
+static int init_save_file(const file_types_t file_type)
 {
-    int my_fd = ERR_SYS;
-    char *my_save_filepath = NULL;
+    const int my_fd = open_db_file(file_type);
 
-    if (get_save_file_name(file_type, &my_save_filepath) == ERR_SYS)
-        return ERR_NO_VAL;
-    if (my_save_filepath)
-        return ERR_NO_VAL;
-    my_fd = open(my_save_filepath, O_CREAT, O_RDWR);
+    if (my_fd < 0)
+        return my_fd;
     add_generic_header(my_fd, file_type);
-    free(my_save_filepath);
     return my_fd;
 }
 
@@ -29,7 +25,10 @@ int save_db(const database_t *db)
 
     for (uint i = 0; i < NB_DATA_FILE_TYPE; ++i) {
         my_fd = init_save_file(save_files[i].type);
+        if (my_fd < 0)
+            continue;
         save_files[i].save_function(my_fd, db);
+        close(my_fd);
     }
     return EXIT_SUCCESS;
 }

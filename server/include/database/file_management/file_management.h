@@ -12,8 +12,13 @@
 #undef _GNU_SOURCE
 
 #include <stdlib.h>
+#include <sys/stat.h>
+#include <dirent.h>
+#include <fcntl.h>
+#include "unistd.h"
 
 #include "database/database_constants.h"
+#include "server_error.h"
 
 typedef struct file_header_s
 {
@@ -24,10 +29,8 @@ typedef struct file_header_s
 
 int add_generic_header(int fd, file_types_t file_type);
 
-static inline int get_save_file_name(file_types_t type, char **filename)
-{
-    return asprintf(
-        filename, "%s%s", save_filename, save_files[type].extension);
-}
+int get_db_dirpath(const char **dirname);
+
+int open_db_file(file_types_t file_type);
 
 #endif // SERVER_FILE_MANAGEMENT_H
