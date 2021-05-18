@@ -28,9 +28,9 @@ const char *const data_dirname = ".database";
 const char *const data_filename = "database";
 
 const save_file_t save_files[NB_DATA_FILE_TYPE] = {
-    {TEAMS, ext_teams, save_teams},
-    {USERS, ext_users, save_users},
-    {CHANNELS, ext_channels, save_channels},
-    {THREADS, ext_threads, save_threads},
-    {REPLIES, ext_replies, save_replies},
-    {MESSAGES, ext_messages, save_messages}};
+    {TEAMS, ext_teams, team_count_nodes, NULL, save_teams},
+    {USERS, ext_users, NULL, NULL, save_users},
+    {CHANNELS, ext_channels, NULL, NULL, save_channels},
+    {THREADS, ext_threads, NULL, NULL, save_threads},
+    {REPLIES, ext_replies, NULL, NULL, save_replies},
+    {MESSAGES, ext_messages, NULL, NULL, save_messages}};

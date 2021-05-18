@@ -16,7 +16,7 @@ typedef struct database_s database_t;
 typedef struct channel_node_s
 {
     channel_t *channel_data;
-    SLIST_HEAD(, thread_node_s) threads;
+    SLIST_HEAD(thread_head_s, thread_node_s) threads;
     SLIST_ENTRY(channel_node_s) next;
 } channel_node_t;
 

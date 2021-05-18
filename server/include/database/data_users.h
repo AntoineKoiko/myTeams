@@ -31,7 +31,7 @@ typedef struct user_node_s
 {
     user_t *user_data;
     uuid_t *subscribed_team;
-    SLIST_HEAD(, msg_node_s) conversation;
+    SLIST_HEAD(msg_head_s, msg_node_s) conversation;
     SLIST_ENTRY(user_node_s) next;
 } user_node_t;
 

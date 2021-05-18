@@ -23,8 +23,8 @@
 
 typedef struct database_s
 {
-    SLIST_HEAD(, team_node_s) teams;
-    SLIST_HEAD(, user_node_s) users;
+    SLIST_HEAD(team_head_s, team_node_s) teams;
+    SLIST_HEAD(user_head_s, user_node_s) users;
 } database_t;
 
 int init_db(database_t **db);

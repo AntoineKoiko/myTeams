@@ -9,25 +9,49 @@
 #include "database/file_management/file_management.h"
 #include "server_error.h"
 
-static int init_save_file(const file_types_t file_type)
+static bool init_save_file(
+    int *fd, const file_types_t file_type, const size_t elements_nb)
 {
-    const int my_fd = open_db_file(file_type);
+    *fd = ERR_SYS;
 
-    if (my_fd < 0)
-        return my_fd;
-    add_generic_header(my_fd, file_type);
-    return my_fd;
+    *fd = open_db_file(file_type);
+    add_generic_header(*fd, file_type, elements_nb);
+    if (*fd < 0) {
+        return false;
+    }
+    return true;
+}
+
+static inline bool exec_count_func(
+    const uint i, size_t *elements_nb, const database_t *db)
+{
+    if (!save_files[i].nb_entries_function)
+        return false;
+    if (save_files[i].nb_entries_function(elements_nb, db) != EXIT_SUCCESS)
+        return false;
+    return true;
+}
+static inline bool exec_save_func(
+    const uint i, const int fd, const database_t *db)
+{
+    if (!save_files[i].save_function)
+        return false;
+    if (save_files[i].save_function(fd, db) != EXIT_SUCCESS)
+        return false;
+    return true;
 }
 
 int save_db(const database_t *db)
 {
     int my_fd = ERR_SYS;
+    size_t my_elements_nb = 0;
 
     for (uint i = 0; i < NB_DATA_FILE_TYPE; ++i) {
-        my_fd = init_save_file(save_files[i].type);
-        if (my_fd < 0)
+        if (!exec_count_func(i, &my_elements_nb, db))
             continue;
-        save_files[i].save_function(my_fd, db);
+        if (!init_save_file(&my_fd, save_files[i].type, my_elements_nb))
+            continue;
+        exec_save_func(i, my_fd, db);
         close(my_fd);
     }
     return EXIT_SUCCESS;

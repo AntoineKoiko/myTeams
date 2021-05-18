@@ -29,10 +29,24 @@ typedef struct header_file_teams_s
 typedef struct team_node_s
 {
     team_t *team_data;
-    SLIST_HEAD(, channel_node_s) channels;
+    SLIST_HEAD(channel_head_s, channel_node_s) channels;
     uuid_t *subscribed_users;
     SLIST_ENTRY(team_node_s) next;
 } team_node_t;
+
+static inline int team_count_nodes(size_t *count, const database_t *db)
+{
+    team_node_t *it = NULL;
+
+    if (!db)
+        return EXIT_FAILURE;
+    *count = 0;
+    SLIST_FOREACH(it, &db->teams, next)
+    {
+        (*count)++;
+    }
+    return EXIT_SUCCESS;
+}
 
 /**
  * @brief Save teams in file

@@ -15,7 +15,7 @@ typedef struct database_s database_t;
 typedef struct thread_node_s
 {
     thread_t *thread_data;
-    SLIST_HEAD(, reply_node_s) replies;
+    SLIST_HEAD(reply_head_s, reply_node_s) replies;
     SLIST_ENTRY(thread_node_s) next;
 } thread_node_t;
 

@@ -13,6 +13,7 @@
 #include <errno.h>
 #include <stdlib.h> // EXIT_SUCCESS
 #include <string.h>
+#include <stdbool.h>
 
 #ifndef EXIT_ERROR
     #define EXIT_ERROR 84
