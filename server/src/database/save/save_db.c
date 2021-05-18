@@ -9,13 +9,12 @@
 #include "database/file_management/file_management.h"
 #include "server_error.h"
 
-static bool init_save_file(
+static inline bool init_save_file(
     int *fd, const file_types_t file_type, const size_t elements_nb)
 {
-    *fd = ERR_SYS;
-
     *fd = open_db_file(file_type);
-    add_generic_header(*fd, file_type, elements_nb);
+    if (add_generic_header(*fd, file_type, elements_nb) != EXIT_SUCCESS)
+        return false;
     if (*fd < 0) {
         return false;
     }
@@ -31,12 +30,13 @@ static inline bool exec_count_func(
         return false;
     return true;
 }
+
 static inline bool exec_save_func(
-    const uint i, const int fd, const database_t *db)
+    const uint i, const int fd, const database_t *db, const size_t elements_nb)
 {
     if (!save_files[i].save_function)
         return false;
-    if (save_files[i].save_function(fd, db) != EXIT_SUCCESS)
+    if (save_files[i].save_function(fd, db, elements_nb) != EXIT_SUCCESS)
         return false;
     return true;
 }
@@ -51,7 +51,7 @@ int save_db(const database_t *db)
             continue;
         if (!init_save_file(&my_fd, save_files[i].type, my_elements_nb))
             continue;
-        exec_save_func(i, my_fd, db);
+        exec_save_func(i, my_fd, db, my_elements_nb);
         close(my_fd);
     }
     return EXIT_SUCCESS;

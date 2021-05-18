@@ -27,7 +27,7 @@ typedef struct save_file_s
     const char *const extension;
     int (*nb_entries_function)(size_t *, const database_t *);
     int (*load_function)(const database_t *);
-    int (*save_function)(const int, const database_t *);
+    int (*save_function)(const int, const database_t *, const size_t);
 } save_file_t;
 
 extern const int magic_file_nb;

@@ -19,6 +19,6 @@ typedef struct thread_node_s
     SLIST_ENTRY(thread_node_s) next;
 } thread_node_t;
 
-int save_threads(int fd, const database_t *db);
+int save_threads(int fd, const database_t *db, size_t elements_nb);
 
 #endif // SERVER_DATA_THREADS_H

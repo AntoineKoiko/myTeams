@@ -34,19 +34,7 @@ typedef struct team_node_s
     SLIST_ENTRY(team_node_s) next;
 } team_node_t;
 
-static inline int team_count_nodes(size_t *count, const database_t *db)
-{
-    team_node_t *it = NULL;
-
-    if (!db)
-        return EXIT_FAILURE;
-    *count = 0;
-    SLIST_FOREACH(it, &db->teams, next)
-    {
-        (*count)++;
-    }
-    return EXIT_SUCCESS;
-}
+int team_count_nodes(size_t *count, const database_t *db);
 
 /**
  * @brief Save teams in file
@@ -54,6 +42,6 @@ static inline int team_count_nodes(size_t *count, const database_t *db)
  * @param db The data to save
  * @return Error code
  */
-int save_teams(int fd, const database_t *db);
+int save_teams(int fd, const database_t *db, size_t elements_nb);
 
 #endif // SERVER_DATA_TEAMS_H

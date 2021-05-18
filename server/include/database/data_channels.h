@@ -20,6 +20,6 @@ typedef struct channel_node_s
     SLIST_ENTRY(channel_node_s) next;
 } channel_node_t;
 
-int save_channels(int fd, const database_t *db);
+int save_channels(int fd, const database_t *db, size_t elements_nb);
 
 #endif // SERVER_DATA_CHANNELS_H

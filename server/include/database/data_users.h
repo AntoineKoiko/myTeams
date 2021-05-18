@@ -41,6 +41,6 @@ typedef struct user_node_s
  * @param db The data to save
  * @return Error code
  */
-int save_users(int fd, const database_t *db);
+int save_users(int fd, const database_t *db, size_t elements_nb);
 
 #endif // SERVER_DATA_USERS_H
