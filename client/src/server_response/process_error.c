@@ -20,8 +20,8 @@ static int process_other_error(int code)
 static int process_uk_error(int code, size_t packet_size, unsigned char *buff)
 {
     char unknow_uuid[UUID_STR_LEN] = {0};
-
-    get_uuid(buff, unknow_uuid);
+    (void)buff;
+    //get_uuid(buff, unknow_uuid);
     if (packet_size < sizeof(uuid_t))
         return EXIT_ERROR;
     if (code == USER)
