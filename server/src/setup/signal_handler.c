@@ -8,13 +8,13 @@
 #include "server.h"
 #include "attributes.h"
 
-static void handle_sigint(N_U int sig)
+static NO_RETURN void handle_sigint(N_U int sig)
 {
     teams_server_t *server = get_or_set_server(NULL);
 
-    printf("\nCATCH SIGINT: The server will shutdown\n");
+    printf("\nCAUGHT SIGINT: The server will shutdown\n");
     close_server(server);
-    exit(0);
+    exit(EXIT_SUCCESS);
 }
 
 int handle_signal(void)

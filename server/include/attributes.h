@@ -10,6 +10,9 @@
 #ifndef N_U
     #define N_U __attribute__((unused))
 #endif
+#ifndef NO_RETURN
+    #define NO_RETURN __attribute__((noreturn))
+#endif
 
 #ifndef NON_NULL
     /**

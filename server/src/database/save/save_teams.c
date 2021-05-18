@@ -26,7 +26,6 @@ int team_count_nodes(size_t *count, const database_t *db)
 NON_NULL(2)
 int save_teams(
     N_U const int fd, N_U const database_t *db, N_U const size_t elements_nb)
-
 {
     return EXIT_SUCCESS;
 }
