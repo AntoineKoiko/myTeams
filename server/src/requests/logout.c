@@ -7,38 +7,42 @@
 
 #include "server.h"
 
-static void prepare_buffer(teams_server_t *server, session_list_t *session,
-        size_t packet_size)
+static void prepare_user_buffer(session_list_t *s, int code, user_t *user)
+{
+    size_t cursor = 0;
+    size_t packet_size = sizeof(int) + strlen(user->user_name)
+                + 1 + sizeof(uuid_t) + 1 + sizeof(int) + 1;
+
+    memcpy(s->cnt.output_buff, &packet_size, sizeof(size_t));
+    cursor += sizeof(size_t);
+    memcpy(s->cnt.output_buff+cursor, &code, sizeof(int));
+    cursor += sizeof(int);
+    memcpy(s->cnt.output_buff+cursor, user->user_uuid, sizeof(uuid_t));
+    cursor += sizeof(uuid_t);
+    memcpy(s->cnt.output_buff+cursor, user->user_name,
+            strlen(user->user_name));
+    cursor += strlen(user->user_name) + 1;
+    memcpy(s->cnt.output_buff+cursor, &user->status, sizeof(int));
+}
+
+static void prepare_buffer(teams_server_t *server, session_list_t *session)
 {
     int code = 254;
     session_list_t *s = NULL;
-    size_t cursor = 0;
 
     STAILQ_FOREACH(s, &server->session_head, next) {
-        cursor = 0;
-        memcpy(s->cnt.output_buff, &packet_size, sizeof(size_t));
-        cursor += sizeof(size_t);
-        memcpy(s->cnt.output_buff+cursor, &code, sizeof(int));
-        cursor += sizeof(int);
-        memcpy(s->cnt.output_buff+cursor, session->user->user_name,
-                strlen(session->user->user_name));
-        cursor += strlen(session->user->user_name) + 1;
-        memcpy(s->cnt.output_buff+cursor, session->user->user_uuid,
-            sizeof(uuid_t));
+        prepare_user_buffer(s, code, session->user);
     }
 }
 
 int logout_request(teams_server_t *server, session_list_t *session,
                     char **argv)
 {
-    size_t packet_size = 0;
     char uuid[UUID_STR_LEN] = {0};
 
     (void)argv;
     uuid_unparse_lower(session->user->user_uuid, uuid);
-    packet_size += sizeof(int) + strlen(session->user->user_name)
-                + 1 + sizeof(uuid_t) + 1;
-    prepare_buffer(server, session, packet_size);
+    prepare_buffer(server, session);
     clean_user(&session->user);
     session->logged_in = false;
     session->should_exit = true;
