@@ -67,6 +67,7 @@ SRC		=	$(DSETUP)/get_args.c	\
 			$(DSRC)/clean_user.c		\
 			$(DSRC)/requests/login.c	\
 			$(DSRC)/requests/logout.c	\
+			$(DSRC)/requests/use.c	\
 			$(DSRC)/requests/db_find_team.c	\
 			$(DSRC)/requests/db_find_channel.c	\
 			$(DSRC)/requests/db_find_thread.c	\
