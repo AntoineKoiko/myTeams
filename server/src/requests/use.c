@@ -45,7 +45,6 @@ static int handle_context(database_t *db, session_list_t *session, char **argv)
     return EXIT_SUCCESS;
 }
 
-
 int use_request(teams_server_t *server, session_list_t *session,
                     char **argv)
 {
