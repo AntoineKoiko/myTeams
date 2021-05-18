@@ -59,15 +59,15 @@ static int creation_failed(session_list_t *session)
 }
 
 //TODO : push new obj in db
-static channel_t *create_process(teams_server_t *server, session_list_t *session,
+static channel_t *create_process(teams_server_t *server, session_list_t *ses,
                                     char **argv)
 {
     channel_t *channel = NULL;
-    team_node_t *node = find_team_in_db(server->database, session->team_ctx);
+    team_node_t *node = find_team_in_db(server->database, ses->team_ctx);
      
     if (!node)
         return NULL;
-    channel = new_channel(session->team_ctx, argv[0], argv[1]);
+    channel = new_channel(ses->team_ctx, argv[0], argv[1]);
     if (!channel)
         return NULL;
     return channel;
