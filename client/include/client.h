@@ -94,6 +94,6 @@ int process_create_event(int code, size_t packet_size, unsigned char *buff);
 int process_simple_event(int code, size_t packet_size, unsigned char *buff);
 int process_other_event(int code, size_t packet_size, unsigned char *buff);
 
-char *get_uuid(unsigned char *buff, char uuid_unparse[UUID_STR_LEN]);
+int command_help(void);
 
 #endif /* !CLIENT_H_ */

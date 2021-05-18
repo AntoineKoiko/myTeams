@@ -32,6 +32,19 @@ static int str_array_len(char **str_array)
     return len;
 }
 
+static bool is_special_case(ssize_t idx)
+{
+    if (idx == -1) {
+        printf("Unknown command.\n");
+        return true;
+    }
+    if (idx == 0) {
+        command_help();
+        return true;
+    }
+    return false;
+}
+
 static int command_interpretor(teams_client_t *client, char *cmd)
 {
     char **arg_array = NULL;
