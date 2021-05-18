@@ -34,10 +34,14 @@ int logout_request(teams_server_t *server, session_list_t *session,
     size_t packet_size = 0;
     char uuid[UUID_STR_LEN] = {0};
 
+    (void)argv;
     uuid_unparse_lower(session->user->user_uuid, uuid);
     packet_size += sizeof(int) + strlen(session->user->user_name)
                 + 1 + sizeof(uuid_t) + 1;
     prepare_buffer(server, session, packet_size);
-    clean_user(session->user);
+    clean_user(&session->user);
+    session->logged_in = false;
+    session->should_exit = true;
     server_event_user_logged_out(uuid);
+    return EXIT_SUCCESS;
 }
