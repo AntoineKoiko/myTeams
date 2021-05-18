@@ -95,6 +95,13 @@ int print_team_elem(int code, size_t packet_size, unsigned char *buff);
 int print_channel_elem(int code, size_t packet_size, unsigned char *buff);
 int print_thread_elem(int code, N_U size_t packet_size, unsigned char *buff);
 
+//SUCCESSFULY CREATED 23X
+
+int print_team_created(int code, size_t packet_size, unsigned char *buff);
+int print_channel_created(int code, size_t packet_size, unsigned char *buff);
+int print_thread_created(int code, size_t packet_size, unsigned char *buff);
+int print_reply_created(int code, size_t packet_size, unsigned char *buff);
+
 //OTHER EVENT 25X
 
 int event_logged_in_out(int code, size_t packet_size, unsigned char *buff);
