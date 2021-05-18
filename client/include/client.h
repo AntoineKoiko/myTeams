@@ -95,6 +95,11 @@ int process_create_event(int code, size_t packet_size, unsigned char *buff);
 int process_simple_event(int code, size_t packet_size, unsigned char *buff);
 int process_other_event(int code, size_t packet_size, unsigned char *buff);
 
+void get_str(char *str, unsigned char *buff, size_t *it);
+void get_time_t(time_t *time, unsigned char *buff, size_t *it);
+void get_uuid(uuid_t uuid, unsigned char *buff, size_t *it);
+void get_size_t(size_t *nb, unsigned char *buff, size_t *it, bool struct_elem);
+void get_int(int *nb, unsigned char *buff, size_t *it, bool struct_elem);
 int command_help(void);
 
 #endif /* !CLIENT_H_ */
