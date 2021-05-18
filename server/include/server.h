@@ -109,6 +109,10 @@ int login_request(teams_server_t *server, session_list_t *session,
                     char **argv);
 int logout_request(teams_server_t *server, session_list_t *session,
                     char **argv);
+int use_request(teams_server_t *server, session_list_t *session,
+                    char **argv);
+int create_team_request(teams_server_t *server, session_list_t *session,
+                    char **argv);
 
 
 
@@ -117,5 +121,9 @@ channel_node_t *find_channel_in_db(database_t *db, uuid_t tm_uuid,
                                     uuid_t chan_uuid);
 thread_node_t *find_thread_in_db(database_t *db, uuid_t tm_uuid,
                                     uuid_t chan_uuid, uuid_t thread_uuid);
+user_node_t *find_user_in_db(database_t *db, uuid_t user_uuid);
+
+int uuid_is_in_arr(uuid_t *uuid_arr, uuid_t to_compare);
+
 
 #endif /* !SERVER_H_ */
