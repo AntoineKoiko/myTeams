@@ -51,9 +51,8 @@ static int command_interpretor(teams_client_t *client, char *cmd)
     ssize_t idx = find_cmd_idx(cmd);
     int nb_args = 0;
 
-    if (idx == -1) {
-        printf("Unknown command.\n");
-        return EXIT_ERROR;
+    if (is_special_case(idx)) {
+        return EXIT_FAILURE;
     }
     arg_array = get_args(client, cmd+strlen(command_list[idx].cmd));
     nb_args = str_array_len(arg_array);
