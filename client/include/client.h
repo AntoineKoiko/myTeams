@@ -44,6 +44,7 @@
 //--------------------------------
 //DEFINE
 
+#define N_U __attribute__((unused))
 #define EXIT_ERROR 84
 
 //-------------------------------
@@ -87,19 +88,28 @@ void interprate_user_input(teams_client_t *client);
 
 void interprate_server_response(teams_client_t *client);
 
-int process_error(int code, size_t packet_size, unsigned char *buff);
-int process_success(int code, size_t packet_size, unsigned char *buff);
-int process_elem(int code, size_t packet_size, unsigned char *buff);
-int process_list(int code, size_t packet_size, unsigned char *buff);
-int process_create_event(int code, size_t packet_size, unsigned char *buff);
-int process_simple_event(int code, size_t packet_size, unsigned char *buff);
-int process_other_event(int code, size_t packet_size, unsigned char *buff);
+//OTHER EVENT 25X
+
+int event_logged_in_out(int code, size_t packet_size, unsigned char *buff);
+int event_subscription(int code, size_t packet_size, unsigned char *buff);
+
+//PRIMARY TYPE GETTER
 
 void get_str(char *str, unsigned char *buff, size_t *it);
 void get_time_t(time_t *time, unsigned char *buff, size_t *it);
 void get_uuid(uuid_t uuid, unsigned char *buff, size_t *it);
 void get_size_t(size_t *nb, unsigned char *buff, size_t *it, bool struct_elem);
 void get_int(int *nb, unsigned char *buff, size_t *it, bool struct_elem);
+
+//OBJECT GETTER
+
+channel_t *get_channel(unsigned char *buff, size_t *it);
+msg_t *get_msg(unsigned char *buff, size_t *it);
+reply_t *get_reply(unsigned char *buff, size_t *it);
+team_t *get_team(unsigned char *buff, size_t *it);
+thread_t *get_thread(unsigned char *buff, size_t *it);
+user_t *get_user(unsigned char *buff, size_t *it);
+
 int command_help(void);
 
 #endif /* !CLIENT_H_ */

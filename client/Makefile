@@ -59,12 +59,12 @@ SRC		=	$(DSETUP)/check_args.c		\
 			$(DSRC)/serialize_cmd.c					\
 			$(DSRC)/command_help.c					\
 			$(DSRC)/server_response/unserializer/primary_type_getter.c		\
-			$(DSRC)/server_response/process_error.c	\
-			$(DSRC)/server_response/process_success.c	\
-			$(DSRC)/server_response/success/process_create_event.c	\
-			$(DSRC)/server_response/success/process_elem.c	\
-			$(DSRC)/server_response/success/process_list.c	\
-			$(DSRC)/server_response/success/process_simple_event.c	\
+			$(DSRC)/server_response/unserializer/get_channel.c				\
+			$(DSRC)/server_response/unserializer/get_msg.c					\
+			$(DSRC)/server_response/unserializer/get_reply.c				\
+			$(DSRC)/server_response/unserializer/get_team.c					\
+			$(DSRC)/server_response/unserializer/get_thread.c				\
+			$(DSRC)/server_response/unserializer/get_user.c					\
 			$(DSRC)/server_response/success/process_other_event.c	\
 
 SRCS	=	$(SRC) $(DSRC)/main.c
