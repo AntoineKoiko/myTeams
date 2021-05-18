@@ -35,6 +35,7 @@
 #include "thread_t.h"
 #include "user_t.h"
 #include "connection_t.h"
+#include "interprate_code_t.h"
 #include "string_list_t.h"
 #include "teams_client_t.h"
 #include "command_t.h"

@@ -58,6 +58,7 @@ SRC		=	$(DSETUP)/check_args.c		\
 			$(DSRC)/read_from_stdin.c				\
 			$(DSRC)/serialize_cmd.c					\
 			$(DSRC)/command_help.c					\
+			$(DSRC)/server_response/unserializer/primary_type_getter.c		\
 			$(DSRC)/server_response/process_error.c	\
 			$(DSRC)/server_response/process_success.c	\
 			$(DSRC)/server_response/success/process_create_event.c	\
