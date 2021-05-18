@@ -8,6 +8,7 @@
 #include "database/database.h"
 #include "database/file_management/file_management.h"
 #include "server_error.h"
+#include "attributes.h"
 
 static inline bool init_save_file(
     int *fd, const file_types_t file_type, const size_t elements_nb)
@@ -41,7 +42,7 @@ static inline bool exec_save_func(
     return true;
 }
 
-int save_db(const database_t *db)
+NON_NULL(1) int save_db(const database_t *db)
 {
     int my_fd = ERR_SYS;
     size_t my_elements_nb = 0;

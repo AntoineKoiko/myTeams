@@ -14,8 +14,6 @@
 #include <stdio.h>
 #undef _GNU_SOURCE
 
-#define N_U __attribute__((unused))
-
 #include <sys/queue.h>
 #include <fcntl.h>
 

@@ -7,6 +7,7 @@
 
 #include "server_error.h"
 #include "database/database.h"
+#include "attributes.h"
 
 int load_db(N_U database_t *db)
 {

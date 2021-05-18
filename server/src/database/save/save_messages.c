@@ -6,7 +6,9 @@
 */
 
 #include "database/database.h"
+#include "attributes.h"
 
+NON_NULL(2)
 int save_messages(
     N_U const int fd, N_U const database_t *db, N_U const size_t elements_nb)
 {

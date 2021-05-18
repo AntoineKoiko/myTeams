@@ -7,6 +7,7 @@
 
 #include "database/database.h"
 #include "database/data_teams.h"
+#include "attributes.h"
 
 int team_count_nodes(size_t *count, const database_t *db)
 {
@@ -22,8 +23,10 @@ int team_count_nodes(size_t *count, const database_t *db)
     return EXIT_SUCCESS;
 }
 
+NON_NULL(2)
 int save_teams(
     N_U const int fd, N_U const database_t *db, N_U const size_t elements_nb)
+
 {
     return EXIT_SUCCESS;
 }

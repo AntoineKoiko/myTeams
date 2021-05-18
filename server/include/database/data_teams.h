@@ -39,7 +39,7 @@ int team_count_nodes(size_t *count, const database_t *db);
 /**
  * @brief Save teams in file
  * @param fd The file to save the data in
- * @param db The data to save
+ * @param db The data to save, should not be NULL
  * @return Error code
  */
 int save_teams(int fd, const database_t *db, size_t elements_nb);

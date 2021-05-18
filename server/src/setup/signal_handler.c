@@ -6,8 +6,9 @@
 */
 
 #include "server.h"
+#include "attributes.h"
 
-static void handle_sigint(__attribute((unused))int sig)
+static void handle_sigint(N_U int sig)
 {
     teams_server_t *server = get_or_set_server(NULL);
 
