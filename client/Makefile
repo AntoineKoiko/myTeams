@@ -65,6 +65,7 @@ SRC		=	$(DSETUP)/check_args.c		\
 			$(DSRC)/server_response/unserializer/get_team.c					\
 			$(DSRC)/server_response/unserializer/get_thread.c				\
 			$(DSRC)/server_response/unserializer/get_user.c					\
+			$(DSRC)/server_response/success/process_elem.c			\
 			$(DSRC)/server_response/success/process_other_event.c	\
 
 SRCS	=	$(SRC) $(DSRC)/main.c

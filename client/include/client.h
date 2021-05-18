@@ -88,6 +88,13 @@ void interprate_user_input(teams_client_t *client);
 
 void interprate_server_response(teams_client_t *client);
 
+//SINGLE ELEM 21X
+
+int print_user_elem(int code, size_t packet_size, unsigned char *buff);
+int print_team_elem(int code, size_t packet_size, unsigned char *buff);
+int print_channel_elem(int code, size_t packet_size, unsigned char *buff);
+int print_thread_elem(int code, N_U size_t packet_size, unsigned char *buff);
+
 //OTHER EVENT 25X
 
 int event_logged_in_out(int code, size_t packet_size, unsigned char *buff);
