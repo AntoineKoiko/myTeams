@@ -12,19 +12,10 @@
 #include <sys/queue.h>
 #include <uuid/uuid.h>
 
+#include "attributes.h"
 #include "team_t.h"
 
 typedef struct database_s database_t;
-
-typedef struct header_file_teams_s
-{
-    size_t size;
-    unsigned int nb_user_subscribed; // TODO remove it ?
-    // knowing that it already is in the size
-} header_file_teams_t;
-
-// const size_t team_size = sizeof(team_header_t) + sizeof(team_t)
-//     + (sizeof(uuid) * nb_user_subscribed);
 
 typedef struct team_node_s
 {
@@ -35,6 +26,7 @@ typedef struct team_node_s
 } team_node_t;
 
 int team_count_nodes(size_t *count, const database_t *db);
+NON_NULL(1) size_t team_storage_len(const team_node_t *team);
 
 /**
  * @brief Save teams in file

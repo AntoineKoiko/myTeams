@@ -25,6 +25,7 @@ DSRC		=	./src
 DINCLUDE	=	./include
 DCOMMON		=	../common
 DTESTS		=	./tests
+TOOLS		=	$(DSRC)/tools
 DSETUP		=	$(DSRC)/setup
 DDATABASE	=	$(DSRC)/database
 
@@ -66,6 +67,8 @@ SRC		=	$(DSETUP)/get_args.c	\
 			$(DSRC)/new/new_msg.c		\
 			$(DSRC)/requests/login.c	\
 			\
+			$(TOOLS)/uuid.c	\
+			\
 			$(DDATABASE)/database_constants.c	\
 			\
 			$(DDATABASE)/init/init_db.c				\
@@ -77,7 +80,8 @@ SRC		=	$(DSETUP)/get_args.c	\
 			$(DDATABASE)/load/load_db.c				\
 			\
 			$(DDATABASE)/save/save_db.c				\
-			$(DDATABASE)/save/save_teams.c			\
+			$(DDATABASE)/save/teams/save_teams.c			\
+			$(DDATABASE)/save/teams/count_teams.c			\
 			$(DDATABASE)/save/save_users.c			\
 			$(DDATABASE)/save/save_channels.c		\
 			$(DDATABASE)/save/save_threads.c			\
