@@ -30,8 +30,7 @@ int print_team_elem(N_U int code, N_U size_t packet_size, unsigned char *buff)
     if (team == NULL)
         return EXIT_ERROR;
     uuid_unparse_lower(team->team_uuid, uuid_unparse);
-    client_print_team(uuid_unparse, team->team_name,
-        team->team_description);
+    client_print_team(uuid_unparse, team->team_name, team->team_description);
     free(team);
     return EXIT_SUCCESS;
 }

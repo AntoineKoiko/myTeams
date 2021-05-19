@@ -66,6 +66,9 @@ SRC		=	$(DSETUP)/check_args.c		\
 			$(DSRC)/server_response/unserializer/get_thread.c				\
 			$(DSRC)/server_response/unserializer/get_user.c					\
 			$(DSRC)/server_response/success/process_elem.c			\
+			$(DSRC)/server_response/success/process_list.c			\
+			$(DSRC)/server_response/success/print_list_team_elem.c	\
+			$(DSRC)/server_response/success/print_list_other_elem.c	\
 			$(DSRC)/server_response/success/process_create_event.c	\
 			$(DSRC)/server_response/success/process_other_event.c	\
 			$(DSRC)/server_response/success/process_simple_event.c	\

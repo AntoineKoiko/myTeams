@@ -95,6 +95,15 @@ int print_team_elem(int code, size_t packet_size, unsigned char *buff);
 int print_channel_elem(int code, size_t packet_size, unsigned char *buff);
 int print_thread_elem(int code, N_U size_t packet_size, unsigned char *buff);
 
+//LIST ELEM 22X
+int print_list(N_U int code, size_t packet_size, unsigned char *buff);
+int print_single_team(unsigned char *buff, size_t *it);
+int print_single_channel(unsigned char *buff, size_t *it);
+int print_single_thread(unsigned char *buff, size_t *it);
+int print_single_reply(unsigned char *buff, size_t *it);
+int print_single_user(unsigned char *buff, size_t *it);
+int print_single_msg(unsigned char *buff, size_t *it);
+
 //SUCCESSFULY CREATED 23X
 
 int print_team_created(int code, size_t packet_size, unsigned char *buff);
