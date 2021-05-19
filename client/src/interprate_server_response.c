@@ -11,8 +11,9 @@ static int find_code_function(int code, size_t packet_size,
     unsigned char *buff)
 {
     for (size_t i = 0; interprate_list[i].code != -1; i++)  {
-        if (interprate_list[i].code == code && interprate_list[i].action_func)
+        if (interprate_list[i].code == code && interprate_list[i].action_func) {
             return interprate_list[i].action_func(code, packet_size, buff);
+        }
     }
     printf("Unknow code: %d\n", code);
     return EXIT_ERROR;
