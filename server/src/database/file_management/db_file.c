@@ -15,7 +15,7 @@ static inline int get_db_filepath(
         return ERR_NO_VAL;
     if (!dirpath) {
         if (asprintf(
-                filename, "./%s%s", data_filename, save_files[type].extension)
+                filename, "./%s%s", data_filename, data_files[type].extension)
                 == ERR_LIB
             || !*filename) {
             return server_error("asprintf", ERR_LIB);
@@ -24,7 +24,7 @@ static inline int get_db_filepath(
                    "%s/%s%s",
                    dirpath,
                    data_filename,
-                   save_files[type].extension)
+                   data_files[type].extension)
             == ERR_LIB
         || !*filename) {
         return server_error("asprintf", ERR_LIB);

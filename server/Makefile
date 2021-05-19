@@ -82,11 +82,11 @@ SRC		=	$(DSETUP)/get_args.c	\
 			$(DDATABASE)/save/save_db.c				\
 			$(DDATABASE)/save/teams/save_teams.c			\
 			$(DDATABASE)/save/teams/count_teams.c			\
-			$(DDATABASE)/save/save_users.c			\
-			$(DDATABASE)/save/save_channels.c		\
-			$(DDATABASE)/save/save_threads.c			\
-			$(DDATABASE)/save/save_replies.c			\
-			$(DDATABASE)/save/save_messages.c		\
+			$(DDATABASE)/save/users/save_users.c			\
+			$(DDATABASE)/save/channels/save_channels.c		\
+			$(DDATABASE)/save/threads/save_threads.c			\
+			$(DDATABASE)/save/replies/save_replies.c			\
+			$(DDATABASE)/save/messages/save_messages.c		\
 
 SRCS	=	$(SRC) $(DSRC)/main.c
 

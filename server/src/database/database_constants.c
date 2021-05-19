@@ -27,7 +27,7 @@ const char *const ext_messages = ".messages";
 const char *const data_dirname = ".database";
 const char *const data_filename = "database";
 
-const save_file_t save_files[NB_DATA_FILE_TYPE] = {
+const save_file_t data_files[NB_DATA_FILE_TYPE] = {
     {TEAMS, ext_teams, team_count_nodes, NULL, save_teams},
     {USERS, ext_users, NULL, NULL, save_users},
     {CHANNELS, ext_channels, NULL, NULL, save_channels},
