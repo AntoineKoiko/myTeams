@@ -20,7 +20,7 @@ int main(int ac, char **av)
         return EXIT_ERROR;
     get_or_set_server(&teams_server);
     init_db(&teams_server.database);
-    //    load_db(teams_server.database);
+    load_db(teams_server.database);
     handle_signal();
     STAILQ_INIT(&teams_server.session_head);
     ret = server_my_teams(&teams_server);

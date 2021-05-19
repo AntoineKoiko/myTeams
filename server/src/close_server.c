@@ -12,7 +12,9 @@ void close_server(teams_server_t *server)
 {
     if (!server)
         return;
-    if (server->database)
+    if (server->database) {
         save_db(server->database);
+        free(server->database);
+    }
     destroy_server(server);
 }
