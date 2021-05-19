@@ -23,7 +23,7 @@ static void prepare_reply_buffer(session_list_t *s, reply_t *reply,
                                     int code)
 {
     size_t cursor = 0;
-    size_t packet_size = sizeof(int) + 1 + ((sizeof(uuid_t) + 1) * 3);
+    size_t packet_size = sizeof(int) + ((sizeof(uuid_t) + 1) * 3);
 
     packet_size += strlen(reply->reply_body) + 1 + sizeof(time_t) + 1;
     cursor = prepare_buffer_header(s, packet_size, code);

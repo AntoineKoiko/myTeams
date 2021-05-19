@@ -23,20 +23,20 @@ static void prepare_thread_buffer(session_list_t *s, thread_t *thread,
                                     int code)
 {
     size_t cursor = 0;
-    size_t packet_size = sizeof(int) + 1 + ((sizeof(uuid_t) + 1) * 3);
+    size_t packet_size = sizeof(int) + ((sizeof(uuid_t) + 1) * 3);
 
     packet_size += strlen(thread->thread_body) + 1
         + strlen(thread->thread_title) + 1;
     cursor = prepare_buffer_header(s, packet_size, code);
     memcpy(s->cnt.output_buff+cursor, thread->thread_uuid, sizeof(uuid_t));
-    cursor += sizeof(uuid_t);
+    cursor += sizeof(uuid_t) + 1;
     memcpy(s->cnt.output_buff+cursor, thread->channel_uuid, sizeof(uuid_t));
-    cursor += sizeof(uuid_t);
+    cursor += sizeof(uuid_t) + 1;
     memcpy(s->cnt.output_buff+cursor, thread->user_uuid, sizeof(uuid_t));
-    cursor += sizeof(uuid_t);
+    cursor += sizeof(uuid_t) + 1;
     memcpy(s->cnt.output_buff+cursor, &thread->thread_timestamp,
             sizeof(time_t));
-    cursor += sizeof(time_t);
+    cursor += sizeof(time_t) + 1;
     memcpy(s->cnt.output_buff+cursor, thread->thread_title,
             strlen(thread->thread_title));
     cursor += strlen(thread->thread_title) + 1;

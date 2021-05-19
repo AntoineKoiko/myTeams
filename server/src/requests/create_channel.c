@@ -11,7 +11,7 @@ static void prepare_channel_buffer(session_list_t *s, channel_t *chan,
                                     int code)
 {
     size_t cursor = 0;
-    size_t packet_size = sizeof(int) + 1 + ((sizeof(uuid_t) + 1) * 2);
+    size_t packet_size = sizeof(int) + ((sizeof(uuid_t) + 1) * 2);
 
     packet_size += strlen(chan->channel_name) + 1
         + strlen(chan->channel_description) + 1;
@@ -21,9 +21,9 @@ static void prepare_channel_buffer(session_list_t *s, channel_t *chan,
     memcpy(s->cnt.output_buff+cursor, &code, sizeof(int));
     cursor += sizeof(int);
     memcpy(s->cnt.output_buff+cursor, chan->channel_uuid, sizeof(uuid_t));
-    cursor += sizeof(uuid_t);
+    cursor += sizeof(uuid_t) + 1;
     memcpy(s->cnt.output_buff+cursor, chan->team_uuid, sizeof(uuid_t));
-    cursor += sizeof(uuid_t);
+    cursor += sizeof(uuid_t) + 1;
     memcpy(s->cnt.output_buff+cursor, chan->channel_name,
         strlen(chan->channel_name));
     cursor += strlen(chan->channel_name) + 1;
