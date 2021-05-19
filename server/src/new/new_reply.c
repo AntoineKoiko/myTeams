@@ -7,15 +7,15 @@
 
 #include "server.h"
 
-reply_t *new_reply(char *body, uuid_t team_uuid, uuid_t thread_uuid,
-                    uuid_t user_uuid)
+reply_t *new_reply(
+    char *body, uuid_t team_uuid, uuid_t thread_uuid, uuid_t user_uuid)
 {
     reply_t *reply = malloc(sizeof(reply_t));
 
     if (reply == NULL)
         return NULL;
     if (time(&reply->reply_timestamp) == -1) {
-        printf("time: %s\n", strerror(errno));
+        server_error("time", EXIT_ERROR);
         free(reply);
         return NULL;
     }

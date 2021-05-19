@@ -14,7 +14,7 @@ thread_t *new_thread(uuid_t chan, uuid_t user, char *title, char *body)
     if (thread == NULL)
         return NULL;
     if (time(&thread->thread_timestamp) == -1) {
-        printf("time: %s\n", strerror(errno));
+        server_error("time", EXIT_ERROR);
         free(thread);
         return NULL;
     }

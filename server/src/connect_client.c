@@ -16,10 +16,10 @@ int connect_client(teams_server_t *server)
         return EXIT_ERROR;
     }
     session->cnt.socket = accept(server->server.socket,
-    (struct sockaddr *)&session->cnt.addr, &client_len);
+        (struct sockaddr *) &session->cnt.addr,
+        &client_len);
     if (session->cnt.socket < 0) {
-        printf("accept: %s\n", strerror(errno));
-        return EXIT_ERROR;
+        return server_error("accept", EXIT_ERROR);
     }
     STAILQ_INSERT_TAIL(&server->session_head, session, next);
     return EXIT_SUCCESS;

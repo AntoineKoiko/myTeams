@@ -14,7 +14,7 @@ msg_t *new_msg(uuid_t sender_uuid, uuid_t receiver_uuid, char *body)
     if (msg == NULL)
         return NULL;
     if (time(&msg->msg_timestamp) == -1) {
-        printf("time: %s\n", strerror(errno));
+        server_error("time", EXIT_ERROR);
         free(msg);
         return NULL;
     }
