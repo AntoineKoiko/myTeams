@@ -18,7 +18,7 @@ static void prepare_user_buffer(session_list_t *s, int code, user_t *user)
     memcpy(s->cnt.output_buff+cursor, &code, sizeof(int));
     cursor += sizeof(int);
     memcpy(s->cnt.output_buff+cursor, user->user_uuid, sizeof(uuid_t));
-    cursor += sizeof(uuid_t);
+    cursor += sizeof(uuid_t) + 1;
     memcpy(s->cnt.output_buff+cursor, user->user_name,
             strlen(user->user_name));
     cursor += strlen(user->user_name) + 1;

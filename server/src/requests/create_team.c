@@ -18,10 +18,10 @@ static void prepare_team_buffer(session_list_t *session, team_t *team,
     cursor += sizeof(int);
     memcpy(session->cnt.output_buff+cursor, team->team_uuid,
         sizeof(uuid_t));
-    cursor += sizeof(uuid_t);
+    cursor += sizeof(uuid_t) + 1;
     memcpy(session->cnt.output_buff+cursor, team->created_by,
         sizeof(uuid_t));
-    cursor += sizeof(uuid_t);
+    cursor += sizeof(uuid_t) + 1;
     memcpy(session->cnt.output_buff+cursor, team->team_name,
             strlen(team->team_name));
     cursor += strlen(team->team_name) + 1;
@@ -64,7 +64,6 @@ int create_team_request(teams_server_t *server, session_list_t *session,
     team_t *team = new_team(argv[0], argv[1], session->user->user_uuid);
     char tm_uuid[UUID_STR_LEN] = {0};
     char creator_uuid[UUID_STR_LEN] = {0};
-
 
     if (team) {
         team_created(server, session, team);
