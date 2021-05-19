@@ -34,8 +34,11 @@ static char **get_cmd_arg(size_t arg_size, char *arg)
 static int compute_cmd(teams_server_t *server, session_list_t *session,
     char cmd_code, char **arg_array)
 {
-    if (cmd_code == 1) {
-        login_request(server, session, arg_array);
+    for (size_t i = 0; command_list[i].cmd; i++) {
+        if (command_list[i].code == cmd_code &&
+            request_array[i]) {
+            request_array[i](server, session, arg_array);
+        }
     }
     return EXIT_SUCCESS;
 }

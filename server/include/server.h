@@ -30,6 +30,7 @@
 #include "logging_server.h"
 #include "session_list_t.h"
 #include "teams_server_t.h"
+#include "command_t.h"
 #include "constant.h"
 #include "status_t.h"
 #include "team_t.h"
