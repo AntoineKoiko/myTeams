@@ -18,10 +18,13 @@ static int thread_created(teams_server_t *server, session_list_t *session,
                                         &cursor);
     session->cnt.output_size += size_buf;
     STAILQ_FOREACH(s, &server->session_head, next) {
-        cursor = s->cnt.output_size;
-        size_buf = prepare_thread_buffer(s->cnt.output_buff, thread, 244,
+        if (is_subscribed(server->database, session->team_ctx,
+                                    s->user->user_uuid) == EXIT_SUCCESS) {
+            cursor = s->cnt.output_size;
+            size_buf = prepare_thread_buffer(s->cnt.output_buff, thread, 244,
                                             &cursor);
-        s->cnt.output_size += size_buf;
+            s->cnt.output_size += size_buf;
+        }
     }
    // SLIST_INSERT_AFTER(server->database->teams.slh_first, team, next);
     return EXIT_SUCCESS;

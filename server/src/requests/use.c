@@ -7,52 +7,47 @@
 
 #include "server.h"
 
-static void prepare_buffer(session_list_t *session,
-        size_t packet_size, int code)
-{
-    size_t cursor = 0;
-
-    memcpy(session->cnt.output_buff, &packet_size, sizeof(size_t));
-    cursor += sizeof(size_t);
-    memcpy(session->cnt.output_buff+cursor, &code, sizeof(int));
-    cursor += sizeof(int);
-    memcpy(session->cnt.output_buff+cursor, session->user->user_name,
-            strlen(session->user->user_name));
-    cursor += strlen(session->user->user_name) + 1;
-    memcpy(session->cnt.output_buff+cursor, session->user->user_uuid,
-        sizeof(uuid_t));
-}
-
-static int handle_context(database_t *db, session_list_t *session, char **argv)
+static int handle_context(database_t *db, session_list_t *session, char **argv,
+                            uuid_t ctx[3])
 {
     size_t nb_arg = 0;
-    uuid_t ctx[3] = {0};
 
-    for (nb_arg = 0; argv[nb_arg]; nb_arg++)
-        uuid_parse(argv[nb_arg], ctx[nb_arg]);
+    for (nb_arg = 0; argv[nb_arg]; nb_arg++);
     if (nb_arg >= 1 && find_team_by_uuid(db, ctx[0]) != NULL)
         uuid_copy(session->team_ctx, ctx[0]);
     else if (nb_arg >= 1)
-        return 412;
+        return 1;
     if (nb_arg >= 2 && find_channel_by_uuid(db, ctx[0], ctx[1]) != NULL)
         uuid_copy(session->channel_ctx, ctx[1]);
     else if (nb_arg >= 2)
-        return 413;
+        return 2;
     if (nb_arg >= 3 && find_thread_by_uuid(db, ctx[0], ctx[1], ctx[2]) != NULL)
         uuid_copy(session->thread_ctx, ctx[2]);
     else if (nb_arg >= 3)
-        return 414;
+        return 3;
     return EXIT_SUCCESS;
+}
+
+static void reset_session_context(session_list_t *s)
+{
+    reset_uuid_t(s->team_ctx);
+    reset_uuid_t(s->channel_ctx);
+    reset_uuid_t(s->thread_ctx);
 }
 
 int use_request(teams_server_t *server, session_list_t *session,
                     char **argv)
 {
-    size_t packet_size = 0;
-    int ret = handle_context(server->database, session, argv);
+    uuid_t ctx[3] = {0};
+    int ret = 0;
 
-    packet_size += sizeof(int) + strlen(session->user->user_name)
-                + 1 + sizeof(uuid_t) + 1;
-    prepare_buffer(session, packet_size, ret);
+    reset_session_context(session);
+    for (int i = 0; argv[i]; i++)
+        uuid_parse(argv[i], ctx[i]);
+    ret = handle_context(server->database, session, argv, ctx);
+    if (ret != EXIT_SUCCESS) {
+        prepare_uuid_buffer(session->cnt.output_buff, ctx[ret - 1], ret + 411,
+                            &session->cnt.output_size);
+    }
     return ret;
 }

@@ -17,11 +17,9 @@ static void get_user_info(session_list_t *session)
     session->cnt.output_size += size_buf;
 }
 
-int info_user_request(teams_server_t *server, session_list_t *session,
-                        char **argv)
+int info_user_request(N_U teams_server_t *server, session_list_t *session,
+                        N_U char **argv)
 {
-    (void)argv;
-    (void)server;
     get_user_info(session);
     return EXIT_SUCCESS;
 }
