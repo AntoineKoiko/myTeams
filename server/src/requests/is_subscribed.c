@@ -22,3 +22,12 @@ int is_subscribed(database_t *db, uuid_t team_uuid, uuid_t user_uuid)
     }
     return EXIT_FAILURE;
 }
+
+int is_sub_and_coonect(database_t *db, uuid_t team_uuid, user_t *user)
+{
+    if (user->status != CONNECTED)
+        return EXIT_FAILURE;
+    if (is_subscribed(db, team_uuid, user->user_uuid) == EXIT_FAILURE)
+        return EXIT_FAILURE;
+    return EXIT_SUCCESS;
+}
