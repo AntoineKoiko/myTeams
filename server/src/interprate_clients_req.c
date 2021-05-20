@@ -61,6 +61,7 @@ static int interprate_client_req(teams_server_t *server,
         compute_cmd(server, session, cmd_code, arg_array);
         traited += packet_size - 1;
     }
+    session->cnt.input_size -= traited;
     return EXIT_SUCCESS;
 }
 
@@ -72,7 +73,7 @@ int interprate_clients_request(teams_server_t *server)
     {
         if (!packet_is_empty(session->cnt.input_buff)) {
             interprate_client_req(server, session);
-            memset(session->cnt.input_buff, 0, 1024);
+            memset(session->cnt.input_buff, 0, INPUT_BUFF_SIZE);
         }
     }
     return EXIT_SUCCESS;
