@@ -15,9 +15,9 @@ int launch_server(teams_server_t *teams_server)
     ret = init_db(&teams_server->database);
     if (ret != EXIT_SUCCESS)
         return ret;
-            load_db(teams_server.database);
-        if (ret != EXIT_SUCCESS)
-            return ret;
+    ret = load_db(teams_server->database);
+    if (ret != EXIT_SUCCESS)
+        return ret;
     handle_signal();
     STAILQ_INIT(&teams_server->session_head);
     ret = server_my_teams(teams_server);
