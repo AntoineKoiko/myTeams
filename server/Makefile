@@ -96,6 +96,7 @@ SRC		=	$(DSETUP)/get_args.c	\
 			$(DSRC)/requests/db/find_user.c		\
 			$(DSRC)/requests/uuid_is_in_arr.c	\
 			\
+			$(DDATABASE)/insert_user.c			\
 			$(DDATABASE)/database_constants.c	\
 			\
 			$(DDATABASE)/init/init_db.c				\

@@ -19,7 +19,7 @@ static int reply_created(teams_server_t *server, session_list_t *session,
     session->cnt.output_size += size_buf;
     STAILQ_FOREACH(s, &server->session_head, next) {
         if (is_subscribed(server->database, reply->team_uuid,
-                                        s->user->user_uuid) == EXIT_SUCCESS) {
+                            s->user->user_data->user_uuid) == EXIT_SUCCESS) {
             cursor = s->cnt.output_size;
             size_buf = prepare_reply_buffer(s->cnt.output_buff, reply, 245,
                                             &cursor);
@@ -51,7 +51,7 @@ static reply_t *create_process(teams_server_t *server, session_list_t *ses,
     if (!node)
         return NULL;
     reply = new_reply(argv[0], ses->team_ctx, ses->thread_ctx,
-        ses->user->user_uuid);
+        ses->user->user_data->user_uuid);
     if (!reply)
         return NULL;
     return reply;

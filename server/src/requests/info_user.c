@@ -12,8 +12,8 @@ static void get_user_info(session_list_t *session)
     size_t cursor = session->cnt.output_size;
     size_t size_buf = 0;
 
-    size_buf = prepare_user_buffer(session->cnt.output_buff, session->user,
-                                    211, &cursor);
+    size_buf = prepare_user_buffer(session->cnt.output_buff,
+        session->user->user_data, 211, &cursor);
     session->cnt.output_size += size_buf;
 }
 

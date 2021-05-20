@@ -204,5 +204,9 @@ user_node_t *find_user_by_name(database_t *db, const char *name);
 
 int uuid_is_in_arr(uuid_t *uuid_arr, uuid_t to_compare);
 
+//TODO move proto:
+
+int insert_user(database_t *db, const char name[MAX_NAME_LENGTH]);
+
 
 #endif /* !SERVER_H_ */

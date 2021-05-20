@@ -19,7 +19,7 @@ static int team_created(teams_server_t *server, session_list_t *session,
     session->cnt.output_size += size_buf;
     STAILQ_FOREACH(s, &server->session_head, next) {
         if (is_subscribed(server->database, team->team_uuid,
-                                        s->user->user_uuid) == EXIT_SUCCESS) {
+                            s->user->user_data->user_uuid) == EXIT_SUCCESS) {
             cursor = s->cnt.output_size;
             size_buf = prepare_team_buffer(s->cnt.output_buff, team, 242,
                                             &cursor);
@@ -44,7 +44,8 @@ static int creation_failed(session_list_t *session)
 int create_team_request(teams_server_t *server, session_list_t *session,
                         char **argv)
 {
-    team_t *team = new_team(argv[0], argv[1], session->user->user_uuid);
+    team_t *team = new_team(argv[0], argv[1],
+                        session->user->user_data->user_uuid);
     char tm_uuid[UUID_STR_LEN] = {0};
     char creator_uuid[UUID_STR_LEN] = {0};
 

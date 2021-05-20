@@ -19,7 +19,7 @@ static int thread_created(teams_server_t *server, session_list_t *session,
     session->cnt.output_size += size_buf;
     STAILQ_FOREACH(s, &server->session_head, next) {
         if (is_subscribed(server->database, session->team_ctx,
-                                    s->user->user_uuid) == EXIT_SUCCESS) {
+                            s->user->user_data->user_uuid) == EXIT_SUCCESS) {
             cursor = s->cnt.output_size;
             size_buf = prepare_thread_buffer(s->cnt.output_buff, thread, 244,
                                             &cursor);
@@ -51,8 +51,8 @@ static thread_t *create_process(teams_server_t *server, session_list_t *ses,
 
     if (!node)
         return NULL;
-    thread = new_thread(node->channel_data->channel_uuid, ses->user->user_uuid,
-                            argv[0], argv[1]);
+    thread = new_thread(node->channel_data->channel_uuid,
+        ses->user->user_data->user_uuid, argv[0], argv[1]);
     if (!thread)
         return NULL;
     return thread;
