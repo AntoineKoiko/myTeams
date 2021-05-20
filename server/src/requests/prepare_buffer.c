@@ -57,3 +57,15 @@ size_t prepare_reply_buffer(unsigned char *buff, reply_t *reply, int code,
     put_reply(buff, reply, cursor);
     return ((*cursor) - written_size);
 }
+
+size_t prepare_user_buffer(unsigned char *buff, user_t *user, int code, 
+                            size_t *cursor)
+{
+    size_t written_size = (*cursor);
+    size_t packet_size = sizeof(int) + ((sizeof(uuid_t) + 1) * 1);
+
+    packet_size += strlen(user->user_name) + 1 + sizeof(int) + 1;
+    put_protocol(buff, packet_size, code, cursor);
+    put_user(buff, user, cursor);
+    return ((*cursor) - written_size);
+}

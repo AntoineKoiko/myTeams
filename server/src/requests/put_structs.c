@@ -82,3 +82,16 @@ size_t put_reply(unsigned char *buff, reply_t *reply, size_t *cursor)
     (*cursor)++;
     return ((*cursor) - written_size);
 }
+
+size_t put_user(unsigned char *buff, user_t *user, size_t *cursor)
+{
+    size_t written_size = (*cursor);
+
+    put_uuid(buff, user->user_uuid, cursor);
+    (*cursor)++;
+    put_string(buff, user->user_name, cursor);
+    (*cursor)++;
+    put_int(buff, user->status, cursor);
+    (*cursor)++;
+    return ((*cursor) - written_size);
+}

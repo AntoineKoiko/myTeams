@@ -7,32 +7,19 @@
 
 #include "server.h"
 
-static void prepare_user_buffer(session_list_t *s, int code, user_t *user)
+static int prepare_buffer(teams_server_t *server, session_list_t *session)
 {
-    size_t cursor = 0;
-    size_t packet_size = sizeof(int) + strlen(user->user_name)
-                + 1 + sizeof(uuid_t) + 1 + sizeof(int) + 1;
-
-    memcpy(s->cnt.output_buff, &packet_size, sizeof(size_t));
-    cursor += sizeof(size_t);
-    memcpy(s->cnt.output_buff+cursor, &code, sizeof(int));
-    cursor += sizeof(int);
-    memcpy(s->cnt.output_buff+cursor, user->user_uuid, sizeof(uuid_t));
-    cursor += sizeof(uuid_t) + 1;
-    memcpy(s->cnt.output_buff+cursor, user->user_name,
-            strlen(user->user_name));
-    cursor += strlen(user->user_name) + 1;
-    memcpy(s->cnt.output_buff+cursor, &user->status, sizeof(int));
-}
-
-static void prepare_buffer(teams_server_t *server, session_list_t *session)
-{
-    int code = 253;
     session_list_t *s = NULL;
+    size_t cursor = 0;
+    size_t size_buf = 0;
 
     STAILQ_FOREACH(s, &server->session_head, next) {
-        prepare_user_buffer(s, code, session->user);
+        cursor = s->cnt.output_size;
+        size_buf = prepare_user_buffer(s->cnt.output_buff, session->user,
+                                        253, &cursor);
+        s->cnt.output_size += size_buf;
     }
+    return EXIT_SUCCESS;
 }
 
 int login_request(teams_server_t *server, session_list_t *session,
