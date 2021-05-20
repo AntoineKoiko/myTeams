@@ -159,7 +159,9 @@ channel_node_t *find_channel_in_db(database_t *db, uuid_t tm_uuid,
                                     uuid_t chan_uuid);
 thread_node_t *find_thread_in_db(database_t *db, uuid_t tm_uuid,
                                     uuid_t chan_uuid, uuid_t thread_uuid);
-user_node_t *find_user_in_db(database_t *db, uuid_t user_uuid);
+
+user_node_t *find_user_by_uuid(database_t *db, uuid_t user_uuid);
+user_node_t *find_user_by_name(database_t *db, const char *name);
 
 int uuid_is_in_arr(uuid_t *uuid_arr, uuid_t to_compare);
 
