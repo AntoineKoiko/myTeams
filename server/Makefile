@@ -57,6 +57,7 @@ SRC		=	$(DSETUP)/get_args.c	\
 			$(DSRC)/get_high_socket.c		\
 			$(DSRC)/close_session.c			\
 			$(DSRC)/interprate_clients_req.c\
+			$(DSRC)/free_str_array.c		\
 			$(DSRC)/new/new_session.c	\
 			$(DSRC)/new/new_user.c 		\
 			$(DSRC)/new/new_team.c 		\

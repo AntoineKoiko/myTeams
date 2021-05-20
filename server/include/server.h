@@ -103,6 +103,8 @@ thread_t *new_thread(uuid_t chan, uuid_t user, char *title, char *body);
 
 user_t *new_user(const char *user_name);
 
+void free_str_array(char **str_array);
+
 //object destructor
 void clean_user(user_t **user);
 
