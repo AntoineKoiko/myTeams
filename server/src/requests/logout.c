@@ -14,25 +14,25 @@ static int prepare_buffer(teams_server_t *server, session_list_t *session)
     size_t size_buf = 0;
 
     STAILQ_FOREACH(s, &server->session_head, next) {
-        cursor = s->cnt.output_size;
-        size_buf = prepare_user_buffer(s->cnt.output_buff, session->user,
+        if (s->logged_in) {
+            cursor = s->cnt.output_size;
+            size_buf = prepare_user_buffer(s->cnt.output_buff, session->user,
                                         254, &cursor);
-        s->cnt.output_size += size_buf;
+            s->cnt.output_size += size_buf;
+        }
     }
     return EXIT_SUCCESS;
 }
 
 int logout_request(teams_server_t *server, session_list_t *session,
-                    char **argv)
+                   N_U char **argv)
 {
     char uuid[UUID_STR_LEN] = {0};
 
-    (void)argv;
     uuid_unparse_lower(session->user->user_uuid, uuid);
     prepare_buffer(server, session);
-    clean_user(&session->user);
     session->logged_in = false;
-    session->should_exit = true;
+    session->user = NULL;
     server_event_user_logged_out(uuid);
     return EXIT_SUCCESS;
 }
