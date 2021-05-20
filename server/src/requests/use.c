@@ -28,17 +28,25 @@ static int handle_context(database_t *db, session_list_t *session, char **argv,
     return EXIT_SUCCESS;
 }
 
+static void reset_session_context(session_list_t *s)
+{
+    reset_uuid_t(s->team_ctx);
+    reset_uuid_t(s->channel_ctx);
+    reset_uuid_t(s->thread_ctx);
+}
+
 int use_request(teams_server_t *server, session_list_t *session,
                     char **argv)
 {
     uuid_t ctx[3] = {0};
     int ret = 0;
 
+    reset_session_context(session);
     for (int i = 0; argv[i]; i++)
         uuid_parse(argv[i], ctx[i]);
     ret = handle_context(server->database, session, argv, ctx);
     if (ret != EXIT_SUCCESS) {
-        prepare_uuid_buffer(session->cnt.output_buff, ctx[ret - 1], ret, 
+        prepare_uuid_buffer(session->cnt.output_buff, ctx[ret - 1], ret + 411,
                             &session->cnt.output_size);
     }
     return ret;

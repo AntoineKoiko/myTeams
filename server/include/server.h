@@ -105,9 +105,10 @@ user_t *new_user(const char *user_name);
 
 void free_str_array(char **str_array);
 
-//object destructor
+//REQUEST TOOLS
 void clean_user(user_t **user);
 int is_subscribed(database_t *db, uuid_t team_uuid, uuid_t user_uuid);
+void reset_uuid_t(uuid_t uuid);
 
 
 //buffer preparing
