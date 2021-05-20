@@ -9,6 +9,7 @@
 #define SERVER_H_
 
 //INCLUDE
+#define INPUT_BUFF_SIZE 1024
 
 #define _GNU_SOURCE
 #include <stdio.h>
@@ -30,6 +31,7 @@
 #include "logging_server.h"
 #include "session_list_t.h"
 #include "teams_server_t.h"
+#include "command_t.h"
 #include "constant.h"
 #include "status_t.h"
 #include "team_t.h"
@@ -101,6 +103,8 @@ thread_t *new_thread(uuid_t chan, uuid_t user, char *title, char *body);
 
 user_t *new_user(const char *user_name);
 
+void free_str_array(char **str_array);
+
 //object destructor
 void clean_user(user_t **user);
 
@@ -120,15 +124,15 @@ size_t put_thread(unsigned char *buff, thread_t *thread, size_t *cursor);
 size_t put_reply(unsigned char *buff, reply_t *reply, size_t *cursor);
 size_t put_user(unsigned char *buff, user_t *user, size_t *cursor);
 
-size_t prepare_team_buffer(unsigned char *buff, team_t *team, int code, 
+size_t prepare_team_buffer(unsigned char *buff, team_t *team, int code,
                         size_t *cursor);
-size_t prepare_channel_buffer(unsigned char *buff, channel_t *chan, int code, 
+size_t prepare_channel_buffer(unsigned char *buff, channel_t *chan, int code,
                         size_t *cursor);
-size_t prepare_thread_buffer(unsigned char *buff, thread_t *thread, int code, 
+size_t prepare_thread_buffer(unsigned char *buff, thread_t *thread, int code,
                         size_t *cursor);
-size_t prepare_reply_buffer(unsigned char *buff, reply_t *reply, int code, 
+size_t prepare_reply_buffer(unsigned char *buff, reply_t *reply, int code,
                         size_t *cursor);
-size_t prepare_user_buffer(unsigned char *buff, user_t *user, int code, 
+size_t prepare_user_buffer(unsigned char *buff, user_t *user, int code,
                             size_t *cursor);
 
 //requests
@@ -163,7 +167,9 @@ channel_node_t *find_channel_in_db(database_t *db, uuid_t tm_uuid,
                                     uuid_t chan_uuid);
 thread_node_t *find_thread_in_db(database_t *db, uuid_t tm_uuid,
                                     uuid_t chan_uuid, uuid_t thread_uuid);
-user_node_t *find_user_in_db(database_t *db, uuid_t user_uuid);
+
+user_node_t *find_user_by_uuid(database_t *db, uuid_t user_uuid);
+user_node_t *find_user_by_name(database_t *db, const char *name);
 
 int uuid_is_in_arr(uuid_t *uuid_arr, uuid_t to_compare);
 

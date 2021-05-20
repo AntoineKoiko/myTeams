@@ -72,7 +72,7 @@ size_t put_reply(unsigned char *buff, reply_t *reply, size_t *cursor)
 
     put_uuid(buff, reply->team_uuid, cursor);
     (*cursor)++;
-    put_uuid(buff, reply->team_uuid, cursor);
+    put_uuid(buff, reply->thread_uuid, cursor);
     (*cursor)++;
     put_time_t(buff, reply->reply_timestamp, cursor);
     (*cursor)++;
