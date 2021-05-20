@@ -12,4 +12,6 @@ extern const char *digits;
 
 extern const command_t command_list[];
 
+extern const interprate_code_t interprate_list[];
+
 #endif /* !CONSTANT_H_ */

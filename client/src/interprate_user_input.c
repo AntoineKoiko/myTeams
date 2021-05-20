@@ -32,19 +32,32 @@ static int str_array_len(char **str_array)
     return len;
 }
 
+static bool is_special_case(ssize_t idx)
+{
+    if (idx == -1) {
+        printf("Unknown command.\n");
+        return true;
+    }
+    if (idx == 0) {
+        command_help();
+        return true;
+    }
+    return false;
+}
+
 static int command_interpretor(teams_client_t *client, char *cmd)
 {
     char **arg_array = NULL;
     ssize_t idx = find_cmd_idx(cmd);
     int nb_args = 0;
 
-    if (idx == -1) {
-        printf("Unknown command.\n");
-        return EXIT_ERROR;
+    if (is_special_case(idx)) {
+        return EXIT_FAILURE;
     }
     arg_array = get_args(client, cmd+strlen(command_list[idx].cmd));
     nb_args = str_array_len(arg_array);
-    if (nb_args < command_list[idx].min_arg || nb_args > command_list[idx].max_arg) {
+    if (nb_args < command_list[idx].min_arg ||
+        nb_args > command_list[idx].max_arg) {
         printf("%s: wrong number of argument(s)\n", command_list[idx].cmd);
     } else {
         serialize_cmd(client, idx, arg_array);
