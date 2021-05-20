@@ -18,10 +18,10 @@ static int reply_created(teams_server_t *server, session_list_t *session,
                                         &cursor);
     session->cnt.output_size += size_buf;
     STAILQ_FOREACH(s, &server->session_head, next) {
-        cursor = session->cnt.output_size;
-        size_buf = prepare_reply_buffer(session->cnt.output_buff, reply, 245,
+        cursor = s->cnt.output_size;
+        size_buf = prepare_reply_buffer(s->cnt.output_buff, reply, 245,
                                             &cursor);
-        session->cnt.output_size += size_buf;
+        s->cnt.output_size += size_buf;
     }
     return EXIT_SUCCESS;
 }
