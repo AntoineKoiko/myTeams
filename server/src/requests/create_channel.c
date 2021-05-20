@@ -18,8 +18,8 @@ static int channel_created(teams_server_t *server, session_list_t *session,
                                         &cursor);
     session->cnt.output_size += size_buf;
     STAILQ_FOREACH(s, &server->session_head, next) {
-        if (is_subscribed(server->database, chan->team_uuid,
-                            s->user->user_data->user_uuid) == EXIT_SUCCESS) {
+        if (is_sub_and_coonect(server->database, chan->team_uuid,
+                                    s->user->user_data) == EXIT_SUCCESS) {
             cursor = s->cnt.output_size;
             size_buf = prepare_channel_buffer(s->cnt.output_buff, chan, 243,
                                             &cursor);
