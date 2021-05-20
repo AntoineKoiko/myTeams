@@ -19,6 +19,13 @@
 #include <sys/queue.h>
 #include <fcntl.h>
 
+#include "database/data_teams.h"
+#include "database/data_users.h"
+#include "database/data_channels.h"
+#include "database/data_threads.h"
+#include "database/data_replies.h"
+#include "database/data_messages.h"
+
 #define STATIC_ARRAY_SIZE(x) (sizeof(x) / sizeof(x[0]))
 
 typedef struct database_s

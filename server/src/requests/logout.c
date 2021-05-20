@@ -32,8 +32,8 @@ int logout_request(teams_server_t *server, session_list_t *session,
     uuid_unparse_lower(session->user->user_data->user_uuid, uuid);
     prepare_buffer(server, session);
     session->logged_in = false;
-    session->user = NULL;
     session->user->user_data->status = NOT_CONNECTED;
+    session->user = NULL;
     server_event_user_logged_out(uuid);
     return EXIT_SUCCESS;
 }

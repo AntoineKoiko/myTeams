@@ -70,7 +70,7 @@ int create_reply_request(teams_server_t *server, session_list_t *session,
         reply_created(server, session, reply);
         uuid_unparse_lower(reply->thread_uuid, thread_uuid);
         uuid_unparse_lower(reply->user_uuid, user_uuid);
-        server_event_thread_new_reply(thread_uuid, user_uuid,
+        server_event_reply_created(thread_uuid, user_uuid,
                                         reply->reply_body);
     }
     return EXIT_SUCCESS;
