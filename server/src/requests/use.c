@@ -30,15 +30,15 @@ static int handle_context(database_t *db, session_list_t *session, char **argv)
 
     for (nb_arg = 0; argv[nb_arg]; nb_arg++)
         uuid_parse(argv[nb_arg], ctx[nb_arg]);
-    if (nb_arg >= 1 && find_team_in_db(db, ctx[0]) != NULL)
+    if (nb_arg >= 1 && find_team_by_uuid(db, ctx[0]) != NULL)
         uuid_copy(session->team_ctx, ctx[0]);
     else if (nb_arg >= 1)
         return 412;
-    if (nb_arg >= 2 && find_channel_in_db(db, ctx[0], ctx[1]) != NULL)
+    if (nb_arg >= 2 && find_channel_by_uuid(db, ctx[0], ctx[1]) != NULL)
         uuid_copy(session->channel_ctx, ctx[1]);
     else if (nb_arg >= 2)
         return 413;
-    if (nb_arg >= 3 && find_thread_in_db(db, ctx[0], ctx[1], ctx[2]) != NULL)
+    if (nb_arg >= 3 && find_thread_by_uuid(db, ctx[0], ctx[1], ctx[2]) != NULL)
         uuid_copy(session->thread_ctx, ctx[2]);
     else if (nb_arg >= 3)
         return 414;

@@ -24,7 +24,7 @@ static void get_thread_list(channel_node_t *cur_channel,
 int list_thread_request(teams_server_t *server, session_list_t *session,
                         char **argv)
 {
-    channel_node_t *cur_channel = find_channel_in_db(server->database,
+    channel_node_t *cur_channel = find_channel_by_uuid(server->database,
                                     session->team_ctx, session->channel_ctx);
 
     (void)argv;

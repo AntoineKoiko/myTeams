@@ -42,9 +42,9 @@ static reply_t *create_process(teams_server_t *server, session_list_t *ses,
                                     char **argv)
 {
     reply_t *reply = NULL;
-    thread_node_t *node = find_thread_in_db(server->database, ses->team_ctx,
+    thread_node_t *node = find_thread_by_uuid(server->database, ses->team_ctx,
                                             ses->channel_ctx, ses->thread_ctx);
-    
+
     if (!node)
         return NULL;
     reply = new_reply(argv[0], ses->team_ctx, ses->thread_ctx,

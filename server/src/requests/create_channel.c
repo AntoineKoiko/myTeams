@@ -43,8 +43,8 @@ static channel_t *create_process(teams_server_t *server, session_list_t *ses,
                                     char **argv)
 {
     channel_t *channel = NULL;
-    team_node_t *node = find_team_in_db(server->database, ses->team_ctx);
-     
+    team_node_t *node = find_team_by_uuid(server->database, ses->team_ctx);
+
     if (!node)
         return NULL;
     channel = new_channel(ses->team_ctx, argv[0], argv[1]);

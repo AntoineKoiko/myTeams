@@ -20,9 +20,9 @@ static void get_team_info(session_list_t *session, team_t *team)
 int info_team_request(teams_server_t *server, session_list_t *session,
                         char **argv)
 {
-    team_node_t *cur_team = find_team_in_db(server->database,
+    team_node_t *cur_team = find_team_by_uuid(server->database,
                                             session->team_ctx);
-    
+
     (void)argv;
     if (!cur_team)
         return EXIT_FAILURE;

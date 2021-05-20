@@ -20,9 +20,9 @@ static void get_thread_info(session_list_t *session, thread_t *thread)
 int info_thread_request(teams_server_t *server, session_list_t *session,
                         char **argv)
 {
-    thread_node_t *cur_thread = find_thread_in_db(server->database,
+    thread_node_t *cur_thread = find_thread_by_uuid(server->database,
                 session->team_ctx, session->channel_ctx, session->thread_ctx);
-    
+
     (void)argv;
     if (!cur_thread)
         return EXIT_FAILURE;

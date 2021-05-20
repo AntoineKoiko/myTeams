@@ -25,7 +25,7 @@ static thread_node_t *get_thread_head(database_t *db, session_list_t *ses)
 {
     thread_node_t *head = NULL;
 
-    head = find_thread_in_db(db, ses->team_ctx, ses->channel_ctx,
+    head = find_thread_by_uuid(db, ses->team_ctx, ses->channel_ctx,
         ses->thread_ctx);
     return head;
 }

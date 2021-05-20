@@ -23,7 +23,7 @@ static void get_channel_list(team_node_t *cur_team, session_list_t *session)
 int list_channel_request(teams_server_t *server, session_list_t *session,
                         char **argv)
 {
-    team_node_t *cur_team = find_team_in_db(server->database,
+    team_node_t *cur_team = find_team_by_uuid(server->database,
                                             session->team_ctx);
 
     (void)argv;

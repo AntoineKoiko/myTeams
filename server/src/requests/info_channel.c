@@ -21,9 +21,9 @@ static void get_channel_info(session_list_t *session, channel_t *chan)
 int info_channel_request(teams_server_t *server, session_list_t *session,
                         char **argv)
 {
-    channel_node_t *cur_chan = find_channel_in_db(server->database,
+    channel_node_t *cur_chan = find_channel_by_uuid(server->database,
                                         session->team_ctx, session->channel_ctx);
-    
+
     (void)argv;
     if (!cur_chan)
         return EXIT_FAILURE;

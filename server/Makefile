@@ -86,10 +86,10 @@ SRC		=	$(DSETUP)/get_args.c	\
 			$(DSRC)/requests/info_user.c		\
 			$(DSRC)/requests/info_channel.c		\
 			$(DSRC)/requests/info_thread.c		\
-			$(DSRC)/requests/db_find_team.c		\
-			$(DSRC)/requests/db_find_channel.c	\
-			$(DSRC)/requests/db_find_thread.c	\
-			$(DSRC)/requests/db_find_user.c	\
+			$(DSRC)/requests/db/find_team.c		\
+			$(DSRC)/requests/db/find_channel.c	\
+			$(DSRC)/requests/db/find_thread.c	\
+			$(DSRC)/requests/db/find_user.c		\
 			$(DSRC)/requests/uuid_is_in_arr.c	\
 			\
 			$(DDATABASE)/database_constants.c	\
