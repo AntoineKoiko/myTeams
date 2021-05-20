@@ -134,6 +134,8 @@ size_t prepare_reply_buffer(unsigned char *buff, reply_t *reply, int code,
                         size_t *cursor);
 size_t prepare_user_buffer(unsigned char *buff, user_t *user, int code,
                             size_t *cursor);
+size_t prepare_uuid_buffer(unsigned char *buff, uuid_t uuid, int code, 
+                        size_t *cursor);
 
 //requests
 int login_request(teams_server_t *server, session_list_t *session,
