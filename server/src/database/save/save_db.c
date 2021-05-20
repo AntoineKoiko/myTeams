@@ -21,14 +21,17 @@ static int init_save_file(const file_types_t file_type)
 
 int save_db(const database_t *db)
 {
+    int my_ret_val = EXIT_SUCCESS;
     int my_fd = ERR_SYS;
 
     for (uint i = 0; i < NB_DATA_FILE_TYPE; ++i) {
         my_fd = init_save_file(save_files[i].type);
-        if (my_fd < 0)
+        if (my_fd < 0) {
+            my_ret_val = ERR_SYS;
             continue;
+        }
         save_files[i].save_function(my_fd, db);
         close(my_fd);
     }
-    return EXIT_SUCCESS;
+    return my_ret_val;
 }
