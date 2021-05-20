@@ -72,23 +72,24 @@ SRC		=	$(DSETUP)/get_args.c	\
 			\
 			$(DDATABASE)/database_constants.c	\
 			\
-			$(DDATABASE)/init/init_db.c				\
+			$(DDATABASE)/init_db.c				\
 			\
 			$(DDATABASE)/file_management/db_file.c	\
 			$(DDATABASE)/file_management/db_dir.c	\
 			$(DDATABASE)/file_management/header.c	\
 			\
-			$(DDATABASE)/load/load_db.c				\
-			$(DDATABASE)/load/teams/load_teams.c				\
+			$(DDATABASE)/load_db.c	\
+			$(DDATABASE)/save_db.c	\
 			\
-			$(DDATABASE)/save/save_db.c				\
-			$(DDATABASE)/save/teams/save_teams.c			\
-			$(DDATABASE)/save/teams/count_teams.c			\
-			$(DDATABASE)/save/users/save_users.c			\
-			$(DDATABASE)/save/channels/save_channels.c		\
-			$(DDATABASE)/save/threads/save_threads.c			\
-			$(DDATABASE)/save/replies/save_replies.c			\
-			$(DDATABASE)/save/messages/save_messages.c		\
+			$(DDATABASE)/teams/load_teams.c		\
+			$(DDATABASE)/teams/save_teams.c		\
+			$(DDATABASE)/teams/count_teams.c	\
+			\
+			$(DDATABASE)/users/save_users.c			\
+			$(DDATABASE)/channels/save_channels.c		\
+			$(DDATABASE)/threads/save_threads.c			\
+			$(DDATABASE)/replies/save_replies.c			\
+			$(DDATABASE)/messages/save_messages.c		\
 
 SRCS	=	$(SRC) $(DSRC)/main.c
 

@@ -11,7 +11,7 @@
 #include "database/data_channels.h"
 #include "tools.h"
 
-int save_team_users(const int fd, uuid_t *const subscribed_users)
+static inline int save_team_users(const int fd, uuid_t *const subscribed_users)
 {
     for (size_t i = 0; subscribed_users[i]; ++i) {
         if (write(fd, subscribed_users[i], sizeof(uuid_t)) == ERR_SYS)
