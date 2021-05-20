@@ -29,7 +29,7 @@ int main(int ac, char **av)
 {
     teams_server_t teams_server = {0};
 
-    if (ac > 1 && !strcmp(av[1], "--help"))
+    if (ac > 1 && !strcmp(av[1], "-help"))
         return usage(EXIT_SUCCESS);
     if (get_args(ac, av, &teams_server.server))
         return usage(EXIT_ERROR);
