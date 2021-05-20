@@ -21,9 +21,8 @@ static void get_team_list(teams_server_t *server, session_list_t *session)
 }
 
 int list_team_request(teams_server_t *server, session_list_t *session,
-                        char **argv)
+                        N_U char **argv)
 {
-    (void)argv;
     get_team_list(server, session);
     return EXIT_SUCCESS;
 }
