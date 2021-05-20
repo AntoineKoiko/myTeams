@@ -170,6 +170,15 @@ int list_thread_request(teams_server_t *server, session_list_t *session,
 int list_reply_request(teams_server_t *server, session_list_t *session,
                         char **argv);
 
+int info_team_request(teams_server_t *server, session_list_t *session,
+                        char **argv);
+int info_user_request(teams_server_t *server, session_list_t *session,
+                        char **argv);
+int info_channel_request(teams_server_t *server, session_list_t *session,
+                        char **argv);
+int info_thread_request(teams_server_t *server, session_list_t *session,
+                        char **argv);
+
 team_node_t *find_team_in_db(database_t *db, uuid_t team_uuid);
 channel_node_t *find_channel_in_db(database_t *db, uuid_t tm_uuid,
                                     uuid_t chan_uuid);
