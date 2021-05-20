@@ -7,39 +7,21 @@
 
 #include "server.h"
 
-static void prepare_team_buffer(session_list_t *session, team_t *team,
-        size_t packet_size, int code)
-{
-    size_t cursor = 0;
-
-    memcpy(session->cnt.output_buff, &packet_size, sizeof(size_t));
-    cursor += sizeof(size_t);
-    memcpy(session->cnt.output_buff+cursor, &code, sizeof(int));
-    cursor += sizeof(int);
-    memcpy(session->cnt.output_buff+cursor, team->team_uuid,
-        sizeof(uuid_t));
-    cursor += sizeof(uuid_t) + 1;
-    memcpy(session->cnt.output_buff+cursor, team->created_by,
-        sizeof(uuid_t));
-    cursor += sizeof(uuid_t) + 1;
-    memcpy(session->cnt.output_buff+cursor, team->team_name,
-            strlen(team->team_name));
-    cursor += strlen(team->team_name) + 1;
-    memcpy(session->cnt.output_buff+cursor, team->team_description,
-            strlen(team->team_description));
-}
-
 static int team_created(teams_server_t *server, session_list_t *session,
                         team_t *team)
 {
-    size_t packet_size = sizeof(int) + strlen(team->team_name) + 1 +
-        strlen(team->team_description) + 1 + ((sizeof(uuid_t) + 1) * 2);
     session_list_t *s = NULL;
+    size_t cursor = session->cnt.output_size;
+    size_t size_buf = 0;
 
-    prepare_team_buffer(session, team, packet_size, 232);
-    session->cnt.output_size++;
-    STAILQ_FOREACH(s, &server->session_head, next) {   
-        prepare_team_buffer(s, team, packet_size, 242);
+    size_buf = prepare_team_buffer(session->cnt.output_buff, team, 232,
+                                        &cursor);
+    session->cnt.output_size += size_buf;
+    STAILQ_FOREACH(s, &server->session_head, next) {
+        cursor = session->cnt.output_size;
+        size_buf = prepare_team_buffer(session->cnt.output_buff, team, 242,
+                                            &cursor);
+        session->cnt.output_size += size_buf;
     }
    // SLIST_INSERT_AFTER(server->database->teams.slh_first, team, next);
     return EXIT_SUCCESS;
@@ -48,13 +30,11 @@ static int team_created(teams_server_t *server, session_list_t *session,
 static int creation_failed(session_list_t *session)
 {
     size_t packet_size = sizeof(int);
-    size_t cursor = 0;
+    size_t cursor = session->cnt.output_size;
     int code = 412;
 
-    memcpy(session->cnt.output_buff, &packet_size, sizeof(size_t));
-    cursor += sizeof(size_t);
-    memcpy(session->cnt.output_buff+cursor, &code, sizeof(int));
-    cursor += sizeof(int);
+    session->cnt.output_size += put_protocol(session->cnt.output_buff,
+                                            packet_size, code, &cursor);
     return EXIT_SUCCESS;
 }
 
