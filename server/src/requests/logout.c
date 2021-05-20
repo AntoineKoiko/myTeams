@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2021
 ** B-NWP-400-REN-4-1-myteams-aurelien.joncour
 ** File description:
-** login
+** logout
 */
 
 #include "server.h"
@@ -17,30 +17,23 @@ static int prepare_buffer(teams_server_t *server, session_list_t *session)
         if (s->logged_in) {
             cursor = s->cnt.output_size;
             size_buf = prepare_user_buffer(s->cnt.output_buff,
-                session->user->user_data, 253, &cursor);
+                session->user->user_data, 254, &cursor);
             s->cnt.output_size += size_buf;
         }
     }
     return EXIT_SUCCESS;
 }
 
-int login_request(teams_server_t *server, session_list_t *session,
-                    char **argv)
+int logout_request(teams_server_t *server, session_list_t *session,
+                   N_U char **argv)
 {
-    user_node_t *user = NULL;
     char uuid[UUID_STR_LEN] = {0};
 
-    if (session->logged_in)
-        return EXIT_SUCCESS;
-    user = find_user_by_name(server->database, argv[0]);
-    if (user == NULL) {
-        insert_user(server->database, argv[0]);
-        user = find_user_by_name(server->database, argv[0]);
-    }
-    session->user = user;
-    session->logged_in = true;
-    prepare_buffer(server, session);
     uuid_unparse_lower(session->user->user_data->user_uuid, uuid);
-    server_event_user_logged_in(uuid);
+    prepare_buffer(server, session);
+    session->logged_in = false;
+    session->user = NULL;
+    session->user->user_data->status = NOT_CONNECTED;
+    server_event_user_logged_out(uuid);
     return EXIT_SUCCESS;
 }

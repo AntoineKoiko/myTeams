@@ -57,15 +57,46 @@ SRC		=	$(DSETUP)/get_args.c	\
 			$(DSRC)/get_high_socket.c		\
 			$(DSRC)/close_session.c			\
 			$(DSRC)/interprate_clients_req.c\
+			$(DSRC)/free_str_array.c		\
 			$(DSRC)/new/new_session.c	\
-			$(DSRC)/new/new_user.c		\
-			$(DSRC)/new/new_team.c		\
-			$(DSRC)/new/new_channel.c	\
-			$(DSRC)/new/new_thread.c	\
-			$(DSRC)/new/new_reply.c		\
-			$(DSRC)/new/new_msg.c		\
+			$(DSRC)/new/new_user.c 		\
+			$(DSRC)/new/new_team.c 		\
+			$(DSRC)/new/new_channel.c 	\
+			$(DSRC)/new/new_thread.c 	\
+			$(DSRC)/new/new_reply.c 	\
+			$(DSRC)/new/new_msg.c 		\
+			$(DSRC)/clean_user.c		\
+			$(DSRC)/requests/prepare_buffer.c	\
+			$(DSRC)/requests/prepare_buffer_uuid.c	\
+			$(DSRC)/requests/is_subscribed.c		\
+			$(DSRC)/requests/reset_uuid_t.c			\
+			$(DSRC)/requests/put_types.c	\
+			$(DSRC)/requests/put_structs.c	\
 			$(DSRC)/requests/login.c	\
+			$(DSRC)/requests/logout.c	\
+			$(DSRC)/requests/use.c	\
+			$(DSRC)/requests/create_req.c		\
+			$(DSRC)/requests/create_team.c		\
+			$(DSRC)/requests/create_channel.c	\
+			$(DSRC)/requests/create_thread.c	\
+			$(DSRC)/requests/create_reply.c		\
+			$(DSRC)/requests/list_req.c			\
+			$(DSRC)/requests/list_team.c		\
+			$(DSRC)/requests/list_channel.c		\
+			$(DSRC)/requests/list_thread.c		\
+			$(DSRC)/requests/list_reply.c		\
+			$(DSRC)/requests/list_user.c		\
+			$(DSRC)/requests/info_team.c		\
+			$(DSRC)/requests/info_user.c		\
+			$(DSRC)/requests/info_channel.c		\
+			$(DSRC)/requests/info_thread.c		\
+			$(DSRC)/requests/db/find_team.c		\
+			$(DSRC)/requests/db/find_channel.c	\
+			$(DSRC)/requests/db/find_thread.c	\
+			$(DSRC)/requests/db/find_user.c		\
+			$(DSRC)/requests/uuid_is_in_arr.c	\
 			\
+			$(DDATABASE)/insert_user.c			\
 			$(DDATABASE)/database_constants.c	\
 			\
 			$(DDATABASE)/init/init_db.c				\
