@@ -65,6 +65,9 @@ SRC		=	$(DSETUP)/get_args.c	\
 			$(DSRC)/new/new_reply.c 	\
 			$(DSRC)/new/new_msg.c 		\
 			$(DSRC)/clean_user.c		\
+			$(DSRC)/requests/prepare_buffer.c	\
+			$(DSRC)/requests/put_types.c	\
+			$(DSRC)/requests/put_structs.c	\
 			$(DSRC)/requests/login.c	\
 			$(DSRC)/requests/logout.c	\
 			$(DSRC)/requests/use.c	\

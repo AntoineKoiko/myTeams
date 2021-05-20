@@ -7,66 +7,34 @@
 
 #include "server.h"
 
-static size_t prepare_buffer_header(session_list_t *s, size_t packet_size,
-                                    int code)
-{
-    size_t cursor = 0;
-
-    memcpy(s->cnt.output_buff, &packet_size, sizeof(size_t));
-    cursor += sizeof(size_t);
-    memcpy(s->cnt.output_buff+cursor, &code, sizeof(int));
-    cursor += sizeof(int);
-    return cursor;
-}
-
-static void prepare_thread_buffer(session_list_t *s, thread_t *thread,
-                                    int code)
-{
-    size_t cursor = 0;
-    size_t packet_size = sizeof(int) + ((sizeof(uuid_t) + 1) * 3);
-
-    packet_size += strlen(thread->thread_body) + 1
-        + strlen(thread->thread_title) + 1;
-    cursor = prepare_buffer_header(s, packet_size, code);
-    memcpy(s->cnt.output_buff+cursor, thread->thread_uuid, sizeof(uuid_t));
-    cursor += sizeof(uuid_t) + 1;
-    memcpy(s->cnt.output_buff+cursor, thread->channel_uuid, sizeof(uuid_t));
-    cursor += sizeof(uuid_t) + 1;
-    memcpy(s->cnt.output_buff+cursor, thread->user_uuid, sizeof(uuid_t));
-    cursor += sizeof(uuid_t) + 1;
-    memcpy(s->cnt.output_buff+cursor, &thread->thread_timestamp,
-            sizeof(time_t));
-    cursor += sizeof(time_t) + 1;
-    memcpy(s->cnt.output_buff+cursor, thread->thread_title,
-            strlen(thread->thread_title));
-    cursor += strlen(thread->thread_title) + 1;
-    memcpy(s->cnt.output_buff+cursor, thread->thread_body,
-        strlen(thread->thread_body));
-}
-
 static int thread_created(teams_server_t *server, session_list_t *session,
                         thread_t *thread)
 {
     session_list_t *s = NULL;
+    size_t cursor = session->cnt.output_size;
+    size_t size_buf = 0;
 
-    prepare_thread_buffer(session, thread, 234);
-    session->cnt.output_size++;
-    STAILQ_FOREACH(s, &server->session_head, next) {   
-        prepare_thread_buffer(s, thread, 244);
+    size_buf = prepare_thread_buffer(session->cnt.output_buff, thread, 234,
+                                        &cursor);
+    session->cnt.output_size += size_buf;
+    STAILQ_FOREACH(s, &server->session_head, next) {
+        cursor = s->cnt.output_size;
+        size_buf = prepare_thread_buffer(s->cnt.output_buff, thread, 244,
+                                            &cursor);
+        s->cnt.output_size += size_buf;
     }
+   // SLIST_INSERT_AFTER(server->database->teams.slh_first, team, next);
     return EXIT_SUCCESS;
 }
 
 static int creation_failed(session_list_t *session)
 {
     size_t packet_size = sizeof(int);
-    size_t cursor = 0;
+    size_t cursor = session->cnt.output_size;
     int code = 414;
 
-    memcpy(session->cnt.output_buff, &packet_size, sizeof(size_t));
-    cursor += sizeof(size_t);
-    memcpy(session->cnt.output_buff+cursor, &code, sizeof(int));
-    cursor += sizeof(int);
+    session->cnt.output_size += put_protocol(session->cnt.output_buff,
+                                            packet_size, code, &cursor);
     return EXIT_SUCCESS;
 }
 

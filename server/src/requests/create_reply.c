@@ -7,47 +7,21 @@
 
 #include "server.h"
 
-static size_t prepare_buffer_header(session_list_t *s, size_t packet_size,
-                                    int code)
-{
-    size_t cursor = 0;
-
-    memcpy(s->cnt.output_buff, &packet_size, sizeof(size_t));
-    cursor += sizeof(size_t);
-    memcpy(s->cnt.output_buff+cursor, &code, sizeof(int));
-    cursor += sizeof(int);
-    return cursor;
-}
-
-static void prepare_reply_buffer(session_list_t *s, reply_t *reply,
-                                    int code)
-{
-    size_t cursor = 0;
-    size_t packet_size = sizeof(int) + ((sizeof(uuid_t) + 1) * 3);
-
-    packet_size += strlen(reply->reply_body) + 1 + sizeof(time_t) + 1;
-    cursor = prepare_buffer_header(s, packet_size, code);
-    memcpy(s->cnt.output_buff+cursor, reply->team_uuid, sizeof(uuid_t));
-    cursor += sizeof(uuid_t) + 1;
-    memcpy(s->cnt.output_buff+cursor, reply->thread_uuid, sizeof(uuid_t));
-    cursor += sizeof(uuid_t) + 1;
-    memcpy(s->cnt.output_buff+cursor, &reply->reply_timestamp, sizeof(time_t));
-    cursor += sizeof(time_t) + 1;
-    memcpy(s->cnt.output_buff+cursor, reply->reply_body,
-        strlen(reply->reply_body));
-    cursor += strlen(reply->reply_body) + 1;
-    memcpy(s->cnt.output_buff+cursor, reply->user_uuid, sizeof(uuid_t));
-}
-
 static int reply_created(teams_server_t *server, session_list_t *session,
                         reply_t *reply)
 {
     session_list_t *s = NULL;
+    size_t cursor = session->cnt.output_size;
+    size_t size_buf = 0;
 
-    prepare_reply_buffer(session, reply, 235);
-    session->cnt.output_size++;
-    STAILQ_FOREACH(s, &server->session_head, next) {   
-        prepare_reply_buffer(s, reply, 245);
+    size_buf = prepare_reply_buffer(session->cnt.output_buff, reply, 235,
+                                        &cursor);
+    session->cnt.output_size += size_buf;
+    STAILQ_FOREACH(s, &server->session_head, next) {
+        cursor = s->cnt.output_size;
+        size_buf = prepare_reply_buffer(s->cnt.output_buff, reply, 245,
+                                            &cursor);
+        s->cnt.output_size += size_buf;
     }
     return EXIT_SUCCESS;
 }
@@ -55,13 +29,11 @@ static int reply_created(teams_server_t *server, session_list_t *session,
 static int creation_failed(session_list_t *session)
 {
     size_t packet_size = sizeof(int);
-    size_t cursor = 0;
+    size_t cursor = session->cnt.output_size;
     int code = 415;
 
-    memcpy(session->cnt.output_buff, &packet_size, sizeof(size_t));
-    cursor += sizeof(size_t);
-    memcpy(session->cnt.output_buff+cursor, &code, sizeof(int));
-    cursor += sizeof(int);
+    session->cnt.output_size += put_protocol(session->cnt.output_buff,
+                                            packet_size, code, &cursor);
     return EXIT_SUCCESS;
 }
 

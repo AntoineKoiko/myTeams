@@ -106,6 +106,33 @@ user_t *new_user(const char *user_name);
 void clean_user(user_t **user);
 
 
+//buffer preparing
+size_t put_uuid(unsigned char *buff, uuid_t uuid, size_t *cursor);
+size_t put_time_t(unsigned char *buff, time_t time, size_t *cursor);
+size_t put_string(unsigned char *buff, char *str, size_t *cursor);
+size_t put_int(unsigned char *buff, int nb, size_t *cursor);
+size_t put_size_t(unsigned char *buff, size_t nb, size_t *cursor);
+
+size_t put_protocol(unsigned char *buff, size_t packet_size, int code,
+                    size_t *cursor);
+size_t put_team(unsigned char *buff, team_t *team, size_t *cursor);
+size_t put_channel(unsigned char *buff, channel_t *chan, size_t *cursor);
+size_t put_thread(unsigned char *buff, thread_t *thread, size_t *cursor);
+size_t put_reply(unsigned char *buff, reply_t *reply, size_t *cursor);
+size_t put_user(unsigned char *buff, user_t *user, size_t *cursor);
+
+size_t prepare_team_buffer(unsigned char *buff, team_t *team, int code, 
+                        size_t *cursor);
+size_t prepare_channel_buffer(unsigned char *buff, channel_t *chan, int code, 
+                        size_t *cursor);
+size_t prepare_thread_buffer(unsigned char *buff, thread_t *thread, int code, 
+                        size_t *cursor);
+size_t prepare_reply_buffer(unsigned char *buff, reply_t *reply, int code, 
+                        size_t *cursor);
+size_t prepare_user_buffer(unsigned char *buff, user_t *user, int code, 
+                            size_t *cursor);
+
+//requests
 int login_request(teams_server_t *server, session_list_t *session,
                     char **argv);
 int logout_request(teams_server_t *server, session_list_t *session,
