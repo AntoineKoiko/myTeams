@@ -9,7 +9,7 @@
 
 int is_subscribed(database_t *db, uuid_t team_uuid, uuid_t user_uuid)
 {
-    team_node_t *team = find_team_in_db(db, team_uuid);
+    team_node_t *team = find_team_by_uuid(db, team_uuid);
     user_node_t *user = find_user_by_uuid(db, user_uuid);
     uuid_t *uuid_arr = NULL;
 
