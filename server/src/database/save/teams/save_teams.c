@@ -13,36 +13,26 @@
 
 int save_team_users(const int fd, uuid_t *const subscribed_users)
 {
-    for (uint i = 0; subscribed_users[i]; ++i) {
+    for (size_t i = 0; subscribed_users[i]; ++i) {
         if (write(fd, subscribed_users[i], sizeof(uuid_t)) == ERR_SYS)
             return server_error("write", ERR_SYS);
     }
     return EXIT_SUCCESS;
 }
 
-int save_team_data(const int fd, const team_t *team_data)
+static inline int save_team_data(const int fd, const team_t *team_data)
 {
     if (!team_data)
         return ERR_NO_VAL;
-    if (write(fd, team_data, sizeof(uuid_t) * 2) == ERR_SYS)
-        return server_error("write", ERR_SYS);
-    if (write(fd, team_data->team_name, strlen(team_data->team_name) + 1)
-        == ERR_SYS)
-        return server_error("write", ERR_SYS);
-    if (write(fd,
-            team_data->team_description,
-            strlen(team_data->team_description) + 1)
-        == ERR_SYS)
+    if (write(fd, team_data, sizeof(team_t)) == ERR_SYS)
         return server_error("write", ERR_SYS);
     return EXIT_SUCCESS;
 }
 
-int save_team(const int fd, const team_node_t *team)
+static inline int save_team(const int fd, const team_node_t *team)
 {
     int my_ret_val = EXIT_SUCCESS;
 
-    if (!team)
-        return ERR_NO_VAL;
     my_ret_val = save_team_data(fd, team->team_data);
     if (my_ret_val != EXIT_SUCCESS)
         return my_ret_val;
@@ -50,11 +40,13 @@ int save_team(const int fd, const team_node_t *team)
     return my_ret_val;
 }
 
-int save_team_storage_size(const int fd, const team_node_t *team)
+static inline int save_team_user_nb(const int fd, const team_node_t *team)
 {
-    size_t my_team_size = sizeof(size_t) + team_storage_len(team);
+    size_t my_team_users = 0;
 
-    if (write(fd, &my_team_size, sizeof(size_t)) == ERR_SYS)
+    if (team->subscribed_users)
+        my_team_users = uuid_array_len(team->subscribed_users);
+    if (write(fd, &my_team_users, sizeof(size_t)) == ERR_SYS)
         return server_error("write", ERR_SYS);
     return EXIT_SUCCESS;
 }
@@ -67,7 +59,7 @@ int save_teams(
 
     SLIST_FOREACH(it, &db->teams, next)
     {
-        save_team_storage_size(fd, it);
+        save_team_user_nb(fd, it);
         save_team(fd, it);
     }
     return EXIT_SUCCESS;

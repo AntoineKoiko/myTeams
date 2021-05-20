@@ -39,6 +39,7 @@
 #include "reply_t.h"
 #include "msg_t.h"
 #include "database/database.h"
+#include "server_error.h"
 
 //--------------------------------
 // DEFINE

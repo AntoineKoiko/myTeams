@@ -68,6 +68,7 @@ SRC		=	$(DSETUP)/get_args.c	\
 			$(DSRC)/requests/login.c	\
 			\
 			$(TOOLS)/uuid.c	\
+			$(TOOLS)/read.c	\
 			\
 			$(DDATABASE)/database_constants.c	\
 			\
@@ -78,6 +79,7 @@ SRC		=	$(DSETUP)/get_args.c	\
 			$(DDATABASE)/file_management/header.c	\
 			\
 			$(DDATABASE)/load/load_db.c				\
+			$(DDATABASE)/load/teams/load_teams.c				\
 			\
 			$(DDATABASE)/save/save_db.c				\
 			$(DDATABASE)/save/teams/save_teams.c			\

@@ -15,7 +15,9 @@
 #undef _GNU_SOURCE
 
 #include <sys/queue.h>
+#include <uuid/uuid.h>
 #include <fcntl.h>
+#include "tools.h"
 
 #define STATIC_ARRAY_SIZE(x) (sizeof(x) / sizeof(x[0]))
 
