@@ -77,6 +77,7 @@ SRC		=	$(DSETUP)/get_args.c	\
 			$(DSRC)/requests/create_channel.c	\
 			$(DSRC)/requests/create_thread.c	\
 			$(DSRC)/requests/create_reply.c		\
+			$(DSRC)/requests/list_req.c			\
 			$(DSRC)/requests/list_team.c		\
 			$(DSRC)/requests/list_channel.c		\
 			$(DSRC)/requests/list_thread.c		\

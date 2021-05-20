@@ -157,7 +157,10 @@ int create_thread_request(teams_server_t *server, session_list_t *session,
 int create_reply_request(teams_server_t *server, session_list_t *session,
                         char **argv);
 
+//LIST REQUESTS:
 
+int list_request(teams_server_t *server, session_list_t *session,
+    char **argv);
 int list_team_request(teams_server_t *server, session_list_t *session,
                         char **argv);
 int list_channel_request(teams_server_t *server, session_list_t *session,
