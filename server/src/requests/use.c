@@ -26,20 +26,20 @@ static void prepare_buffer(session_list_t *session,
 static int handle_context(database_t *db, session_list_t *session, char **argv)
 {
     size_t nb_arg = 0;
-    uuid_t ctx[3];
+    uuid_t ctx[3] = {0};
 
     for (nb_arg = 0; argv[nb_arg]; nb_arg++)
-        uuid_parse(argv[nb_arg], (unsigned char *)ctx[nb_arg]);
+        uuid_parse(argv[nb_arg], ctx[nb_arg]);
     if (nb_arg >= 1 && find_team_in_db(db, ctx[0]) != NULL)
-        memcpy(session->team_ctx, ctx[0], 16);
+        uuid_copy(session->team_ctx, ctx[0]);
     else if (nb_arg >= 1)
         return 412;
     if (nb_arg >= 2 && find_channel_in_db(db, ctx[0], ctx[1]) != NULL)
-        memcpy(session->channel_ctx, ctx[1], 16);
+        uuid_copy(session->channel_ctx, ctx[1]);
     else if (nb_arg >= 2)
         return 413;
     if (nb_arg >= 3 && find_thread_in_db(db, ctx[0], ctx[1], ctx[2]) != NULL)
-        memcpy(session->thread_ctx, ctx[2], 16);
+        uuid_copy(session->thread_ctx, ctx[2]);
     else if (nb_arg >= 3)
         return 414;
     return EXIT_SUCCESS;

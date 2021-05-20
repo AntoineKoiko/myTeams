@@ -142,13 +142,18 @@ int logout_request(teams_server_t *server, session_list_t *session,
                     char **argv);
 int use_request(teams_server_t *server, session_list_t *session,
                     char **argv);
+
+//CREATE REQUESTS:
+
+int create_request(teams_server_t *server, session_list_t *session,
+    char **argv);
+
 int create_team_request(teams_server_t *server, session_list_t *session,
                     char **argv);
 int create_channel_request(teams_server_t *server, session_list_t *session,
                     char **argv);
 int create_thread_request(teams_server_t *server, session_list_t *session,
                     char **argv);
-
 int create_reply_request(teams_server_t *server, session_list_t *session,
                         char **argv);
 

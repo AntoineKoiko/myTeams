@@ -36,8 +36,8 @@ const request_fct request_array[] = {
     NULL,
     NULL,
     NULL,
-    NULL,
-    NULL,
+    &use_request,
+    &create_request,
     NULL,
     NULL,
     NULL
