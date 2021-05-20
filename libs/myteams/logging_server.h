@@ -60,7 +60,7 @@ char const *thread_body);
 ** Commands:
 ** /create "reply_body"
 **/
-int server_event_thread_new_reply(char const *thread_uuid,
+int server_event_reply_created(char const *thread_uuid,
 char const *user_uuid,
 char const *reply_body);
 
@@ -135,7 +135,7 @@ int server_event_user_logged_out(char const *user_uuid);
 ** Commands:
 ** /send "user_uuid" "message_body"
 **/
-int server_event_private_message_sent(char const *sender_uuid,
+int server_event_private_message_sended(char const *sender_uuid,
 char const *receiver_uuid,
 char const *message_body);
 

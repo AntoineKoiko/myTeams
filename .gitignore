@@ -18,5 +18,5 @@ log*.txt
 .vscode/
 .idea
 
-#my personnal folder for testing something inside the repo
+# my personnal folder to test something inside the repo
 .sandbox

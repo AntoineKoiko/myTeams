@@ -5,14 +5,14 @@
 ## Makefile of the project
 ##
 
-#constante
+# constantes
 ECHO		=	echo -e
 DEFAULT		=	"\e[0m"
 OK_C		=	"\e[32m"
 ERROR_C		=	"\e[31m"
 LIGHT_RED	=	"\e[91m"
 
-#var
+# var
 
 NAME		=	myteams_server
 TEST_NAME	=	unit_tests
@@ -20,11 +20,13 @@ TEST_NAME	=	unit_tests
 CC		=	gcc
 
 DLIB		=	../libs/myteams
-LIBSO		= 	../libs/myteams
+LIBSO		=	../libs/myteams
 DSRC		=	./src
-DSETUP		=	$(DSRC)/setup
 DINCLUDE	=	./include
+DCOMMON		=	../common
 DTESTS		=	./tests
+DSETUP		=	$(DSRC)/setup
+DDATABASE	=	$(DSRC)/database
 
 var := $(shell realpath $(PWD)/$(LIBSO)/libmyteams.so)
 
@@ -55,6 +57,7 @@ SRC		=	$(DSETUP)/get_args.c	\
 			$(DSRC)/get_high_socket.c		\
 			$(DSRC)/close_session.c			\
 			$(DSRC)/interprate_clients_req.c\
+			$(DSRC)/free_str_array.c		\
 			$(DSRC)/new/new_session.c	\
 			$(DSRC)/new/new_user.c 		\
 			$(DSRC)/new/new_team.c 		\
@@ -62,13 +65,64 @@ SRC		=	$(DSETUP)/get_args.c	\
 			$(DSRC)/new/new_thread.c 	\
 			$(DSRC)/new/new_reply.c 	\
 			$(DSRC)/new/new_msg.c 		\
+			$(DSRC)/clean_user.c		\
+			$(DSRC)/requests/prepare_buffer.c	\
+			$(DSRC)/requests/prepare_buffer_uuid.c	\
+			$(DSRC)/requests/is_subscribed.c		\
+			$(DSRC)/requests/reset_uuid_t.c			\
+			$(DSRC)/requests/put_types.c	\
+			$(DSRC)/requests/put_structs.c	\
 			$(DSRC)/requests/login.c	\
+			$(DSRC)/requests/logout.c	\
+			$(DSRC)/requests/use.c	\
+			$(DSRC)/requests/create_req.c		\
+			$(DSRC)/requests/create_team.c		\
+			$(DSRC)/requests/create_channel.c	\
+			$(DSRC)/requests/create_thread.c	\
+			$(DSRC)/requests/create_reply.c		\
+			$(DSRC)/requests/list_req.c			\
+			$(DSRC)/requests/list_team.c		\
+			$(DSRC)/requests/list_channel.c		\
+			$(DSRC)/requests/list_thread.c		\
+			$(DSRC)/requests/list_reply.c		\
+			$(DSRC)/requests/list_user.c		\
+			$(DSRC)/requests/info_team.c		\
+			$(DSRC)/requests/info_user.c		\
+			$(DSRC)/requests/info_channel.c		\
+			$(DSRC)/requests/info_thread.c		\
+			$(DSRC)/requests/db/find_team.c		\
+			$(DSRC)/requests/db/find_channel.c	\
+			$(DSRC)/requests/db/find_thread.c	\
+			$(DSRC)/requests/db/find_user.c		\
+			$(DSRC)/requests/uuid_is_in_arr.c	\
+			\
+			$(DDATABASE)/insert_user.c			\
+			$(DDATABASE)/database_constants.c	\
+			\
+			$(DDATABASE)/init/init_db.c				\
+			\
+			$(DDATABASE)/file_management/db_file.c	\
+			$(DDATABASE)/file_management/db_dir.c	\
+			$(DDATABASE)/file_management/header.c	\
+			\
+			$(DDATABASE)/load/load_db.c				\
+			\
+			$(DDATABASE)/save/save_db.c				\
+			$(DDATABASE)/save/save_teams.c			\
+			$(DDATABASE)/save/save_users.c			\
+			$(DDATABASE)/save/save_channels.c		\
+			$(DDATABASE)/save/save_threads.c			\
+			$(DDATABASE)/save/save_replies.c			\
+			$(DDATABASE)/save/save_messages.c		\
 
 SRCS	=	$(SRC) $(DSRC)/main.c
 
 OBJ		=	$(SRCS:.c=.o)
 
-CFLAGS	=	-W -Wall -Wextra -Werror -pedantic -I $(DINCLUDE) -I $(DLIB)
+INCLUDE	=	-I $(DINCLUDE) -I $(DLIB) -I $(DCOMMON)/include
+
+CFLAGS	=	-W -Wall -Wextra -Werror -pedantic $(INCLUDE)
+
 LDFLAGS	=	-luuid -L $(DLIB) -lmyteams -Wl,-rpath=$(PWD)/$(LIBSO)
 
 all: $(NAME)
@@ -96,7 +150,7 @@ debug: CFLAGS += -g3 -ggdb
 debug: re
 
 # tests_run:
-# 	$(CC) $(TEST_SRC) $(SRC) -o $(TEST_NAME) -lcriterion --coverage -I $(DINCLUDE) $(LDFLAGS)
-# 	./$(TEST_NAME)
+#	$(CC) $(TEST_SRC) $(SRC) -o $(TEST_NAME) -lcriterion --coverage -I $(DINCLUDE) $(LDFLAGS)
+#	./$(TEST_NAME)
 
 .PHONY:	all $(NAME) clean fclean re tests_run debug

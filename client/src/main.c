@@ -7,6 +7,13 @@
 
 #include "client.h"
 
+static void init_var(teams_client_t *teams_client)
+{
+    STAILQ_INIT(&teams_client->command_head);
+    STAILQ_INIT(&teams_client->arg_stack);
+    teams_client->should_read = true;
+}
+
 int main(int ac, char **av)
 {
     int ret = EXIT_SUCCESS;
@@ -20,9 +27,7 @@ int main(int ac, char **av)
         return EXIT_ERROR;
     get_or_set_client(&teams_client);
     handle_signal();
-    STAILQ_INIT(&teams_client.command_head);
-    STAILQ_INIT(&teams_client.arg_stack);
-    teams_client.should_read = true;
+    init_var(&teams_client);
     ret = client_my_teams(&teams_client);
     destroy_client(&teams_client);
     return (ret == EXIT_ERROR ? EXIT_ERROR : EXIT_SUCCESS);

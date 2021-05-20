@@ -9,9 +9,15 @@
 
 static int read_from_server(connection_t *client)
 {
-    if (read(client->socket, &client->input_buff, INPUT_BUFF_SIZE) <= 0) {
+    ssize_t nread = 0;
+
+    nread = read(client->socket,
+        (&client->input_buff)+client->input_size,
+        INPUT_BUFF_SIZE - client->input_size);
+    if (nread <= 0) {
         return EXIT_FAILURE;
     }
+    client->input_size += nread;
     return EXIT_SUCCESS;
 }
 

@@ -9,7 +9,7 @@
 
 bool packet_is_empty(unsigned char buffer[1024])
 {
-    for (size_t i = 0; i < 1024; i++) {
+    for (size_t i = 0; i < INPUT_BUFF_SIZE; i++) {
         if (buffer[i] != 0) {
             return false;
         }

@@ -8,13 +8,15 @@
 #ifndef TEAM_T_H_
 #define TEAM_T_H_
 
-#include "server.h"
+#include <uuid/uuid.h>
+#include "max_size.h"
 
-typedef struct {
+typedef struct
+{
     uuid_t team_uuid;
+    uuid_t created_by;
     char team_name[MAX_NAME_LENGTH];
     char team_description[MAX_DESCRIPTION_LENGTH];
-    uuid_t created_by;
 } team_t;
 
 #endif /* !TEAM_T_H_ */
