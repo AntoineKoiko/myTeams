@@ -19,6 +19,8 @@ typedef struct msg_node_s
     SLIST_ENTRY(msg_node_s) next;
 } msg_node_t;
 
+msg_t *new_msg(uuid_t sender_uuid, uuid_t receiver_uuid, char *body);
+
 int save_messages(int fd, const database_t *db, size_t elements_nb);
 
 #endif // SERVER_DATA_MESSAGES_H

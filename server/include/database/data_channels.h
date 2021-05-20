@@ -20,6 +20,8 @@ typedef struct channel_node_s
     SLIST_ENTRY(channel_node_s) next;
 } channel_node_t;
 
+channel_t *new_channel(uuid_t team_uuid, char *name, char *desc);
+
 int save_channels(int fd, const database_t *db, size_t elements_nb);
 
 #endif // SERVER_DATA_CHANNELS_H

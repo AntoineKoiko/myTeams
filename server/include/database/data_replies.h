@@ -19,6 +19,9 @@ typedef struct reply_node_s
     SLIST_ENTRY(reply_node_s) next;
 } reply_node_t;
 
+reply_t *new_reply(
+    char *body, uuid_t team_uuid, uuid_t thread_uuid, uuid_t user_uuid);
+
 int save_replies(int fd, const database_t *db, size_t elements_nb);
 
 #endif // SERVER_DATA_REPLIES_H

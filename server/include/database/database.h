@@ -19,7 +19,7 @@
 #include <fcntl.h>
 #include "tools.h"
 
-#define STATIC_ARRAY_SIZE(x) (sizeof(x) / sizeof(x[0]))
+#include "attributes.h"
 
 typedef struct database_s
 {
@@ -27,10 +27,16 @@ typedef struct database_s
     SLIST_HEAD(user_head_s, user_node_s) users;
 } database_t;
 
-int init_db(database_t **db);
+NON_NULL() int init_db(database_t **db);
 
-int load_db(database_t *db);
+NON_NULL() int load_db(database_t *db);
 
-int save_db(const database_t *db);
+NON_NULL() int save_db(const database_t *db);
+
+NON_NULL() void delete_db(database_t *db);
+
+#ifdef DEBUG
+NON_NULL() void dump_db(const database_t *db);
+#endif /* DEBUG */
 
 #endif // MYTEAMS_DATABASE_H

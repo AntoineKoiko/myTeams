@@ -65,8 +65,6 @@ void manage_fd_sets(teams_server_t *server);
 int create_server(connection_t *server);
 void close_server(teams_server_t *server);
 
-// void save_db_into_files(database_t *database);
-
 void destroy_server(teams_server_t *server);
 
 teams_server_t *get_or_set_server(teams_server_t *server);
@@ -88,21 +86,6 @@ bool packet_is_empty(unsigned char buffer[1024]);
 int get_high_socket(teams_server_t *server);
 
 int interprate_clients_request(teams_server_t *server);
-
-// object constructor
-
-channel_t *new_channel(uuid_t team_uuid, char *name, char *desc);
-
-msg_t *new_msg(uuid_t sender_uuid, uuid_t receiver_uuid, char *body);
-
-reply_t *new_reply(
-    char *body, uuid_t team_uuid, uuid_t thread_uuid, uuid_t user_uuid);
-
-team_t *new_team(const char *name, const char *desc, uuid_t created_by);
-
-thread_t *new_thread(uuid_t chan, uuid_t user, char *title, char *body);
-
-user_t *new_user(const char *user_name);
 
 int login_request(
     teams_server_t *server, session_list_t *session, char **argv);

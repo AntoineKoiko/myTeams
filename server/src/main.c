@@ -6,8 +6,9 @@
 */
 
 #include "server.h"
+#include "database/data_teams.h"
 
-int launch_server(teams_server_t *teams_server)
+static int launch_server(teams_server_t *teams_server)
 {
     int ret = EXIT_SUCCESS;
 
@@ -21,12 +22,12 @@ int launch_server(teams_server_t *teams_server)
     handle_signal();
     STAILQ_INIT(&teams_server->session_head);
     ret = server_my_teams(teams_server);
-    close_server(teams_server);
     return ret;
 }
 
 int main(int ac, char **av)
 {
+    int ret = EXIT_SUCCESS;
     teams_server_t teams_server = {0};
 
     if (ac > 1 && !strcmp(av[1], "--help"))
@@ -35,5 +36,7 @@ int main(int ac, char **av)
         return usage(EXIT_ERROR);
     if (create_server(&teams_server.server) == EXIT_ERROR)
         return EXIT_ERROR;
-    return launch_server(&teams_server);
+    ret = launch_server(&teams_server);
+    close_server(&teams_server);
+    return ret;
 }

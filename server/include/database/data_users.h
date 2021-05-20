@@ -35,6 +35,8 @@ typedef struct user_node_s
     SLIST_ENTRY(user_node_s) next;
 } user_node_t;
 
+user_t *new_user(const char *user_name);
+
 /**
  * @brief Save users in file
  * @param fd The file to save the data in

@@ -69,6 +69,7 @@ SRC		=	$(DSETUP)/get_args.c	\
 			\
 			$(TOOLS)/uuid.c	\
 			$(TOOLS)/read.c	\
+			$(TOOLS)/write.c	\
 			\
 			$(DDATABASE)/database_constants.c	\
 			\
@@ -78,14 +79,19 @@ SRC		=	$(DSETUP)/get_args.c	\
 			$(DDATABASE)/file_management/db_dir.c	\
 			$(DDATABASE)/file_management/header.c	\
 			\
-			$(DDATABASE)/load_db.c	\
-			$(DDATABASE)/save_db.c	\
+			$(DDATABASE)/load_db.c		\
+			$(DDATABASE)/save_db.c		\
+			$(DDATABASE)/delete_db.c	\
+			$(DDATABASE)/dump_db.c		\
 			\
 			$(DDATABASE)/teams/load_teams.c		\
 			$(DDATABASE)/teams/save_teams.c		\
 			$(DDATABASE)/teams/count_teams.c	\
+			$(DDATABASE)/teams/insert_teams.c	\
+			$(DDATABASE)/teams/delete_teams.c	\
+			$(DDATABASE)/teams/dump_teams.c	\
 			\
-			$(DDATABASE)/users/save_users.c			\
+			$(DDATABASE)/users/save_users.c				\
 			$(DDATABASE)/channels/save_channels.c		\
 			$(DDATABASE)/threads/save_threads.c			\
 			$(DDATABASE)/replies/save_replies.c			\
@@ -122,7 +128,7 @@ fclean:	clean
 
 re: fclean all
 
-debug: CFLAGS += -g3 -ggdb
+debug: CFLAGS += -g3 -ggdb -D DEBUG
 debug: re
 
 # tests_run:

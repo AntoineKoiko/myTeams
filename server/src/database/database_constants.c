@@ -27,10 +27,70 @@ const char *const ext_messages = ".messages";
 const char *const data_dirname = ".database";
 const char *const data_filename = "database";
 
-const save_file_t data_files[NB_DATA_FILE_TYPE] = {
-    {TEAMS, ext_teams, team_count_nodes, NULL, save_teams},
-    {USERS, ext_users, NULL, NULL, save_users},
-    {CHANNELS, ext_channels, NULL, NULL, save_channels},
-    {THREADS, ext_threads, NULL, NULL, save_threads},
-    {REPLIES, ext_replies, NULL, NULL, save_replies},
-    {MESSAGES, ext_messages, NULL, NULL, save_messages}};
+const save_file_t data_files[NB_DATA_FILE_TYPE] = {{TEAMS,
+                                                       ext_teams,
+                                                       team_count_nodes,
+                                                       load_teams,
+                                                       save_teams,
+                                                       delete_teams
+#ifdef DEBUG
+                                                       ,
+                                                       dump_teams
+#endif /* DEBUG */
+                                                   },
+    {USERS,
+        ext_users,
+        NULL,
+        NULL,
+        save_users,
+        NULL
+#ifdef DEBUG
+        ,
+        NULL
+#endif /* DEBUG */
+    },
+    {CHANNELS,
+        ext_channels,
+        NULL,
+        NULL,
+        save_channels,
+        NULL
+
+#ifdef DEBUG
+        ,
+        NULL
+#endif /* DEBUG */
+    },
+    {THREADS,
+        ext_threads,
+        NULL,
+        NULL,
+        save_threads,
+        NULL
+#ifdef DEBUG
+        ,
+        NULL
+#endif /* DEBUG */
+    },
+    {REPLIES,
+        ext_replies,
+        NULL,
+        NULL,
+        save_replies,
+        NULL
+#ifdef DEBUG
+        ,
+        NULL
+#endif /* DEBUG */
+    },
+    {MESSAGES,
+        ext_messages,
+        NULL,
+        NULL,
+        save_messages,
+        NULL
+#ifdef DEBUG
+        ,
+        NULL
+#endif /* DEBUG */
+    }};

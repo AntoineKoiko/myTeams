@@ -33,7 +33,7 @@ static inline bool check_header(const int fd)
     struct stat my_file_stats = {0};
 
     fstat(fd, &my_file_stats);
-    if ((unsigned long) my_file_stats.st_size <= sizeof(file_header_t))
+    if ((unsigned long) my_file_stats.st_size < sizeof(file_header_t))
         return false;
     return true;
 }
@@ -67,8 +67,9 @@ NON_NULL(1) int load_db(database_t *db)
     size_t my_elements_nb = 0;
 
     for (uint i = 0; i < NB_DATA_FILE_TYPE; ++i) {
-        if (!get_save_file(&my_fd, data_files[i].type))
+        if (!get_save_file(&my_fd, data_files[i].type)) {
             continue;
+        }
         if (get_header(my_fd, data_files[i].type, &my_elements_nb)) {
             exec_load_func(i, my_fd, db, my_elements_nb);
         }
