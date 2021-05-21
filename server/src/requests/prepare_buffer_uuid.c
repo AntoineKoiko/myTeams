@@ -7,7 +7,7 @@
 
 #include "server.h"
 
-size_t prepare_uuid_buffer(unsigned char *buff, uuid_t uuid, int code, 
+size_t prepare_uuid_buffer(unsigned char *buff, uuid_t uuid, int code,
                         size_t *cursor)
 {
     size_t written_size = (*cursor);
