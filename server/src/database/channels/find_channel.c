@@ -7,6 +7,26 @@
 
 #include "server.h"
 
+channel_node_t *find_channel_by_team_thread(
+    const database_t *db, const uuid_t team, const uuid_t thread)
+{
+    channel_node_t *my_channel = NULL;
+    thread_node_t *my_thread = NULL;
+    team_node_t *my_team = find_team_by_uuid(db, team);
+
+    if (!my_team)
+        return NULL;
+    SLIST_FOREACH(my_channel, &my_team->channels, next)
+    {
+        SLIST_FOREACH(my_thread, &my_channel->threads, next)
+        {
+            if (uuid_compare(thread, my_thread->thread_data->thread_uuid) == 0)
+                return my_channel;
+        }
+    }
+    return NULL;
+}
+
 channel_node_t *find_channel_by_uuid(
     const database_t *db, const uuid_t tm_uuid, const uuid_t chan_uuid)
 {

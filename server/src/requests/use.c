@@ -21,7 +21,7 @@ static int handle_context(database_t *db, session_list_t *session, char **argv,
         uuid_copy(session->channel_ctx, ctx[1]);
     else if (nb_arg >= 2)
         return 2;
-    if (nb_arg >= 3 && find_thread_by_uuid(db, ctx[0], ctx[1], ctx[2]) != NULL)
+    if (nb_arg >= 3 && find_thread_by_team_chan(db, ctx[0], ctx[1], ctx[2]) != NULL)
         uuid_copy(session->thread_ctx, ctx[2]);
     else if (nb_arg >= 3)
         return 3;

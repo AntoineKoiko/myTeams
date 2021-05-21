@@ -18,16 +18,6 @@
 
 typedef struct database_s database_t;
 
-typedef struct header_file_users_s
-{
-    size_t size;
-    unsigned int nb_subscribed_teams; // TODO remove it ?
-    // knowing that it already is in the size
-} header_file_users_t;
-
-// const size_t file_user_size = sizeof(header_file_users_t)
-//     + sizeof(header_file_users_t) + (sizeof(uuid_t) * nb_subscribed_teams);
-
 typedef struct user_node_s
 {
     user_t *user_data;

@@ -22,18 +22,18 @@ static reply_node_t *new_reply_node(const uuid_t team_uuid,
 }
 
 NON_NULL(1)
-int insert_reply(database_t *db, const uuid_t team_uuid,
-    const uuid_t thread_uuid, const uuid_t user_uuid,
-    const char body[MAX_BODY_LENGTH])
+int insert_reply(database_t *db, const uuid_t team, const uuid_t thread,
+    const uuid_t user, const char body[MAX_BODY_LENGTH])
 {
-    reply_node_t *my_reply_node =
-        new_reply_node(team_uuid, thread_uuid, user_uuid, body);
+    reply_node_t *my_reply_node = NULL;
+    thread_node_t *my_thread = NULL;
 
+    my_thread = find_thread_by_team(db, team, thread);
+    if (!my_thread)
+        return ERR_NO_VAL;
+    my_reply_node = new_reply_node(team, thread, user, body);
     if (!my_reply_node)
         return ERR_NO_VAL;
-    SLIST_INSERT_HEAD(
-        &db->teams.slh_first->channels.slh_first->threads.slh_first->replies,
-        my_reply_node,
-        next);
+    SLIST_INSERT_HEAD(&my_thread->replies, my_reply_node, next);
     return EXIT_SUCCESS;
 }

@@ -35,3 +35,20 @@ team_node_t *find_team_by_name(
     }
     return NULL;
 }
+
+team_node_t *find_team_by_channel(const database_t *db, const uuid_t channel)
+{
+    team_node_t *my_team = NULL;
+    channel_node_t *my_channel = NULL;
+
+    SLIST_FOREACH(my_team, &db->teams, next)
+    {
+        SLIST_FOREACH(my_channel, &my_team->channels, next)
+        {
+            if (uuid_compare(my_channel->channel_data->channel_uuid, channel)
+                == 0)
+                return my_team;
+        }
+    }
+    return NULL;
+}

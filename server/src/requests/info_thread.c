@@ -20,7 +20,7 @@ static void get_thread_info(session_list_t *session, thread_t *thread)
 int info_thread_request(teams_server_t *server, session_list_t *session,
                         N_U char **argv)
 {
-    thread_node_t *cur_thread = find_thread_by_uuid(server->database,
+    thread_node_t *cur_thread = find_thread_by_team_chan(server->database,
                 session->team_ctx, session->channel_ctx, session->thread_ctx);
 
     if (!cur_thread)

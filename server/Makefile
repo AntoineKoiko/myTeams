@@ -47,55 +47,53 @@ LIB		=	myteams
 
 TEST_SRC	=
 
-SRC		=	$(DSETUP)/get_args.c	\
-			$(DSETUP)/signal_handler.c	\
-			$(DSETUP)/manage_fd_sets.c	\
-			$(DSRC)/constant.c		\
-			$(DSRC)/usage.c			\
-			$(DSRC)/create_server.c	\
-			$(DSRC)/get_or_set_server.c \
-			$(DSRC)/close_server.c		\
-			$(DSRC)/destroy_server.c	\
-			$(DSRC)/server_my_teams.c	\
-			$(DSRC)/check_select_error.c	\
-			$(DSRC)/packet_is_empty.c		\
-			$(DSRC)/check_fds.c				\
-			$(DSRC)/connect_client.c		\
-			$(DSRC)/get_high_socket.c		\
-			$(DSRC)/close_session.c			\
-			$(DSRC)/interprate_clients_req.c\
-			$(DSRC)/free_str_array.c		\
-			$(DSRC)/new/new_session.c	\
-			$(DSRC)/clean_user.c		\
-			$(DSRC)/requests/prepare_buffer.c	\
+SRC		=	$(DSETUP)/get_args.c					\
+			$(DSETUP)/signal_handler.c				\
+			$(DSETUP)/manage_fd_sets.c				\
+			\
+			$(DSRC)/constant.c						\
+			$(DSRC)/usage.c							\
+			$(DSRC)/create_server.c					\
+			$(DSRC)/get_or_set_server.c 			\
+			$(DSRC)/close_server.c					\
+			$(DSRC)/destroy_server.c				\
+			$(DSRC)/server_my_teams.c				\
+			$(DSRC)/check_select_error.c			\
+			$(DSRC)/packet_is_empty.c				\
+			$(DSRC)/check_fds.c						\
+			$(DSRC)/connect_client.c				\
+			$(DSRC)/get_high_socket.c				\
+			$(DSRC)/close_session.c					\
+			$(DSRC)/interprate_clients_req.c		\
+			$(DSRC)/free_str_array.c				\
+			$(DSRC)/new/new_session.c				\
+			$(DSRC)/clean_user.c					\
+			\
+			$(DSRC)/requests/prepare_buffer.c		\
 			$(DSRC)/requests/prepare_buffer_uuid.c	\
 			$(DSRC)/requests/is_subscribed.c		\
 			$(DSRC)/requests/reset_uuid_t.c			\
-			$(DSRC)/requests/put_types.c	\
-			$(DSRC)/requests/put_structs.c	\
-			$(DSRC)/requests/login.c	\
-			$(DSRC)/requests/logout.c	\
-			$(DSRC)/requests/use.c	\
-			$(DSRC)/requests/create_req.c		\
-			$(DSRC)/requests/create_team.c		\
-			$(DSRC)/requests/create_channel.c	\
-			$(DSRC)/requests/create_thread.c	\
-			$(DSRC)/requests/create_reply.c		\
-			$(DSRC)/requests/list_req.c			\
-			$(DSRC)/requests/list_team.c		\
-			$(DSRC)/requests/list_channel.c		\
-			$(DSRC)/requests/list_thread.c		\
-			$(DSRC)/requests/list_reply.c		\
-			$(DSRC)/requests/list_user.c		\
-			$(DSRC)/requests/info_team.c		\
-			$(DSRC)/requests/info_user.c		\
-			$(DSRC)/requests/info_channel.c		\
-			$(DSRC)/requests/info_thread.c		\
-			$(DSRC)/requests/db/find_team.c		\
-			$(DSRC)/requests/db/find_channel.c	\
-			$(DSRC)/requests/db/find_thread.c	\
-			$(DSRC)/requests/db/find_user.c		\
-			$(DSRC)/requests/uuid_is_in_arr.c	\
+			$(DSRC)/requests/put_types.c			\
+			$(DSRC)/requests/put_structs.c			\
+			$(DSRC)/requests/login.c				\
+			$(DSRC)/requests/logout.c				\
+			$(DSRC)/requests/use.c					\
+			$(DSRC)/requests/create_req.c			\
+			$(DSRC)/requests/create_team.c			\
+			$(DSRC)/requests/create_channel.c		\
+			$(DSRC)/requests/create_thread.c		\
+			$(DSRC)/requests/create_reply.c			\
+			$(DSRC)/requests/list_req.c				\
+			$(DSRC)/requests/list_team.c			\
+			$(DSRC)/requests/list_channel.c			\
+			$(DSRC)/requests/list_thread.c			\
+			$(DSRC)/requests/list_reply.c			\
+			$(DSRC)/requests/list_user.c			\
+			$(DSRC)/requests/info_team.c			\
+			$(DSRC)/requests/info_user.c			\
+			$(DSRC)/requests/info_channel.c			\
+			$(DSRC)/requests/info_thread.c			\
+			$(DSRC)/requests/uuid_is_in_arr.c		\
 			\
 			$(TOOLS)/uuid.c		\
 			$(TOOLS)/read.c		\
@@ -121,27 +119,30 @@ SRC		=	$(DSETUP)/get_args.c	\
 			$(DDB_TEAMS)/delete_teams.c		\
 			$(DDB_TEAMS)/dump_teams.c		\
             $(DDB_TEAMS)/new_team.c 		\
+            $(DDB_TEAMS)/find_team.c 		\
 			\
-			$(DDB_CHANNELS)/insert_channels.c		\
-            $(DDB_CHANNELS)/new_channel.c 	\
+			$(DDB_CHANNELS)/save_channels.c		\
+			$(DDB_CHANNELS)/insert_channels.c	\
+            $(DDB_CHANNELS)/new_channel.c 		\
+            $(DDB_CHANNELS)/find_channel.c 		\
 			\
+			$(DDB_THREADS)/save_threads.c		\
 			$(DDB_THREADS)/insert_threads.c		\
-            $(DDB_THREADS)/new_thread.c 	\
+            $(DDB_THREADS)/new_thread.c 		\
+            $(DDB_THREADS)/find_thread.c 		\
 			\
+			$(DDB_REPLIES)/save_replies.c		\
 			$(DDB_REPLIES)/insert_replies.c		\
-            $(DDB_REPLIES)/new_reply.c 	\
+            $(DDB_REPLIES)/new_reply.c 			\
 			\
+			$(DDB_USERS)/save_users.c		\
 			$(DDB_USERS)/insert_users.c		\
 			$(DDB_USERS)/new_user.c 		\
+			$(DDB_USERS)/find_user.c 		\
 			\
-			$(DDB_MESSAGES)/insert_msgs.c		\
+			$(DDB_MESSAGES)/save_msgs.c		\
+			$(DDB_MESSAGES)/insert_msgs.c	\
             $(DDB_MESSAGES)/new_msg.c 		\
-			\
-			$(DDATABASE)/users/save_users.c				\
-			$(DDATABASE)/channels/save_channels.c		\
-			$(DDATABASE)/threads/save_threads.c			\
-			$(DDATABASE)/replies/save_replies.c			\
-			$(DDATABASE)/msgs/save_msgs.c		\
 
 SRCS	=	$(SRC) $(DSRC)/main.c
 

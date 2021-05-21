@@ -21,8 +21,10 @@ typedef struct thread_node_s
     SLIST_ENTRY(thread_node_s) next;
 } thread_node_t;
 
-thread_node_t *find_thread_by_uuid(const database_t *db, const uuid_t tm_uuid,
-    const uuid_t chan_uuid, const uuid_t thread_uuid);
+thread_node_t *find_thread_by_team(
+    const database_t *db, const uuid_t team, const uuid_t thread);
+thread_node_t *find_thread_by_team_chan(const database_t *db,
+    const uuid_t tm_uuid, const uuid_t chan_uuid, const uuid_t thread_uuid);
 thread_node_t *find_thread_by_name(const database_t *db, const uuid_t tm_uuid,
     const uuid_t chan_uuid, const char name[MAX_NAME_LENGTH]);
 

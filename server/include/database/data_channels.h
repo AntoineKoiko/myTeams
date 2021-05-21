@@ -21,6 +21,8 @@ typedef struct channel_node_s
     SLIST_ENTRY(channel_node_s) next;
 } channel_node_t;
 
+channel_node_t *find_channel_by_team_thread(
+    const database_t *db, const uuid_t team, const uuid_t thread);
 channel_node_t *find_channel_by_uuid(
     const database_t *db, const uuid_t tm_uuid, const uuid_t chan_uuid);
 channel_node_t *find_channel_by_name(const database_t *db,

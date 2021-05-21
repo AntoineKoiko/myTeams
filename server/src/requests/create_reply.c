@@ -45,7 +45,7 @@ static reply_t *create_process(teams_server_t *server, session_list_t *ses,
                                     char **argv)
 {
     reply_t *reply = NULL;
-    thread_node_t *node = find_thread_by_uuid(
+    thread_node_t *node = find_thread_by_team_chan(
         server->database, ses->team_ctx, ses->channel_ctx, ses->thread_ctx);
 
     if (!node)
