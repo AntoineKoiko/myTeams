@@ -33,11 +33,11 @@ user_node_t *find_user_by_name(
 user_t *new_user(const char name[MAX_NAME_LENGTH]);
 
 /**
- * @brief Save users in file
- * @param fd The file to save the data in
- * @param db The data to save
- * @return Error code
- */
+** @brief Save users in file
+** @param fd The file to save the data in
+** @param db The data to save
+** @return Error code
+**/
 int save_users(int fd, const database_t *db, size_t elements_nb);
 
 NON_NULL(1)

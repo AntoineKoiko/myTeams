@@ -43,12 +43,13 @@ team_node_t *find_team_by_name(
 team_node_t *find_team_by_channel(const database_t *db, const uuid_t channel);
 
 /**
- * @brief Save teams in file
- * @param fd The file to save the data in
- * @param db The data to save, should not be NULL
- * @return Error code
- */
-NON_NULL(2) int save_teams(int fd, const database_t *db, size_t elements_nb);
+** @brief Save teams in file
+** @param fd The file to save the data in
+** @param db The data to save, should not be NULL
+** @return Error code
+**/
+NON_NULL(2)
+int save_teams(int fd, const database_t *db, size_t elements_nb);
 
 NON_NULL(2)
 int load_teams(int fd, database_t *db, size_t elements_nb);

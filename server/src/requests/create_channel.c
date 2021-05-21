@@ -26,7 +26,7 @@ static int channel_created(teams_server_t *server, session_list_t *session,
             s->cnt.output_size += size_buf;
         }
     }
-   // SLIST_INSERT_AFTER(server->database->teams.slh_first, team, next);
+    //SLIST_INSERT_AFTER(server->database->teams.slh_first, team, next);
     return EXIT_SUCCESS;
 }
 

@@ -16,10 +16,10 @@
 
 #ifndef NON_NULL
     /**
-     * @brief Tell compiler that certain arguments should not be NULL, if
-     * so, it generates a warning
-     * @param ... The positions of the arguments that should not be null
-     */
+    ** @brief Tell compiler that certain arguments should not be NULL, if
+    ** so, it generates a warning
+    ** @param ... The positions of the arguments that should not be null
+    **/
     #define NON_NULL(...) __attribute__((nonnull(__VA_ARGS__)))
 #endif
 

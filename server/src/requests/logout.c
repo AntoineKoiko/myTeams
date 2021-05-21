@@ -25,7 +25,7 @@ static int prepare_buffer(teams_server_t *server, session_list_t *session)
 }
 
 int logout_request(teams_server_t *server, session_list_t *session,
-                   N_U char **argv)
+                    N_U char **argv)
 {
     char uuid[UUID_STR_LEN] = {0};
 

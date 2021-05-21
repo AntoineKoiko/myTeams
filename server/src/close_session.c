@@ -14,7 +14,9 @@ int close_session(teams_server_t *server, session_list_t *session)
         close(session->cnt.socket);
     }
     STAILQ_REMOVE(&server->session_head, session, session_list_s, next);
-    session->user->user_data->status = NOT_CONNECTED;
+    if (session->user && session->user->user_data) {
+        session->user->user_data->status = NOT_CONNECTED;
+    }
     free(session);
     return EXIT_SUCCESS;
 }

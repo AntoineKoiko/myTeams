@@ -21,10 +21,10 @@ static inline int get_db_filepath(
             return server_error("asprintf", ERR_LIB);
         }
     } else if (asprintf(filename,
-                   "%s/%s%s",
-                   dirpath,
-                   data_filename,
-                   data_files[type].extension)
+                    "%s/%s%s",
+                    dirpath,
+                    data_filename,
+                    data_files[type].extension)
             == ERR_LIB
         || !*filename) {
         return server_error("asprintf", ERR_LIB);
