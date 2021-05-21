@@ -126,6 +126,7 @@ size_t put_channel(unsigned char *buff, channel_t *chan, size_t *cursor);
 size_t put_thread(unsigned char *buff, thread_t *thread, size_t *cursor);
 size_t put_reply(unsigned char *buff, reply_t *reply, size_t *cursor);
 size_t put_user(unsigned char *buff, user_t *user, size_t *cursor);
+size_t put_msg(unsigned char *buff, msg_t *msg, size_t *cursor);
 
 size_t prepare_team_buffer(unsigned char *buff, team_t *team, int code,
                         size_t *cursor);
@@ -138,6 +139,8 @@ size_t prepare_reply_buffer(unsigned char *buff, reply_t *reply, int code,
 size_t prepare_user_buffer(unsigned char *buff, user_t *user, int code,
                             size_t *cursor);
 size_t prepare_uuid_buffer(unsigned char *buff, uuid_t uuid, int code,
+                        size_t *cursor);
+size_t prepare_msg_buffer(unsigned char *buff, msg_t *msg, int code,
                         size_t *cursor);
 
 //requests
