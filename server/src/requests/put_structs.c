@@ -7,8 +7,8 @@
 
 #include "server.h"
 
-size_t put_protocol(unsigned char *buff, size_t packet_size, int code,
-                    size_t *cursor)
+size_t put_protocol(
+    unsigned char *buff, size_t packet_size, int code, size_t *cursor)
 {
     size_t written_size = (*cursor);
 
@@ -23,7 +23,7 @@ size_t put_team(unsigned char *buff, team_t *team, size_t *cursor)
 
     put_uuid(buff, team->team_uuid, cursor);
     (*cursor)++;
-    put_uuid(buff, team->created_by, cursor);
+    put_uuid(buff, team->creator, cursor);
     (*cursor)++;
     put_string(buff, team->team_name, cursor);
     (*cursor)++;
@@ -58,9 +58,11 @@ size_t put_thread(unsigned char *buff, thread_t *thread, size_t *cursor)
     put_uuid(buff, thread->user_uuid, cursor);
     (*cursor)++;
     put_time_t(buff, thread->thread_timestamp, cursor);
-    (*cursor)++;;
+    (*cursor)++;
+    ;
     put_string(buff, thread->thread_title, cursor);
-    (*cursor)++;;
+    (*cursor)++;
+    ;
     put_string(buff, thread->thread_body, cursor);
     (*cursor)++;
     return ((*cursor) - written_size);

@@ -52,7 +52,7 @@ int create_team_request(teams_server_t *server, session_list_t *session,
     if (team) {
         team_created(server, session, team);
         uuid_unparse_lower(team->team_uuid, tm_uuid);
-        uuid_unparse_lower(team->created_by, creator_uuid);
+        uuid_unparse_lower(team->creator, creator_uuid);
         server_event_team_created(tm_uuid, team->team_name, creator_uuid);
     } else
         creation_failed(session);
