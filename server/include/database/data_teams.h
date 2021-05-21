@@ -38,11 +38,11 @@ int insert_team(database_t *db, const char name[MAX_NAME_LENGTH],
     const char description[MAX_DESCRIPTION_LENGTH], const uuid_t team_creator);
 
 /**
- * @brief Save teams in file
- * @param fd The file to save the data in
- * @param db The data to save, should not be NULL
- * @return Error code
- */
+** @brief Save teams in file
+** @param fd The file to save the data in
+** @param db The data to save, should not be NULL
+** @return Error code
+**/
 NON_NULL(2)
 int save_teams(int fd, const database_t *db, size_t elements_nb);
 

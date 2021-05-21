@@ -69,7 +69,8 @@ int print_reply_created(N_U int code, N_U size_t packet_size,
         return EXIT_ERROR;
     uuid_unparse_lower(reply->thread_uuid, uuid_thread);
     uuid_unparse_lower(reply->user_uuid, uuid_user);
-    client_print_reply_created(uuid_thread, uuid_user, reply->reply_timestamp, reply->reply_body);
+    client_print_reply_created(uuid_thread, uuid_user, reply->reply_timestamp,
+                                reply->reply_body);
     free(reply);
     return EXIT_SUCCESS;
 }
