@@ -194,6 +194,9 @@ int info_thread_request(teams_server_t *server, session_list_t *session,
 int send_request(teams_server_t *server, session_list_t *session,
                         char **argv);
 
+int subscribed_request(teams_server_t *server, session_list_t *session,
+                        char **argv);
+
 team_node_t *find_team_by_uuid(database_t *db, uuid_t team_uuid);
 team_node_t *find_team_by_name(database_t *db, const char *name);
 
