@@ -39,15 +39,16 @@ int send_request(teams_server_t *server, session_list_t *session,
     msg_t *msg = NULL;
 
     uuid_parse(argv[0], dest_uuid);
+    msg = new_msg(session->user->user_data->user_uuid, dest_uuid, argv[1]);
+    if (!msg)
+        return EXIT_FAILURE;
     dest = find_user_by_uuid(server->database, dest_uuid);
     if (!dest) {
+        //put_msg_in_db(server, dest, msg);
         prepare_uuid_buffer(session->cnt.output_buff, dest_uuid, 411,
                             &session->cnt.output_size);
         return EXIT_SUCCESS;
     }
-    msg = new_msg(session->user->user_data->user_uuid, dest_uuid, argv[1]);
-    if (!msg)
-        return EXIT_FAILURE;
     msg_is_created(server, session, msg);
     return EXIT_SUCCESS;
 }
