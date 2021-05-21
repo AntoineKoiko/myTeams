@@ -179,7 +179,8 @@ int list_reply_request(teams_server_t *server, session_list_t *session,
                         char **argv);
 int list_user_request(teams_server_t *server, session_list_t *session,
                         N_U char **argv);
-
+int list_message_request(teams_server_t *server, session_list_t *session,
+                        char **argv);
 
 int info_team_request(teams_server_t *server, session_list_t *session,
                         char **argv);
