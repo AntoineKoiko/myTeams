@@ -206,6 +206,12 @@ thread_node_t *find_thread_by_name(database_t *db, uuid_t tm_uuid,
 user_node_t *find_user_by_uuid(database_t *db, uuid_t user_uuid);
 user_node_t *find_user_by_name(database_t *db, const char *name);
 
+session_list_t *find_user_session_by_name(teams_server_t *server,
+                                            const char *user_name);
+session_list_t *find_user_session_by_uuid(teams_server_t *server,
+                                            uuid_t user_uuid);
+
+
 int uuid_is_in_arr(uuid_t *uuid_arr, uuid_t to_compare);
 
 //TODO move proto:

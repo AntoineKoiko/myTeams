@@ -95,6 +95,7 @@ SRC		=	$(DSETUP)/get_args.c	\
 			$(DSRC)/requests/db/find_channel.c	\
 			$(DSRC)/requests/db/find_thread.c	\
 			$(DSRC)/requests/db/find_user.c		\
+			$(DSRC)/requests/find_user_in_session.c	\
 			$(DSRC)/requests/uuid_is_in_arr.c	\
 			\
 			$(DDATABASE)/insert_user.c			\
