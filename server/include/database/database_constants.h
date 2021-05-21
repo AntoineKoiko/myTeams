@@ -41,7 +41,7 @@ extern const char *const ext_users;
 extern const char *const ext_channels;
 extern const char *const ext_threads;
 extern const char *const ext_replies;
-extern const char *const ext_messages;
+extern const char *const ext_msgs;
 
 extern const char *const data_dirname;
 extern const char *const data_filename;

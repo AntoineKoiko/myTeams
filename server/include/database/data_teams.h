@@ -13,8 +13,8 @@
 #include <sys/queue.h>
 #include <uuid/uuid.h>
 
-#include "attributes.h"
 #include "team_t.h"
+#include "attributes.h"
 
 typedef struct database_s database_t;
 
@@ -30,11 +30,12 @@ typedef struct team_node_s
 int team_count_nodes(size_t *count, const database_t *db);
 NON_NULL(1) size_t team_storage_len(const team_node_t *team);
 
-team_t *new_team(const char *name, const char *desc, uuid_t team_creator);
+team_t *new_team(const char name[MAX_NAME_LENGTH],
+    const char description[MAX_DESCRIPTION_LENGTH], const uuid_t team_creator);
 
 NON_NULL(1)
 int insert_team(database_t *db, const char name[MAX_NAME_LENGTH],
-    const char description[MAX_DESCRIPTION_LENGTH], uuid_t team_creator);
+    const char description[MAX_DESCRIPTION_LENGTH], const uuid_t team_creator);
 
 /**
  * @brief Save teams in file

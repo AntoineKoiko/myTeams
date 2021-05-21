@@ -7,8 +7,8 @@
 
 #include "server.h"
 
-reply_t *new_reply(
-    char *body, uuid_t team_uuid, uuid_t thread_uuid, uuid_t user_uuid)
+reply_t *new_reply(const uuid_t team_uuid, const uuid_t thread_uuid,
+    const uuid_t user_uuid, const char body[MAX_BODY_LENGTH])
 {
     reply_t *reply = malloc(sizeof(reply_t));
 

@@ -10,6 +10,7 @@
 #include <sys/queue.h>
 
 #include "channel_t.h"
+#include "attributes.h"
 
 typedef struct database_s database_t;
 
@@ -20,7 +21,9 @@ typedef struct channel_node_s
     SLIST_ENTRY(channel_node_s) next;
 } channel_node_t;
 
-channel_t *new_channel(uuid_t team_uuid, char *name, char *desc);
+channel_t *new_channel(const uuid_t team_uuid,
+    const char name[MAX_NAME_LENGTH],
+    const char description[MAX_DESCRIPTION_LENGTH]);
 
 int save_channels(int fd, const database_t *db, size_t elements_nb);
 

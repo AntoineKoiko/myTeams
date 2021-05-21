@@ -10,7 +10,7 @@
 #include "server_error.h"
 
 static team_node_t *new_team_node(const char name[MAX_NAME_LENGTH],
-    const char description[MAX_DESCRIPTION_LENGTH], uuid_t team_creator)
+    const char description[MAX_DESCRIPTION_LENGTH], const uuid_t team_creator)
 {
     team_node_t *my_team_node = calloc(1, sizeof(team_node_t));
 
@@ -22,7 +22,7 @@ static team_node_t *new_team_node(const char name[MAX_NAME_LENGTH],
 
 NON_NULL(1)
 int insert_team(database_t *db, const char name[MAX_NAME_LENGTH],
-    const char description[MAX_DESCRIPTION_LENGTH], uuid_t team_creator)
+    const char description[MAX_DESCRIPTION_LENGTH], const uuid_t team_creator)
 {
     team_node_t *my_team_node = new_team_node(name, description, team_creator);
 

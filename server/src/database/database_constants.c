@@ -12,7 +12,7 @@
 #include "database/data_channels.h"
 #include "database/data_threads.h"
 #include "database/data_replies.h"
-#include "database/data_messages.h"
+#include "database/data_msgs.h"
 
 const int magic_file_nb =
     180517110; // le numero de telephone d'epitech Rennes lol
@@ -22,7 +22,7 @@ const char *const ext_users = ".users";
 const char *const ext_channels = ".channels";
 const char *const ext_threads = ".threads";
 const char *const ext_replies = ".replies";
-const char *const ext_messages = ".messages";
+const char *const ext_msgs = ".msgs";
 
 const char *const data_dirname = ".database";
 const char *const data_filename = "database";
@@ -84,10 +84,10 @@ const save_file_t data_files[NB_DATA_FILE_TYPE] = {{TEAMS,
 #endif /* DEBUG */
     },
     {MESSAGES,
-        ext_messages,
+        ext_msgs,
         NULL,
         NULL,
-        save_messages,
+        save_msgs,
         NULL
 #ifdef DEBUG
         ,

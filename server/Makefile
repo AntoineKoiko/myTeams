@@ -19,15 +19,21 @@ TEST_NAME	=	unit_tests
 
 CC		=	gcc
 
-DLIB		=	../libs/myteams
-LIBSO		=	../libs/myteams
-DSRC		=	./src
-DINCLUDE	=	./include
-DCOMMON		=	../common
-DTESTS		=	./tests
-TOOLS		=	$(DSRC)/tools
-DSETUP		=	$(DSRC)/setup
-DDATABASE	=	$(DSRC)/database
+DLIB			=	../libs/myteams
+LIBSO			=	../libs/myteams
+DSRC			=	./src
+DINCLUDE		=	./include
+DCOMMON			=	../common
+DTESTS			=	./tests
+TOOLS			=	$(DSRC)/tools
+DSETUP			=	$(DSRC)/setup
+DDATABASE		=	$(DSRC)/database
+DDB_TEAMS		=	$(DDATABASE)/teams
+DDB_CHANNELS	=	$(DDATABASE)/channels
+DDB_THREADS		=	$(DDATABASE)/threads
+DDB_REPLIES		=	$(DDATABASE)/replies
+DDB_USERS		=	$(DDATABASE)/users
+DDB_MESSAGES	=	$(DDATABASE)/msgs
 
 var := $(shell realpath $(PWD)/$(LIBSO)/libmyteams.so)
 
@@ -114,18 +120,28 @@ SRC		=	$(DSETUP)/get_args.c	\
 			$(DDATABASE)/delete_db.c	\
 			$(DDATABASE)/dump_db.c		\
 			\
-			$(DDATABASE)/teams/load_teams.c		\
-			$(DDATABASE)/teams/save_teams.c		\
-			$(DDATABASE)/teams/count_teams.c	\
-			$(DDATABASE)/teams/insert_teams.c	\
-			$(DDATABASE)/teams/delete_teams.c	\
-			$(DDATABASE)/teams/dump_teams.c	\
+			$(DDB_TEAMS)/load_teams.c		\
+			$(DDB_TEAMS)/save_teams.c		\
+			$(DDB_TEAMS)/count_teams.c		\
+			$(DDB_TEAMS)/insert_teams.c		\
+			$(DDB_TEAMS)/delete_teams.c		\
+			$(DDB_TEAMS)/dump_teams.c		\
+			\
+			$(DDB_CHANNELS)/insert_channels.c		\
+			\
+			$(DDB_THREADS)/insert_threads.c		\
+			\
+			$(DDB_REPLIES)/insert_replies.c		\
+			\
+			$(DDB_USERS)/insert_users.c		\
+			\
+			$(DDB_MESSAGES)/insert_msgs.c		\
 			\
 			$(DDATABASE)/users/save_users.c				\
 			$(DDATABASE)/channels/save_channels.c		\
 			$(DDATABASE)/threads/save_threads.c			\
 			$(DDATABASE)/replies/save_replies.c			\
-			$(DDATABASE)/messages/save_messages.c		\
+			$(DDATABASE)/msgs/save_msgs.c		\
 
 SRCS	=	$(SRC) $(DSRC)/main.c
 

@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2021
-** data_messages.h
+** data_msgs.h
 ** File description:
 ** Messages data handling
 */
@@ -10,6 +10,7 @@
 #include <sys/queue.h>
 
 #include "msg_t.h"
+#include "attributes.h"
 
 typedef struct database_s database_t;
 
@@ -19,8 +20,9 @@ typedef struct msg_node_s
     SLIST_ENTRY(msg_node_s) next;
 } msg_node_t;
 
-msg_t *new_msg(uuid_t sender_uuid, uuid_t receiver_uuid, char *body);
+msg_t *new_msg(const uuid_t sender_uuid, const uuid_t receiver_uuid,
+    const char body[MAX_BODY_LENGTH]);
 
-int save_messages(int fd, const database_t *db, size_t elements_nb);
+int save_msgs(int fd, const database_t *db, size_t elements_nb);
 
 #endif // SERVER_DATA_MESSAGES_H

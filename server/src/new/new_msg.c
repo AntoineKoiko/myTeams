@@ -7,7 +7,8 @@
 
 #include "server.h"
 
-msg_t *new_msg(uuid_t sender_uuid, uuid_t receiver_uuid, char *body)
+msg_t *new_msg(const uuid_t sender_uuid, const uuid_t receiver_uuid,
+    const char body[MAX_BODY_LENGTH])
 {
     msg_t *msg = malloc(sizeof(msg_t));
 

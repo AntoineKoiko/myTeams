@@ -7,7 +7,8 @@
 
 #include "server.h"
 
-channel_t *new_channel(uuid_t team_uuid, char *name, char *desc)
+channel_t *new_channel(const uuid_t team_uuid,
+    const char name[MAX_NAME_LENGTH], const char desc[MAX_DESCRIPTION_LENGTH])
 {
     channel_t *channel = malloc(sizeof(channel_t));
 

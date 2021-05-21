@@ -7,14 +7,14 @@
 
 #include "server.h"
 
-user_t *new_user(const char *user_name)
+user_t *new_user(const char name[MAX_NAME_LENGTH])
 {
     user_t *user = malloc(sizeof(user_t));
 
     if (user == NULL)
         return NULL;
     uuid_generate(user->user_uuid);
-    strcpy(user->user_name, user_name);
+    strcpy(user->user_name, name);
     user->status = NOT_CONNECTED;
     return user;
 }

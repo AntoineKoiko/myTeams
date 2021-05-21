@@ -91,20 +91,6 @@ int interprate_clients_request(teams_server_t *server);
 
 int login_request(
     teams_server_t *server, session_list_t *session, char **argv);
-// object constructor
-
-channel_t *new_channel(uuid_t team_uuid, char *name, char *desc);
-
-msg_t *new_msg(uuid_t sender_uuid, uuid_t receiver_uuid, char *body);
-
-reply_t *new_reply(
-    char *body, uuid_t team_uuid, uuid_t thread_uuid, uuid_t user_uuid);
-
-team_t *new_team(const char *name, const char *desc, uuid_t team_creator);
-
-thread_t *new_thread(uuid_t chan, uuid_t user, char *title, char *body);
-
-user_t *new_user(const char *user_name);
 
 void free_str_array(char **str_array);
 

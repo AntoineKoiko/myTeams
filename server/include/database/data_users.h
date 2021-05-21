@@ -14,6 +14,7 @@
 #include <uuid/uuid.h>
 
 #include "user_t.h"
+#include "attributes.h"
 
 typedef struct database_s database_t;
 
@@ -31,11 +32,11 @@ typedef struct user_node_s
 {
     user_t *user_data;
     uuid_t *subscribed_team;
-    SLIST_HEAD(msg_head_s, msg_node_s) conversation;
+    SLIST_HEAD(msg_head_s, msg_node_s) conversations;
     SLIST_ENTRY(user_node_s) next;
 } user_node_t;
 
-user_t *new_user(const char *user_name);
+user_t *new_user(const char name[MAX_NAME_LENGTH]);
 
 /**
  * @brief Save users in file
