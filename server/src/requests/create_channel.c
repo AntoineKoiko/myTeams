@@ -11,19 +11,14 @@ static int channel_created(teams_server_t *server, session_list_t *session,
                         channel_t *chan)
 {
     session_list_t *s = NULL;
-    size_t cursor = session->cnt.output_size;
-    size_t size_buf = 0;
+    size_t *cursor = &session->cnt.output_size;
 
-    size_buf = prepare_channel_buffer(session->cnt.output_buff, chan, 233,
-                                        &cursor);
-    session->cnt.output_size += size_buf;
+    prepare_channel_buffer(session->cnt.output_buff, chan, 233, cursor);
     STAILQ_FOREACH(s, &server->session_head, next) {
         if (is_sub_and_coonect(server->database, chan->team_uuid,
                                     s->user->user_data) == EXIT_SUCCESS) {
-            cursor = s->cnt.output_size;
-            size_buf = prepare_channel_buffer(s->cnt.output_buff, chan, 243,
-                                            &cursor);
-            s->cnt.output_size += size_buf;
+            cursor = &s->cnt.output_size;
+            prepare_channel_buffer(s->cnt.output_buff, chan, 243, cursor);
         }
     }
    // SLIST_INSERT_AFTER(server->database->teams.slh_first, team, next);
@@ -33,11 +28,10 @@ static int channel_created(teams_server_t *server, session_list_t *session,
 static int creation_failed(session_list_t *session)
 {
     size_t packet_size = sizeof(int);
-    size_t cursor = session->cnt.output_size;
+    size_t *cursor = &session->cnt.output_size;
     int code = 413;
 
-    session->cnt.output_size += put_protocol(session->cnt.output_buff,
-                                            packet_size, code, &cursor);
+    put_protocol(session->cnt.output_buff, packet_size, code, cursor);
     return EXIT_SUCCESS;
 }
 

@@ -9,22 +9,21 @@
 
 static void get_thread_info(session_list_t *session, thread_t *thread)
 {
-    size_t cursor = session->cnt.output_size;
-    size_t size_buf = 0;
+    size_t *cursor = &session->cnt.output_size;
 
-    size_buf = prepare_thread_buffer(session->cnt.output_buff, thread,
-                                    214, &cursor);
-    session->cnt.output_size += size_buf;
+    prepare_thread_buffer(session->cnt.output_buff, thread, 214, cursor);
 }
 
 int info_thread_request(teams_server_t *server, session_list_t *session,
                         N_U char **argv)
 {
-    thread_node_t *cur_thread = find_thread_by_uuid(server->database,
-                session->team_ctx, session->channel_ctx, session->thread_ctx);
+    thread_node_t *thread = NULL;
 
-    if (!cur_thread)
+    thread = find_thread_by_uuid(server->database, session->team_ctx,\
+session->channel_ctx, session->thread_ctx);
+
+    if (!thread)
         return EXIT_FAILURE;
-    get_thread_info(session, cur_thread->thread_data);
+    get_thread_info(session, thread->thread_data);
     return EXIT_SUCCESS;
 }
