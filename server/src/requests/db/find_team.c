@@ -7,12 +7,13 @@
 
 #include "server.h"
 
-team_node_t *find_team_by_uuid(database_t *db, uuid_t team_uuid)
+team_node_t *find_team_by_uuid(const database_t *db, const uuid_t team_uuid)
 {
     team_node_t *node = NULL;
     team_t *buf = NULL;
 
-    SLIST_FOREACH(node, &db->teams, next) {
+    SLIST_FOREACH(node, &db->teams, next)
+    {
         buf = node->team_data;
         if (uuid_compare(buf->team_uuid, team_uuid) == 0)
             return node;
@@ -20,12 +21,14 @@ team_node_t *find_team_by_uuid(database_t *db, uuid_t team_uuid)
     return NULL;
 }
 
-team_node_t *find_team_by_name(database_t *db, const char *name)
+team_node_t *find_team_by_name(
+    const database_t *db, const char name[MAX_NAME_LENGTH])
 {
     team_node_t *node = NULL;
     team_t *buf = NULL;
 
-    SLIST_FOREACH(node, &db->teams, next) {
+    SLIST_FOREACH(node, &db->teams, next)
+    {
         buf = node->team_data;
         if (!strcmp(buf->team_name, name))
             return node;

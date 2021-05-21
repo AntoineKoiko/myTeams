@@ -21,6 +21,16 @@ typedef struct thread_node_s
     SLIST_ENTRY(thread_node_s) next;
 } thread_node_t;
 
+thread_node_t *find_thread_by_uuid(const database_t *db, const uuid_t tm_uuid,
+    const uuid_t chan_uuid, const uuid_t thread_uuid);
+thread_node_t *find_thread_by_name(const database_t *db, const uuid_t tm_uuid,
+    const uuid_t chan_uuid, const char name[MAX_NAME_LENGTH]);
+
+NON_NULL(1)
+int insert_thread(database_t *db, const uuid_t chan, const uuid_t user,
+    const char name[MAX_NAME_LENGTH],
+    const char description[MAX_DESCRIPTION_LENGTH]);
+
 thread_t *new_thread(const uuid_t chan, const uuid_t user,
     const char name[MAX_NAME_LENGTH], const char body[MAX_BODY_LENGTH]);
 

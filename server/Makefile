@@ -66,12 +66,6 @@ SRC		=	$(DSETUP)/get_args.c	\
 			$(DSRC)/interprate_clients_req.c\
 			$(DSRC)/free_str_array.c		\
 			$(DSRC)/new/new_session.c	\
-			$(DSRC)/new/new_user.c 		\
-			$(DSRC)/new/new_team.c 		\
-			$(DSRC)/new/new_channel.c 	\
-			$(DSRC)/new/new_thread.c 	\
-			$(DSRC)/new/new_reply.c 	\
-			$(DSRC)/new/new_msg.c 		\
 			$(DSRC)/clean_user.c		\
 			$(DSRC)/requests/prepare_buffer.c	\
 			$(DSRC)/requests/prepare_buffer_uuid.c	\
@@ -103,8 +97,8 @@ SRC		=	$(DSETUP)/get_args.c	\
 			$(DSRC)/requests/db/find_user.c		\
 			$(DSRC)/requests/uuid_is_in_arr.c	\
 			\
-			$(TOOLS)/uuid.c	\
-			$(TOOLS)/read.c	\
+			$(TOOLS)/uuid.c		\
+			$(TOOLS)/read.c		\
 			$(TOOLS)/write.c	\
 			\
 			$(DDATABASE)/database_constants.c	\
@@ -126,16 +120,22 @@ SRC		=	$(DSETUP)/get_args.c	\
 			$(DDB_TEAMS)/insert_teams.c		\
 			$(DDB_TEAMS)/delete_teams.c		\
 			$(DDB_TEAMS)/dump_teams.c		\
+            $(DDB_TEAMS)/new_team.c 		\
 			\
 			$(DDB_CHANNELS)/insert_channels.c		\
+            $(DDB_CHANNELS)/new_channel.c 	\
 			\
 			$(DDB_THREADS)/insert_threads.c		\
+            $(DDB_THREADS)/new_thread.c 	\
 			\
 			$(DDB_REPLIES)/insert_replies.c		\
+            $(DDB_REPLIES)/new_reply.c 	\
 			\
 			$(DDB_USERS)/insert_users.c		\
+			$(DDB_USERS)/new_user.c 		\
 			\
 			$(DDB_MESSAGES)/insert_msgs.c		\
+            $(DDB_MESSAGES)/new_msg.c 		\
 			\
 			$(DDATABASE)/users/save_users.c				\
 			$(DDATABASE)/channels/save_channels.c		\

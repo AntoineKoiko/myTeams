@@ -21,6 +21,16 @@ typedef struct channel_node_s
     SLIST_ENTRY(channel_node_s) next;
 } channel_node_t;
 
+channel_node_t *find_channel_by_uuid(
+    const database_t *db, const uuid_t tm_uuid, const uuid_t chan_uuid);
+channel_node_t *find_channel_by_name(const database_t *db,
+    const uuid_t tm_uuid, const char name[MAX_NAME_LENGTH]);
+
+NON_NULL(1)
+int insert_channel(database_t *db, const uuid_t team_uuid,
+    const char name[MAX_NAME_LENGTH],
+    const char description[MAX_DESCRIPTION_LENGTH]);
+
 channel_t *new_channel(const uuid_t team_uuid,
     const char name[MAX_NAME_LENGTH],
     const char description[MAX_DESCRIPTION_LENGTH]);

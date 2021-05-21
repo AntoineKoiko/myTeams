@@ -36,6 +36,10 @@ typedef struct user_node_s
     SLIST_ENTRY(user_node_s) next;
 } user_node_t;
 
+user_node_t *find_user_by_uuid(const database_t *db, const uuid_t user_uuid);
+user_node_t *find_user_by_name(
+    const database_t *db, const char name[MAX_NAME_LENGTH]);
+
 user_t *new_user(const char name[MAX_NAME_LENGTH]);
 
 /**
@@ -45,5 +49,8 @@ user_t *new_user(const char name[MAX_NAME_LENGTH]);
  * @return Error code
  */
 int save_users(int fd, const database_t *db, size_t elements_nb);
+
+NON_NULL(1)
+int insert_user(database_t *db, const char name[MAX_NAME_LENGTH]);
 
 #endif // SERVER_DATA_USERS_H

@@ -20,6 +20,11 @@ typedef struct reply_node_s
     SLIST_ENTRY(reply_node_s) next;
 } reply_node_t;
 
+NON_NULL(1)
+int insert_reply(database_t *db, const uuid_t team_uuid,
+    const uuid_t thread_uuid, const uuid_t user_uuid,
+    const char body[MAX_BODY_LENGTH]);
+
 reply_t *new_reply(const uuid_t team_uuid, const uuid_t thread_uuid,
     const uuid_t user_uuid, const char body[MAX_BODY_LENGTH]);
 

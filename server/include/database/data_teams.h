@@ -37,6 +37,10 @@ NON_NULL(1)
 int insert_team(database_t *db, const char name[MAX_NAME_LENGTH],
     const char description[MAX_DESCRIPTION_LENGTH], const uuid_t team_creator);
 
+team_node_t *find_team_by_uuid(const database_t *db, const uuid_t team_uuid);
+team_node_t *find_team_by_name(
+    const database_t *db, const char name[MAX_NAME_LENGTH]);
+
 /**
  * @brief Save teams in file
  * @param fd The file to save the data in

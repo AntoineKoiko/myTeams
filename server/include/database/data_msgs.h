@@ -20,6 +20,10 @@ typedef struct msg_node_s
     SLIST_ENTRY(msg_node_s) next;
 } msg_node_t;
 
+NON_NULL(1)
+int insert_msg(database_t *db, const uuid_t sender, const uuid_t receiver,
+    const char body[MAX_BODY_LENGTH]);
+
 msg_t *new_msg(const uuid_t sender_uuid, const uuid_t receiver_uuid,
     const char body[MAX_BODY_LENGTH]);
 

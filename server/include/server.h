@@ -172,26 +172,9 @@ int info_channel_request(
 int info_thread_request(
     teams_server_t *server, session_list_t *session, char **argv);
 
-team_node_t *find_team_by_uuid(database_t *db, uuid_t team_uuid);
-team_node_t *find_team_by_name(database_t *db, const char *name);
-
-channel_node_t *find_channel_by_uuid(
-    database_t *db, uuid_t tm_uuid, uuid_t chan_uuid);
-channel_node_t *find_channel_by_name(
-    database_t *db, uuid_t tm_uuid, const char *name);
-
-thread_node_t *find_thread_by_uuid(
-    database_t *db, uuid_t tm_uuid, uuid_t chan_uuid, uuid_t thread_uuid);
-thread_node_t *find_thread_by_name(
-    database_t *db, uuid_t tm_uuid, uuid_t chan_uuid, const char *name);
-
-user_node_t *find_user_by_uuid(database_t *db, uuid_t user_uuid);
-user_node_t *find_user_by_name(database_t *db, const char *name);
-
 int uuid_is_in_arr(uuid_t *uuid_arr, uuid_t to_compare);
 
 // TODO move proto:
 
-int insert_user(database_t *db, const char name[MAX_NAME_LENGTH]);
 
 #endif /* !SERVER_H_ */
