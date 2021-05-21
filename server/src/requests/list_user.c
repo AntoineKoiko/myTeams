@@ -10,13 +10,11 @@
 static void get_user_list(teams_server_t *server, session_list_t *session)
 {
     user_node_t *u = NULL;
-    size_t cursor = session->cnt.output_size;
-    size_t size_buf = 0;
+    size_t *cursor = &session->cnt.output_size;
+    unsigned char *buf = session->cnt.output_buff;
 
     SLIST_FOREACH(u, &server->database->users, next) {
-        size_buf = prepare_user_buffer(session->cnt.output_buff, u->user_data,
-                                        221, &cursor);
-        session->cnt.output_size += size_buf;
+        prepare_user_buffer(buf, u->user_data, 221, cursor);
     }
 }
 
