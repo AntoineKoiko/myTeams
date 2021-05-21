@@ -23,7 +23,7 @@ size_t put_team(unsigned char *buff, team_t *team, size_t *cursor)
 
     put_uuid(buff, team->team_uuid, cursor);
     (*cursor)++;
-    put_uuid(buff, team->creator, cursor);
+    put_uuid(buff, team->team_creator, cursor);
     (*cursor)++;
     put_string(buff, team->team_name, cursor);
     (*cursor)++;

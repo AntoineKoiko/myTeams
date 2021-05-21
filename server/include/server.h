@@ -100,7 +100,7 @@ msg_t *new_msg(uuid_t sender_uuid, uuid_t receiver_uuid, char *body);
 reply_t *new_reply(
     char *body, uuid_t team_uuid, uuid_t thread_uuid, uuid_t user_uuid);
 
-team_t *new_team(const char *name, const char *desc, uuid_t creator);
+team_t *new_team(const char *name, const char *desc, uuid_t team_creator);
 
 thread_t *new_thread(uuid_t chan, uuid_t user, char *title, char *body);
 
