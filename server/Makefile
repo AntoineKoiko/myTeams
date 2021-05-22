@@ -97,6 +97,7 @@ SRC		=	$(DSETUP)/get_args.c					\
 			$(DSRC)/requests/uuid_is_in_arr.c		\
 			\
 			$(TOOLS)/uuid.c		\
+			$(TOOLS)/str_array.c\
 			$(TOOLS)/read.c		\
 			$(TOOLS)/write.c	\
 			\
