@@ -33,7 +33,7 @@ static bool check_packet(teams_client_t *client, size_t *old_cursor)
         return false;
     }
     get_int(&code, client->client.input_buff+it, &it, false);
-    find_code_function(code, packet_size, client->client.input_buff+it);
+    find_code_function(code, packet_size - sizeof(int), client->client.input_buff+it);
     it += packet_size - sizeof(int);
     *old_cursor = it;
     return true;

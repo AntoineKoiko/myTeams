@@ -42,7 +42,6 @@ static int team_created(teams_server_t *server, session_list_t *session,
 static int check_error(session_list_t *session, teams_server_t *server,
     const char **argv)
 {
-    team_node_t *team = NULL;
     size_t argc = 0;
 
     if (!argv)
@@ -50,8 +49,7 @@ static int check_error(session_list_t *session, teams_server_t *server,
     argc = str_array_len(argv);
     if (argc != 2)
         return EXIT_ERROR;
-    team = find_team_by_name(server->database, argv[0]);
-    if (team) {
+    if (find_team_by_name(server->database, argv[0])) {
         put_protocol(session->cnt.output_buff, sizeof(int), 402,
             &session->cnt.output_size);
         return EXIT_FAILURE;
