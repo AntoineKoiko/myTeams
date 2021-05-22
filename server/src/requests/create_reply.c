@@ -24,15 +24,15 @@ static int reply_created(teams_server_t *server, session_list_t *session,
     return EXIT_SUCCESS;
 }
 
-static int creation_failed(session_list_t *session)
-{
-    size_t packet_size = sizeof(int);
-    size_t *cursor = &session->cnt.output_size;
-    int code = 415;
+// static int creation_failed(session_list_t *session)
+// {
+//     size_t packet_size = sizeof(int);
+//     size_t *cursor = &session->cnt.output_size;
+//     int code = 415;
 
-    put_protocol(session->cnt.output_buff, packet_size, code, cursor);
-    return EXIT_SUCCESS;
-}
+//     put_protocol(session->cnt.output_buff, packet_size, code, cursor);
+//     return EXIT_SUCCESS;
+// }
 
 //TODO : push new obj in db
 static reply_t *create_process(teams_server_t *server, session_list_t *ses,
@@ -59,7 +59,8 @@ int create_reply_request(teams_server_t *server, session_list_t *session,
     reply_t *reply = create_process(server, session, argv);
 
     if (!reply) {
-        creation_failed(session);
+       // creation_failed(session);
+       return EXIT_FAILURE;
     } else {
         reply_created(server, session, reply);
         uuid_unparse_lower(reply->thread_uuid, thread_uuid);

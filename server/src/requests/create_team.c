@@ -25,30 +25,34 @@ static int team_created(teams_server_t *server, session_list_t *session,
     return EXIT_SUCCESS;
 }
 
-static int creation_failed(session_list_t *session)
-{
-    size_t packet_size = sizeof(int);
-    size_t *cursor = &session->cnt.output_size;
-    int code = 412;
+// static int creation_failed(session_list_t *session)
+// {
+//     size_t packet_size = sizeof(int);
+//     size_t *cursor = &session->cnt.output_size;
+//     int code = 412;
 
-    put_protocol(session->cnt.output_buff, packet_size, code, cursor);
-    return EXIT_SUCCESS;
-}
+//     put_protocol(session->cnt.output_buff, packet_size, code, cursor);
+//     return EXIT_SUCCESS;
+// }
 
 int create_team_request(teams_server_t *server, session_list_t *session,
                         char **argv)
 {
-    team_t *team = new_team(argv[0], argv[1],
-                        session->user->user_data->user_uuid);
+    team_t *team = NULL;
     char tm_uuid[UUID_STR_LEN] = {0};
     char creator_uuid[UUID_STR_LEN] = {0};
 
+    if (find_team_by_name(server->database, argv[0]) != NULL) {
+        put_protocol(session->cnt.output_buff, sizeof(int), 402, &session->cnt.output_size);
+        return EXIT_SUCCESS;
+    }
+    team = new_team(argv[0], argv[1], session->user->user_data->user_uuid);
     if (team) {
         team_created(server, session, team);
         uuid_unparse_lower(team->team_uuid, tm_uuid);
         uuid_unparse_lower(team->created_by, creator_uuid);
         server_event_team_created(tm_uuid, team->team_name, creator_uuid);
     } else
-        creation_failed(session);
+        return EXIT_FAILURE;
     return EXIT_SUCCESS;
 }
