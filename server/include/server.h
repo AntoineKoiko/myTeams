@@ -34,6 +34,7 @@
 #include "teams_server_t.h"
 #include "command_t.h"
 #include "constant.h"
+#include "client_req_t.h"
 #include "status_t.h"
 #include "team_t.h"
 #include "channel_t.h"

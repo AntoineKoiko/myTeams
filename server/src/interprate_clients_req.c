@@ -35,9 +35,14 @@ static int compute_cmd(teams_server_t *server, session_list_t *session,
     char cmd_code, char **arg_array)
 {
     for (size_t i = 0; command_list[i].cmd; i++) {
-        if (command_list[i].code == cmd_code &&
-            request_array[i]) {
-            request_array[i](server, session, arg_array);
+        if (command_list[i].code == cmd_code && request_array[i].fct) {
+            if ((request_array[i].need_login && session->logged_in) ||
+                !request_array[i].need_login) {
+                request_array[i].fct(server, session, arg_array);
+            } else {
+                put_protocol(session->cnt.output_buff, sizeof(int), 401,
+                    &session->cnt.output_size);
+            }
         }
     }
     return EXIT_SUCCESS;

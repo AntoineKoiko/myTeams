@@ -26,17 +26,36 @@ const command_t command_list[] = {
     {NULL, 0, 0, 0},
 };
 
-const request_fct request_array[] = {&login_request,
-    &logout_request,
-    NULL,
-    NULL,
-    NULL,
-    NULL,
-    NULL,
-    NULL,
-    NULL,
-    &use_request,
-    &create_request,
-    &list_request,
-    NULL,
-    NULL};
+const client_req_t request_array[] = {
+    {&login_request, false},
+    {&logout_request, true},
+    {NULL, true},
+    {NULL, true},
+    {NULL, true},
+    {NULL, true},
+    {NULL, true},
+    {NULL, true},
+    {NULL, true},
+    {&use_request, true},
+    {&create_request, true},
+    {&list_request, true},
+    {NULL, true},
+    {NULL, true}
+};
+
+// const request_fct request_array[] = {
+//     &login_request,
+//     &logout_request,
+//     NULL,
+//     NULL,
+//     NULL,
+//     NULL,
+//     NULL,
+//     NULL,
+//     NULL,
+//     &use_request,
+//     &create_request,
+//     &list_request,
+//     NULL,
+//     NULL
+// };
