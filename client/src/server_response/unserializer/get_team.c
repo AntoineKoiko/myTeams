@@ -14,7 +14,7 @@ team_t *get_team(unsigned char *buff, size_t *it)
     if (team == NULL)
         return NULL;
     get_uuid(team->team_uuid, buff, it);
-    get_uuid(team->created_by, buff, it);
+    get_uuid(team->team_creator, buff, it);
     get_str(team->team_name, buff, it);
     get_str(team->team_description, buff, it);
     return team;

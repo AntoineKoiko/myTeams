@@ -15,7 +15,7 @@ const command_t command_list[] = {
     {"/users", 3, 0, 0},
     {"/user", 4, 1, 1},
     {"/send", 5, 2, 2},
-    {"/messages", 6, 1, 1},
+    {"/msgs", 6, 1, 1},
     {"/subscribe", 7, 1, 1},
     {"/subscribed", 8, 0, 1},
     {"/unsubscribe", 9, 1, 1},
@@ -26,19 +26,36 @@ const command_t command_list[] = {
     {NULL, 0, 0, 0},
 };
 
-const request_fct request_array[] = {
-    &login_request,
-    &logout_request,
-    NULL,
-    NULL,
-    NULL,
-    NULL,
-    NULL,
-    NULL,
-    NULL,
-    &use_request,
-    &create_request,
-    &list_request,
-    NULL,
-    NULL
+const client_req_t request_array[] = {
+    {&login_request, false},
+    {&logout_request, true},
+    {NULL, true},
+    {NULL, true},
+    {NULL, true},
+    {NULL, true},
+    {NULL, true},
+    {NULL, true},
+    {NULL, true},
+    {&use_request, true},
+    {&create_request, true},
+    {&list_request, true},
+    {NULL, true},
+    {NULL, true}
 };
+
+// const request_fct request_array[] = {
+//     &login_request,
+//     &logout_request,
+//     NULL,
+//     NULL,
+//     NULL,
+//     NULL,
+//     NULL,
+//     NULL,
+//     NULL,
+//     &use_request,
+//     &create_request,
+//     &list_request,
+//     NULL,
+//     NULL
+// };

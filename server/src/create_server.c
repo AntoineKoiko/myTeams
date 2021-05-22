@@ -18,10 +18,12 @@ static int set_socket_opt(connection_t *cnt)
 {
     int opt = 1;
 
-    if (setsockopt(cnt->socket, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT,
-        &opt, sizeof(opt))) {
-            printf("setsockopt: %s\n", strerror(errno));
-        return EXIT_ERROR;
+    if (setsockopt(cnt->socket,
+            SOL_SOCKET,
+            SO_REUSEADDR | SO_REUSEPORT,
+            &opt,
+            sizeof(opt))) {
+        return server_error("setsockopt", EXIT_ERROR);
     }
     return EXIT_SUCCESS;
 }
@@ -32,20 +34,17 @@ int create_server(connection_t *cnt)
 
     cnt->socket = socket(AF_INET, SOCK_STREAM, 0);
     if (cnt->socket == -1) {
-        printf("create_server: socket: %s\n", strerror(errno));
-        return EXIT_ERROR;
+        return server_error("create_server: socket", EXIT_ERROR);
     }
     if (set_socket_opt(cnt) == EXIT_ERROR)
         return EXIT_ERROR;
     set_socket_addr(cnt);
-    ret = bind(cnt->socket, (struct sockaddr *)&cnt->addr, sizeof(cnt->addr));
+    ret = bind(cnt->socket, (struct sockaddr *) &cnt->addr, sizeof(cnt->addr));
     if (ret == -1) {
-        printf("bind: %s\n", strerror(errno));
-        return EXIT_ERROR;
+        return server_error("bind", EXIT_ERROR);
     }
     if (listen(cnt->socket, FD_SETSIZE) == -1) {
-        printf("listen: %s\n", strerror(errno));
-        return EXIT_ERROR;
+        return server_error("listen", EXIT_ERROR);
     }
     return EXIT_SUCCESS;
 }

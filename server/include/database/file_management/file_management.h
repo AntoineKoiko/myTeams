@@ -24,10 +24,10 @@ typedef struct file_header_s
 {
     const int magic_number;
     file_types_t file_type;
-    int elements_nb;
+    size_t elements_nb;
 } file_header_t;
 
-int add_generic_header(int fd, file_types_t file_type);
+int add_generic_header(int fd, file_types_t file_type, size_t elements_nb);
 
 int get_db_dirpath(const char **dirname);
 

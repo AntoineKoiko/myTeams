@@ -10,34 +10,40 @@
 #include "database/file_management/file_management.h"
 #include "database/database_constants.h"
 
-#define _GNU_SOURCE
-#include <stdio.h>
-#undef _GNU_SOURCE
-
-#define N_U __attribute__((unused))
-
-#include <sys/queue.h>
-#include <fcntl.h>
-
 #include "database/data_teams.h"
 #include "database/data_users.h"
 #include "database/data_channels.h"
 #include "database/data_threads.h"
 #include "database/data_replies.h"
-#include "database/data_messages.h"
+#include "database/data_msgs.h"
 
-#define STATIC_ARRAY_SIZE(x) (sizeof(x) / sizeof(x[0]))
+#define _GNU_SOURCE
+#include <stdio.h>
+#undef _GNU_SOURCE
+
+#include <sys/queue.h>
+#include <uuid/uuid.h>
+#include <fcntl.h>
+#include "tools.h"
+
+#include "attributes.h"
 
 typedef struct database_s
 {
-    SLIST_HEAD(, team_node_s) teams;
-    SLIST_HEAD(, user_node_s) users;
+    SLIST_HEAD(team_head_s, team_node_s) teams;
+    SLIST_HEAD(user_head_s, user_node_s) users;
 } database_t;
 
-int init_db(database_t **db);
+NON_NULL() int init_db(database_t **db);
 
-int load_db(database_t *db);
+NON_NULL() int load_db(database_t *db);
 
-int save_db(const database_t *db);
+NON_NULL() int save_db(const database_t *db);
+
+NON_NULL() void delete_db(database_t *db);
+
+#ifdef DEBUG
+NON_NULL() void dump_db(const database_t *db);
+#endif /* DEBUG */
 
 #endif // MYTEAMS_DATABASE_H

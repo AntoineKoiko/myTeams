@@ -25,8 +25,13 @@ typedef struct save_file_s
 {
     file_types_t type;
     const char *const extension;
-    //    int (*load_function)(const database_t *);
-    int (*save_function)(const int, const database_t *);
+    int (*nb_entries_function)(size_t *, const database_t *);
+    int (*load_function)(const int, database_t *, const size_t);
+    int (*save_function)(const int, const database_t *, const size_t);
+    void (*delete_function)(database_t *);
+#ifdef DEBUG
+    void (*dump_function)(const database_t *);
+#endif /* DEBUG */
 } save_file_t;
 
 extern const int magic_file_nb;
@@ -36,11 +41,11 @@ extern const char *const ext_users;
 extern const char *const ext_channels;
 extern const char *const ext_threads;
 extern const char *const ext_replies;
-extern const char *const ext_messages;
+extern const char *const ext_msgs;
 
 extern const char *const data_dirname;
 extern const char *const data_filename;
 
-extern const save_file_t save_files[NB_DATA_FILE_TYPE];
+extern const save_file_t data_files[NB_DATA_FILE_TYPE];
 
 #endif // SERVER_DATABASE_CONSTANTS_H

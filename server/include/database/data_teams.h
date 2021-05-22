@@ -8,38 +8,56 @@
 #define SERVER_DATA_TEAMS_H
 
 #include <stddef.h>
+#include <stdlib.h>
 
 #include <sys/queue.h>
 #include <uuid/uuid.h>
 
 #include "team_t.h"
+#include "attributes.h"
 
 typedef struct database_s database_t;
 
-typedef struct header_file_teams_s
-{
-    size_t size;
-    unsigned int nb_user_subscribed; // TODO remove it ?
-    // knowing that it already is in the size
-} header_file_teams_t;
-
-// const size_t team_size = sizeof(team_header_t) + sizeof(team_t)
-//     + (sizeof(uuid) * nb_user_subscribed);
-
 typedef struct team_node_s
 {
-    team_t *team_data;
-    SLIST_HEAD(, channel_node_s) channels;
+    size_t nb_subscribed_users;
     uuid_t *subscribed_users;
+    team_t *team_data;
+    SLIST_HEAD(channel_head_s, channel_node_s) channels;
     SLIST_ENTRY(team_node_s) next;
 } team_node_t;
 
+int team_count_nodes(size_t *count, const database_t *db);
+NON_NULL(1) size_t team_storage_len(const team_node_t *team);
+
+team_t *new_team(const char name[MAX_NAME_LENGTH],
+    const char description[MAX_DESCRIPTION_LENGTH], const uuid_t team_creator);
+
+NON_NULL(1)
+int insert_team(database_t *db, const char name[MAX_NAME_LENGTH],
+    const char description[MAX_DESCRIPTION_LENGTH], const uuid_t team_creator);
+
+team_node_t *find_team_by_uuid(const database_t *db, const uuid_t team_uuid);
+team_node_t *find_team_by_name(
+    const database_t *db, const char name[MAX_NAME_LENGTH]);
+team_node_t *find_team_by_channel(const database_t *db, const uuid_t channel);
+
 /**
- * @brief Save teams in file
- * @param fd The file to save the data in
- * @param db The data to save
- * @return Error code
- */
-int save_teams(int fd, const database_t *db);
+** @brief Save teams in file
+** @param fd The file to save the data in
+** @param db The data to save, should not be NULL
+** @return Error code
+**/
+NON_NULL(2)
+int save_teams(int fd, const database_t *db, size_t elements_nb);
+
+NON_NULL(2)
+int load_teams(int fd, database_t *db, size_t elements_nb);
+
+NON_NULL() void delete_teams(database_t *db);
+
+#ifdef DEBUG
+void dump_teams(const database_t *db);
+#endif
 
 #endif // SERVER_DATA_TEAMS_H

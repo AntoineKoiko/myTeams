@@ -8,7 +8,9 @@
 #ifndef CONSTANT_H_
 #define CONSTANT_H_
 
-#include "server.h"
+#include "command_t.h"
+#include "teams_server_t.h"
+#include "client_req_t.h"
 
 extern const char *digits;
 
@@ -17,6 +19,6 @@ extern const command_t command_list[];
 typedef int (* const request_fct)(teams_server_t *server,
     session_list_t *session, char **argv);
 
-extern const request_fct request_array[];
+extern const client_req_t request_array[];
 
 #endif /* !CONSTANT_H_ */

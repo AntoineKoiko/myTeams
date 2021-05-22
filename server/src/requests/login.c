@@ -6,6 +6,7 @@
 */
 
 #include "server.h"
+#include "database/data_users.h"
 
 static int prepare_buffer(teams_server_t *server, session_list_t *session)
 {

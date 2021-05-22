@@ -14,7 +14,7 @@
 typedef struct
 {
     uuid_t team_uuid;
-    uuid_t created_by;
+    uuid_t team_creator;
     char team_name[MAX_NAME_LENGTH];
     char team_description[MAX_DESCRIPTION_LENGTH];
 } team_t;

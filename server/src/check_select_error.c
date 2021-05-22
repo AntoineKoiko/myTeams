@@ -10,11 +10,10 @@
 int check_select_error(int nready)
 {
     if (nready == -1) {
-        printf("select: %s\n", strerror(errno));
-        return EXIT_ERROR;
+        return server_error("select", EXIT_ERROR);
     }
     if (nready == 0) {
-        printf("select return 0: server should exit\n");
+        printf("select returned 0: server should exit\n");
         return EXIT_ERROR;
     }
     return EXIT_SUCCESS;
