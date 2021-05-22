@@ -18,9 +18,10 @@ void delete_teams(database_t *db)
 {
     team_node_t *it = NULL;
 
-    SLIST_FOREACH(it, &db->teams, next)
-    {
+    while (!SLIST_EMPTY(&db->teams)) {
+        it = SLIST_FIRST(&db->teams);
+        SLIST_REMOVE_HEAD(&db->teams, next);
         delete_team(it);
-        // TODO add node removal
+        free(it);
     }
 }
