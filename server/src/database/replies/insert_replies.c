@@ -18,6 +18,10 @@ static reply_node_t *new_reply_node(const uuid_t team_uuid,
         return NULL;
     my_reply_node->reply_data =
         new_reply(team_uuid, thread_uuid, user_uuid, body);
+    if (my_reply_node->reply_data == NULL) {
+        free(my_reply_node);
+        return NULL;
+    }
     return my_reply_node;
 }
 

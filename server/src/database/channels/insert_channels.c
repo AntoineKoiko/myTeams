@@ -17,6 +17,10 @@ static channel_node_t *new_channel_node(const uuid_t team_uuid,
     if (!my_channel_node)
         return NULL;
     my_channel_node->channel_data = new_channel(team_uuid, name, description);
+    if (my_channel_node->channel_data == NULL) {
+        free(my_channel_node);
+        return NULL;
+    }
     return my_channel_node;
 }
 

@@ -16,6 +16,10 @@ static msg_node_t *new_msg_node(const uuid_t sender, const uuid_t receiver,
     if (!my_msg_node)
         return NULL;
     my_msg_node->msg_data = new_msg(sender, receiver, body);
+    if (my_msg_node->msg_data == NULL) {
+        free(my_msg_node);
+        return NULL;
+    }
     return my_msg_node;
 }
 

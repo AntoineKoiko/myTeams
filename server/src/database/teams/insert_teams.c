@@ -17,6 +17,10 @@ static team_node_t *new_team_node(const char name[MAX_NAME_LENGTH],
     if (!my_team_node)
         return NULL;
     my_team_node->team_data = new_team(name, description, team_creator);
+    if (my_team_node->team_data == NULL) {
+        free(my_team_node);
+        return NULL;
+    }
     return my_team_node;
 }
 

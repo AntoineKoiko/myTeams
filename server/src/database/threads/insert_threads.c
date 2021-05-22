@@ -17,6 +17,10 @@ static thread_node_t *new_thread_node(const uuid_t chan, const uuid_t user,
     if (!my_thread_node)
         return NULL;
     my_thread_node->thread_data = new_thread(chan, user, name, description);
+    if (my_thread_node->thread_data == NULL) {
+        free(my_thread_node);
+        return NULL;
+    }
     return my_thread_node;
 }
 
