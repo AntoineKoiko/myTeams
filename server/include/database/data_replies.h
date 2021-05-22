@@ -28,6 +28,6 @@ int insert_reply(database_t *db, const uuid_t team_uuid,
 reply_t *new_reply(const uuid_t team_uuid, const uuid_t thread_uuid,
     const uuid_t user_uuid, const char body[MAX_BODY_LENGTH]);
 
-int save_replies(int fd, const database_t *db, size_t elements_nb);
+int save_replies(int fd, const database_t *db);
 
 #endif // SERVER_DATA_REPLIES_H

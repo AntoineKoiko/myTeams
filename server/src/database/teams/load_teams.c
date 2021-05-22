@@ -6,22 +6,25 @@
 */
 
 #include "database/database.h"
-#include "database/data_teams.h"
 #include "my_queue.h"
 #include "attributes.h"
 #include "tools.h"
 
-static inline int load_users(
+NON_NULL(2)
+static inline int load_team_users(
     const int fd, team_node_t *team, const size_t users)
 {
+    if (!users)
+        return EXIT_SUCCESS;
     return read_and_check(fd, &team->subscribed_users, users * sizeof(uuid_t));
 }
 
+NON_NULL(2)
 static int load_team(const int fd, team_node_t *team, const size_t users)
 {
     int my_ret_val = EXIT_SUCCESS;
 
-    my_ret_val = load_users(fd, team, users);
+    my_ret_val = load_team_users(fd, team, users);
     if (my_ret_val != EXIT_SUCCESS)
         return my_ret_val;
     my_ret_val = read_and_check(fd, team->team_data, sizeof(team_t));

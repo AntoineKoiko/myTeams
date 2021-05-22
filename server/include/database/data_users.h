@@ -20,8 +20,9 @@ typedef struct database_s database_t;
 
 typedef struct user_node_s
 {
+    size_t nb_subscribed_teams;
+    uuid_t *subscribed_teams;
     user_t *user_data;
-    uuid_t *subscribed_team;
     SLIST_HEAD(msg_head_s, msg_node_s) conversations;
     SLIST_ENTRY(user_node_s) next;
 } user_node_t;
@@ -38,9 +39,11 @@ user_t *new_user(const char name[MAX_NAME_LENGTH]);
 ** @param db The data to save
 ** @return Error code
 **/
-int save_users(int fd, const database_t *db, size_t elements_nb);
+int save_users(int fd, const database_t *db);
 
-NON_NULL(1)
-int insert_user(database_t *db, const char name[MAX_NAME_LENGTH]);
+NON_NULL(2)
+int load_users(int fd, database_t *db, size_t elements_nb);
+
+NON_NULL(1) int insert_user(database_t *db, const char name[MAX_NAME_LENGTH]);
 
 #endif // SERVER_DATA_USERS_H

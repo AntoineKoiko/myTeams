@@ -39,7 +39,7 @@ typedef struct save_file_s
     const char *const extension;
     int (*nb_entries_function)(size_t *, const database_t *);
     int (*load_function)(const int, database_t *, const size_t);
-    int (*save_function)(const int, const database_t *, const size_t);
+    int (*save_function)(const int, const database_t *);
     void (*delete_function)(database_t *);
 #ifdef DEBUG
     void (*dump_function)(const database_t *);

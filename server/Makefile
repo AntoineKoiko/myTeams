@@ -138,6 +138,7 @@ SRC		=	$(DSETUP)/get_args.c					\
             $(DDB_REPLIES)/new_reply.c 			\
 			\
 			$(DDB_USERS)/save_users.c		\
+			$(DDB_USERS)/load_users.c		\
 			$(DDB_USERS)/insert_users.c		\
 			$(DDB_USERS)/new_user.c 		\
 			$(DDB_USERS)/find_user.c 		\

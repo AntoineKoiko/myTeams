@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2021
 ** tools.h
 ** File description:
-** TODO: add description
+** Independent tools
 */
 #ifndef SERVER_TOOLS_H
 #define SERVER_TOOLS_H

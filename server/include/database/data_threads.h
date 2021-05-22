@@ -36,6 +36,6 @@ int insert_thread(database_t *db, const uuid_t chan, const uuid_t user,
 thread_t *new_thread(const uuid_t chan, const uuid_t user,
     const char name[MAX_NAME_LENGTH], const char body[MAX_BODY_LENGTH]);
 
-int save_threads(int fd, const database_t *db, size_t elements_nb);
+int save_threads(int fd, const database_t *db);
 
 #endif // SERVER_DATA_THREADS_H

@@ -49,7 +49,7 @@ team_node_t *find_team_by_channel(const database_t *db, const uuid_t channel);
 ** @return Error code
 **/
 NON_NULL(2)
-int save_teams(int fd, const database_t *db, size_t elements_nb);
+int save_teams(int fd, const database_t *db);
 
 NON_NULL(2)
 int load_teams(int fd, database_t *db, size_t elements_nb);
