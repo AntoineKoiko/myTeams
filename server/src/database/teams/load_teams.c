@@ -54,9 +54,6 @@ int load_teams(const int fd, database_t *db, const size_t elements_nb)
     team_node_t *my_act_team = NULL;
     int my_ret_val = EXIT_SUCCESS;
 
-    if (!db->teams.slh_first) {
-        return ERR_NO_VAL;
-    }
     for (size_t i = 0; i < elements_nb; ++i) {
         my_ret_val = init_team_node(fd, &my_act_team, &my_users);
         if (my_ret_val != EXIT_SUCCESS)
