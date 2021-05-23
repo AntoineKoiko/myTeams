@@ -6,7 +6,7 @@
 */
 
 #include "database/database.h"
-#include "my_queue.h"
+#include <sys/queue.h>
 #include "attributes.h"
 #include "tools.h"
 
@@ -46,8 +46,8 @@ NON_NULL(2) static int load_thread(const int fd, database_t *db)
         return my_ret_val;
     my_ret_val = read_and_check(fd, my_thread->thread_data, sizeof(thread_t));
     if (my_ret_val != EXIT_SUCCESS) {
-        // destroy_thread(my_thread);
-        // TODO destroy functions
+        // delete_thread(my_thread);
+        // TODO delete functions
         // TODO use free to null
         return my_ret_val;
     }

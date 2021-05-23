@@ -6,7 +6,7 @@
 */
 
 #include "database/database.h"
-#include "my_queue.h"
+#include <sys/queue.h>
 #include "attributes.h"
 #include "tools.h"
 
@@ -47,8 +47,8 @@ NON_NULL(2) static int load_reply(const int fd, database_t *db)
         return my_ret_val;
     my_ret_val = read_and_check(fd, my_reply->reply_data, sizeof(reply_t));
     if (my_ret_val != EXIT_SUCCESS) {
-        // destroy_reply(my_reply);
-        // TODO destroy functions
+        // delete_reply(my_reply);
+        // TODO delete functions
         // TODO use free to null
         return my_ret_val;
     }

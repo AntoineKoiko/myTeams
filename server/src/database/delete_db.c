@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2021
-** destroy_db.c
+** delete_db.c
 ** File description:
 ** Free database
 */

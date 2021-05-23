@@ -6,7 +6,7 @@
 */
 
 #include "database/database.h"
-#include "my_queue.h"
+#include <sys/queue.h>
 #include "attributes.h"
 #include "tools.h"
 
@@ -51,12 +51,12 @@ NON_NULL(2) static int load_team(const int fd, database_t *db)
         return my_ret_val;
     my_ret_val = load_team_users(fd, &my_team, my_users);
     if (my_ret_val != EXIT_SUCCESS) {
-        // destroy_team_node() // TODO destroy functions
+        // delete_team_node() // TODO delete functions
         return my_ret_val;
     }
     my_ret_val = read_and_check(fd, my_team->team_data, sizeof(team_t));
     if (my_ret_val != EXIT_SUCCESS) {
-        // destroy_team_node() // TODO destroy functions
+        // delete_team_node() // TODO delete functions
         return my_ret_val;
     }
     SLIST_INSERT_HEAD(&db->teams, my_team, next);

@@ -6,7 +6,7 @@
 */
 
 #include "database/database.h"
-#include "my_queue.h"
+#include <sys/queue.h>
 #include "attributes.h"
 #include "tools.h"
 
@@ -47,8 +47,8 @@ NON_NULL(2) static int load_channel(const int fd, database_t *db)
     my_ret_val =
         read_and_check(fd, my_channel->channel_data, sizeof(channel_t));
     if (my_ret_val != EXIT_SUCCESS) {
-        // destroy_channel(my_channel);
-        // TODO destroy functions
+        // delete_channel(my_channel);
+        // TODO delete functions
         // TODO use free to null
         return my_ret_val;
     }
