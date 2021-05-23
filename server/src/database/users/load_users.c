@@ -20,7 +20,7 @@ static inline int load_user_teams(
     if (!teams)
         return EXIT_SUCCESS;
     return read_and_check(
-        fd, &(*user)->subscribed_teams, teams * sizeof(uuid_t));
+        fd, (*user)->subscribed_teams, teams * sizeof(uuid_t));
 }
 
 NON_NULL(2, 3)
@@ -35,7 +35,7 @@ static int init_user_node(const int fd, user_node_t **user, size_t *teams)
     if (!(*user))
         return ERR_NO_VAL;
     (*user)->user_data = calloc(1, sizeof(user_t));
-    if (!(*user))
+    if (!(*user)->user_data)
         return ERR_NO_VAL;
     (*user)->subscribed_teams = calloc(*teams, sizeof(uuid_t));
     if (!(*user)->subscribed_teams)
@@ -43,6 +43,7 @@ static int init_user_node(const int fd, user_node_t **user, size_t *teams)
     return EXIT_SUCCESS;
 }
 
+NON_NULL(1)
 static void log_user_loaded(const user_t *user)
 {
     char uuid_user[UUID_STR_LEN] = {0};

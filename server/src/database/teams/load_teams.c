@@ -32,7 +32,7 @@ static int init_team_node(const int fd, team_node_t **team, size_t *users)
     if (!(*team))
         return ERR_NO_VAL;
     (*team)->team_data = calloc(1, sizeof(team_t));
-    if (!(*team))
+    if (!(*team)->team_data)
         return ERR_NO_VAL;
     (*team)->subscribed_users = calloc(*users, sizeof(uuid_t));
     if (!(*team)->subscribed_users)
