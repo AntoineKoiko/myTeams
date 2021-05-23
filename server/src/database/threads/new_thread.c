@@ -10,7 +10,7 @@
 thread_t *new_thread(const uuid_t chan, const uuid_t user,
     const char name[MAX_NAME_LENGTH], const char body[MAX_BODY_LENGTH])
 {
-    thread_t *thread = malloc(sizeof(thread_t));
+    thread_t *thread = calloc(1, sizeof(thread_t));
 
     if (thread == NULL)
         return NULL;
