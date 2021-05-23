@@ -5,6 +5,7 @@
 ** Load users from file
 */
 
+#include "logging_server.h"
 #include "database/database.h"
 #include "database/data_teams.h"
 #include "my_queue.h"
@@ -51,6 +52,14 @@ static int init_user_node(const int fd, user_node_t **user, size_t *teams)
     return EXIT_SUCCESS;
 }
 
+static void log_user_loaded(user_t *user)
+{
+    char uuid_user[UUID_STR_LEN] = {0};
+
+    uuid_unparse_lower(user->user_uuid, uuid_user);
+    server_event_user_loaded(uuid_user, user->user_name);
+}
+
 NON_NULL(2)
 int load_users(const int fd, database_t *db, const size_t elements_nb)
 {
@@ -65,6 +74,7 @@ int load_users(const int fd, database_t *db, const size_t elements_nb)
         my_ret_val = load_user(fd, my_act_user, my_teams);
         if (my_ret_val != EXIT_SUCCESS)
             break;
+        log_user_loaded(my_act_user->user_data);
         SLIST_INSERT_HEAD(&db->users, my_act_user, next);
     }
     if (my_ret_val == EXIT_FAILURE)
