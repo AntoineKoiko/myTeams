@@ -15,8 +15,8 @@ static int thread_created(teams_server_t *server, session_list_t *session,
 
     prepare_thread_buffer(session->cnt.output_buff, thread, 234, cursor);
     STAILQ_FOREACH(s, &server->session_head, next) {
-        if (is_sub_and_coonect(server->database, session->team_ctx,
-                                s->user->user_data) == EXIT_SUCCESS) {
+        if (is_sub_and_connected(server->database, session->team_ctx,
+                                s->user->user_data)) {
             cursor = &s->cnt.output_size;
             prepare_thread_buffer(s->cnt.output_buff, thread, 244, cursor);
         }

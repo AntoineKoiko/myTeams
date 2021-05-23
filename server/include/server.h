@@ -97,9 +97,9 @@ void free_str_array(char **str_array);
 
 // REQUEST TOOLS
 void clean_user(user_t **user);
-int is_subscribed(database_t *db, uuid_t team_uuid, uuid_t user_uuid);
+bool is_subscribed(database_t *db, uuid_t team_uuid, uuid_t user_uuid);
 void reset_uuid_t(uuid_t uuid);
-int is_sub_and_coonect(database_t *db, uuid_t team_uuid, user_t *user);
+bool is_sub_and_connected(database_t *db, uuid_t team_uuid, user_t *user);
 
 // buffer preparing
 size_t put_uuid(unsigned char *buff, uuid_t uuid, size_t *cursor);
