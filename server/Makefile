@@ -83,6 +83,7 @@ SRC		=	$(DSETUP)/get_args.c					\
 			$(DSRC)/requests/send.c					\
 			$(DSRC)/requests/user.c					\
 			$(DSRC)/requests/subscribed.c			\
+			$(DSRC)/requests/subscribe.c			\
 			$(DSRC)/requests/create_req.c			\
 			$(DSRC)/requests/create_team.c			\
 			$(DSRC)/requests/create_channel.c		\

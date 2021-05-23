@@ -183,6 +183,9 @@ int info_thread_request(teams_server_t *server, session_list_t *session,
 int send_request(teams_server_t *server, session_list_t *session,
                         char **argv);
 
+int subscribe_request(teams_server_t *server, session_list_t *session,
+                        char **argv);
+
 int subscribed_request(teams_server_t *server, session_list_t *session,
                         char **argv);
 int user_request(N_U teams_server_t *server, session_list_t *session,
