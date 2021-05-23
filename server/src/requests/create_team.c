@@ -18,7 +18,7 @@ static int team_created(teams_server_t *server, session_list_t *session,
                                         &cursor);
     session->cnt.output_size += size_buf;
     STAILQ_FOREACH(s, &server->session_head, next) {
-        if (session->logged_in) {
+        if (s->logged_in) {
             cursor = s->cnt.output_size;
             size_buf = prepare_team_buffer(s->cnt.output_buff, team, 242,
                                             &cursor);
