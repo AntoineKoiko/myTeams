@@ -71,6 +71,7 @@ SRC		=	$(DSETUP)/get_args.c					\
 			\
 			$(DSRC)/requests/prepare_buffer.c		\
 			$(DSRC)/requests/prepare_buffer_uuid.c	\
+			$(DSRC)/requests/prepare_buffer_msg.c	\
 			$(DSRC)/requests/is_subscribed.c		\
 			$(DSRC)/requests/reset_uuid_t.c			\
 			$(DSRC)/requests/put_types.c			\
@@ -79,6 +80,9 @@ SRC		=	$(DSETUP)/get_args.c					\
 			$(DSRC)/requests/login.c				\
 			$(DSRC)/requests/logout.c				\
 			$(DSRC)/requests/use.c					\
+			$(DSRC)/requests/send.c					\
+			$(DSRC)/requests/user.c					\
+			$(DSRC)/requests/subscribed.c			\
 			$(DSRC)/requests/create_req.c			\
 			$(DSRC)/requests/create_team.c			\
 			$(DSRC)/requests/create_channel.c		\
@@ -90,10 +94,12 @@ SRC		=	$(DSETUP)/get_args.c					\
 			$(DSRC)/requests/list_thread.c			\
 			$(DSRC)/requests/list_reply.c			\
 			$(DSRC)/requests/list_user.c			\
+			$(DSRC)/requests/list_message.c			\
 			$(DSRC)/requests/info_team.c			\
 			$(DSRC)/requests/info_user.c			\
 			$(DSRC)/requests/info_channel.c			\
 			$(DSRC)/requests/info_thread.c			\
+			$(DSRC)/requests/find_user_in_session.c	\
 			$(DSRC)/requests/uuid_is_in_arr.c		\
 			\
 			$(TOOLS)/uuid.c		\

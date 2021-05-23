@@ -115,63 +115,89 @@ size_t put_channel(unsigned char *buff, channel_t *chan, size_t *cursor);
 size_t put_thread(unsigned char *buff, thread_t *thread, size_t *cursor);
 size_t put_reply(unsigned char *buff, reply_t *reply, size_t *cursor);
 size_t put_user(unsigned char *buff, user_t *user, size_t *cursor);
+size_t put_msg(unsigned char *buff, msg_t *msg, size_t *cursor);
 
-size_t prepare_team_buffer(
-    unsigned char *buff, team_t *team, int code, size_t *cursor);
-size_t prepare_channel_buffer(
-    unsigned char *buff, channel_t *chan, int code, size_t *cursor);
-size_t prepare_thread_buffer(
-    unsigned char *buff, thread_t *thread, int code, size_t *cursor);
-size_t prepare_reply_buffer(
-    unsigned char *buff, reply_t *reply, int code, size_t *cursor);
-size_t prepare_user_buffer(
-    unsigned char *buff, user_t *user, int code, size_t *cursor);
-size_t prepare_uuid_buffer(
-    unsigned char *buff, uuid_t uuid, int code, size_t *cursor);
+size_t prepare_team_buffer(unsigned char *buff, team_t *team, int code,
+                        size_t *cursor);
+size_t prepare_channel_buffer(unsigned char *buff, channel_t *chan, int code,
+                        size_t *cursor);
+size_t prepare_thread_buffer(unsigned char *buff, thread_t *thread, int code,
+                        size_t *cursor);
+size_t prepare_reply_buffer(unsigned char *buff, reply_t *reply, int code,
+                        size_t *cursor);
+size_t prepare_user_buffer(unsigned char *buff, user_t *user, int code,
+                            size_t *cursor);
+size_t prepare_uuid_buffer(unsigned char *buff, uuid_t uuid, int code,
+                        size_t *cursor);
+size_t prepare_msg_buffer(unsigned char *buff, msg_t *msg, int code,
+                        size_t *cursor);
 
-// requests
-int login_request(
-    teams_server_t *server, session_list_t *session, char **argv);
-int logout_request(
-    teams_server_t *server, session_list_t *session, char **argv);
-int use_request(teams_server_t *server, session_list_t *session, char **argv);
+//requests
+int login_request(teams_server_t *server, session_list_t *session,
+                    char **argv);
+int logout_request(teams_server_t *server, session_list_t *session,
+                    char **argv);
+int use_request(teams_server_t *server, session_list_t *session,
+                    char **argv);
 
-// CREATE REQUESTS:
+//CREATE REQUESTS:
 
-int create_request(
-    teams_server_t *server, session_list_t *session, char **argv);
+int create_request(teams_server_t *server, session_list_t *session,
+    char **argv);
 
-int create_team_request(
-    teams_server_t *server, session_list_t *session, char **argv);
-int create_channel_request(
-    teams_server_t *server, session_list_t *session, char **argv);
-int create_thread_request(
-    teams_server_t *server, session_list_t *session, char **argv);
-int create_reply_request(
-    teams_server_t *server, session_list_t *session, char **argv);
+int create_team_request(teams_server_t *server, session_list_t *session,
+                    char **argv);
+int create_channel_request(teams_server_t *server, session_list_t *session,
+                    char **argv);
+int create_thread_request(teams_server_t *server, session_list_t *session,
+                    char **argv);
+int create_reply_request(teams_server_t *server, session_list_t *session,
+                        char **argv);
 
-// LIST REQUESTS:
+//LIST REQUESTS:
 
-int list_request(teams_server_t *server, session_list_t *session, char **argv);
-int list_team_request(
-    teams_server_t *server, session_list_t *session, char **argv);
-int list_channel_request(
-    teams_server_t *server, session_list_t *session, char **argv);
-int list_thread_request(
-    teams_server_t *server, session_list_t *session, char **argv);
-int list_reply_request(
-    teams_server_t *server, session_list_t *session, char **argv);
-int list_user_request(
-    teams_server_t *server, session_list_t *session, N_U char **argv);
+int list_request(teams_server_t *server, session_list_t *session,
+    char **argv);
+int list_team_request(teams_server_t *server, session_list_t *session,
+                        char **argv);
+int list_channel_request(teams_server_t *server, session_list_t *session,
+                        char **argv);
+int list_thread_request(teams_server_t *server, session_list_t *session,
+                        char **argv);
+int list_reply_request(teams_server_t *server, session_list_t *session,
+                        char **argv);
+int list_user_request(teams_server_t *server, session_list_t *session,
+                        N_U char **argv);
+int list_message_request(teams_server_t *server, session_list_t *session,
+                        char **argv);
 
-int info_team_request(
-    teams_server_t *server, session_list_t *session, char **argv);
-int info_user_request(
-    teams_server_t *server, session_list_t *session, char **argv);
-int info_channel_request(
-    teams_server_t *server, session_list_t *session, char **argv);
-int info_thread_request(
-    teams_server_t *server, session_list_t *session, char **argv);
+int info_team_request(teams_server_t *server, session_list_t *session,
+                        char **argv);
+int info_user_request(teams_server_t *server, session_list_t *session,
+                        char **argv);
+int info_channel_request(teams_server_t *server, session_list_t *session,
+                        char **argv);
+int info_thread_request(teams_server_t *server, session_list_t *session,
+                        char **argv);
+
+int send_request(teams_server_t *server, session_list_t *session,
+                        char **argv);
+
+int subscribed_request(teams_server_t *server, session_list_t *session,
+                        char **argv);
+int user_request(N_U teams_server_t *server, session_list_t *session,
+                        char **argv);
+
+// thread_node_t *find_thread_by_uuid(database_t *db, uuid_t tm_uuid,
+//                                     uuid_t chan_uuid, uuid_t thread_uuid);
+// thread_node_t *find_thread_by_name(database_t *db, uuid_t tm_uuid,
+//                                     uuid_t chan_uuid, const char *name);
+
+session_list_t *find_user_session_by_name(teams_server_t *server,
+                                            const char *user_name);
+session_list_t *find_user_session_by_uuid(teams_server_t *server,
+                                            uuid_t user_uuid);
+
 
 int uuid_is_in_arr(uuid_t *uuid_arr, uuid_t to_compare);
 
