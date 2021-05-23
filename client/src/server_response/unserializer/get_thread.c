@@ -18,6 +18,6 @@ thread_t *get_thread(unsigned char *buff, size_t *it)
     get_uuid(thread->user_uuid, buff, it);
     get_time_t(&thread->thread_timestamp, buff, it);
     get_str(thread->thread_title, buff, it);
-    get_str(thread->thread_title, buff, it);
+    get_str(thread->thread_body, buff, it);
     return thread;
 }

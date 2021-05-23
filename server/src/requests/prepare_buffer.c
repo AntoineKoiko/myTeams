@@ -39,6 +39,7 @@ size_t prepare_thread_buffer(unsigned char *buff, thread_t *thread, int code,
     size_t written_size = (*cursor);
     size_t packet_size = sizeof(int) + ((sizeof(uuid_t) + 1) * 3);
 
+    packet_size += sizeof(time_t) + 1;
     packet_size += strlen(thread->thread_body) + 1
         + strlen(thread->thread_title) + 1;
     put_protocol(buff, packet_size, code, cursor);
