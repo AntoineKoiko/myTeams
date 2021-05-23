@@ -1,19 +1,19 @@
 /*
 ** EPITECH PROJECT, 2021
-** count_teams.c
+** count_users.c
 ** File description:
-** Count teams
+** Count users
 */
 
 #include "server_error.h"
 #include "database/database.h"
 
-NON_NULL(2) int count_team_nodes(size_t *count, const database_t *db)
+NON_NULL(2) int count_user_nodes(size_t *count, const database_t *db)
 {
-    team_node_t *it = NULL;
+    user_node_t *my_user = NULL;
 
     *count = 0;
-    SLIST_FOREACH(it, &(db->teams), next)
+    SLIST_FOREACH(my_user, &(db->users), next)
     {
         (*count)++;
     }

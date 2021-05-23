@@ -14,10 +14,10 @@ typedef struct database_s database_t;
 typedef enum file_types_e
 {
     TEAMS,
-    USERS,
     CHANNELS,
     THREADS,
     REPLIES,
+    USERS,
     MESSAGES
 } file_types_t;
 

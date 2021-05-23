@@ -34,11 +34,11 @@ NON_NULL(2)
 int save_users(const int fd, const database_t *db)
 {
     int my_ret_val = EXIT_SUCCESS;
-    user_node_t *it = NULL;
+    user_node_t *my_user = NULL;
 
-    SLIST_FOREACH(it, &db->users, next)
+    SLIST_FOREACH(my_user, &db->users, next)
     {
-        my_ret_val = save_user(fd, it);
+        my_ret_val = save_user(fd, my_user);
         if (my_ret_val != EXIT_SUCCESS)
             return my_ret_val;
     }

@@ -39,6 +39,11 @@ channel_t *new_channel(const uuid_t team_uuid,
     const char name[MAX_NAME_LENGTH],
     const char description[MAX_DESCRIPTION_LENGTH]);
 
+NON_NULL(2)
+int count_channel_nodes(size_t *count, const database_t *db);
+
+NON_NULL(2) int load_channels(int fd, database_t *db, size_t elements_nb);
+
 int save_channels(int fd, const database_t *db);
 
 #endif // SERVER_DATA_CHANNELS_H
