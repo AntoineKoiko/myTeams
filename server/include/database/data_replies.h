@@ -28,6 +28,13 @@ int insert_reply(database_t *db, const uuid_t team_uuid,
 reply_t *new_reply(const uuid_t team_uuid, const uuid_t thread_uuid,
     const uuid_t user_uuid, const char body[MAX_BODY_LENGTH]);
 
+NON_NULL(2)
+int count_reply_nodes(size_t *count, const database_t *db);
+
+NON_NULL(2)
+int load_replies(int fd, database_t *db, size_t elements_nb);
+
+NON_NULL(2)
 int save_replies(int fd, const database_t *db);
 
 #endif // SERVER_DATA_REPLIES_H

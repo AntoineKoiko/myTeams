@@ -42,6 +42,9 @@ user_t *new_user(const char name[MAX_NAME_LENGTH]);
 int save_users(int fd, const database_t *db);
 
 NON_NULL(2)
+int count_user_nodes(size_t *count, const database_t *db);
+
+NON_NULL(2)
 int load_users(int fd, database_t *db, size_t elements_nb);
 
 NON_NULL(1) int insert_user(database_t *db, const char name[MAX_NAME_LENGTH]);
