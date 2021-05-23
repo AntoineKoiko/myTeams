@@ -18,8 +18,8 @@ void dump_db(const database_t *db)
 
     printf("\nDUMP %i\n", nb);
     for (uint i = 0; i < NB_DATA_FILE_TYPE; ++i) {
-        if (data_files[i].dump_function)
-            data_files[i].dump_function(db);
+        if (DB_DUMP(i))
+            DB_DUMP(i)(db);
     }
     printf("DUMP END\n");
     nb++;

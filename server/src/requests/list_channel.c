@@ -10,25 +10,22 @@
 static void get_channel_list(team_node_t *cur_team, session_list_t *session)
 {
     channel_node_t *node = NULL;
-    size_t cursor = session->cnt.output_size;
-    size_t size_buf = 0;
+    size_t *cursor = &session->cnt.output_size;
+    unsigned char *buf = session->cnt.output_buff;
 
     SLIST_FOREACH(node, &cur_team->channels, next) {
-        size_buf = prepare_channel_buffer(session->cnt.output_buff,
-                                            node->channel_data, 223, &cursor);
-        session->cnt.output_size += size_buf;
+        prepare_channel_buffer(buf, node->channel_data, 223, cursor);
     }
 }
 
 int list_channel_request(teams_server_t *server, session_list_t *session,
-                        char **argv)
+                        N_U char **argv)
 {
-    team_node_t *cur_team = find_team_by_uuid(server->database,
-                                            session->team_ctx);
+    team_node_t *team = NULL;
 
-    (void)argv;
-    if (!cur_team)
+    team = find_team_by_uuid(server->database, session->team_ctx);
+    if (!team)
         return EXIT_FAILURE;
-    get_channel_list(cur_team, session);
+    get_channel_list(team, session);
     return EXIT_SUCCESS;
 }

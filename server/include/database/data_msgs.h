@@ -27,6 +27,13 @@ int insert_msg(database_t *db, const uuid_t sender, const uuid_t receiver,
 msg_t *new_msg(const uuid_t sender_uuid, const uuid_t receiver_uuid,
     const char body[MAX_BODY_LENGTH]);
 
-int save_msgs(int fd, const database_t *db, size_t elements_nb);
+NON_NULL(2)
+int count_msg_nodes(size_t *count, const database_t *db);
+
+NON_NULL(2)
+int load_msgs(int fd, database_t *db, size_t elements_nb);
+
+NON_NULL(2)
+int save_msgs(int fd, const database_t *db);
 
 #endif // SERVER_DATA_MESSAGES_H

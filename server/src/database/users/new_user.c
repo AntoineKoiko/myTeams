@@ -9,7 +9,7 @@
 
 user_t *new_user(const char name[MAX_NAME_LENGTH])
 {
-    user_t *user = malloc(sizeof(user_t));
+    user_t *user = calloc(1, sizeof(user_t));
 
     if (user == NULL)
         return NULL;

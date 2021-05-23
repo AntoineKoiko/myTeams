@@ -9,12 +9,9 @@
 
 static void get_thread_info(session_list_t *session, thread_t *thread)
 {
-    size_t cursor = session->cnt.output_size;
-    size_t size_buf = 0;
+    size_t *cursor = &session->cnt.output_size;
 
-    size_buf = prepare_thread_buffer(session->cnt.output_buff, thread,
-                                    214, &cursor);
-    session->cnt.output_size += size_buf;
+    prepare_thread_buffer(session->cnt.output_buff, thread, 214, cursor);
 }
 
 int info_thread_request(teams_server_t *server, session_list_t *session,

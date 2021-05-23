@@ -37,22 +37,26 @@ fclean:
 	rm -rf $(SERVER_NAME)
 	rm -rf $(CLIENT_NAME)
 
-re: 
+re:
 	rm -rf $(SERVER_NAME)
 	rm -rf $(CLIENT_NAME)
 	make re -C $(SERVER_D)
 	make re -C $(CLIENT_D)
 
+debug:
+	make debug -C $(SERVER_D)
+	make debug -C $(CLIENT_D)
+
 clean_server:
 	make clean -C $(SERVER_D)
-	
+
 clean_client:
 	make clean -C $(CLIENT_D)
 
 fclean_server:
 	make fclean -C $(SERVER_D)
 	rm -rf $(SERVER_NAME)
-	
+
 fclean_cliennt:
 	make fclean -C $(CLIENT_D)
 	rm -rf $(CLIENT_NAME)
@@ -60,9 +64,17 @@ fclean_cliennt:
 re_server:
 	rm -rf $(SERVER_NAME)
 	make re -C $(SERVER_D)
-	
+
 re_client:
 	rm -rf $(CLIENT_NAME)
 	make re -C $(CLIENT_D)
+
+.PHONY: all $(SERVER_NAME)  $(CLIENT_NAME) clean fclean re clean_server clean_client fclean_server fclean_cliennt re_server re_client
+
+debug_server:
+	make debug -C $(SERVER_D)
+
+debug_client:
+	make debug -C $(CLIENT_D)
 
 .PHONY: all $(SERVER_NAME)  $(CLIENT_NAME) clean fclean re clean_server clean_client fclean_server fclean_cliennt re_server re_client

@@ -49,10 +49,8 @@ size_t put_thread(unsigned char *buff, thread_t *thread, size_t *cursor)
     (*cursor)++;
     put_time_t(buff, thread->thread_timestamp, cursor);
     (*cursor)++;
-    ;
     put_string(buff, thread->thread_title, cursor);
     (*cursor)++;
-    ;
     put_string(buff, thread->thread_body, cursor);
     (*cursor)++;
     return ((*cursor) - written_size);

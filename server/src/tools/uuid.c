@@ -6,13 +6,18 @@
 */
 
 #include <uuid/uuid.h>
-#include "attributes.h"
+#include "server_error.h"
+#include "tools.h"
 
-NON_NULL(1) size_t uuid_array_len(uuid_t *array)
+NON_NULL(3)
+int write_uuid_array(const int fd, const size_t nb_elems, const uuid_t *array)
 {
-    size_t my_count = 0;
+    int my_ret_val = EXIT_SUCCESS;
 
-    while (array[my_count])
-        my_count++;
-    return my_count;
+    if (!nb_elems)
+        return EXIT_SUCCESS;
+    my_ret_val = write_and_check(fd, &nb_elems, sizeof(size_t));
+    if (my_ret_val != EXIT_SUCCESS)
+        return my_ret_val;
+    return write_and_check(fd, array, nb_elems * sizeof(uuid_t));
 }

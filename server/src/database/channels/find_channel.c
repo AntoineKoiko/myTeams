@@ -27,7 +27,7 @@ channel_node_t *find_channel_by_team_thread(
     return NULL;
 }
 
-channel_node_t *find_channel_by_uuid(
+channel_node_t *find_channel_by_team(
     const database_t *db, const uuid_t tm_uuid, const uuid_t chan_uuid)
 {
     channel_node_t *node = NULL;
@@ -41,6 +41,25 @@ channel_node_t *find_channel_by_uuid(
         buf = node->channel_data;
         if (uuid_compare(buf->channel_uuid, chan_uuid) == 0)
             return node;
+    }
+    return NULL;
+}
+
+channel_node_t *find_channel_by_uuid(
+    const database_t *db, const uuid_t chan_to_find)
+{
+    channel_node_t *my_channel = NULL;
+    team_node_t *my_team = NULL;
+
+    SLIST_FOREACH(my_team, &db->teams, next)
+    {
+        SLIST_FOREACH(my_channel, &my_team->channels, next)
+        {
+            if (uuid_compare(my_channel->channel_data->channel_uuid,
+                    chan_to_find)
+                == 0)
+                return my_channel;
+        }
     }
     return NULL;
 }

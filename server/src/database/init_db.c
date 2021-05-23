@@ -8,7 +8,7 @@
 #include "database/database.h"
 #include "database/data_teams.h"
 #include "server_error.h"
-#include "my_queue.h"
+#include <sys/queue.h>
 
 NON_NULL(1) int init_db(database_t **db)
 {

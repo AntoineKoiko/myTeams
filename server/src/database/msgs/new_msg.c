@@ -10,7 +10,7 @@
 msg_t *new_msg(const uuid_t sender_uuid, const uuid_t receiver_uuid,
     const char body[MAX_BODY_LENGTH])
 {
-    msg_t *msg = malloc(sizeof(msg_t));
+    msg_t *msg = calloc(1, sizeof(msg_t));
 
     if (msg == NULL)
         return NULL;
