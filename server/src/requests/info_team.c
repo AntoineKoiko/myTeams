@@ -9,22 +9,19 @@
 
 static void get_team_info(session_list_t *session, team_t *team)
 {
-    size_t cursor = session->cnt.output_size;
-    size_t size_buf = 0;
+    size_t *cursor = &session->cnt.output_size;
 
-    size_buf = prepare_team_buffer(session->cnt.output_buff, team,
-                                    212, &cursor);
-    session->cnt.output_size += size_buf;
+    prepare_team_buffer(session->cnt.output_buff, team, 212, cursor);
 }
 
 int info_team_request(teams_server_t *server, session_list_t *session,
                         N_U char **argv)
 {
-    team_node_t *cur_team = find_team_by_uuid(server->database,
-                                            session->team_ctx);
+    team_node_t *team = NULL;
 
-    if (!cur_team)
+    team = find_team_by_uuid(server->database, session->team_ctx);
+    if (!team)
         return EXIT_FAILURE;
-    get_team_info(session, cur_team->team_data);
+    get_team_info(session, team->team_data);
     return EXIT_SUCCESS;
 }

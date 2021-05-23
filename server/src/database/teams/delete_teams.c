@@ -6,7 +6,7 @@
 */
 
 #include "database/database.h"
-#include <sys/queue.h>
+#include "database/data_teams.h"
 
 static void delete_team(team_node_t *team)
 {
@@ -17,13 +17,11 @@ static void delete_team(team_node_t *team)
 void delete_teams(database_t *db)
 {
     team_node_t *it = NULL;
-    team_node_t *last_it = NULL;
 
-    SLIST_FOREACH(it, &db->teams, next)
-    {
-        SLIST_REMOVE(&db->teams, last_it, team_node_s, next);
+    while (!SLIST_EMPTY(&db->teams)) {
+        it = SLIST_FIRST(&db->teams);
+        SLIST_REMOVE_HEAD(&db->teams, next);
         delete_team(it);
-        last_it = it;
-        // TODO add node removal
+        free(it);
     }
 }

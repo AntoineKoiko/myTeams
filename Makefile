@@ -70,3 +70,11 @@ re_client:
 	make re -C $(CLIENT_D)
 
 .PHONY: all $(SERVER_NAME)  $(CLIENT_NAME) clean fclean re clean_server clean_client fclean_server fclean_cliennt re_server re_client
+
+debug_server:
+	make debug -C $(SERVER_D)
+
+debug_client:
+	make debug -C $(CLIENT_D)
+
+.PHONY: all $(SERVER_NAME)  $(CLIENT_NAME) clean fclean re clean_server clean_client fclean_server fclean_cliennt re_server re_client

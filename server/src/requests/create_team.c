@@ -18,43 +18,65 @@ static int team_created(teams_server_t *server, session_list_t *session,
                                         &cursor);
     session->cnt.output_size += size_buf;
     STAILQ_FOREACH(s, &server->session_head, next) {
-        if (is_sub_and_coonect(server->database, team->team_uuid,
-                                        s->user->user_data) == EXIT_SUCCESS) {
+        if (s->logged_in) {
             cursor = s->cnt.output_size;
             size_buf = prepare_team_buffer(s->cnt.output_buff, team, 242,
                                             &cursor);
             s->cnt.output_size += size_buf;
         }
     }
-    //SLIST_INSERT_AFTER(server->database->teams.slh_first, team, next);
     return EXIT_SUCCESS;
 }
 
-static int creation_failed(session_list_t *session)
-{
-    size_t packet_size = sizeof(int);
-    size_t cursor = session->cnt.output_size;
-    int code = 412;
+// static int creation_failed(session_list_t *session)
+// {
+//     size_t packet_size = sizeof(int);
+//     size_t cursor = session->cnt.output_size;
+//     int code = 412;
 
-    session->cnt.output_size += put_protocol(session->cnt.output_buff,
-                                            packet_size, code, &cursor);
+//     session->cnt.output_size += put_protocol(session->cnt.output_buff,
+//                                             packet_size, code, &cursor);
+//     return EXIT_SUCCESS;
+// }
+
+static int check_error(session_list_t *session, teams_server_t *server,
+    const char **argv)
+{
+    size_t argc = 0;
+
+    if (!argv)
+        return EXIT_ERROR;
+    argc = str_array_len(argv);
+    if (argc != 2)
+        return EXIT_ERROR;
+    if (find_team_by_name(server->database, argv[0])) {
+        put_protocol(session->cnt.output_buff, sizeof(int), 402,
+            &session->cnt.output_size);
+        return EXIT_FAILURE;
+    }
     return EXIT_SUCCESS;
 }
 
-int create_team_request(teams_server_t *server, session_list_t *session,
-                        char **argv)
+int create_team_request(teams_server_t *server, session_list_t *session, char **argv)
 {
-    team_t *team = new_team(argv[0], argv[1],
-                        session->user->user_data->user_uuid);
+    team_node_t *team = NULL;
     char tm_uuid[UUID_STR_LEN] = {0};
     char creator_uuid[UUID_STR_LEN] = {0};
+    int ret = 0;
 
-    if (team) {
-        team_created(server, session, team);
-        uuid_unparse_lower(team->team_uuid, tm_uuid);
-        uuid_unparse_lower(team->team_creator, creator_uuid);
-        server_event_team_created(tm_uuid, team->team_name, creator_uuid);
-    } else
-        creation_failed(session);
+    ret = check_error(session, server, (const char **)argv);
+    if (ret)
+        return ret;
+    if (insert_team(server->database, argv[0], argv[1],
+        session->user->user_data->user_uuid) == ERR_NO_VAL)
+        return EXIT_ERROR;
+    team = find_team_by_name(server->database, argv[0]);
+    if (team == NULL)
+        return EXIT_ERROR;
+    uuid_unparse_lower(team->team_data->team_uuid, tm_uuid);
+    uuid_unparse_lower(team->team_data->team_creator, creator_uuid);
+    server_event_team_created(tm_uuid, team->team_data->team_name,
+        creator_uuid);
+    team_created(server, session, team->team_data);
     return EXIT_SUCCESS;
 }

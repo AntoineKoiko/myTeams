@@ -11,65 +11,74 @@ static int channel_created(teams_server_t *server, session_list_t *session,
                         channel_t *chan)
 {
     session_list_t *s = NULL;
-    size_t cursor = session->cnt.output_size;
-    size_t size_buf = 0;
+    size_t *cursor = &session->cnt.output_size;
 
-    size_buf = prepare_channel_buffer(session->cnt.output_buff, chan, 233,
-                                        &cursor);
-    session->cnt.output_size += size_buf;
+    prepare_channel_buffer(session->cnt.output_buff, chan, 233, cursor);
     STAILQ_FOREACH(s, &server->session_head, next) {
-        if (is_sub_and_coonect(server->database, chan->team_uuid,
-                                    s->user->user_data) == EXIT_SUCCESS) {
-            cursor = s->cnt.output_size;
-            size_buf = prepare_channel_buffer(s->cnt.output_buff, chan, 243,
-                                            &cursor);
-            s->cnt.output_size += size_buf;
+        if (is_sub_and_connected(server->database, chan->team_uuid,
+                                    s->user->user_data)
+            && session->cnt.socket != s->cnt.socket) {
+            cursor = &s->cnt.output_size;
+            prepare_channel_buffer(s->cnt.output_buff, chan, 243, cursor);
         }
     }
-    //SLIST_INSERT_AFTER(server->database->teams.slh_first, team, next);
     return EXIT_SUCCESS;
 }
 
-static int creation_failed(session_list_t *session)
-{
-    size_t packet_size = sizeof(int);
-    size_t cursor = session->cnt.output_size;
-    int code = 413;
+// static int creation_failed(session_list_t *session)
+// {
+//     size_t packet_size = sizeof(int);
+//     size_t *cursor = &session->cnt.output_size;
+//     int code = 413;
 
-    session->cnt.output_size += put_protocol(session->cnt.output_buff,
-                                            packet_size, code, &cursor);
+//     put_protocol(session->cnt.output_buff, packet_size, code, cursor);
+//     return EXIT_SUCCESS;
+// }
+
+static int check_error(session_list_t *session, teams_server_t *server,
+    const char **argv)
+{
+    size_t argc = 0;
+
+    if (!argv)
+        return EXIT_ERROR;
+    argc = str_array_len(argv);
+    if (argc != 2)
+        return EXIT_ERROR;
+    if (find_channel_by_name(server->database, session->team_ctx, argv[0])) {
+        put_protocol(session->cnt.output_buff, sizeof(int), 402,
+            &session->cnt.output_size);
+        return EXIT_FAILURE;
+    }
+    if (!is_subscribed(server->database, session->team_ctx,
+        session->user->user_data->user_uuid)) {
+        put_protocol(session->cnt.output_buff, sizeof(int), 401,
+            &session->cnt.output_size);
+        return EXIT_FAILURE;
+    }
     return EXIT_SUCCESS;
-}
-
-//TODO : push new obj in db
-static channel_t *create_process(teams_server_t *server, session_list_t *ses,
-                                    char **argv)
-{
-    channel_t *channel = NULL;
-    team_node_t *node = find_team_by_uuid(server->database, ses->team_ctx);
-
-    if (!node)
-        return NULL;
-    channel = new_channel(ses->team_ctx, argv[0], argv[1]);
-    if (!channel)
-        return NULL;
-    return channel;
 }
 
 int create_channel_request(teams_server_t *server, session_list_t *session,
                         char **argv)
 {
+    channel_node_t *chan = NULL;
     char tm_uuid[UUID_STR_LEN] = {0};
     char chan_uuid[UUID_STR_LEN] = {0};
-    channel_t *chan = create_process(server, session, argv);
+    int ret = 0;
 
-    if (!chan) {
-        creation_failed(session);
-    } else {
-        channel_created(server, session, chan);
-        uuid_unparse_lower(chan->channel_uuid, chan_uuid);
-        uuid_unparse_lower(chan->team_uuid, tm_uuid);
-        server_event_channel_created(tm_uuid, chan_uuid, chan->channel_name);
+    ret = check_error(session, server, (const char **)argv);
+    if (ret)
+        return ret;
+    if (insert_channel(server->database, session->team_ctx, argv[0], argv[1])
+        == ERR_NO_VAL) {
+            return EXIT_ERROR;
     }
+    chan = find_channel_by_name(server->database, session->team_ctx, argv[0]);
+    channel_created(server, session, chan->channel_data);
+    uuid_unparse_lower(chan->channel_data->channel_uuid, chan_uuid);
+    uuid_unparse_lower(chan->channel_data->team_uuid, tm_uuid);
+    server_event_channel_created(tm_uuid, chan_uuid,
+        chan->channel_data->channel_name);
     return EXIT_SUCCESS;
 }

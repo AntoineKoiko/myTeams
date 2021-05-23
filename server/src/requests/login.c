@@ -40,6 +40,7 @@ int login_request(teams_server_t *server, session_list_t *session,
     }
     session->user = user;
     session->logged_in = true;
+    session->user->user_data->status = CONNECTED;
     prepare_buffer(server, session);
     uuid_unparse_lower(session->user->user_data->user_uuid, uuid);
     server_event_user_logged_in(uuid);

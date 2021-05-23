@@ -9,12 +9,10 @@
 
 static void get_user_info(session_list_t *session)
 {
-    size_t cursor = session->cnt.output_size;
-    size_t size_buf = 0;
+    size_t *cursor = &session->cnt.output_size;
+    user_t *user = session->user->user_data;
 
-    size_buf = prepare_user_buffer(session->cnt.output_buff,
-        session->user->user_data, 211, &cursor);
-    session->cnt.output_size += size_buf;
+    prepare_user_buffer(session->cnt.output_buff, user, 211, cursor);
 }
 
 int info_user_request(N_U teams_server_t *server, session_list_t *session,
