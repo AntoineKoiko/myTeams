@@ -22,18 +22,6 @@ static inline int load_user_teams(
         fd, &(*user)->subscribed_teams, teams * sizeof(uuid_t));
 }
 
-// NON_NULL(2)
-// static int load_user(const int fd, user_node_t *user, const size_t teams)
-//{
-//     int my_ret_val = EXIT_SUCCESS;
-//
-//     my_ret_val = load_user_teams(fd, user, teams);
-//     if (my_ret_val != EXIT_SUCCESS)
-//         return my_ret_val;
-//     my_ret_val = read_and_check(fd, user->user_data, sizeof(user_t));
-//     return my_ret_val;
-// }
-
 NON_NULL(2, 3)
 static int init_user_node(const int fd, user_node_t **user, size_t *teams)
 {
