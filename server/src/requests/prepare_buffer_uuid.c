@@ -15,5 +15,6 @@ size_t prepare_uuid_buffer(unsigned char *buff, uuid_t uuid, int code,
 
     put_protocol(buff, packet_size, code, cursor);
     put_uuid(buff, uuid, cursor);
+    *cursor = *cursor + 1;
     return ((*cursor) - written_size);
 }
