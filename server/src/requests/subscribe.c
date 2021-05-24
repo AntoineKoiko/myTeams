@@ -62,7 +62,9 @@ int subscribe_request(teams_server_t *server, session_list_t *session,
     uuid_parse(argv[0], team_uuid);
     team = find_team_by_uuid(server->database, team_uuid);
     if (team == NULL) {
-        put_protocol(session->cnt.output_buff, sizeof(int), 402,
+        prepare_uuid_buffer(session->cnt.output_buff,
+            team_uuid,
+            412,
             &session->cnt.output_size);
         return EXIT_FAILURE;
     }
