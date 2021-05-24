@@ -51,7 +51,7 @@ size_t prepare_reply_buffer(unsigned char *buff, reply_t *reply, int code,
                             size_t *cursor)
 {
     size_t written_size = (*cursor);
-    size_t packet_size = sizeof(int) + ((sizeof(uuid_t) + 1) * 3);
+    size_t packet_size = sizeof(int) + ((sizeof(uuid_t) + 1) * 4);
 
     packet_size += strlen(reply->reply_body) + 1 + sizeof(time_t) + 1;
     put_protocol(buff, packet_size, code, cursor);

@@ -153,6 +153,7 @@ SRC		=	$(DSETUP)/get_args.c					\
 			$(DDB_REPLIES)/save_replies.c		\
 			$(DDB_REPLIES)/insert_replies.c		\
             $(DDB_REPLIES)/new_reply.c 			\
+			$(DDB_REPLIES)/find_replies.c		\
 			$(DDB_REPLIES)/delete_replies.c		\
 			\
 			$(DDB_USERS)/count_users.c		\

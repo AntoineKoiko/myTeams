@@ -13,6 +13,7 @@
 #include "max_size.h"
 
 typedef struct {
+    uuid_t reply_uuid;
     uuid_t team_uuid;
     uuid_t thread_uuid;
     time_t reply_timestamp;
