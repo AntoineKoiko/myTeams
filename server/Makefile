@@ -96,6 +96,7 @@ SRC		=	$(DSETUP)/get_args.c					\
 			$(DSRC)/requests/list_reply.c			\
 			$(DSRC)/requests/list_user.c			\
 			$(DSRC)/requests/list_message.c			\
+			$(DSRC)/requests/info_req.c				\
 			$(DSRC)/requests/info_team.c			\
 			$(DSRC)/requests/info_user.c			\
 			$(DSRC)/requests/info_channel.c			\
@@ -107,6 +108,8 @@ SRC		=	$(DSETUP)/get_args.c					\
 			$(TOOLS)/str_array.c\
 			$(TOOLS)/read.c		\
 			$(TOOLS)/write.c	\
+			$(TOOLS)/free.c		\
+			$(TOOLS)/calloc.c	\
 			\
 			$(DDATABASE)/database_constants.c	\
 			\
@@ -125,10 +128,10 @@ SRC		=	$(DSETUP)/get_args.c					\
 			$(DDB_TEAMS)/load_teams.c		\
 			$(DDB_TEAMS)/save_teams.c		\
 			$(DDB_TEAMS)/insert_teams.c		\
-			$(DDB_TEAMS)/delete_teams.c		\
-			$(DDB_TEAMS)/dump_teams.c		\
             $(DDB_TEAMS)/new_team.c 		\
             $(DDB_TEAMS)/find_team.c 		\
+			$(DDB_TEAMS)/delete_teams.c		\
+			$(DDB_TEAMS)/dump_teams.c		\
 			\
 			$(DDB_CHANNELS)/count_channels.c	\
 			$(DDB_CHANNELS)/load_channels.c		\
@@ -136,6 +139,7 @@ SRC		=	$(DSETUP)/get_args.c					\
 			$(DDB_CHANNELS)/insert_channels.c	\
             $(DDB_CHANNELS)/new_channel.c 		\
             $(DDB_CHANNELS)/find_channel.c 		\
+			$(DDB_CHANNELS)/delete_channels.c	\
 			\
 			$(DDB_THREADS)/count_threads.c		\
 			$(DDB_THREADS)/load_threads.c		\
@@ -143,12 +147,15 @@ SRC		=	$(DSETUP)/get_args.c					\
 			$(DDB_THREADS)/insert_threads.c		\
             $(DDB_THREADS)/new_thread.c 		\
             $(DDB_THREADS)/find_thread.c 		\
+            $(DDB_THREADS)/delete_threads.c		\
 			\
 			$(DDB_REPLIES)/count_replies.c		\
 			$(DDB_REPLIES)/load_replies.c		\
 			$(DDB_REPLIES)/save_replies.c		\
 			$(DDB_REPLIES)/insert_replies.c		\
             $(DDB_REPLIES)/new_reply.c 			\
+			$(DDB_REPLIES)/find_replies.c		\
+			$(DDB_REPLIES)/delete_replies.c		\
 			\
 			$(DDB_USERS)/count_users.c		\
 			$(DDB_USERS)/load_users.c		\
@@ -156,12 +163,14 @@ SRC		=	$(DSETUP)/get_args.c					\
 			$(DDB_USERS)/insert_users.c		\
 			$(DDB_USERS)/new_user.c 		\
 			$(DDB_USERS)/find_user.c 		\
+			$(DDB_USERS)/delete_users.c		\
 			\
 			$(DDB_MESSAGES)/count_msgs.c	\
 			$(DDB_MESSAGES)/load_msgs.c		\
 			$(DDB_MESSAGES)/save_msgs.c		\
 			$(DDB_MESSAGES)/insert_msgs.c	\
             $(DDB_MESSAGES)/new_msg.c 		\
+			$(DDB_MESSAGES)/delete_msgs.c	\
 
 SRCS	=	$(SRC) $(DSRC)/main.c
 

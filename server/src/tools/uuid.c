@@ -14,10 +14,10 @@ int write_uuid_array(const int fd, const size_t nb_elems, const uuid_t *array)
 {
     int my_ret_val = EXIT_SUCCESS;
 
-    if (!nb_elems)
-        return EXIT_SUCCESS;
     my_ret_val = write_and_check(fd, &nb_elems, sizeof(size_t));
     if (my_ret_val != EXIT_SUCCESS)
         return my_ret_val;
+    if (!nb_elems)
+        return EXIT_SUCCESS;
     return write_and_check(fd, array, nb_elems * sizeof(uuid_t));
 }

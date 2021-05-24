@@ -13,9 +13,9 @@ void close_server(teams_server_t *server)
 {
     if (!server)
         return;
+    destroy_server(server);
     if (server->database) {
         save_db(server->database);
         delete_db(server->database);
     }
-    destroy_server(server);
 }

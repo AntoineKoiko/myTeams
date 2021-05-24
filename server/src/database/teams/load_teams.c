@@ -28,15 +28,17 @@ static int init_team_node(const int fd, team_node_t **team, size_t *users)
     my_ret_val = read_and_check(fd, users, sizeof(size_t));
     if (my_ret_val != EXIT_SUCCESS)
         return my_ret_val;
-    *team = calloc(1, sizeof(team_node_t));
+    *team = calloc_and_check(1, sizeof(team_node_t));
     if (!(*team))
         return ERR_NO_VAL;
-    (*team)->team_data = calloc(1, sizeof(team_t));
+    (*team)->team_data = calloc_and_check(1, sizeof(team_t));
     if (!(*team)->team_data)
         return ERR_NO_VAL;
-    (*team)->subscribed_users = calloc(*users, sizeof(uuid_t));
-    if (!(*team)->subscribed_users)
-        return ERR_NO_VAL;
+    if (*users > 0) {
+        (*team)->subscribed_users = calloc_and_check(*users, sizeof(uuid_t));
+        if (!(*team)->subscribed_users)
+            return ERR_NO_VAL;
+    }
     return EXIT_SUCCESS;
 }
 

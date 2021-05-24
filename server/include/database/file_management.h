@@ -17,7 +17,7 @@
 #include <fcntl.h>
 #include "unistd.h"
 
-#include "database/database_constants.h"
+#include "database_constants.h"
 #include "server_error.h"
 
 typedef struct file_header_s

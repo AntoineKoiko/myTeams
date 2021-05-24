@@ -25,11 +25,11 @@ static int register_reply_db(database_t *db, reply_node_t *reply)
 
 NON_NULL(1) static int init_reply_node(reply_node_t **reply)
 {
-    *reply = calloc(1, sizeof(reply_node_t));
+    *reply = calloc_and_check(1, sizeof(reply_node_t));
 
     if (!(*reply))
         return ERR_NO_VAL;
-    (*reply)->reply_data = calloc(1, sizeof(reply_t));
+    (*reply)->reply_data = calloc_and_check(1, sizeof(reply_t));
     if (!(*reply)->reply_data) {
         free(*reply);
         return ERR_NO_VAL;

@@ -11,7 +11,7 @@
 static msg_node_t *new_msg_node(const uuid_t sender, const uuid_t receiver,
     const char body[MAX_BODY_LENGTH])
 {
-    msg_node_t *my_msg_node = calloc(1, sizeof(msg_node_t));
+    msg_node_t *my_msg_node = calloc_and_check(1, sizeof(msg_node_t));
 
     if (!my_msg_node)
         return NULL;

@@ -25,7 +25,7 @@ static char **get_cmd_arg(size_t arg_size, char *arg)
         arg_array[i] = strdup(arg+ptr);
         if (arg_array[i] == NULL)
             return NULL;
-        ptr = strlen(arg_array[i]) + 1;
+        ptr += strlen(arg_array[i]) + 1;
     }
     arg_array[nb_arg] = NULL;
     return arg_array;

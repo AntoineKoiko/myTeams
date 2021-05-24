@@ -12,11 +12,11 @@
 static team_node_t *new_team_node(const char name[MAX_NAME_LENGTH],
     const char description[MAX_DESCRIPTION_LENGTH], const uuid_t team_creator)
 {
-    team_node_t *my_team_node = calloc(1, sizeof(team_node_t));
+    team_node_t *my_team_node = calloc_and_check(1, sizeof(team_node_t));
 
     if (!my_team_node)
         return NULL;
-    my_team_node->subscribed_users = calloc(0, sizeof(uuid_t));
+    my_team_node->subscribed_users = calloc_and_check(0, sizeof(uuid_t));
     if (my_team_node->subscribed_users == NULL) {
         free(my_team_node);
         return NULL;

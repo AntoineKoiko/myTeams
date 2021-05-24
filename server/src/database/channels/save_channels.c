@@ -5,9 +5,7 @@
 ** Save channels into file
 */
 
-#include "server_error.h"
 #include "database/database.h"
-#include "tools.h"
 
 static inline int save_channel(const int fd, const channel_node_t *channel)
 {

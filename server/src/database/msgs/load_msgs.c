@@ -28,11 +28,11 @@ static int register_msg_db(database_t *db, msg_node_t *msg)
 
 NON_NULL(1) static int init_msg_node(msg_node_t **msg)
 {
-    *msg = calloc(1, sizeof(msg_node_t));
+    *msg = calloc_and_check(1, sizeof(msg_node_t));
 
     if (!(*msg))
         return ERR_NO_VAL;
-    (*msg)->msg_data = calloc(1, sizeof(msg_t));
+    (*msg)->msg_data = calloc_and_check(1, sizeof(msg_t));
     if (!(*msg)->msg_data) {
         free(*msg);
         return ERR_NO_VAL;

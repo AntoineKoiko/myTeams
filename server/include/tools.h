@@ -19,4 +19,8 @@ int write_uuid_array(int fd, size_t nb_elems, const uuid_t *array);
 
 NON_NULL(1) size_t str_array_len(const char **str_array);
 
+NON_NULL(1) void free_to_null(void **ptr);
+
+void *calloc_and_check(size_t nmemb, size_t size);
+
 #endif // SERVER_TOOLS_H
