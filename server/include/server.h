@@ -130,6 +130,8 @@ size_t prepare_user_buffer(
     unsigned char *buff, user_t *user, int code, size_t *cursor);
 size_t prepare_uuid_buffer(
     unsigned char *buff, uuid_t uuid, int code, size_t *cursor);
+size_t prepare_2_uuid_buffer(
+    unsigned char *buff, uuid_t *uuid, int code, size_t *cursor);
 size_t prepare_msg_buffer(
     unsigned char *buff, msg_t *msg, int code, size_t *cursor);
 
