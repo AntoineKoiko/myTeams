@@ -6,7 +6,6 @@
 */
 
 #include "database/database.h"
-#include "attributes.h"
 
 static inline int save_user_data(const int fd, const user_t *user_data)
 {

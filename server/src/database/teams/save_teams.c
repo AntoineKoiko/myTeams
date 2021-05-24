@@ -5,9 +5,7 @@
 ** Save teams into file
 */
 
-#include "server_error.h"
 #include "database/database.h"
-#include "tools.h"
 
 static inline int save_team_data(const int fd, const team_t *team_data)
 {

@@ -6,7 +6,6 @@
 */
 
 #include "database/database.h"
-#include "attributes.h"
 
 static inline int save_thread(const int fd, const thread_node_t *thread)
 {

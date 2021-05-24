@@ -5,7 +5,7 @@
 ** Manage file of databse
 */
 
-#include "database/file_management/file_management.h"
+#include "database/file_management.h"
 #include "database/database_constants.h"
 
 static inline int get_db_filepath(
