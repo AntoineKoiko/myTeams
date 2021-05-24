@@ -56,6 +56,8 @@ int save_teams(int fd, const database_t *db);
 NON_NULL(2)
 int load_teams(int fd, database_t *db, size_t elements_nb);
 
+NON_NULL(1) void delete_team(team_node_t **team);
+
 NON_NULL(1) void delete_teams(database_t *db);
 
 #ifdef DEBUG

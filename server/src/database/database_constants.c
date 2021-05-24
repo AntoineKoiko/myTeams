@@ -43,7 +43,7 @@ const save_file_t data_files[NB_DATA_FILE_TYPE] = {{TEAMS,
         count_channel_nodes,
         load_channels,
         save_channels,
-        NULL
+        delete_channels
 
 #ifdef DEBUG
         ,
@@ -55,7 +55,7 @@ const save_file_t data_files[NB_DATA_FILE_TYPE] = {{TEAMS,
         count_thread_nodes,
         load_threads,
         save_threads,
-        NULL
+        delete_threads
 #ifdef DEBUG
         ,
         NULL
@@ -66,7 +66,7 @@ const save_file_t data_files[NB_DATA_FILE_TYPE] = {{TEAMS,
         count_reply_nodes,
         load_replies,
         save_replies,
-        NULL
+        delete_replies
 #ifdef DEBUG
         ,
         NULL
@@ -77,7 +77,7 @@ const save_file_t data_files[NB_DATA_FILE_TYPE] = {{TEAMS,
         count_team_nodes,
         load_users,
         save_users,
-        NULL
+        delete_users
 #ifdef DEBUG
         ,
         NULL
@@ -88,7 +88,7 @@ const save_file_t data_files[NB_DATA_FILE_TYPE] = {{TEAMS,
         count_msg_nodes,
         load_msgs,
         save_msgs,
-        NULL
+        delete_msgs
 #ifdef DEBUG
         ,
         NULL

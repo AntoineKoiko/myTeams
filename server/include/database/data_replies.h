@@ -20,13 +20,13 @@ typedef struct reply_node_s
     SLIST_ENTRY(reply_node_s) next;
 } reply_node_t;
 
+reply_t *new_reply(const uuid_t team_uuid, const uuid_t thread_uuid,
+    const uuid_t user_uuid, const char body[MAX_BODY_LENGTH]);
+
 NON_NULL(1)
 int insert_reply(database_t *db, const uuid_t team_uuid,
     const uuid_t thread_uuid, const uuid_t user_uuid,
     const char body[MAX_BODY_LENGTH]);
-
-reply_t *new_reply(const uuid_t team_uuid, const uuid_t thread_uuid,
-    const uuid_t user_uuid, const char body[MAX_BODY_LENGTH]);
 
 NON_NULL(2)
 int count_reply_nodes(size_t *count, const database_t *db);
@@ -36,5 +36,9 @@ int load_replies(int fd, database_t *db, size_t elements_nb);
 
 NON_NULL(2)
 int save_replies(int fd, const database_t *db);
+
+NON_NULL(1) void delete_reply(reply_node_t **reply);
+
+NON_NULL(1) void delete_replies(database_t *db);
 
 #endif // SERVER_DATA_REPLIES_H

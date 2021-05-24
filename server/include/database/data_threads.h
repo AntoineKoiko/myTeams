@@ -28,13 +28,13 @@ thread_node_t *find_thread_by_team_chan(const database_t *db,
 thread_node_t *find_thread_by_name(const database_t *db, const uuid_t tm_uuid,
     const uuid_t chan_uuid, const char name[MAX_NAME_LENGTH]);
 
+thread_t *new_thread(const uuid_t chan, const uuid_t user,
+    const char name[MAX_NAME_LENGTH], const char body[MAX_BODY_LENGTH]);
+
 NON_NULL(1)
 int insert_thread(database_t *db, const uuid_t chan, const uuid_t user,
     const char name[MAX_NAME_LENGTH],
     const char description[MAX_DESCRIPTION_LENGTH]);
-
-thread_t *new_thread(const uuid_t chan, const uuid_t user,
-    const char name[MAX_NAME_LENGTH], const char body[MAX_BODY_LENGTH]);
 
 NON_NULL(2)
 int count_thread_nodes(size_t *count, const database_t *db);
@@ -43,5 +43,9 @@ NON_NULL(2)
 int load_threads(int fd, database_t *db, size_t elements_nb);
 
 int save_threads(int fd, const database_t *db);
+
+NON_NULL(1) void delete_thread(thread_node_t **thread);
+
+NON_NULL(1) void delete_threads(database_t *db);
 
 #endif // SERVER_DATA_THREADS_H

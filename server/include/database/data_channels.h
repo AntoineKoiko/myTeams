@@ -30,12 +30,12 @@ channel_node_t *find_channel_by_team(
 channel_node_t *find_channel_by_name(const database_t *db,
     const uuid_t tm_uuid, const char name[MAX_NAME_LENGTH]);
 
-NON_NULL(1)
-int insert_channel(database_t *db, const uuid_t team_uuid,
+channel_t *new_channel(const uuid_t team_uuid,
     const char name[MAX_NAME_LENGTH],
     const char description[MAX_DESCRIPTION_LENGTH]);
 
-channel_t *new_channel(const uuid_t team_uuid,
+NON_NULL(1)
+int insert_channel(database_t *db, const uuid_t team_uuid,
     const char name[MAX_NAME_LENGTH],
     const char description[MAX_DESCRIPTION_LENGTH]);
 
@@ -45,5 +45,9 @@ int count_channel_nodes(size_t *count, const database_t *db);
 NON_NULL(2) int load_channels(int fd, database_t *db, size_t elements_nb);
 
 int save_channels(int fd, const database_t *db);
+
+NON_NULL(1) void delete_channel(channel_node_t **channel);
+
+NON_NULL(1) void delete_channels(database_t *db);
 
 #endif // SERVER_DATA_CHANNELS_H
