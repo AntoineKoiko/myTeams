@@ -29,7 +29,7 @@ const command_t command_list[] = {
 const client_req_t request_array[] = {
     {&login_request, false},
     {&logout_request, true},
-    {NULL, true},
+    {&list_user_request, true},
     {NULL, true},
     {NULL, true},
     {NULL, true},
