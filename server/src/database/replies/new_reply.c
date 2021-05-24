@@ -10,7 +10,7 @@
 reply_t *new_reply(const uuid_t team_uuid, const uuid_t thread_uuid,
     const uuid_t user_uuid, const char body[MAX_BODY_LENGTH])
 {
-    reply_t *reply = calloc(1, sizeof(reply_t));
+    reply_t *reply = calloc_and_check(1, sizeof(reply_t));
 
     if (reply == NULL)
         return NULL;

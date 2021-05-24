@@ -10,7 +10,7 @@
 team_t *new_team(const char name[MAX_NAME_LENGTH],
     const char description[MAX_DESCRIPTION_LENGTH], const uuid_t team_creator)
 {
-    team_t *team = calloc(1, sizeof(team_t));
+    team_t *team = calloc_and_check(1, sizeof(team_t));
 
     if (team == NULL)
         return NULL;

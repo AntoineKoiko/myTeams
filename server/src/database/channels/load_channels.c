@@ -24,11 +24,11 @@ static int register_channel_db(database_t *db, channel_node_t *channel)
 
 NON_NULL(1) static int init_channel_node(channel_node_t **channel)
 {
-    *channel = calloc(1, sizeof(channel_node_t));
+    *channel = calloc_and_check(1, sizeof(channel_node_t));
 
     if (!(*channel))
         return ERR_NO_VAL;
-    (*channel)->channel_data = calloc(1, sizeof(channel_t));
+    (*channel)->channel_data = calloc_and_check(1, sizeof(channel_t));
     if (!(*channel)->channel_data) {
         free(*channel);
         return ERR_NO_VAL;

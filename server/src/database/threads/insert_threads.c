@@ -12,7 +12,7 @@ static thread_node_t *new_thread_node(const uuid_t chan, const uuid_t user,
     const char name[MAX_NAME_LENGTH],
     const char description[MAX_DESCRIPTION_LENGTH])
 {
-    thread_node_t *my_thread_node = calloc(1, sizeof(thread_node_t));
+    thread_node_t *my_thread_node = calloc_and_check(1, sizeof(thread_node_t));
 
     if (!my_thread_node)
         return NULL;

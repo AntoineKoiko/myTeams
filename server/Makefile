@@ -108,6 +108,7 @@ SRC		=	$(DSETUP)/get_args.c					\
 			$(TOOLS)/read.c		\
 			$(TOOLS)/write.c	\
 			$(TOOLS)/free.c		\
+			$(TOOLS)/calloc.c	\
 			\
 			$(DDATABASE)/database_constants.c	\
 			\

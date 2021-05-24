@@ -74,7 +74,7 @@ const save_file_t data_files[NB_DATA_FILE_TYPE] = {{TEAMS,
     },
     {USERS,
         ext_users,
-        count_team_nodes,
+        count_user_nodes,
         load_users,
         save_users,
         delete_users

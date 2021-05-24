@@ -12,7 +12,8 @@ static channel_node_t *new_channel_node(const uuid_t team_uuid,
     const char name[MAX_NAME_LENGTH],
     const char description[MAX_DESCRIPTION_LENGTH])
 {
-    channel_node_t *my_channel_node = calloc(1, sizeof(channel_node_t));
+    channel_node_t *my_channel_node =
+        calloc_and_check(1, sizeof(channel_node_t));
 
     if (!my_channel_node)
         return NULL;

@@ -24,11 +24,11 @@ static int register_thread_db(database_t *db, thread_node_t *thread)
 
 NON_NULL(1) static int init_thread_node(thread_node_t **thread)
 {
-    *thread = calloc(1, sizeof(thread_node_t));
+    *thread = calloc_and_check(1, sizeof(thread_node_t));
 
     if (!(*thread))
         return ERR_NO_VAL;
-    (*thread)->thread_data = calloc(1, sizeof(thread_t));
+    (*thread)->thread_data = calloc_and_check(1, sizeof(thread_t));
     if (!(*thread)->thread_data) {
         free(*thread);
         return ERR_NO_VAL;

@@ -31,15 +31,17 @@ static int init_user_node(const int fd, user_node_t **user, size_t *teams)
     my_ret_val = read_and_check(fd, teams, sizeof(size_t));
     if (my_ret_val != EXIT_SUCCESS)
         return my_ret_val;
-    *user = calloc(1, sizeof(user_node_t));
+    *user = calloc_and_check(1, sizeof(user_node_t));
     if (!(*user))
         return ERR_NO_VAL;
-    (*user)->user_data = calloc(1, sizeof(user_t));
+    (*user)->user_data = calloc_and_check(1, sizeof(user_t));
     if (!(*user)->user_data)
         return ERR_NO_VAL;
-    (*user)->subscribed_teams = calloc(*teams, sizeof(uuid_t));
-    if (!(*user)->subscribed_teams)
-        return ERR_NO_VAL;
+    if (*teams > 0) {
+        (*user)->subscribed_teams = calloc_and_check(*teams, sizeof(uuid_t));
+        if (!(*user)->subscribed_teams)
+            return ERR_NO_VAL;
+    }
     return EXIT_SUCCESS;
 }
 
@@ -77,7 +79,7 @@ int load_users(const int fd, database_t *db, const size_t elements_nb)
 {
     int my_ret_val = EXIT_SUCCESS;
 
-    for (size_t i = 0; i < elements_nb; ++i) {
+    for (size_t i = 0; i < elements_nb; i++) {
         my_ret_val = load_user(fd, db);
         if (my_ret_val != EXIT_SUCCESS && my_ret_val != ERR_NO_VAL)
             break;

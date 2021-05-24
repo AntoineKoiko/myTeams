@@ -12,7 +12,7 @@ static reply_node_t *new_reply_node(const uuid_t team_uuid,
     const uuid_t thread_uuid, const uuid_t user_uuid,
     const char body[MAX_BODY_LENGTH])
 {
-    reply_node_t *my_reply_node = calloc(1, sizeof(reply_node_t));
+    reply_node_t *my_reply_node = calloc_and_check(1, sizeof(reply_node_t));
 
     if (!my_reply_node)
         return NULL;
