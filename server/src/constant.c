@@ -39,7 +39,7 @@ const client_req_t request_array[] = {
     {&use_request, true},
     {&create_request, true},
     {&list_request, true},
-    {NULL, true},
+    {&info_request, true},
     {NULL, true}
 };
 

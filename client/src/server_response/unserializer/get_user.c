@@ -15,6 +15,6 @@ user_t *get_user(unsigned char *buff, size_t *it)
         return NULL;
     get_uuid(user->user_uuid, buff, it);
     get_str(user->user_name, buff, it);
-    get_int(&user->status, buff, it, true);
+    get_int(&user->status, buff+(*it), it, true);
     return user;
 }

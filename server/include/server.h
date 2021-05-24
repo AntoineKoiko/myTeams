@@ -159,6 +159,7 @@ int create_reply_request(
 // LIST REQUESTS:
 
 int list_request(teams_server_t *server, session_list_t *session, char **argv);
+
 int list_team_request(
     teams_server_t *server, session_list_t *session, char **argv);
 int list_channel_request(
@@ -171,6 +172,10 @@ int list_user_request(
     teams_server_t *server, session_list_t *session, N_U char **argv);
 int list_message_request(
     teams_server_t *server, session_list_t *session, char **argv);
+
+// INFO REQUESTS:
+
+int info_request(teams_server_t *server, session_list_t *session, char **argv);
 
 int info_team_request(
     teams_server_t *server, session_list_t *session, char **argv);
