@@ -34,7 +34,7 @@ const client_req_t request_array[] = {
     {NULL, true},
     {NULL, true},
     {&subscribe_request, true},
-    {NULL, true},
+    {&subscribed_request, true},
     {NULL, true},
     {&use_request, true},
     {&create_request, true},
@@ -42,20 +42,3 @@ const client_req_t request_array[] = {
     {&info_request, true},
     {NULL, true}
 };
-
-// const request_fct request_array[] = {
-//     &login_request,
-//     &logout_request,
-//     NULL,
-//     NULL,
-//     NULL,
-//     NULL,
-//     NULL,
-//     NULL,
-//     NULL,
-//     &use_request,
-//     &create_request,
-//     &list_request,
-//     NULL,
-//     NULL
-// };
