@@ -25,16 +25,6 @@ static int thread_created(
     return EXIT_SUCCESS;
 }
 
-// static int creation_failed(session_list_t *session)
-// {
-//     size_t packet_size = sizeof(int);
-//     size_t *cursor = &session->cnt.output_size;
-//     int code = 414;
-
-//     put_protocol(session->cnt.output_buff, packet_size, code, cursor);
-//     return EXIT_SUCCESS;
-// }
-
 static void log_thread_creation(thread_t *thread)
 {
     char thread_uuid[UUID_STR_LEN] = {0};
