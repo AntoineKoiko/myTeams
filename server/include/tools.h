@@ -25,11 +25,11 @@ size_t find_uuid_index(
     size_t array_size, const uuid_t *array, const uuid_t to_find);
 
 NON_NULL(1, 2)
-int add_elem_uuid_array(size_t *nb_elems, uuid_t *array, const uuid_t to_add);
+int add_elem_uuid_array(size_t *nb_elems, uuid_t **array, const uuid_t to_add);
 
 NON_NULL(1, 2)
 int remove_elem_uuid_array(
-    size_t *nb_elems, uuid_t *array, const uuid_t to_remove);
+    size_t *nb_elems, uuid_t **array, const uuid_t to_remove);
 
 NON_NULL(1) size_t str_array_len(const char **str_array);
 

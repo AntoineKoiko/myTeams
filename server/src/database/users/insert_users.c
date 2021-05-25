@@ -14,11 +14,6 @@ static user_node_t *new_user_node(const char name[MAX_NAME_LENGTH])
 
     if (!my_user_node)
         return NULL;
-    my_user_node->subscribed_teams = calloc_and_check(0, sizeof(uuid_t));
-    if (my_user_node->subscribed_teams == NULL) {
-        free(my_user_node);
-        return NULL;
-    }
     my_user_node->user_data = new_user(name);
     if (my_user_node->user_data == NULL) {
         free(my_user_node->subscribed_teams);
