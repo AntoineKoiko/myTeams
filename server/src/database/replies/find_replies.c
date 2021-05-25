@@ -7,11 +7,12 @@
 
 #include "server.h"
 
-reply_node_t *find_reply_by_uuid(const database_t *db,
-    const uuid_t tm_uuid, const uuid_t chan_uuid, const uuid_t thread_uuid, const uuid_t reply_uuid)
+reply_node_t *find_reply_by_uuid(const database_t *db, const uuid_t tm_uuid,
+    const uuid_t chan_uuid, const uuid_t thread_uuid, const uuid_t reply_uuid)
 {
     reply_node_t *node = NULL;
-    thread_node_t *thread_buf = find_thread_by_team_chan(db, tm_uuid, chan_uuid, thread_uuid);
+    thread_node_t *thread_buf = find_thread_by_team_chan(db, tm_uuid,
+        chan_uuid, thread_uuid);
     reply_t *buf = NULL;
 
     if (thread_buf == NULL) {
