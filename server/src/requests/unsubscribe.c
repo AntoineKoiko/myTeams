@@ -1,35 +1,35 @@
 /*
 ** EPITECH PROJECT, 2021
-** B-NWP-400-REN-4-1-myteams-aurelien.joncour
+** unsubscribe.c
 ** File description:
-** subscribe
+** unsubscribe a user from a team
 */
 
 #include "server.h"
 
-static inline int push_user_on_list(team_node_t *team, uuid_t user)
+static inline int pop_user_on_list(team_node_t *team, uuid_t user)
 {
-    return add_elem_uuid_array(
+    return remove_elem_uuid_array(
         &team->nb_subscribed_users, team->subscribed_users, user);
 }
 
-static inline int push_team_on_list(user_node_t *user, uuid_t team)
+static inline int pop_team_on_list(user_node_t *user, uuid_t team)
 {
-    return add_elem_uuid_array(
+    return remove_elem_uuid_array(
         &user->nb_subscribed_teams, user->subscribed_teams, team);
 }
 
-static void log_subscribed(team_t *team, user_t *user)
+static void log_unsubscribed(const team_t *team, user_t *user)
 {
     char user_uuid[UUID_STR_LEN] = {0};
     char team_uuid[UUID_STR_LEN] = {0};
 
     uuid_unparse_lower(user->user_uuid, user_uuid);
     uuid_unparse_lower(team->team_uuid, team_uuid);
-    server_event_user_subscribed(team_uuid, user_uuid);
+    server_event_user_unsubscribed(team_uuid, user_uuid);
 }
 
-static void team_subscribe(session_list_t *session, team_t *team)
+static void team_unsubscribe(session_list_t *session, team_t *team)
 {
     uuid_t uuid[2] = {0};
     size_t cursor = session->cnt.output_size;
@@ -38,11 +38,11 @@ static void team_subscribe(session_list_t *session, team_t *team)
     uuid_copy(uuid[0], team->team_uuid);
     uuid_copy(uuid[1], session->user->user_data->user_uuid);
     size_buf =
-        prepare_2_uuid_buffer(session->cnt.output_buff, uuid, 251, &cursor);
+        prepare_2_uuid_buffer(session->cnt.output_buff, uuid, 252, &cursor);
     session->cnt.output_size += size_buf;
 }
 
-int subscribe_request(
+int unsubscribe_request(
     teams_server_t *server, session_list_t *session, char **argv)
 {
     user_node_t *user = session->user;
@@ -58,11 +58,11 @@ int subscribe_request(
             &session->cnt.output_size);
         return EXIT_FAILURE;
     }
-    if (push_user_on_list(team, user->user_data->user_uuid))
+    if (pop_user_on_list(team, user->user_data->user_uuid))
         return EXIT_ERROR;
-    if (push_team_on_list(user, team->team_data->team_uuid))
+    if (pop_team_on_list(user, team->team_data->team_uuid))
         return EXIT_ERROR;
-    team_subscribe(session, team->team_data);
-    log_subscribed(team->team_data, user->user_data);
+    team_unsubscribe(session, team->team_data);
+    log_unsubscribed(team->team_data, user->user_data);
     return EXIT_SUCCESS;
 }
