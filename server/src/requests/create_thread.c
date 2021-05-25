@@ -40,8 +40,8 @@ static thread_t *create_process(teams_server_t *server, session_list_t *ses,
                                     char **argv)
 {
     thread_t *thread = NULL;
-    channel_node_t *node = find_channel_by_uuid(server->database, ses->team_ctx,
-                                            ses->channel_ctx);
+    channel_node_t *node = find_channel_by_uuid(server->database,
+        ses->team_ctx, ses->channel_ctx);
 
     if (!node)
         return NULL;
@@ -61,8 +61,9 @@ int create_thread_request(teams_server_t *server, session_list_t *session,
     thread_t *thread = NULL;
 
     if (find_thread_by_name(server->database, session->team_ctx,\
-session->channel_ctx, argv[0])) {
-        put_protocol(session->cnt.output_buff, sizeof(int), 402, &session->cnt.output_size);
+        session->channel_ctx, argv[0])) {
+        put_protocol(session->cnt.output_buff, sizeof(int), 402,
+            &session->cnt.output_size);
         return EXIT_SUCCESS;
     }
     thread = create_process(server, session, argv);;

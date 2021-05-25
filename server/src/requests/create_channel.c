@@ -58,7 +58,8 @@ int create_channel_request(teams_server_t *server, session_list_t *session,
     channel_t *chan = NULL;
 
     if (find_channel_by_name(server->database, session->team_ctx, argv[0])) {
-        put_protocol(session->cnt.output_buff, sizeof(int), 402, &session->cnt.output_size);
+        put_protocol(session->cnt.output_buff, sizeof(int), 402,
+            &session->cnt.output_size);
         return EXIT_SUCCESS;
     }
     chan =  create_process(server, session, argv);
