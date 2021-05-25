@@ -7,14 +7,6 @@
 
 #include "server.h"
 
-// static void put_msg_in_db(teams_server_t *server, msg_t *msg,
-//                             user_node_t *user)
-// {
-//     //msg_node_t *msg_node = new_msg_node();
-
-//    // SLIST_INSERT(; user->conversation; next);
-// }
-
 static void msg_is_created(teams_server_t *server, N_U session_list_t *session,
                             msg_t *msg)
 {
@@ -22,6 +14,10 @@ static void msg_is_created(teams_server_t *server, N_U session_list_t *session,
     char send_uuid[UUID_STR_LEN] = {0};
     session_list_t *dest_session = find_user_session_by_uuid(server,
                                                         msg->receiver_uuid);
+    if (!dest_session) {
+        put_protocol(session->cnt.output_buff, sizeof(int), 411,
+                    &session->cnt.output_size);
+    }
     uuid_unparse_lower(msg->receiver_uuid, rec_uuid);
     uuid_unparse_lower(msg->sender_uuid, send_uuid);
     //put_msg_in_db(server, msg, session->user);
@@ -39,16 +35,19 @@ int send_request(teams_server_t *server, session_list_t *session,
     msg_t *msg = NULL;
 
     uuid_parse(argv[0], dest_uuid);
-    msg = new_msg(session->user->user_data->user_uuid, dest_uuid, argv[1]);
-    if (!msg)
-        return EXIT_FAILURE;
     dest = find_user_by_uuid(server->database, dest_uuid);
     if (!dest) {
-        //put_msg_in_db(server, dest, msg);
         prepare_uuid_buffer(session->cnt.output_buff, dest_uuid, 411,
                             &session->cnt.output_size);
         return EXIT_SUCCESS;
     }
+    if (insert_msg(server->database, session->user->user_data->user_uuid,
+        dest_uuid, argv[1]) == ERR_NO_VAL) {
+        return EXIT_ERROR;
+    }
+    msg = new_msg(session->user->user_data->user_uuid, dest_uuid, argv[1]);
+    if (!msg)
+        return EXIT_ERROR;
     msg_is_created(server, session, msg);
     return EXIT_SUCCESS;
 }
