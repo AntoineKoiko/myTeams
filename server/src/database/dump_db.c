@@ -11,8 +11,7 @@
     #include "database/database_constants.h"
     #include "database/data_teams.h"
 
-NON_NULL()
-void dump_db(const database_t *db)
+NON_NULL() void dump_db(const database_t *db)
 {
     static int nb = 0;
 
@@ -24,6 +23,7 @@ void dump_db(const database_t *db)
     printf("DUMP END\n");
     nb++;
 }
+
 #endif /* DEBUG */
 
 typedef int make_iso_compilers_happy;

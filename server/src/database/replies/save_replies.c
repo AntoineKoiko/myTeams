@@ -14,8 +14,8 @@ static inline int save_reply(const int fd, const reply_node_t *reply)
     return write_and_check(fd, reply->reply_data, sizeof(reply_t));
 }
 
-NON_NULL(2)
-static int save_each_reply_thread(const int fd, const channel_node_t *channel)
+NON_NULL(2) static int save_each_reply_thread(const int fd,
+    const channel_node_t *channel)
 {
     thread_node_t *thread_it = NULL;
     reply_node_t *reply_it = NULL;
@@ -33,8 +33,7 @@ static int save_each_reply_thread(const int fd, const channel_node_t *channel)
     return EXIT_SUCCESS;
 }
 
-NON_NULL(2)
-int save_replies(const int fd, const database_t *db)
+NON_NULL(2) int save_replies(const int fd, const database_t *db)
 {
     team_node_t *team_it = NULL;
     channel_node_t *channel_it = NULL;

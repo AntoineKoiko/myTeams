@@ -14,8 +14,7 @@ static inline int save_msg(const int fd, const msg_node_t *msg)
     return write_and_check(fd, msg->msg_data, sizeof(msg_t));
 }
 
-NON_NULL(2)
-int save_msgs(const int fd, const database_t *db)
+NON_NULL(2) int save_msgs(const int fd, const database_t *db)
 {
     user_node_t *user_it = NULL;
     msg_node_t *msg_it = NULL;

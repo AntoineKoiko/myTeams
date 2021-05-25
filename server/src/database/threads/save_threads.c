@@ -14,8 +14,8 @@ static inline int save_thread(const int fd, const thread_node_t *thread)
     return write_and_check(fd, thread->thread_data, sizeof(thread_t));
 }
 
-NON_NULL(2)
-static int save_each_thread(const int fd, const channel_node_t *channel)
+NON_NULL(2) static int save_each_thread(const int fd,
+    const channel_node_t *channel)
 {
     thread_node_t *thread_it = NULL;
     int my_ret_val = EXIT_SUCCESS;
