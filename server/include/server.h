@@ -140,7 +140,7 @@ int login_request(
     teams_server_t *server, session_list_t *session, char **argv);
 int logout_request(
     teams_server_t *server, session_list_t *session, char **argv);
-int use_request(teams_server_t *server, session_list_t *session, char **argv);
+int use_request(N_U teams_server_t *server, session_list_t *session, char **argv);
 
 // CREATE REQUESTS:
 
