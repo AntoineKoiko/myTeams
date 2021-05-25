@@ -50,9 +50,7 @@ NON_NULL(2) static int load_msg(const int fd, database_t *db)
         return my_ret_val;
     my_ret_val = read_and_check(fd, my_msg->msg_data, sizeof(msg_t));
     if (my_ret_val != EXIT_SUCCESS) {
-        // delete_msg(my_msg);
-        // TODO delete functions
-        // TODO use free to null
+        delete_msg(&my_msg);
         return my_ret_val;
     }
     return register_msg_db(db, my_msg);

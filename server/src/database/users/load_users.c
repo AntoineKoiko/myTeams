@@ -64,11 +64,15 @@ NON_NULL(2) static int load_user(const int fd, database_t *db)
     if (my_ret_val != EXIT_SUCCESS)
         return my_ret_val;
     my_ret_val = load_user_teams(fd, &my_user, my_teams);
-    if (my_ret_val != EXIT_SUCCESS)
+    if (my_ret_val != EXIT_SUCCESS) {
+        delete_user(&my_user);
         return my_ret_val;
+    }
     my_ret_val = read_and_check(fd, my_user->user_data, sizeof(user_t));
-    if (my_ret_val != EXIT_SUCCESS)
+    if (my_ret_val != EXIT_SUCCESS) {
+        delete_user(&my_user);
         return my_ret_val;
+    }
     SLIST_INSERT_HEAD(&db->users, my_user, next);
     log_user_loaded(my_user->user_data);
     return my_ret_val;

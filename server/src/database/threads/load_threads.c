@@ -46,9 +46,7 @@ NON_NULL(2) static int load_thread(const int fd, database_t *db)
         return my_ret_val;
     my_ret_val = read_and_check(fd, my_thread->thread_data, sizeof(thread_t));
     if (my_ret_val != EXIT_SUCCESS) {
-        // delete_thread(my_thread);
-        // TODO delete functions
-        // TODO use free to null
+        delete_thread(&my_thread);
         return my_ret_val;
     }
     return register_thread_db(db, my_thread);

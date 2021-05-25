@@ -47,9 +47,7 @@ NON_NULL(2) static int load_reply(const int fd, database_t *db)
         return my_ret_val;
     my_ret_val = read_and_check(fd, my_reply->reply_data, sizeof(reply_t));
     if (my_ret_val != EXIT_SUCCESS) {
-        // delete_reply(my_reply);
-        // TODO delete functions
-        // TODO use free to null
+        delete_reply(&my_reply);
         return my_ret_val;
     }
     return register_reply_db(db, my_reply);

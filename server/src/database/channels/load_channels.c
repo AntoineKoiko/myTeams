@@ -47,9 +47,7 @@ NON_NULL(2) static int load_channel(const int fd, database_t *db)
     my_ret_val =
         read_and_check(fd, my_channel->channel_data, sizeof(channel_t));
     if (my_ret_val != EXIT_SUCCESS) {
-        // delete_channel(my_channel);
-        // TODO delete functions
-        // TODO use free to null
+        delete_channel(&my_channel);
         return my_ret_val;
     }
     return register_channel_db(db, my_channel);
