@@ -14,7 +14,7 @@ size_t prepare_team_buffer(unsigned char *buff, team_t *team, int code,
     size_t packet_size = sizeof(int) + ((sizeof(uuid_t) + 1) * 2);
 
     packet_size += strlen(team->team_name) + 1 +
-                     strlen(team->team_description) + 1;
+                        strlen(team->team_description) + 1;
     put_protocol(buff, packet_size, code, cursor);
     put_team(buff, team, cursor);
     return ((*cursor) - written_size);

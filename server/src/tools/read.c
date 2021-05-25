@@ -9,8 +9,8 @@
 #include "server_error.h"
 #include "attributes.h"
 
-NON_NULL(2)
-int read_and_check(const int fd, void *buff, const size_t read_size)
+NON_NULL(2) int read_and_check(const int fd, void *buff,
+    const size_t read_size)
 {
     ssize_t my_read = 0;
 

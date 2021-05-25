@@ -15,7 +15,7 @@ static int thread_created(
 
     prepare_thread_buffer(session->cnt.output_buff, thread, 234, cursor);
     STAILQ_FOREACH(s, &server->session_head, next) {
-        if (is_sub_and_connected(
+        if (s->logged_in && s->user && is_sub_and_connected(
                 server->database, session->team_ctx, s->user->user_data)
                 && session->cnt.socket != s->cnt.socket) {
             cursor = &s->cnt.output_size;

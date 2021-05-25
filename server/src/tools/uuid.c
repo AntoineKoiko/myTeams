@@ -9,8 +9,8 @@
 #include "server_error.h"
 #include "tools.h"
 
-NON_NULL(3)
-int write_uuid_array(const int fd, const size_t nb_elems, const uuid_t *array)
+NON_NULL(3) int write_uuid_array(const int fd, const size_t nb_elems,
+    const uuid_t *array)
 {
     int my_ret_val = EXIT_SUCCESS;
 
@@ -22,8 +22,7 @@ int write_uuid_array(const int fd, const size_t nb_elems, const uuid_t *array)
     return write_and_check(fd, array, nb_elems * sizeof(uuid_t));
 }
 
-NON_NULL(2)
-size_t find_uuid_index(
+NON_NULL(2) size_t find_uuid_index(
     const size_t array_size, const uuid_t *array, const uuid_t to_find)
 {
     for (size_t i = 0; i < array_size; ++i) {
@@ -44,8 +43,7 @@ int add_elem_uuid_array(size_t *nb_elems, uuid_t *array, const uuid_t to_add)
     return EXIT_SUCCESS;
 }
 
-NON_NULL(1, 2)
-int remove_elem_uuid_array(
+NON_NULL(1, 2) int remove_elem_uuid_array(
     size_t *nb_elems, uuid_t *array, const uuid_t to_remove)
 {
     size_t my_user_index = -1;

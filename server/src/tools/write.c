@@ -9,8 +9,8 @@
 #include "server_error.h"
 #include "attributes.h"
 
-NON_NULL(2)
-int write_and_check(const int fd, const void *buff, const size_t write_size)
+NON_NULL(2) int write_and_check(const int fd, const void *buff,
+    const size_t write_size)
 {
     ssize_t my_write = 0;
 

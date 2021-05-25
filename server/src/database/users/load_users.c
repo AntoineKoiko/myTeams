@@ -12,8 +12,7 @@
 #include "attributes.h"
 #include "tools.h"
 
-NON_NULL(2)
-static inline int load_user_teams(
+NON_NULL(2) static inline int load_user_teams(
     const int fd, user_node_t **user, const size_t teams)
 {
     (*user)->nb_subscribed_teams = teams;
@@ -23,8 +22,8 @@ static inline int load_user_teams(
         fd, (*user)->subscribed_teams, teams * sizeof(uuid_t));
 }
 
-NON_NULL(2, 3)
-static int init_user_node(const int fd, user_node_t **user, size_t *teams)
+NON_NULL(2, 3) static int init_user_node(const int fd, user_node_t **user,
+    size_t *teams)
 {
     int my_ret_val = EXIT_SUCCESS;
 
@@ -45,8 +44,7 @@ static int init_user_node(const int fd, user_node_t **user, size_t *teams)
     return EXIT_SUCCESS;
 }
 
-NON_NULL(1)
-static void log_user_loaded(const user_t *user)
+NON_NULL(1) static void log_user_loaded(const user_t *user)
 {
     char uuid_user[UUID_STR_LEN] = {0};
 
@@ -78,8 +76,8 @@ NON_NULL(2) static int load_user(const int fd, database_t *db)
     return my_ret_val;
 }
 
-NON_NULL(2)
-int load_users(const int fd, database_t *db, const size_t elements_nb)
+NON_NULL(2) int load_users(const int fd, database_t *db,
+    const size_t elements_nb)
 {
     int my_ret_val = EXIT_SUCCESS;
 

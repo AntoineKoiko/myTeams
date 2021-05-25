@@ -29,8 +29,7 @@ static inline int save_user(const int fd, const user_node_t *user)
     return EXIT_SUCCESS;
 }
 
-NON_NULL(2)
-int save_users(const int fd, const database_t *db)
+NON_NULL(2) int save_users(const int fd, const database_t *db)
 {
     int my_ret_val = EXIT_SUCCESS;
     user_node_t *my_user = NULL;

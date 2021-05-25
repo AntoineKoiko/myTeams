@@ -10,8 +10,8 @@
 #include "attributes.h"
 #include "tools.h"
 
-NON_NULL(1)
-static int register_channel_db(database_t *db, channel_node_t *channel)
+NON_NULL(1) static int register_channel_db(database_t *db,
+    channel_node_t *channel)
 {
     team_node_t *my_team = NULL;
 
@@ -53,8 +53,8 @@ NON_NULL(2) static int load_channel(const int fd, database_t *db)
     return register_channel_db(db, my_channel);
 }
 
-NON_NULL(2)
-int load_channels(const int fd, database_t *db, const size_t elements_nb)
+NON_NULL(2) int load_channels(const int fd, database_t *db,
+    const size_t elements_nb)
 {
     int my_ret_val = EXIT_SUCCESS;
 

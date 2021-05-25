@@ -10,8 +10,8 @@
 #include "attributes.h"
 #include "tools.h"
 
-NON_NULL(1)
-static int register_thread_db(database_t *db, thread_node_t *thread)
+NON_NULL(1) static int register_thread_db(database_t *db,
+    thread_node_t *thread)
 {
     channel_node_t *my_channel = NULL;
 
@@ -52,8 +52,8 @@ NON_NULL(2) static int load_thread(const int fd, database_t *db)
     return register_thread_db(db, my_thread);
 }
 
-NON_NULL(2)
-int load_threads(const int fd, database_t *db, const size_t elements_nb)
+NON_NULL(2) int load_threads(const int fd, database_t *db,
+    const size_t elements_nb)
 {
     int my_ret_val = EXIT_SUCCESS;
 
