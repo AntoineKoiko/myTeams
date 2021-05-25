@@ -12,8 +12,7 @@ static int handle_context(
 {
     size_t nb_arg = 0;
 
-    for (nb_arg = 0; argv[nb_arg]; nb_arg++)
-        ;
+    for (nb_arg = 0; argv[nb_arg]; nb_arg++);
     if (nb_arg >= 1 && find_team_by_uuid(db, ctx[0]) != NULL)
         uuid_copy(session->team_ctx, ctx[0]);
     else if (nb_arg >= 1)
