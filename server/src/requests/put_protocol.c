@@ -14,5 +14,6 @@ size_t put_protocol(
 
     written_size += put_size_t(buff, packet_size, cursor);
     written_size += put_int(buff, code, cursor);
+    // TODO do something with written_size ?
     return (*cursor);
 }

@@ -7,7 +7,8 @@
 #ifndef MYTEAMS_DATABASE_H
 #define MYTEAMS_DATABASE_H
 
-#include "database/file_management/file_management.h"
+#include "server_error.h"
+#include "file_management.h"
 #include "database/database_constants.h"
 
 #include "database/data_teams.h"
@@ -24,9 +25,9 @@
 #include <sys/queue.h>
 #include <uuid/uuid.h>
 #include <fcntl.h>
-#include "tools.h"
 
 #include "attributes.h"
+#include "tools.h"
 
 typedef struct database_s
 {
@@ -43,7 +44,7 @@ NON_NULL() int save_db(const database_t *db);
 NON_NULL() void delete_db(database_t *db);
 
 #ifdef DEBUG
-NON_NULL() void dump_db(const database_t *db);
+NON_NULL(1) void dump_db(const database_t *db);
 #endif /* DEBUG */
 
 #endif // MYTEAMS_DATABASE_H

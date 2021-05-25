@@ -10,7 +10,7 @@
 reply_t *new_reply(const uuid_t team_uuid, const uuid_t thread_uuid,
     const uuid_t user_uuid, const char body[MAX_BODY_LENGTH])
 {
-    reply_t *reply = malloc(sizeof(reply_t));
+    reply_t *reply = calloc_and_check(1, sizeof(reply_t));
 
     if (reply == NULL)
         return NULL;
@@ -19,6 +19,7 @@ reply_t *new_reply(const uuid_t team_uuid, const uuid_t thread_uuid,
         free(reply);
         return NULL;
     }
+    uuid_generate(reply->reply_uuid);
     uuid_copy(reply->team_uuid, team_uuid);
     uuid_copy(reply->thread_uuid, thread_uuid);
     uuid_copy(reply->user_uuid, user_uuid);

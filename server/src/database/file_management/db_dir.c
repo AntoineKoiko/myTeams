@@ -5,7 +5,7 @@
 ** Manage directory for database
 */
 
-#include "database/file_management/file_management.h"
+#include "database/file_management.h"
 
 static int create_db_dir(const char *dirpath)
 {

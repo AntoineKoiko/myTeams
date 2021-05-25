@@ -49,10 +49,8 @@ size_t put_thread(unsigned char *buff, thread_t *thread, size_t *cursor)
     (*cursor)++;
     put_time_t(buff, thread->thread_timestamp, cursor);
     (*cursor)++;
-    ;
     put_string(buff, thread->thread_title, cursor);
     (*cursor)++;
-    ;
     put_string(buff, thread->thread_body, cursor);
     (*cursor)++;
     return ((*cursor) - written_size);
@@ -62,6 +60,8 @@ size_t put_reply(unsigned char *buff, reply_t *reply, size_t *cursor)
 {
     size_t written_size = (*cursor);
 
+    put_uuid(buff, reply->reply_uuid, cursor);
+    (*cursor)++;
     put_uuid(buff, reply->team_uuid, cursor);
     (*cursor)++;
     put_uuid(buff, reply->thread_uuid, cursor);

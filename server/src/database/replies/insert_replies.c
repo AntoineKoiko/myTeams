@@ -12,7 +12,7 @@ static reply_node_t *new_reply_node(const uuid_t team_uuid,
     const uuid_t thread_uuid, const uuid_t user_uuid,
     const char body[MAX_BODY_LENGTH])
 {
-    reply_node_t *my_reply_node = calloc(1, sizeof(reply_node_t));
+    reply_node_t *my_reply_node = calloc_and_check(1, sizeof(reply_node_t));
 
     if (!my_reply_node)
         return NULL;
@@ -26,12 +26,17 @@ static reply_node_t *new_reply_node(const uuid_t team_uuid,
 }
 
 NON_NULL(1)
-int insert_reply(database_t *db, const uuid_t team, const uuid_t thread,
-    const uuid_t user, const char body[MAX_BODY_LENGTH])
+int insert_reply(database_t *db, uuid_t array[4], const char body[MAX_BODY_LENGTH])
 {
+    uuid_t team = {0};
+    uuid_t thread = {0};
+    uuid_t user = {0};
     reply_node_t *my_reply_node = NULL;
     thread_node_t *my_thread = NULL;
 
+    uuid_copy(team, array[0]);
+    uuid_copy(thread, array[1]);
+    uuid_copy(user, array[2]);
     my_thread = find_thread_by_team(db, team, thread);
     if (!my_thread)
         return ERR_NO_VAL;
@@ -39,5 +44,6 @@ int insert_reply(database_t *db, const uuid_t team, const uuid_t thread,
     if (!my_reply_node)
         return ERR_NO_VAL;
     SLIST_INSERT_HEAD(&my_thread->replies, my_reply_node, next);
+    uuid_copy(array[3], my_reply_node->reply_data->reply_uuid);
     return EXIT_SUCCESS;
 }

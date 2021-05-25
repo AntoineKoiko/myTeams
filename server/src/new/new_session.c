@@ -9,7 +9,7 @@
 
 session_list_t *new_session(void)
 {
-    session_list_t *session = malloc(sizeof(session_list_t));
+    session_list_t *session = calloc_and_check(1, sizeof(session_list_t));
 
     if (session == NULL)
         return NULL;

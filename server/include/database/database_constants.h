@@ -14,10 +14,10 @@ typedef struct database_s database_t;
 typedef enum file_types_e
 {
     TEAMS,
-    USERS,
     CHANNELS,
     THREADS,
     REPLIES,
+    USERS,
     MESSAGES
 } file_types_t;
 
@@ -48,13 +48,12 @@ typedef struct save_file_s
 
 extern const save_file_t data_files[NB_DATA_FILE_TYPE];
 
-#define DB_TYPE(index)          (data_files[index].type)
-#define DB_EXT(index)           (data_files[DB_TYPE(index)].extension)
-#define DB_NB_ENTRIES(index)    data_files[DB_TYPE(index)].nb_entries_function
-#define DB_LOAD(index)          (data_files[DB_TYPE(index)].load_function)
-#define DB_SAVE(index)          (data_files[DB_TYPE(index)].save_function)
-#define DB_DELETE_EXISTS(index) (data_files[DB_TYPE(index)].delete_function)
-#define DB_DELETE(index)        (data_files[DB_TYPE(index)].delete_function)
+#define DB_TYPE(index)       (data_files[index].type)
+#define DB_EXT(index)        (data_files[DB_TYPE(index)].extension)
+#define DB_NB_ENTRIES(index) data_files[DB_TYPE(index)].nb_entries_function
+#define DB_LOAD(index)       (data_files[DB_TYPE(index)].load_function)
+#define DB_SAVE(index)       (data_files[DB_TYPE(index)].save_function)
+#define DB_DELETE(index)     (data_files[DB_TYPE(index)].delete_function)
 #ifdef DEBUG
     #define DB_DUMP(index) (data_files[DB_TYPE(index)].dump_function)
 #endif

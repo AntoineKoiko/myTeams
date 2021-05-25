@@ -6,7 +6,6 @@
 */
 
 #include "database/database.h"
-#include "attributes.h"
 
 static inline int save_reply(const int fd, const reply_node_t *reply)
 {

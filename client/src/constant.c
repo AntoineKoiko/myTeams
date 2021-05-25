@@ -20,7 +20,7 @@ const command_t command_list[] = {
     {"/subscribe", 7, 1, 1},
     {"/subscribed", 8, 0, 1},
     {"/unsubscribe", 9, 1, 1},
-    {"/use", 10, 1, 3},
+    {"/use", 10, 0, 3},
     {"/create", 11, 1, 2},
     {"/list", 12, 0, 0},
     {"/info", 13, 0, 0},

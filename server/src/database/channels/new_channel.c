@@ -10,7 +10,7 @@
 channel_t *new_channel(const uuid_t team_uuid,
     const char name[MAX_NAME_LENGTH], const char desc[MAX_DESCRIPTION_LENGTH])
 {
-    channel_t *channel = malloc(sizeof(channel_t));
+    channel_t *channel = calloc_and_check(1, sizeof(channel_t));
 
     if (channel == NULL)
         return NULL;

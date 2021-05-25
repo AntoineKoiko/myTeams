@@ -27,7 +27,9 @@ typedef struct team_node_s
     SLIST_ENTRY(team_node_s) next;
 } team_node_t;
 
-int team_count_nodes(size_t *count, const database_t *db);
+NON_NULL(2)
+int count_team_nodes(size_t *count, const database_t *db);
+
 NON_NULL(1) size_t team_storage_len(const team_node_t *team);
 
 team_t *new_team(const char name[MAX_NAME_LENGTH],
@@ -54,7 +56,9 @@ int save_teams(int fd, const database_t *db);
 NON_NULL(2)
 int load_teams(int fd, database_t *db, size_t elements_nb);
 
-NON_NULL() void delete_teams(database_t *db);
+NON_NULL(1) void delete_team(team_node_t **team);
+
+NON_NULL(1) void delete_teams(database_t *db);
 
 #ifdef DEBUG
 void dump_teams(const database_t *db);

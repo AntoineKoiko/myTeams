@@ -29,7 +29,7 @@ const char *const data_filename = "database";
 
 const save_file_t data_files[NB_DATA_FILE_TYPE] = {{TEAMS,
                                                        ext_teams,
-                                                       team_count_nodes,
+                                                       count_team_nodes,
                                                        load_teams,
                                                        save_teams,
                                                        delete_teams
@@ -38,23 +38,12 @@ const save_file_t data_files[NB_DATA_FILE_TYPE] = {{TEAMS,
                                                        dump_teams
 #endif /* DEBUG */
                                                    },
-    {USERS,
-        ext_users,
-        NULL,
-        NULL,
-        save_users,
-        NULL
-#ifdef DEBUG
-        ,
-        NULL
-#endif /* DEBUG */
-    },
     {CHANNELS,
         ext_channels,
-        NULL,
-        NULL,
+        count_channel_nodes,
+        load_channels,
         save_channels,
-        NULL
+        delete_channels
 
 #ifdef DEBUG
         ,
@@ -63,10 +52,10 @@ const save_file_t data_files[NB_DATA_FILE_TYPE] = {{TEAMS,
     },
     {THREADS,
         ext_threads,
-        NULL,
-        NULL,
+        count_thread_nodes,
+        load_threads,
         save_threads,
-        NULL
+        delete_threads
 #ifdef DEBUG
         ,
         NULL
@@ -74,10 +63,21 @@ const save_file_t data_files[NB_DATA_FILE_TYPE] = {{TEAMS,
     },
     {REPLIES,
         ext_replies,
-        NULL,
-        NULL,
+        count_reply_nodes,
+        load_replies,
         save_replies,
+        delete_replies
+#ifdef DEBUG
+        ,
         NULL
+#endif /* DEBUG */
+    },
+    {USERS,
+        ext_users,
+        count_user_nodes,
+        load_users,
+        save_users,
+        delete_users
 #ifdef DEBUG
         ,
         NULL
@@ -85,10 +85,10 @@ const save_file_t data_files[NB_DATA_FILE_TYPE] = {{TEAMS,
     },
     {MESSAGES,
         ext_msgs,
-        NULL,
-        NULL,
+        count_msg_nodes,
+        load_msgs,
         save_msgs,
-        NULL
+        delete_msgs
 #ifdef DEBUG
         ,
         NULL

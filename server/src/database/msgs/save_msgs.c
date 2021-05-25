@@ -5,9 +5,7 @@
 ** Save msgs into file
 */
 
-#include "server_error.h"
 #include "database/database.h"
-#include "tools.h"
 
 static inline int save_msg(const int fd, const msg_node_t *msg)
 {

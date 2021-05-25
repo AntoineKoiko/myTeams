@@ -17,7 +17,7 @@ static int list_sub_team(teams_server_t *server, session_list_t *ses)
 
     SLIST_FOREACH(t, &server->database->teams, next) {
         team = t->team_data;
-        if (!is_subscribed(db, team->team_uuid, user->user_uuid))
+        if (is_subscribed(db, team->team_uuid, user->user_uuid))
             prepare_team_buffer(ses->cnt.output_buff, team, 222, cursor);
     }
     return EXIT_SUCCESS;

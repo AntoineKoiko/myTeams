@@ -7,22 +7,23 @@
 
 #include "server.h"
 
-static int handle_context(database_t *db, session_list_t *session, char **argv,
-                            uuid_t ctx[3])
+static int handle_context(
+    database_t *db, session_list_t *session, char **argv, uuid_t ctx[3])
 {
     size_t nb_arg = 0;
 
-    for (nb_arg = 0; argv[nb_arg]; nb_arg++);
+    for (nb_arg = 0; argv[nb_arg]; nb_arg++)
+        ;
     if (nb_arg >= 1 && find_team_by_uuid(db, ctx[0]) != NULL)
         uuid_copy(session->team_ctx, ctx[0]);
     else if (nb_arg >= 1)
         return 1;
-    if (nb_arg >= 2 && find_channel_by_uuid(db, ctx[0], ctx[1]) != NULL)
+    if (nb_arg >= 2 && find_channel_by_team(db, ctx[0], ctx[1]) != NULL)
         uuid_copy(session->channel_ctx, ctx[1]);
     else if (nb_arg >= 2)
         return 2;
-    if (nb_arg >= 3 && find_thread_by_team_chan(db, ctx[0], ctx[1], ctx[2])
-        != NULL)
+    if (nb_arg >= 3
+        && find_thread_by_team_chan(db, ctx[0], ctx[1], ctx[2]) != NULL)
         uuid_copy(session->thread_ctx, ctx[2]);
     else if (nb_arg >= 3)
         return 3;
@@ -36,8 +37,7 @@ static void reset_session_context(session_list_t *s)
     reset_uuid_t(s->thread_ctx);
 }
 
-int use_request(teams_server_t *server, session_list_t *session,
-                    char **argv)
+int use_request(teams_server_t *server, session_list_t *session, char **argv)
 {
     uuid_t ctx[3] = {0};
     int ret = 0;
@@ -47,8 +47,10 @@ int use_request(teams_server_t *server, session_list_t *session,
         uuid_parse(argv[i], ctx[i]);
     ret = handle_context(server->database, session, argv, ctx);
     if (ret != EXIT_SUCCESS) {
-        prepare_uuid_buffer(session->cnt.output_buff, ctx[ret - 1], ret + 411,
-                            &session->cnt.output_size);
+        prepare_uuid_buffer(session->cnt.output_buff,
+            ctx[ret - 1],
+            ret + 411,
+            &session->cnt.output_size);
     }
     return ret;
 }

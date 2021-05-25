@@ -12,7 +12,7 @@ static thread_node_t *new_thread_node(const uuid_t chan, const uuid_t user,
     const char name[MAX_NAME_LENGTH],
     const char description[MAX_DESCRIPTION_LENGTH])
 {
-    thread_node_t *my_thread_node = calloc(1, sizeof(thread_node_t));
+    thread_node_t *my_thread_node = calloc_and_check(1, sizeof(thread_node_t));
 
     if (!my_thread_node)
         return NULL;
@@ -36,7 +36,7 @@ int insert_thread(database_t *db, const uuid_t chan, const uuid_t user,
     my_team = find_team_by_channel(db, chan);
     if (!my_team)
         return ERR_NO_VAL;
-    my_channel = find_channel_by_uuid(db, my_team->team_data->team_uuid, chan);
+    my_channel = find_channel_by_team(db, my_team->team_data->team_uuid, chan);
     if (!my_channel)
         return ERR_NO_VAL;
     my_thread_node = new_thread_node(chan, user, name, description);

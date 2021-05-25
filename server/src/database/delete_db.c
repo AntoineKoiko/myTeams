@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2021
-** destroy_db.c
+** delete_db.c
 ** File description:
 ** Free database
 */
@@ -11,8 +11,8 @@
 
 NON_NULL() void delete_db(database_t *db)
 {
-    for (file_types_t i = 0; i < NB_DATA_FILE_TYPE; ++i) {
-        if (DB_DELETE_EXISTS(i))
+    for (int i = NB_DATA_FILE_TYPE - 1; i >= 0; i--) {
+        if (DB_DELETE(i))
             DB_DELETE(i)(db);
     }
     free(db);

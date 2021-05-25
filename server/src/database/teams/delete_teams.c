@@ -2,26 +2,26 @@
 ** EPITECH PROJECT, 2021
 ** delete_teams.c
 ** File description:
-** Free teams
+** Free memory allocated to teams
 */
 
 #include "database/database.h"
-#include "database/data_teams.h"
+#include "tools.h"
 
-static void delete_team(team_node_t *team)
+NON_NULL(1) void delete_team(team_node_t **team)
 {
-    free(team->team_data);
-    free(team->subscribed_users);
+    free_to_null((void **) &(*team)->team_data);
+    free_to_null((void **) &(*team)->subscribed_users);
+    free_to_null((void **) team);
 }
 
-void delete_teams(database_t *db)
+NON_NULL(1) void delete_teams(database_t *db)
 {
-    team_node_t *it = NULL;
+    team_node_t *my_team = NULL;
 
     while (!SLIST_EMPTY(&db->teams)) {
-        it = SLIST_FIRST(&db->teams);
+        my_team = SLIST_FIRST(&db->teams);
         SLIST_REMOVE_HEAD(&db->teams, next);
-        delete_team(it);
-        free(it);
+        delete_team(&my_team);
     }
 }

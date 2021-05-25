@@ -37,6 +37,8 @@ int login_request(teams_server_t *server, session_list_t *session,
     if (user == NULL) {
         insert_user(server->database, argv[0]);
         user = find_user_by_name(server->database, argv[0]);
+        uuid_unparse_lower(user->user_data->user_uuid, uuid);
+        server_event_user_created(uuid, user->user_data->user_name);
     }
     session->user = user;
     session->logged_in = true;

@@ -20,13 +20,24 @@ typedef struct msg_node_s
     SLIST_ENTRY(msg_node_s) next;
 } msg_node_t;
 
+msg_t *new_msg(const uuid_t sender_uuid, const uuid_t receiver_uuid,
+    const char body[MAX_BODY_LENGTH]);
+
 NON_NULL(1)
 int insert_msg(database_t *db, const uuid_t sender, const uuid_t receiver,
     const char body[MAX_BODY_LENGTH]);
 
-msg_t *new_msg(const uuid_t sender_uuid, const uuid_t receiver_uuid,
-    const char body[MAX_BODY_LENGTH]);
+NON_NULL(2)
+int count_msg_nodes(size_t *count, const database_t *db);
 
+NON_NULL(2)
+int load_msgs(int fd, database_t *db, size_t elements_nb);
+
+NON_NULL(2)
 int save_msgs(int fd, const database_t *db);
+
+NON_NULL(1) void delete_msg(msg_node_t **msg);
+
+NON_NULL(1) void delete_msgs(database_t *db);
 
 #endif // SERVER_DATA_MESSAGES_H
