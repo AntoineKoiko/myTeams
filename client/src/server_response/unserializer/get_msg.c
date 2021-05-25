@@ -9,7 +9,7 @@
 
 msg_t *get_msg(unsigned char *buff, size_t *it)
 {
-    msg_t *msg = malloc(sizeof(msg));
+    msg_t *msg = malloc(sizeof(msg_t));
 
     if (msg == NULL)
         return NULL;
