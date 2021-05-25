@@ -10,7 +10,8 @@
 #include "attributes.h"
 #include "tools.h"
 
-NON_NULL(2) static inline int load_team_users(
+NON_NULL(2)
+static inline int load_team_users(
     const int fd, team_node_t **team, const size_t users)
 {
     (*team)->nb_subscribed_users = users;
@@ -64,8 +65,8 @@ NON_NULL(2) static int load_team(const int fd, database_t *db)
     return EXIT_SUCCESS;
 }
 
-NON_NULL(2) int load_teams(const int fd, database_t *db,
-    const size_t elements_nb)
+NON_NULL(2)
+int load_teams(const int fd, database_t *db, const size_t elements_nb)
 {
     int my_ret_val = EXIT_SUCCESS;
 

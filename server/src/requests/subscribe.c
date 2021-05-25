@@ -10,13 +10,13 @@
 static inline int push_user_on_list(team_node_t *team, uuid_t user)
 {
     return add_elem_uuid_array(
-        &team->nb_subscribed_users, team->subscribed_users, user);
+        &team->nb_subscribed_users, &team->subscribed_users, user);
 }
 
 static inline int push_team_on_list(user_node_t *user, uuid_t team)
 {
     return add_elem_uuid_array(
-        &user->nb_subscribed_teams, user->subscribed_teams, team);
+        &user->nb_subscribed_teams, &user->subscribed_teams, team);
 }
 
 static void log_subscribed(team_t *team, user_t *user)
