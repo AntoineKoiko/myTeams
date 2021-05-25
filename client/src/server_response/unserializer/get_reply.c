@@ -13,6 +13,7 @@ reply_t *get_reply(unsigned char *buff, size_t *it)
 
     if (reply == NULL)
         return NULL;
+    get_uuid(reply->reply_uuid, buff, it);
     get_uuid(reply->team_uuid, buff, it);
     get_uuid(reply->thread_uuid, buff, it);
     get_time_t(&reply->reply_timestamp, buff, it);

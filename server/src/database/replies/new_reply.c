@@ -19,6 +19,7 @@ reply_t *new_reply(const uuid_t team_uuid, const uuid_t thread_uuid,
         free(reply);
         return NULL;
     }
+    uuid_generate(reply->reply_uuid);
     uuid_copy(reply->team_uuid, team_uuid);
     uuid_copy(reply->thread_uuid, thread_uuid);
     uuid_copy(reply->user_uuid, user_uuid);

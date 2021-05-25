@@ -84,7 +84,7 @@ int create_thread_request(
         return ret;
     if (insert_thread(server->database, session->channel_ctx,
         session->user->user_data->user_uuid, argv[0], argv[1]) == ERR_NO_VAL) {
-            return EXIT_ERROR;
+        return EXIT_ERROR;
     }
     thread = find_thread_by_name(server->database, session->team_ctx,
                 session->channel_ctx, argv[0]);

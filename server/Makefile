@@ -97,6 +97,7 @@ SRC		=	$(DSETUP)/get_args.c					\
 			$(DSRC)/requests/list_reply.c			\
 			$(DSRC)/requests/list_user.c			\
 			$(DSRC)/requests/list_message.c			\
+			$(DSRC)/requests/info_req.c				\
 			$(DSRC)/requests/info_team.c			\
 			$(DSRC)/requests/info_user.c			\
 			$(DSRC)/requests/info_channel.c			\
@@ -154,6 +155,7 @@ SRC		=	$(DSETUP)/get_args.c					\
 			$(DDB_REPLIES)/save_replies.c		\
 			$(DDB_REPLIES)/insert_replies.c		\
             $(DDB_REPLIES)/new_reply.c 			\
+			$(DDB_REPLIES)/find_replies.c		\
 			$(DDB_REPLIES)/delete_replies.c		\
 			\
 			$(DDB_USERS)/count_users.c		\
