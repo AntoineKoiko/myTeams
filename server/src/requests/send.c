@@ -14,13 +14,9 @@ static void msg_is_created(teams_server_t *server, N_U session_list_t *session,
     char send_uuid[UUID_STR_LEN] = {0};
     session_list_t *dest_session = find_user_session_by_uuid(server,
                                                         msg->receiver_uuid);
-    if (!dest_session) {
-        put_protocol(session->cnt.output_buff, sizeof(int), 411,
-                    &session->cnt.output_size);
-    }
+    //SI DEUX SESSION UNE NE RECOIT PAS l'EVENT.
     uuid_unparse_lower(msg->receiver_uuid, rec_uuid);
     uuid_unparse_lower(msg->sender_uuid, send_uuid);
-    //put_msg_in_db(server, msg, session->user);
     if (dest_session && dest_session->user->user_data->status == CONNECTED)
         prepare_msg_buffer(dest_session->cnt.output_buff, msg, 246,
                             &dest_session->cnt.output_size);
@@ -32,7 +28,7 @@ int send_request(teams_server_t *server, session_list_t *session,
 {
     uuid_t dest_uuid = {0};
     user_node_t *dest = NULL;
-    msg_t *msg = NULL;
+    msg_node_t *msg = NULL;
 
     uuid_parse(argv[0], dest_uuid);
     dest = find_user_by_uuid(server->database, dest_uuid);
@@ -45,9 +41,9 @@ int send_request(teams_server_t *server, session_list_t *session,
         dest_uuid, argv[1]) == ERR_NO_VAL) {
         return EXIT_ERROR;
     }
-    msg = new_msg(session->user->user_data->user_uuid, dest_uuid, argv[1]);
+    msg = SLIST_FIRST(&session->user->conversations); //C'est pas ouf faudras ajouter un uuid;
     if (!msg)
         return EXIT_ERROR;
-    msg_is_created(server, session, msg);
+    msg_is_created(server, session, msg->msg_data);
     return EXIT_SUCCESS;
 }
