@@ -27,9 +27,8 @@ NON_NULL(1)
 int insert_reply(database_t *db, uuid_t array[],
     const char body[MAX_BODY_LENGTH]);
 
-reply_node_t *find_reply_by_uuid(const database_t *db,
-    const uuid_t tm_uuid, const uuid_t chan_uuid, const uuid_t thread_uuid,
-    const uuid_t reply_uuid);
+reply_node_t *find_reply_by_uuid(const database_t *db, const uuid_t tm_uuid,
+    const uuid_t chan_uuid, uuid_t array[2]);
 
 NON_NULL(2)
 int count_reply_nodes(size_t *count, const database_t *db);
