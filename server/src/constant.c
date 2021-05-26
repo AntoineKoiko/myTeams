@@ -35,7 +35,7 @@ const client_req_t request_array[] = {
     {NULL, true},
     {&subscribe_request, true},
     {&subscribed_request, true},
-    {NULL, true},
+    {&unsubscribe_request, true},
     {&use_request, true},
     {&create_request, true},
     {&list_request, true},
