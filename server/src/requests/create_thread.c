@@ -75,7 +75,8 @@ int create_thread_request(
         return ret;
     uuid_copy(array[0], session->channel_ctx);
     uuid_copy(array[1], session->user->user_data->user_uuid);
-    if (insert_thread(server->database, array, argv[0], argv[1]) == ERR_NO_VAL) {
+    if (insert_thread(server->database, array, argv[0], argv[1])
+        == ERR_NO_VAL) {
         return EXIT_ERROR;
     }
     thread = find_thread_by_name(server->database, session->team_ctx,

@@ -140,7 +140,8 @@ int login_request(
     teams_server_t *server, session_list_t *session, char **argv);
 int logout_request(
     teams_server_t *server, session_list_t *session, char **argv);
-int use_request(N_U teams_server_t *server, session_list_t *session, char **argv);
+int use_request(N_U teams_server_t *server, session_list_t *session,
+    char **argv);
 
 // CREATE REQUESTS:
 
@@ -189,6 +190,8 @@ int info_thread_request(
 int send_request(teams_server_t *server, session_list_t *session, char **argv);
 
 int subscribe_request(
+    teams_server_t *server, session_list_t *session, char **argv);
+int unsubscribe_request(
     teams_server_t *server, session_list_t *session, char **argv);
 
 int subscribed_request(
