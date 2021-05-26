@@ -36,8 +36,10 @@ int insert_channel(database_t *db, const uuid_t team_uuid,
     if (!my_team)
         return ERR_NO_VAL;
     my_channel_node = new_channel_node(team_uuid, name, description);
-    if (!my_channel_node)
+    if (!my_channel_node) {
+        delete_channel(&my_channel_node);
         return ERR_NO_VAL;
+    }
     SLIST_INSERT_HEAD(&my_team->channels, my_channel_node, next);
     return EXIT_SUCCESS;
 }

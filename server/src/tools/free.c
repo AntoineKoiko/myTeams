@@ -10,7 +10,8 @@
 
 NON_NULL(1) void free_to_null(void **ptr)
 {
-    if (*ptr)
+    if (*ptr) {
         free(*ptr);
-    *ptr = NULL;
+        *ptr = NULL;
+    }
 }
