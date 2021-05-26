@@ -14,31 +14,35 @@ NON_NULL(1) void delete_msg(msg_node_t **msg)
     free_to_null((void **) msg);
 }
 
-NON_NULL(1) static bool msg_already_deleted(msg_node_t *msg)
+NON_NULL(1) void delete_every_user_msgs(msg_t **msgs)
 {
-    static struct msg_head_s my_msgs = {0};
-
-    if (msg_exists(&my_msgs, msg))
-        return false;
-    SLIST_INSERT_HEAD(&my_msgs, msg, next);
-    return true;
+    free_to_null((void **) msgs);
 }
 
-NON_NULL(1) static void delete_user_msgs(user_node_t *user)
+static bool msg_already_deleted(msg_t *msg, const bool to_free)
 {
-    msg_node_t *my_msg = SLIST_FIRST(&user->conversations);
-    msg_node_t *my_last_msg = my_msg;
+    static msg_t *my_msgs = NULL;
+    static size_t my_nb_msgs = 0;
+
+    if (to_free) {
+        delete_every_user_msgs(&my_msgs);
+        return true;
+    }
+    return is_msg_double(&my_msgs, &my_nb_msgs, msg);
+}
+
+NON_NULL(1) void delete_user_msgs(struct msg_head_s *msgs)
+{
+    msg_node_t *my_msg = SLIST_FIRST(msgs);
+    msg_node_t *my_next_msg = NULL;
 
     while (my_msg) {
-        if (!msg_already_deleted(my_msg)) {
-            my_last_msg = SLIST_NEXT(my_last_msg, next);
-            SLIST_REMOVE_HEAD(&user->conversations, next);
+        my_next_msg = SLIST_NEXT(my_msg, next);
+        if (my_msg->msg_data && msg_already_deleted(my_msg->msg_data, false)) {
+            SLIST_REMOVE(msgs, my_msg, msg_node_s, next);
             delete_msg(&my_msg);
         }
-        if (!my_last_msg)
-            break;
-        my_msg = SLIST_NEXT(my_last_msg, next);
-        my_last_msg = my_msg;
+        my_msg = my_next_msg;
     }
 }
 
@@ -48,6 +52,7 @@ NON_NULL(1) void delete_msgs(database_t *db)
 
     SLIST_FOREACH(my_user, &db->users, next)
     {
-        delete_user_msgs(my_user);
+        delete_user_msgs(&my_user->conversations);
     }
+    msg_already_deleted(NULL, true);
 }

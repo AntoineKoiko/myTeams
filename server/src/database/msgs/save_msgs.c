@@ -15,14 +15,16 @@ static inline int save_msg(const int fd, const msg_node_t *msg)
     return write_and_check(fd, msg->msg_data, sizeof(msg_t));
 }
 
-NON_NULL(1) static bool msg_already_saved(msg_node_t *msg)
+static bool msg_already_saved(msg_t *msg, const bool to_free)
 {
-    static struct msg_head_s my_msgs = {0};
+    static msg_t *my_msgs = NULL;
+    static size_t my_nb_msgs = 0;
 
-    if (msg_exists(&my_msgs, msg))
+    if (to_free) {
+        delete_every_user_msgs(&my_msgs);
         return true;
-    SLIST_INSERT_HEAD(&my_msgs, msg, next);
-    return false;
+    }
+    return is_msg_double(&my_msgs, &my_nb_msgs, msg);
 }
 
 NON_NULL(2) static int save_user_msgs(const int fd, user_node_t *user)
@@ -32,7 +34,8 @@ NON_NULL(2) static int save_user_msgs(const int fd, user_node_t *user)
 
     SLIST_FOREACH(my_msg_it, &user->conversations, next)
     {
-        if (!msg_already_saved(my_msg_it)) {
+        if (my_msg_it->msg_data
+            && !msg_already_saved(my_msg_it->msg_data, false)) {
             my_ret_val = save_msg(fd, my_msg_it);
             if (my_ret_val != EXIT_SUCCESS && my_ret_val != ERR_NO_VAL)
                 return my_ret_val;
@@ -52,5 +55,6 @@ NON_NULL(2) int save_msgs(const int fd, const database_t *db)
         if (my_ret_val != EXIT_SUCCESS)
             return my_ret_val;
     }
+    msg_already_saved(NULL, true);
     return EXIT_SUCCESS;
 }

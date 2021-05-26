@@ -172,6 +172,7 @@ SRC		=	$(DSETUP)/get_args.c					\
 			$(DDB_MESSAGES)/save_msgs.c		\
 			$(DDB_MESSAGES)/insert_msgs.c	\
             $(DDB_MESSAGES)/new_msg.c 		\
+			$(DDB_MESSAGES)/find_msg.c		\
 			$(DDB_MESSAGES)/delete_msgs.c	\
 
 SRCS	=	$(SRC) $(DSRC)/main.c
