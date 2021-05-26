@@ -77,6 +77,7 @@ SRC		=	$(DSETUP)/get_args.c					\
 			$(DSRC)/requests/put_types.c			\
 			$(DSRC)/requests/put_structs.c			\
 			$(DSRC)/requests/put_protocol.c			\
+			$(DSRC)/requests/verify_context.c		\
 			$(DSRC)/requests/login.c				\
 			$(DSRC)/requests/logout.c				\
 			$(DSRC)/requests/use.c					\

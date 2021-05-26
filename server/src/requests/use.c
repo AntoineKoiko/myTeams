@@ -28,7 +28,8 @@ static void reset_session_context(session_list_t *s)
     reset_uuid_t(s->thread_ctx);
 }
 
-int use_request(N_U teams_server_t *server, session_list_t *session, char **argv)
+int use_request(N_U teams_server_t *server, session_list_t *session,
+    char **argv)
 {
     uuid_t ctx[3] = {0};
 
