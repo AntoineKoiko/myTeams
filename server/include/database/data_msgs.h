@@ -30,6 +30,8 @@ int insert_msg(database_t *db, const uuid_t sender, const uuid_t receiver,
 NON_NULL(2)
 int count_msg_nodes(size_t *count, const database_t *db);
 
+bool msg_exists(struct msg_head_s *msgs, msg_node_t *msg);
+
 NON_NULL(2)
 int load_msgs(int fd, database_t *db, size_t elements_nb);
 

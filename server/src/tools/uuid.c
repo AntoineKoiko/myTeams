@@ -50,14 +50,15 @@ int remove_elem_uuid_array(
 {
     size_t my_user_index = -1;
 
+    if (*nb_elems == 0) {
+        return EXIT_ERROR;
+    }
     my_user_index =
         find_uuid_index((*nb_elems), (const uuid_t *) (*array), to_remove);
-    if (my_user_index != (size_t) -1)
+    if (my_user_index == (size_t) -1)
         return ERR_NO_VAL;
     uuid_copy((*array)[my_user_index], (*array)[(*nb_elems) - 1]);
     (*nb_elems)--;
     (*array) = reallocarray((*array), (*nb_elems), sizeof(uuid_t));
-    if ((*array) == NULL)
-        return EXIT_ERROR;
     return EXIT_SUCCESS;
 }

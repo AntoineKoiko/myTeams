@@ -15,6 +15,7 @@
 
 #include "user_t.h"
 #include "attributes.h"
+#include "tools.h"
 
 typedef struct database_s database_t;
 
@@ -52,5 +53,17 @@ int save_users(int fd, const database_t *db);
 NON_NULL(1) void delete_user(user_node_t **user);
 
 NON_NULL(1) void delete_users(database_t *db);
+
+static inline int push_team_on_list(user_node_t *user, uuid_t team)
+{
+    return add_elem_uuid_array(
+        &user->nb_subscribed_teams, &user->subscribed_teams, team);
+}
+
+static inline int pop_team_on_list(user_node_t *user, uuid_t team)
+{
+    return remove_elem_uuid_array(
+        &user->nb_subscribed_teams, &user->subscribed_teams, team);
+}
 
 #endif // SERVER_DATA_USERS_H

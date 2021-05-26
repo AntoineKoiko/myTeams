@@ -35,13 +35,16 @@ int insert_msg(database_t *db, const uuid_t sender, const uuid_t receiver,
         return ERR_NO_VAL;
     my_user = find_user_by_uuid(db, sender);
     if (!my_user) {
-        //        delete_msg(my_msg_node);
+        delete_msg(&my_msg_node);
         return ERR_NO_VAL;
     }
     SLIST_INSERT_HEAD(&my_user->conversations, my_msg_node, next);
     my_user = find_user_by_uuid(db, receiver);
-    if (!my_user)
+    if (!my_user) {
+        SLIST_REMOVE_HEAD(&my_user->conversations, next);
+        delete_msg(&my_msg_node);
         return ERR_NO_VAL;
+    }
     SLIST_INSERT_HEAD(&my_user->conversations, my_msg_node, next);
     return EXIT_SUCCESS;
 }
