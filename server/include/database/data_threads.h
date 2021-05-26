@@ -32,7 +32,7 @@ thread_t *new_thread(const uuid_t chan, const uuid_t user,
     const char name[MAX_NAME_LENGTH], const char body[MAX_BODY_LENGTH]);
 
 NON_NULL(1)
-int insert_thread(database_t *db, const uuid_t chan, const uuid_t user,
+int insert_thread(database_t *db, uuid_t array[2],
     const char name[MAX_NAME_LENGTH],
     const char description[MAX_DESCRIPTION_LENGTH]);
 

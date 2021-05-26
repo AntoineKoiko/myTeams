@@ -67,13 +67,15 @@ int create_thread_request(
     teams_server_t *server, session_list_t *session, char **argv)
 {
     thread_node_t *thread = NULL;
+    uuid_t array[2] = {0};
     int ret = 0;
 
     ret = check_error(session, server, (const char **)argv);
     if (ret)
         return ret;
-    if (insert_thread(server->database, session->channel_ctx,
-        session->user->user_data->user_uuid, argv[0], argv[1]) == ERR_NO_VAL) {
+    uuid_copy(array[0], session->channel_ctx);
+    uuid_copy(array[1], session->user->user_data->user_uuid);
+    if (insert_thread(server->database, array, argv[0], argv[1]) == ERR_NO_VAL) {
         return EXIT_ERROR;
     }
     thread = find_thread_by_name(server->database, session->team_ctx,
