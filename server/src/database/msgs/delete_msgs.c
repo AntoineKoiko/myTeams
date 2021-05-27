@@ -32,11 +32,10 @@ NON_NULL(1) void delete_user_msgs(struct msg_head_s *msgs)
     msg_node_t *my_next_msg = NULL;
 
     while (my_msg) {
-            my_msg->msg_data->msg_body);
-            my_next_msg = SLIST_NEXT(my_msg, next);
-            SLIST_REMOVE(msgs, my_msg, msg_node_s, next);
-            delete_msg(&my_msg);
-            my_msg = my_next_msg;
+        my_next_msg = SLIST_NEXT(my_msg, next);
+        SLIST_REMOVE(msgs, my_msg, msg_node_s, next);
+        delete_msg(&my_msg);
+        my_msg = my_next_msg;
     }
 }
 
