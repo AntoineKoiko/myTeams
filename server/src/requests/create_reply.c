@@ -17,8 +17,7 @@ static int reply_created(teams_server_t *server, session_list_t *session,
     STAILQ_FOREACH(s, &server->session_head, next) {
         if (s->logged_in && s->user &&
             is_sub_and_connected(server->database, reply->team_uuid,
-                                        s->user->user_data)
-            && session->cnt.socket != s->cnt.socket) {
+                                        s->user->user_data)) {
             cursor = &s->cnt.output_size;
             prepare_reply_buffer(s->cnt.output_buff, reply, 245, cursor);
         }
