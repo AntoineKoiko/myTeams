@@ -10,7 +10,7 @@
 #include "database/file_management.h"
 #include "attributes.h"
 
-static inline bool init_save_file(
+static bool init_save_file(
     int *fd, const uint i, const size_t elements_nb)
 {
     *fd = open_db_file(i);
@@ -21,7 +21,7 @@ static inline bool init_save_file(
     return true;
 }
 
-static inline bool exec_count_func(
+static bool exec_count_func(
     const uint i, size_t *elements_nb, const database_t *db)
 {
     if (!DB_NB_ENTRIES(i))
@@ -31,7 +31,7 @@ static inline bool exec_count_func(
     return true;
 }
 
-static inline bool exec_save_func(
+static bool exec_save_func(
     const uint i, const int fd, const database_t *db)
 {
     if (!DB_SAVE(i))

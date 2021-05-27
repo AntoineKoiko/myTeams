@@ -8,7 +8,7 @@
 #include "database/database.h"
 #include <sys/queue.h>
 
-static inline int save_msg(const int fd, const msg_node_t *msg)
+static int save_msg(const int fd, const msg_node_t *msg)
 {
     if (!msg->msg_data)
         return ERR_NO_VAL;

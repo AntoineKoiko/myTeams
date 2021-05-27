@@ -7,7 +7,7 @@
 
 #include "database/database.h"
 
-static inline int save_reply(const int fd, const reply_node_t *reply)
+static int save_reply(const int fd, const reply_node_t *reply)
 {
     if (!reply->reply_data)
         return ERR_NO_VAL;

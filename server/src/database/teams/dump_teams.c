@@ -5,6 +5,8 @@
 ** Print teams content
 */
 
+const int make_iso_compilers_happy_1 = 1;
+
 #ifdef DEBUG
 
     #include "database/database.h"
@@ -32,10 +34,6 @@ void dump_teams(const database_t *db)
     SLIST_FOREACH(it, &db->teams, next)
     {
         dump_team_data(it->team_data);
-        // dump_channels(it);
-        // dump_subscribed_users(it->subscribed_users);
     }
 }
 #endif
-
-typedef int make_iso_compilers_happy;

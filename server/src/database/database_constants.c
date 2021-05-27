@@ -36,7 +36,7 @@ const save_file_t data_files[NB_DATA_FILE_TYPE] = {{TEAMS,
 #ifdef DEBUG
                                                         ,
                                                         dump_teams
-#endif /* DEBUG */
+#endif
                                                 },
     {CHANNELS,
         ext_channels,
@@ -48,7 +48,7 @@ const save_file_t data_files[NB_DATA_FILE_TYPE] = {{TEAMS,
 #ifdef DEBUG
         ,
         NULL
-#endif /* DEBUG */
+#endif
     },
     {THREADS,
         ext_threads,
@@ -59,7 +59,7 @@ const save_file_t data_files[NB_DATA_FILE_TYPE] = {{TEAMS,
 #ifdef DEBUG
         ,
         NULL
-#endif /* DEBUG */
+#endif
     },
     {REPLIES,
         ext_replies,
@@ -70,7 +70,7 @@ const save_file_t data_files[NB_DATA_FILE_TYPE] = {{TEAMS,
 #ifdef DEBUG
         ,
         NULL
-#endif /* DEBUG */
+#endif
     },
     {USERS,
         ext_users,
@@ -81,7 +81,7 @@ const save_file_t data_files[NB_DATA_FILE_TYPE] = {{TEAMS,
 #ifdef DEBUG
         ,
         NULL
-#endif /* DEBUG */
+#endif
     },
     {MESSAGES,
         ext_msgs,
@@ -92,5 +92,5 @@ const save_file_t data_files[NB_DATA_FILE_TYPE] = {{TEAMS,
 #ifdef DEBUG
         ,
         NULL
-#endif /* DEBUG */
+#endif
     }};
