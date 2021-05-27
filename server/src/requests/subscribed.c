@@ -28,11 +28,10 @@ static int list_sub_to_team(teams_server_t *server, session_list_t *ses,
 {
     user_node_t *user = NULL;
 
-    for (int i = 0; team->subscribed_users[i]; i++) {
+    for (size_t i = 0; i < team->nb_subscribed_users; i++) {
         user = find_user_by_uuid(server->database, team->subscribed_users[i]);
-        if (!user)
-            return EXIT_FAILURE;
-        prepare_user_buffer(ses->cnt.output_buff, user->user_data, 221,
+        if (user)
+            prepare_user_buffer(ses->cnt.output_buff, user->user_data, 221,
                             &ses->cnt.output_size);
     }
     return EXIT_SUCCESS;
@@ -43,8 +42,9 @@ int subscribed_request(teams_server_t *server, session_list_t *session,
 {
     team_node_t *team = NULL;
     uuid_t tm_uuid = {0};
+    size_t argc = str_array_len((const char **)argv);
 
-    if (!argv || !argv[0])
+    if (argc == 0)
         return list_sub_team(server, session);
     uuid_parse(argv[0], tm_uuid);
     team = find_team_by_uuid(server->database, tm_uuid);

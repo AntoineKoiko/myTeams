@@ -101,6 +101,7 @@ void clean_user(user_t **user);
 bool is_subscribed(database_t *db, uuid_t team_uuid, uuid_t user_uuid);
 void reset_uuid_t(uuid_t uuid);
 bool is_sub_and_connected(database_t *db, uuid_t team_uuid, user_t *user);
+int verify_context(teams_server_t *server, session_list_t *ses);
 
 // buffer preparing
 size_t put_uuid(unsigned char *buff, uuid_t uuid, size_t *cursor);
@@ -140,7 +141,8 @@ int login_request(
     teams_server_t *server, session_list_t *session, char **argv);
 int logout_request(
     teams_server_t *server, session_list_t *session, char **argv);
-int use_request(teams_server_t *server, session_list_t *session, char **argv);
+int use_request(N_U teams_server_t *server, session_list_t *session,
+    char **argv);
 
 // CREATE REQUESTS:
 
@@ -189,6 +191,8 @@ int info_thread_request(
 int send_request(teams_server_t *server, session_list_t *session, char **argv);
 
 int subscribe_request(
+    teams_server_t *server, session_list_t *session, char **argv);
+int unsubscribe_request(
     teams_server_t *server, session_list_t *session, char **argv);
 
 int subscribed_request(

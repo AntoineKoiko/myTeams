@@ -25,8 +25,8 @@ static reply_node_t *new_reply_node(const uuid_t team_uuid,
     return my_reply_node;
 }
 
-NON_NULL(1)
-int insert_reply(database_t *db, uuid_t array[4], const char body[MAX_BODY_LENGTH])
+NON_NULL(1) int insert_reply(database_t *db, uuid_t array[4],
+    const char body[MAX_BODY_LENGTH])
 {
     uuid_t team = {0};
     uuid_t thread = {0};

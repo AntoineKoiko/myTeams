@@ -31,31 +31,14 @@ const client_req_t request_array[] = {
     {&logout_request, true},
     {&list_user_request, true},
     {&user_request, true},
-    {NULL, true},
-    {NULL, true},
+    {&send_request, true},
+    {&list_message_request, true},
     {&subscribe_request, true},
-    {NULL, true},
-    {NULL, true},
+    {&subscribed_request, true},
+    {&unsubscribe_request, true},
     {&use_request, true},
     {&create_request, true},
     {&list_request, true},
     {&info_request, true},
     {NULL, true}
 };
-
-// const request_fct request_array[] = {
-//     &login_request,
-//     &logout_request,
-//     NULL,
-//     NULL,
-//     NULL,
-//     NULL,
-//     NULL,
-//     NULL,
-//     NULL,
-//     &use_request,
-//     &create_request,
-//     &list_request,
-//     NULL,
-//     NULL
-// };

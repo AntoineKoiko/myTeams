@@ -15,7 +15,7 @@ static int thread_created(
 
     prepare_thread_buffer(session->cnt.output_buff, thread, 234, cursor);
     STAILQ_FOREACH(s, &server->session_head, next) {
-        if (is_sub_and_connected(
+        if (s->logged_in && s->user && is_sub_and_connected(
                 server->database, session->team_ctx, s->user->user_data)
                 && session->cnt.socket != s->cnt.socket) {
             cursor = &s->cnt.output_size;
@@ -24,16 +24,6 @@ static int thread_created(
     }
     return EXIT_SUCCESS;
 }
-
-// static int creation_failed(session_list_t *session)
-// {
-//     size_t packet_size = sizeof(int);
-//     size_t *cursor = &session->cnt.output_size;
-//     int code = 414;
-
-//     put_protocol(session->cnt.output_buff, packet_size, code, cursor);
-//     return EXIT_SUCCESS;
-// }
 
 static void log_thread_creation(thread_t *thread)
 {
@@ -77,13 +67,16 @@ int create_thread_request(
     teams_server_t *server, session_list_t *session, char **argv)
 {
     thread_node_t *thread = NULL;
+    uuid_t array[2] = {0};
     int ret = 0;
 
     ret = check_error(session, server, (const char **)argv);
     if (ret)
         return ret;
-    if (insert_thread(server->database, session->channel_ctx,
-        session->user->user_data->user_uuid, argv[0], argv[1]) == ERR_NO_VAL) {
+    uuid_copy(array[0], session->channel_ctx);
+    uuid_copy(array[1], session->user->user_data->user_uuid);
+    if (insert_thread(server->database, array, argv[0], argv[1])
+        == ERR_NO_VAL) {
         return EXIT_ERROR;
     }
     thread = find_thread_by_name(server->database, session->team_ctx,

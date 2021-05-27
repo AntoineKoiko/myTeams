@@ -13,7 +13,6 @@
 typedef struct {
     int code;
     int (*action_func)(int code, size_t packet_size, unsigned char *buff);
-
 } interprate_code_t;
 
 #endif /* !INTERPRATE_CODE_T_H_ */

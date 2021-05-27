@@ -28,16 +28,16 @@ const char *const data_dirname = ".database";
 const char *const data_filename = "database";
 
 const save_file_t data_files[NB_DATA_FILE_TYPE] = {{TEAMS,
-                                                       ext_teams,
-                                                       count_team_nodes,
-                                                       load_teams,
-                                                       save_teams,
-                                                       delete_teams
+                                                        ext_teams,
+                                                        count_team_nodes,
+                                                        load_teams,
+                                                        save_teams,
+                                                        delete_teams
 #ifdef DEBUG
-                                                       ,
-                                                       dump_teams
+                                                        ,
+                                                        dump_teams
 #endif /* DEBUG */
-                                                   },
+                                                },
     {CHANNELS,
         ext_channels,
         count_channel_nodes,

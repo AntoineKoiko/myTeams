@@ -57,7 +57,8 @@ static int check_error(session_list_t *session, teams_server_t *server,
     return EXIT_SUCCESS;
 }
 
-int create_team_request(teams_server_t *server, session_list_t *session, char **argv)
+int create_team_request(teams_server_t *server, session_list_t *session,
+    char **argv)
 {
     team_node_t *team = NULL;
     char tm_uuid[UUID_STR_LEN] = {0};

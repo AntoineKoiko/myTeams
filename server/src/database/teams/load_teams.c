@@ -53,12 +53,12 @@ NON_NULL(2) static int load_team(const int fd, database_t *db)
         return my_ret_val;
     my_ret_val = load_team_users(fd, &my_team, my_users);
     if (my_ret_val != EXIT_SUCCESS) {
-        // delete_team_node() // TODO delete functions
+        delete_team(&my_team);
         return my_ret_val;
     }
     my_ret_val = read_and_check(fd, my_team->team_data, sizeof(team_t));
     if (my_ret_val != EXIT_SUCCESS) {
-        // delete_team_node() // TODO delete functions
+        delete_team(&my_team);
         return my_ret_val;
     }
     SLIST_INSERT_HEAD(&db->teams, my_team, next);

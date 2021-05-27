@@ -30,11 +30,18 @@ int insert_msg(database_t *db, const uuid_t sender, const uuid_t receiver,
 NON_NULL(2)
 int count_msg_nodes(size_t *count, const database_t *db);
 
-NON_NULL(2)
-int load_msgs(int fd, database_t *db, size_t elements_nb);
+NON_NULL(1, 3)
+bool msg_exists(const msg_t *msgs, size_t nb_msgs, const msg_t *msg);
+
+NON_NULL(1, 2)
+bool is_msg_double(msg_t **msg_doubles, size_t *nb_doubles, const msg_t *msg);
+
+NON_NULL(2) int load_msgs(int fd, database_t *db, size_t elements_nb);
 
 NON_NULL(2)
 int save_msgs(int fd, const database_t *db);
+
+NON_NULL(1) void delete_user_msgs(struct msg_head_s *msgs);
 
 NON_NULL(1) void delete_msg(msg_node_t **msg);
 

@@ -29,8 +29,7 @@ static inline int save_team(const int fd, const team_node_t *team)
     return EXIT_SUCCESS;
 }
 
-NON_NULL(2)
-int save_teams(const int fd, const database_t *db)
+NON_NULL(2) int save_teams(const int fd, const database_t *db)
 {
     team_node_t *it = NULL;
     int my_ret_val = EXIT_SUCCESS;

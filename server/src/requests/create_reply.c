@@ -15,7 +15,8 @@ static int reply_created(teams_server_t *server, session_list_t *session,
 
     prepare_reply_buffer(session->cnt.output_buff, reply, 235, cursor);
     STAILQ_FOREACH(s, &server->session_head, next) {
-        if (is_sub_and_connected(server->database, reply->team_uuid,
+        if (s->logged_in && s->user &&
+            is_sub_and_connected(server->database, reply->team_uuid,
                                         s->user->user_data)
             && session->cnt.socket != s->cnt.socket) {
             cursor = &s->cnt.output_size;
@@ -68,9 +69,9 @@ static void log_reply_creation(reply_t *reply)
 int create_reply_request(teams_server_t *server, session_list_t *session,
                         char **argv)
 {
-    char uuid[UUID_STR_LEN] = {0};
     reply_node_t *reply = NULL;
     uuid_t uuid_array[4] = {0};
+    uuid_t uuid_array_2[2] = {0};
     int ret = 0;
 
     ret = check_error(session, server, (const char **)argv);
@@ -79,12 +80,12 @@ int create_reply_request(teams_server_t *server, session_list_t *session,
     uuid_copy(uuid_array[0], session->team_ctx);
     uuid_copy(uuid_array[1], session->thread_ctx);
     uuid_copy(uuid_array[2], session->user->user_data->user_uuid);
-    if (insert_reply(server->database, uuid_array, argv[0]) == ERR_NO_VAL) {
+    if (insert_reply(server->database, uuid_array, argv[0]) == ERR_NO_VAL)
         return EXIT_ERROR;
-    }
-    uuid_unparse_lower(uuid_array[3], uuid);
+    uuid_copy(uuid_array_2[0], session->thread_ctx);
+    uuid_copy(uuid_array_2[1], uuid_array[3]);
     reply = find_reply_by_uuid(server->database, session->team_ctx,
-                session->channel_ctx, session->thread_ctx, uuid_array[3]);
+                session->channel_ctx, uuid_array_2);
     reply_created(server, session, reply->reply_data);
     log_reply_creation(reply->reply_data);
     return EXIT_SUCCESS;

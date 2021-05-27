@@ -25,14 +25,18 @@ static thread_node_t *new_thread_node(const uuid_t chan, const uuid_t user,
 }
 
 NON_NULL(1)
-int insert_thread(database_t *db, const uuid_t chan, const uuid_t user,
+int insert_thread(database_t *db, uuid_t array[2],
     const char name[MAX_NAME_LENGTH],
     const char description[MAX_DESCRIPTION_LENGTH])
 {
     thread_node_t *my_thread_node = NULL;
     team_node_t *my_team = NULL;
     channel_node_t *my_channel = NULL;
+    uuid_t chan = {0};
+    uuid_t user = {0};
 
+    uuid_copy(chan, array[0]);
+    uuid_copy(user, array[1]);
     my_team = find_team_by_channel(db, chan);
     if (!my_team)
         return ERR_NO_VAL;

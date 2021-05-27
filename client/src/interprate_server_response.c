@@ -11,7 +11,8 @@ static int find_code_function(int code, size_t packet_size,
     unsigned char *buff)
 {
     for (size_t i = 0; interprate_list[i].code != -1; i++)  {
-        if (interprate_list[i].code == code && interprate_list[i].action_func) {
+        if (interprate_list[i].code == code &&
+            interprate_list[i].action_func) {
             return interprate_list[i].action_func(code, packet_size, buff);
         }
     }
@@ -33,7 +34,8 @@ static bool check_packet(teams_client_t *client, size_t *old_cursor)
         return false;
     }
     get_int(&code, client->client.input_buff+it, &it, false);
-    find_code_function(code, packet_size - sizeof(int), client->client.input_buff+it);
+    find_code_function(code, packet_size - sizeof(int),
+        client->client.input_buff+it);
     it += packet_size - sizeof(int);
     *old_cursor = it;
     return true;

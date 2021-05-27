@@ -7,29 +7,6 @@
 
 #include "server.h"
 
-static int push_user_on_list(team_node_t *team, uuid_t user)
-{
-    team->nb_subscribed_users++;
-    team->subscribed_users = reallocarray(team->subscribed_users,
-        team->nb_subscribed_users, sizeof(uuid_t));
-    if (team->subscribed_users == NULL)
-        return EXIT_ERROR;
-    uuid_copy(team->subscribed_users[team->nb_subscribed_users - 1],
-        user);
-    return EXIT_SUCCESS;
-}
-
-static int push_team_on_list(user_node_t *user, uuid_t team)
-{
-    user->nb_subscribed_teams++;
-    user->subscribed_teams = reallocarray(user->subscribed_teams,
-        user->nb_subscribed_teams, sizeof(uuid_t));
-    if (user->subscribed_teams == NULL)
-        return EXIT_ERROR;
-    uuid_copy(user->subscribed_teams[user->nb_subscribed_teams - 1], team);
-    return EXIT_SUCCESS;
-}
-
 static void log_subscribed(team_t *team, user_t *user)
 {
     char user_uuid[UUID_STR_LEN] = {0};
@@ -48,12 +25,30 @@ static void team_subscribe(session_list_t *session, team_t *team)
 
     uuid_copy(uuid[0], team->team_uuid);
     uuid_copy(uuid[1], session->user->user_data->user_uuid);
-    size_buf = prepare_2_uuid_buffer(session->cnt.output_buff, uuid, 251, &cursor);
+    size_buf =
+        prepare_2_uuid_buffer(session->cnt.output_buff, uuid, 251, &cursor);
     session->cnt.output_size += size_buf;
 }
 
-int subscribe_request(teams_server_t *server, session_list_t *session,
-                        char **argv)
+static int process_subscribe(teams_server_t *server, session_list_t *session,
+    team_node_t *team, user_node_t *user)
+{
+    if (is_subscribed(server->database,
+            team->team_data->team_uuid,
+            session->user->user_data->user_uuid)) {
+        return EXIT_SUCCESS;
+    }
+    if (push_user_on_list(team, user->user_data->user_uuid))
+        return EXIT_ERROR;
+    if (push_team_on_list(user, team->team_data->team_uuid))
+        return EXIT_ERROR;
+    team_subscribe(session, team->team_data);
+    log_subscribed(team->team_data, user->user_data);
+    return EXIT_SUCCESS;
+}
+
+int subscribe_request(
+    teams_server_t *server, session_list_t *session, char **argv)
 {
     user_node_t *user = session->user;
     team_node_t *team = NULL;
@@ -68,11 +63,5 @@ int subscribe_request(teams_server_t *server, session_list_t *session,
             &session->cnt.output_size);
         return EXIT_FAILURE;
     }
-    if (push_user_on_list(team, user->user_data->user_uuid))
-        return EXIT_ERROR;
-    if (push_team_on_list(user, team->team_data->team_uuid))
-        return EXIT_ERROR;
-    team_subscribe(session, team->team_data);
-    log_subscribed(team->team_data, user->user_data);
-    return EXIT_SUCCESS;
+    return process_subscribe(server, session, team, user);
 }
