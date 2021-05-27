@@ -12,11 +12,12 @@ static void get_msg_list(session_list_t *session, user_node_t *user)
 {
     msg_node_t *node = NULL;
     size_t *cursor = &session->cnt.output_size;
-    user_t *data = user->user_data;
+    user_t *session_user = session->user->user_data;
 
     SLIST_FOREACH(node, &user->conversations, next) {
-        if (uuid_compare(node->msg_data->receiver_uuid, data->user_uuid) == 0
-            || !uuid_compare(node->msg_data->sender_uuid, data->user_uuid)) {
+        if (!uuid_compare(node->msg_data->receiver_uuid,
+            session_user->user_uuid) || !uuid_compare(
+            node->msg_data->sender_uuid, session_user->user_uuid)) {
                 prepare_msg_buffer(session->cnt.output_buff,
                                             node->msg_data, 226, cursor);
             }

@@ -32,7 +32,7 @@ const client_req_t request_array[] = {
     {&list_user_request, true},
     {&user_request, true},
     {&send_request, true},
-    {NULL, true},
+    {&list_message_request, true},
     {&subscribe_request, true},
     {&subscribed_request, true},
     {&unsubscribe_request, true},
