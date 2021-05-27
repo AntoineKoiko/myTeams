@@ -52,8 +52,12 @@ int insert_msg(database_t *db, const uuid_t sender, const uuid_t receiver,
         delete_msg(&my_msg_node);
         return my_ret_val;
     }
+    my_msg_node = new_msg_node(sender, receiver, body);
+    if (!my_msg_node)
+        return ERR_NO_VAL;
     my_ret_val = insert_msg_user(db, receiver, my_msg_node);
     if (my_ret_val != EXIT_SUCCESS) {
+        delete_msg(&my_msg_node);
         return my_ret_val;
     }
     return EXIT_SUCCESS;

@@ -21,7 +21,7 @@ static bool msg_already_saved(msg_t *msg, const bool to_free)
     static size_t my_nb_msgs = 0;
 
     if (to_free) {
-        delete_every_user_msgs(&my_msgs);
+        free_to_null((void **) &my_msgs);
         return true;
     }
     return is_msg_double(&my_msgs, &my_nb_msgs, msg);

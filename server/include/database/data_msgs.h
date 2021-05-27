@@ -41,8 +41,6 @@ NON_NULL(2) int load_msgs(int fd, database_t *db, size_t elements_nb);
 NON_NULL(2)
 int save_msgs(int fd, const database_t *db);
 
-NON_NULL(1) void delete_every_user_msgs(msg_t **msgs);
-
 NON_NULL(1) void delete_user_msgs(struct msg_head_s *msgs);
 
 NON_NULL(1) void delete_msg(msg_node_t **msg);

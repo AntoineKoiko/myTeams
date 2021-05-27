@@ -10,21 +10,6 @@
 #include "attributes.h"
 #include "tools.h"
 
-NON_NULL(1) static int register_msg_db(database_t *db, msg_node_t *msg)
-{
-    user_node_t *my_user = NULL;
-
-    my_user = find_user_by_uuid(db, msg->msg_data->receiver_uuid);
-    if (!my_user)
-        return ERR_NO_VAL;
-    SLIST_INSERT_HEAD(&my_user->conversations, msg, next);
-    my_user = find_user_by_uuid(db, msg->msg_data->sender_uuid);
-    if (!my_user)
-        return ERR_NO_VAL;
-    SLIST_INSERT_HEAD(&my_user->conversations, msg, next);
-    return EXIT_SUCCESS;
-}
-
 NON_NULL(1) static int init_msg_node(msg_node_t **msg)
 {
     *msg = calloc_and_check(1, sizeof(msg_node_t));
@@ -52,11 +37,16 @@ NON_NULL(2) static int load_msg(const int fd, database_t *db)
         delete_msg(&my_msg);
         return my_ret_val;
     }
-    return register_msg_db(db, my_msg);
+    my_ret_val = insert_msg(db,
+        my_msg->msg_data->sender_uuid,
+        my_msg->msg_data->receiver_uuid,
+        my_msg->msg_data->msg_body);
+    delete_msg(&my_msg);
+    return my_ret_val;
 }
 
-NON_NULL(2) int load_msgs(const int fd, database_t *db,
-    const size_t elements_nb)
+NON_NULL(2)
+int load_msgs(const int fd, database_t *db, const size_t elements_nb)
 {
     int my_ret_val = EXIT_SUCCESS;
 

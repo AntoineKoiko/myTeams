@@ -14,18 +14,13 @@ NON_NULL(1) void delete_msg(msg_node_t **msg)
     free_to_null((void **) msg);
 }
 
-NON_NULL(1) void delete_every_user_msgs(msg_t **msgs)
-{
-    free_to_null((void **) msgs);
-}
-
 static bool msg_already_deleted(msg_t *msg, const bool to_free)
 {
     static msg_t *my_msgs = NULL;
     static size_t my_nb_msgs = 0;
 
     if (to_free) {
-        delete_every_user_msgs(&my_msgs);
+        free_to_null((void **) &my_msgs);
         return true;
     }
     return is_msg_double(&my_msgs, &my_nb_msgs, msg);
@@ -37,12 +32,11 @@ NON_NULL(1) void delete_user_msgs(struct msg_head_s *msgs)
     msg_node_t *my_next_msg = NULL;
 
     while (my_msg) {
-        my_next_msg = SLIST_NEXT(my_msg, next);
-        if (my_msg->msg_data && msg_already_deleted(my_msg->msg_data, false)) {
+            my_msg->msg_data->msg_body);
+            my_next_msg = SLIST_NEXT(my_msg, next);
             SLIST_REMOVE(msgs, my_msg, msg_node_s, next);
             delete_msg(&my_msg);
-        }
-        my_msg = my_next_msg;
+            my_msg = my_next_msg;
     }
 }
 
