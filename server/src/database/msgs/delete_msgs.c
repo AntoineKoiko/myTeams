@@ -14,18 +14,6 @@ NON_NULL(1) void delete_msg(msg_node_t **msg)
     free_to_null((void **) msg);
 }
 
-static bool msg_already_deleted(msg_t *msg, const bool to_free)
-{
-    static msg_t *my_msgs = NULL;
-    static size_t my_nb_msgs = 0;
-
-    if (to_free) {
-        free_to_null((void **) &my_msgs);
-        return true;
-    }
-    return is_msg_double(&my_msgs, &my_nb_msgs, msg);
-}
-
 NON_NULL(1) void delete_user_msgs(struct msg_head_s *msgs)
 {
     msg_node_t *my_msg = SLIST_FIRST(msgs);
@@ -47,5 +35,4 @@ NON_NULL(1) void delete_msgs(database_t *db)
     {
         delete_user_msgs(&my_user->conversations);
     }
-    msg_already_deleted(NULL, true);
 }
