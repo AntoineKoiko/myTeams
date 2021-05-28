@@ -15,6 +15,7 @@ LIGHT_RED	=	"\e[91m"
 
 SERVER_NAME = myteams_server
 CLIENT_NAME = myteams_cli
+TEST_NAME	= unit_tests
 
 SERVER_D = ./server
 CLIENT_D = ./client
@@ -76,5 +77,9 @@ debug_server:
 
 debug_client:
 	make debug -C $(CLIENT_D)
+
+tests_run:
+	make -C tests/
+	./$(TEST_NAME)
 
 .PHONY: all $(SERVER_NAME)  $(CLIENT_NAME) clean fclean re clean_server clean_client fclean_server fclean_cliennt re_server re_client
