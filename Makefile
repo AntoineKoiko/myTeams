@@ -37,6 +37,7 @@ fclean:
 	make fclean -C $(CLIENT_D)
 	rm -rf $(SERVER_NAME)
 	rm -rf $(CLIENT_NAME)
+	rm -rf $(TEST_NAME)
 
 re:
 	rm -rf $(SERVER_NAME)
@@ -47,6 +48,8 @@ re:
 debug:
 	make debug -C $(SERVER_D)
 	make debug -C $(CLIENT_D)
+	rm -rf *.gcno
+	rm -rf *.gcda
 
 clean_server:
 	make clean -C $(SERVER_D)

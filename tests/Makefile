@@ -45,7 +45,13 @@ endif
 
 LIB		=	myteams
 
-TEST_SRC	= ./server/test_.c
+TEST_SRC	= 	./server/test_new_session.c			\
+				./server/test_put_types.c			\
+				./server/test_put_structs.c			\
+				./server/test_check_select_error.c	\
+				./server/test_clear_func.c			\
+				./server/test_get_args.c			\
+				./server/test_create_server.c		\
 
 SRC		=	$(DSETUP)/get_args.c					\
 			$(DSETUP)/signal_handler.c				\
