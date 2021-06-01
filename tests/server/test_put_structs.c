@@ -21,7 +21,7 @@ Test(put_structs, put_team)
     strcpy(team.team_description, "Best team");
     memcpy(team.team_creator, "uuid_1", 6);
     memcpy(team.team_uuid, "uuid_2", 6);
-    put_team(buf, &team,  &cursor);;
+    put_team(buf, &team, &cursor);
     cr_assert_eq(cursor, expect_size);
 }
 
@@ -38,7 +38,7 @@ Test(put_structs, put_channel)
     strcpy(chan.channel_description, "Best channel");
     memcpy(chan.channel_uuid, "uuid_1", 6);
     memcpy(chan.team_uuid, "uuid_2", 6);
-    put_channel(buf, &chan,  &cursor);;
+    put_channel(buf, &chan, &cursor);
     cr_assert_eq(cursor, expect_size);
 }
 
@@ -54,6 +54,6 @@ Test(put_structs, put_user)
     strcpy(user.user_name, "kevin");
     memcpy(user.user_uuid, "uuid_1", 6);
     user.status = 1;
-    put_user(buf, &user,  &cursor);
+    put_user(buf, &user, &cursor);
     cr_assert_eq(cursor, expect_size);
 }

@@ -61,8 +61,8 @@ Test(put_types, test_put_time_t)
 
 Test(put_types, test_put_uuid_t)
 {
-    uuid_t uuid = {0};;
-    uuid_t res = {0};;
+    uuid_t uuid = {0};
+    uuid_t res = {0};
     size_t cursor = 0;
     unsigned char buf[100] = {0};
 
