@@ -12,7 +12,7 @@
 #include "attributes.h"
 #include "tools.h"
 
-NON_NULL(2) static inline int load_user_teams(
+NON_NULL(2) static int load_user_teams(
     const int fd, user_node_t **user, const size_t teams)
 {
     (*user)->nb_subscribed_teams = teams;

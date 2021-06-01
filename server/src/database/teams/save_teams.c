@@ -7,14 +7,14 @@
 
 #include "database/database.h"
 
-static inline int save_team_data(const int fd, const team_t *team_data)
+static int save_team_data(const int fd, const team_t *team_data)
 {
     if (!team_data)
         return ERR_NO_VAL;
     return write_and_check(fd, team_data, sizeof(team_t));
 }
 
-static inline int save_team(const int fd, const team_node_t *team)
+static int save_team(const int fd, const team_node_t *team)
 {
     int my_ret_val = EXIT_SUCCESS;
 

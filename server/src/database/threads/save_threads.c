@@ -7,7 +7,7 @@
 
 #include "database/database.h"
 
-static inline int save_thread(const int fd, const thread_node_t *thread)
+static int save_thread(const int fd, const thread_node_t *thread)
 {
     if (!thread->thread_data)
         return ERR_NO_VAL;

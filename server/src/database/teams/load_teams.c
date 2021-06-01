@@ -11,7 +11,7 @@
 #include "tools.h"
 
 NON_NULL(2)
-static inline int load_team_users(
+static int load_team_users(
     const int fd, team_node_t **team, const size_t users)
 {
     (*team)->nb_subscribed_users = users;

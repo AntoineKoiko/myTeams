@@ -10,7 +10,7 @@
 #include "database/file_management.h"
 #include "attributes.h"
 
-static inline bool get_save_file(int *fd, const uint i)
+static bool get_save_file(int *fd, const uint i)
 {
     *fd = open_db_file(i);
     if (*fd < 0)
@@ -18,7 +18,7 @@ static inline bool get_save_file(int *fd, const uint i)
     return true;
 }
 
-static inline bool exec_load_func(
+static bool exec_load_func(
     const uint i, const int fd, database_t *db, const size_t elements_nb)
 {
     if (!DB_LOAD(i))
@@ -28,7 +28,7 @@ static inline bool exec_load_func(
     return true;
 }
 
-static inline bool check_header(const int fd)
+static bool check_header(const int fd)
 {
     struct stat my_file_stats = {0};
 
@@ -38,7 +38,7 @@ static inline bool check_header(const int fd)
     return true;
 }
 
-static inline bool get_header(const int fd, const uint i, size_t *elements_nb)
+static bool get_header(const int fd, const uint i, size_t *elements_nb)
 {
     file_header_t my_header = {0};
     ssize_t my_read = ERR_SYS;

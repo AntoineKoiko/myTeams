@@ -8,7 +8,7 @@
 #include "database/file_management.h"
 #include "database/database_constants.h"
 
-static inline int get_db_filepath(
+static int get_db_filepath(
     const char *dirpath, const file_types_t i, char **filename)
 {
     if (!filename)

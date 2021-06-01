@@ -7,14 +7,14 @@
 
 #include "database/database.h"
 
-static inline int save_user_data(const int fd, const user_t *user_data)
+static int save_user_data(const int fd, const user_t *user_data)
 {
     if (!user_data)
         return ERR_NO_VAL;
     return write_and_check(fd, user_data, sizeof(user_t));
 }
 
-static inline int save_user(const int fd, const user_node_t *user)
+static int save_user(const int fd, const user_node_t *user)
 {
     int my_ret_val = EXIT_SUCCESS;
 

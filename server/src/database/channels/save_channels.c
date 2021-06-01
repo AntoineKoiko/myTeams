@@ -7,7 +7,7 @@
 
 #include "database/database.h"
 
-static inline int save_channel(const int fd, const channel_node_t *channel)
+static int save_channel(const int fd, const channel_node_t *channel)
 {
     if (!channel->channel_data)
         return ERR_NO_VAL;

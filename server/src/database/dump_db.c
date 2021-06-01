@@ -5,6 +5,8 @@
 ** Print database content
 */
 
+const int make_iso_compilers_happy = 1;
+
 #ifdef DEBUG
 
     #include "database/database.h"
@@ -25,5 +27,3 @@ NON_NULL() void dump_db(const database_t *db)
 }
 
 #endif /* DEBUG */
-
-typedef int make_iso_compilers_happy;
