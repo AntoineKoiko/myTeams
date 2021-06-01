@@ -5,6 +5,7 @@
 *vgcor*
 *.gcno
 *.gcda
+unit_tests
 
 .temp/
 log*.txt
