@@ -6,6 +6,7 @@
 */
 
 #include "client.h"
+#include <stdio.h>
 
 static void init_var(teams_client_t *teams_client)
 {
@@ -19,6 +20,8 @@ int main(int ac, char **av)
     int ret = EXIT_SUCCESS;
     teams_client_t teams_client = {0};
 
+    setbuf(stdout, NULL);
+    setbuf(stderr, NULL);
     if (ac > 1 && !strcmp(av[1], "-help"))
         return usage(EXIT_SUCCESS);
     if (check_args(ac, av, &teams_client.client))
