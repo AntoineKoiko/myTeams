@@ -4,8 +4,6 @@ from os import wait
 import src.interact as ict
 from src.my_global import *
 from time import sleep
-from src.User import User
-from src.Team import Team
 
 def to_cli_arg(str):
     return "\"" + str + "\""
@@ -66,11 +64,11 @@ def do_users(popen):
     out_err = ict.read_err_on_process(popen)
     return (out, out_err)
 
-def cli_send(popen, user: User, msg: str):
+def cli_send(popen, user, msg: str):
     request = "/send " + to_cli_arg(user.getUuid()) + " " + to_cli_arg(msg) + "\n"
     ict.write_on_process(popen, request)
 
-def do_send(popen, user: User, msg: str):
+def do_send(popen, user, msg: str):
     cli_send(popen, user, msg)
     sleep(WAITING_TIME)
     out = ict.read_on_process(popen)
@@ -89,7 +87,7 @@ def do_list(popen):
     out_err = ict.read_err_on_process(popen)
     return (out, out_err)
 
-def cli_subscribe(popen, team: Team):
+def cli_subscribe(popen, team):
     request = "/subscribe " + to_cli_arg(team.getUuid()) + "\n"
     ict.write_on_process(popen, request)
 
@@ -100,7 +98,7 @@ def do_subscribe(popen, team):
     out_err = ict.read_err_on_process(popen)
     return (out, out_err)
 
-def cli_unsubscribe(popen, team: Team):
+def cli_unsubscribe(popen, team):
     request = "/unsubscribe " + to_cli_arg(team.getUuid()) + "\n"
     ict.write_on_process(popen, request)
 
