@@ -1,0 +1,117 @@
+Teams = fork de skype                                          Antoine Couacault
+Request for Comments: 9039                                        Arthur Jourdan
+Category : Proposed Standard                                    Aurelien Joncour
+                                                                        May 2021
+
+
+                    MYTEAMS PACKET TRANSFER PROTOCOL
+
+Status of this Memo
+
+   This document specifies an Internet standards track protocol for the
+   Internet community, and requests discussion and suggestions for
+   improvements.  Please refer to the current edition of the "Internet
+   Official Protocol Standards" (STD 1) for the standardization state
+   and status of this protocol.  Distribution of this memo is unlimited.
+
+Abstract
+
+   This memo specifies the creation of MTPTP (myteams packet trasfer protocol),
+   that is a new standard for packet transfer management, specially designed to
+   send and receive ascii data.
+
+Table of contents
+    1.Server reply code
+    2.
+
+    .Authors' Addresses
+
+
+1.Server reply Code
+    2XX             Succes
+
+        21X         Single element
+
+        22X         List of elements
+
+        23X         Element successfuly created
+
+        24X         Event received about other users actions
+
+            2X1         user
+
+            2X2         team
+
+            2X3         channel
+
+            2X4         thread
+
+            2X5         replies
+
+            2X6         msg
+
+        25X         Special event (the decimal number is not related to the element type)
+
+            251     User succesfuly subscribed to a teams
+
+            252     User succesfuly unsubscribed to a teams
+
+            253     User logged in
+
+            254     User logged out
+
+    4XX             Error
+
+    4X1             Unauthorized (the user is not authorized to do the action, probably he is not subscribed)
+
+    41X             User ask for an unknonw element
+
+
+2.Content of data element:
+
+Standart element:
+
+uuid: 16 bit (representing the Universally unique identifier)
+string:
+int
+
+user:
+    [uuid]      user_uuid
+    [string]    user_name
+    [int]       user_status (0 = not connected, 1 = connected)
+
+team:
+    [uuid]      team_uuid
+
+
+
+
+
+
+
+
+
+
+
+
+.Authors' Addresses
+
+{Epitech}
+19-22 Boulevard Saint Conweion, 35000 Rennes
+
+Antoine Couacault
+Email: antoine.couacault@epitech.eu
+
+Arthur Jourdan
+Email: arthur.jourdan@epitech.eu
+
+Aurelien Joncour
+Email: aurelien.joncour@epitech.eu
+
+
+
+
+
+
+
+
