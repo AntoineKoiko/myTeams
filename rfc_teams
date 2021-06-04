@@ -10,7 +10,6 @@ Status of this Memo
 
    This document specifies an Internet standards track protocol for the
    Internet community, and requests discussion and suggestions for
-   improvements.  Please refer to the current edition of the "Internet
    Official Protocol Standards" (STD 1) for the standardization state
    and status of this protocol.  Distribution of this memo is unlimited.
 
@@ -22,7 +21,7 @@ Abstract
 
 Table of contents
     1.Server reply code
-    2.
+    2.Content of data element
 
     .Authors' Addresses
 
@@ -64,7 +63,15 @@ Table of contents
 
     4X1             Unauthorized (the user is not authorized to do the action, probably he is not subscribed)
 
-    41X             User ask for an unknonw element
+        41X         User ask for an unknonw element
+
+            411         Unknown user
+
+            412         Unknown team
+
+            413         Unknown channel
+
+            414         Unknown thread
 
 
 2.Content of data element:
@@ -75,6 +82,10 @@ uuid: 16 bit (representing the Universally unique identifier)
 string:
 int
 
+header:
+    [int]       rfc request code
+    [size_t]    packet size
+
 user:
     [uuid]      user_uuid
     [string]    user_name
@@ -82,14 +93,30 @@ user:
 
 team:
     [uuid]      team_uuid
+    [uuid]      team_creator
+    [string]    team_name
+    [string]    team_description
 
+channel:
+    [uuid]      channel_uuid
+    [uuid]      team_uuid
+    [string]    channel_name
+    [string]    channel_description
 
+thread:
+    [uuid]      thread_uuid
+    [uuid]      channel_uuid
+    [time_t]    thread_timestamp
+    [string]    thread_title
+    [string]    thread_body
 
-
-
-
-
-
+reply:
+    [uuid]      reply_uuid
+    [uuid]      team_uuid
+    [uuid]      thread_uuid
+    [time_t]    reply_timestamp
+    [string]    reply_body
+    [uuid]      user_uuid
 
 
 
@@ -107,11 +134,4 @@ Email: arthur.jourdan@epitech.eu
 
 Aurelien Joncour
 Email: aurelien.joncour@epitech.eu
-
-
-
-
-
-
-
 
