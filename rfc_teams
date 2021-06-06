@@ -10,23 +10,66 @@ Status of this Memo
 
    This document specifies an Internet standards track protocol for the
    Internet community, and requests discussion and suggestions for
+   improvements.  Please refer to the current edition of the "Internet
    Official Protocol Standards" (STD 1) for the standardization state
    and status of this protocol.  Distribution of this memo is unlimited.
 
 Abstract
 
-   This memo specifies the creation of MTPTP (myteams packet trasfer protocol),
+   This memo specifies the creation of MTPTP (myteams packet transfer protocol),
    that is a new standard for packet transfer management, specially designed to
    send and receive ascii data.
 
 Table of contents
-    1.Server reply code
-    2.Content of data element
+    1.Client request
+    2.Server response
+    3.Server reply code
+    4.Content of data element
 
     .Authors' Addresses
 
+1.Client request
 
-1.Server reply Code
+    When a client write a command in the teams cli, a packet is created
+
+    Packet:
+        header:
+            [SIZE_T] The packet size writed on 8 bytes (The size of the packet size variable is exclude)
+            [CHAR]  The command code writed on 1 bytes
+        content:
+            [STRING] each args is writed as a string and separated by NULL BYTES
+
+Command code list:
+
+    Command       | Code
+    ======================
+    /login        |   1
+    /logout       |   2
+    /users        |   3
+    /user         |   4
+    /send         |   5
+    /msgs         |   6
+    /subscribe    |   7
+    /subscribed   |   8
+    /unsubscribe  |   9
+    /use          |  10
+    /create       |  11
+    /list         |  12
+    /info         |  13
+    ======================
+
+2.Server response
+
+    After a client request the server create a packet and send it to the client
+
+    Packet
+        header:
+            [SIZE_T] The packet size writed on 8 bytes (The size of the packet size variable is exclude)
+            [INT]   The response code writed on 4 bytes (Read the "Server reply Code" section for more information)
+        Content:
+            [DATATYPE] Each element inside a custom datatype is separated by a NULL character (Read the "Content of data element" section for more information)
+
+3.Server reply Code
     2XX             Succes
 
         21X         Single element
@@ -74,13 +117,13 @@ Table of contents
             414         Unknown thread
 
 
-2.Content of data element:
+4.Content of data element:
 
 Standart element:
 
-uuid: 16 bit (representing the Universally unique identifier)
-string:
-int
+[uuid]: 16 bytes (representing the Universally unique identifier)
+[string]: ASCII character encoded in decimal and ending with a null character
+[int]: A number represented in 4 bytes
 
 header:
     [int]       rfc request code
@@ -106,6 +149,7 @@ channel:
 thread:
     [uuid]      thread_uuid
     [uuid]      channel_uuid
+    [uuid]      user_uuid
     [time_t]    thread_timestamp
     [string]    thread_title
     [string]    thread_body
@@ -118,7 +162,11 @@ reply:
     [string]    reply_body
     [uuid]      user_uuid
 
-
+msg:
+    [uuid]      sender_uuid
+    [uuid]      receiver_uuid
+    [time_t]    msg_timestamp
+    [string]    msg_body
 
 
 .Authors' Addresses
